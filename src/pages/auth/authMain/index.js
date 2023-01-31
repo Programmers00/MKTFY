@@ -1,12 +1,12 @@
 import { useState } from "react";
-import styles from "./auth.module.scss";
+import styles from "./authMain.module.scss";
 
-const Auth = () => {
+const AuthMain = () => {
   const [isShowLogin, setIsShowLogin] = useState(false);
   const [isShowCreateAccount, setIsShowCreateAccount] = useState(false);
 
   return (
-    <div className={styles.authBox}>
+    <div className={styles.authMainBox}>
       <span className={styles.logo}>MKTFY</span>
       <span className={styles.subLogo}> Buy and sell stuff!</span>
       <button
@@ -24,4 +24,4 @@ const Auth = () => {
     </div>
   );
 };
-export default Auth;
+export default AuthMain;

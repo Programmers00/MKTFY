@@ -1,0 +1,20 @@
+.authBox {
+  // animation: animatedBackground 10s linear infinite alternate;
+  background: #9349de;
+  background-image: url("../../assets/background/background1.png"),
+    url("../../assets/background/background2.png"),
+    url("../../assets/background/background3.png"),
+    url("../../assets/background/background4.png");
+  background-size: 100%;
+  background-position: 0% 80%, 0% 55%, 0% 30%, 0% 0%;
+  background-repeat: no-repeat;
+}
+
+// @keyframes animatedBackground {
+//   from {
+//     background-position: 0% 80%, 0% 55%, 0% 30%, 0% 0%;
+//   }
+//   to {
+//     background-position: 0% 60%, 0% 30%, 0% 20%, 0% 0%;
+//   }
+// }

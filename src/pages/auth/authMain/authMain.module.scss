@@ -1,10 +1,4 @@
-.authBox {
-  animation: animatedBackground 10s linear infinite alternate;
-  background: #9349de;
-  background-image: url("../../src/assets/background/background1.png"),
-    url("../../src/assets/background/background2.png"),
-    url("../../src/assets/background/background3.png"),
-    url("../../src/assets/background/background4.png");
+.authMainBox {
   background-size: 100%;
   background-position: 0% 80%, 0% 55%, 0% 30%, 0% 0%;
   background-repeat: no-repeat;
@@ -12,7 +6,6 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  // place-items: center;
   justify-content: center;
   align-items: center;
   .logo {
@@ -44,14 +37,5 @@
   }
   .createAccountButton {
     background: #6318af;
-  }
-}
-
-@keyframes animatedBackground {
-  from {
-    background-position: 0% 80%, 0% 55%, 0% 30%, 0% 0%;
-  }
-  to {
-    background-position: 0% 60%, 0% 30%, 0% 20%, 0% 0%;
   }
 }
