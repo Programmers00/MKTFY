@@ -30,60 +30,59 @@ import FAQ from "./pages/help/faq";
 import Checkout from "./pages/userMain/checkout";
 import CreateOffer from "./pages/userMain/createOffer";
 import Detail from "./pages/userMain/detail";
-import PrivateRoute from "./routes/PrivateRoute";
 
 const App = () => {
   return (
     <>
       <Provider store={store}>
         <Router>
-          <PrivateRoute>
-            <Routes>
-              {/* auth */}
-              <Route path="/auth/*" element={<Auth />}>
-                <Route index element={<AuthMain />} />
-                <Route path="login" element={<Login />} />
-                <Route
-                  path="forgotPasswordSubmitEmail"
-                  element={<ForgotPasswordSubmitEmail />}
-                />
-                <Route
-                  path="forgotPasswordSubmitCode"
-                  element={<ForgotPasswordSubmitCode />}
-                />
-                <Route path="resetPassword" element={<ResetPassword />} />
-                <Route path="createAccount" element={<CreateAccount />} />
-                <Route path="createPassword" element={<CreatePassword />} />
-                <Route index element={<AuthMain />} />
-                <Route path="*" element={<div>Opps</div>} />
-              </Route>
-              {/* user main */}
-              <Route path="/*" element={<UserMain />}>
-                {/* contents */}
-                <Route index element={<Deals />} />
-                <Route path="carsVehicles" element={<CarsVehicles />} />
-                <Route path="electronics" element={<Electronics />} />
-                <Route path="furniture" element={<Furniture />} />
-                <Route path="realEstate" element={<RealEstate />} />
-                {/* userInfo */}
-                <Route
-                  path="accountInformation"
-                  element={<AccountInformation />}
-                />
-                <Route path="changePassword" element={<ChangePassword />} />
-                <Route path="myListings" element={<MyListings />} />
-                <Route path="myPurchases" element={<MyPurchases />} />
-                {/* help */}
-                <Route path="contactUs" element={<ContactUs />} />
-                <Route path="faq" element={<FAQ />} />
-                {/* etc */}
-                <Route path="checkout" element={<Checkout />} />
-                <Route path="createOffer" element={<CreateOffer />} />
-                <Route path="detail" element={<Detail />} />
-                <Route path="*" element={<div>Opps</div>} />
-              </Route>
-            </Routes>
-          </PrivateRoute>
+          {/* auth */}
+          <Routes>
+            <Route exact path="/auth/*" element={<Auth />}>
+              <Route index element={<AuthMain />} />
+              <Route exact path="login" element={<Login />} />
+              <Route
+                exact
+                path="forgotPasswordSubmitEmail"
+                element={<ForgotPasswordSubmitEmail />}
+              />
+              <Route
+                exact
+                path="forgotPasswordSubmitCode"
+                element={<ForgotPasswordSubmitCode />}
+              />
+              <Route exact path="resetPassword" element={<ResetPassword />} />
+              <Route exact path="createAccount" element={<CreateAccount />} />
+              <Route exact path="createPassword" element={<CreatePassword />} />
+              {/* <Route path="*" element={<div>Opps</div>} /> */}
+            </Route>
+            {/* user main with private router logic */}
+            <Route exact path="/*" element={<UserMain />}>
+              {/* contents */}
+              <Route exact index element={<Deals />} />
+              <Route exact path="carsVehicles" element={<CarsVehicles />} />
+              <Route exact path="electronics" element={<Electronics />} />
+              <Route exact path="furniture" element={<Furniture />} />
+              <Route exact path="realEstate" element={<RealEstate />} />
+              {/* userInfo */}
+              <Route
+                exact
+                path="accountInformation"
+                element={<AccountInformation />}
+              />
+              <Route exact path="changePassword" element={<ChangePassword />} />
+              <Route exact path="myListings" element={<MyListings />} />
+              <Route exact path="myPurchases" element={<MyPurchases />} />
+              {/* help */}
+              <Route exact path="contactUs" element={<ContactUs />} />
+              <Route exact path="faq" element={<FAQ />} />
+              {/* etc */}
+              <Route exact path="checkout" element={<Checkout />} />
+              <Route exact path="createOffer" element={<CreateOffer />} />
+              <Route exact path="detail" element={<Detail />} />
+              {/* <Route path="*" element={<div>Opps</div>} /> */}
+            </Route>
+          </Routes>
         </Router>
       </Provider>
     </>
