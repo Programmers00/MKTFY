@@ -29,10 +29,16 @@
     @include button;
     background: $yellow;
     margin-bottom: 18px;
+    &:hover {
+      background: $hoverYellow;
+    }
   }
   .createAccountButton {
     @include button;
     background: $purple;
+    &:hover {
+      background: $hoverPurple;
+    }
   }
   .bottomText {
     /* Find out more about us! Visit our website */

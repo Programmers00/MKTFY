@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+// scss
 import styles from "./authMain.module.scss";
 
 const AuthMain = () => {
-  const [isShowLogin, setIsShowLogin] = useState(false);
-  const [isShowCreateAccount, setIsShowCreateAccount] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className={styles.authMainBox}>
@@ -11,13 +11,13 @@ const AuthMain = () => {
       <span className={styles.subTitle}> Buy and sell stuff!</span>
       <button
         className={styles.loginButton}
-        onClick={() => setIsShowLogin(true)}
+        onClick={() => navigate("/auth/login")}
       >
         Login
       </button>
       <button
         className={styles.createAccountButton}
-        onClick={() => setIsShowCreateAccount(true)}
+        onClick={() => navigate("/auth/createAccount")}
       >
         Create account
       </button>
