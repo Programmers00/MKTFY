@@ -1,3 +1,6 @@
+// mixins for button
+@import "../../../styles/mixins";
+
 .authMainBox {
   background-size: 100%;
   background-position: 0% 80%, 0% 55%, 0% 30%, 0% 0%;
@@ -8,34 +11,42 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  .logo {
+  .title {
     color: #ffffff;
     font-size: 70px;
     font-weight: 600;
   }
-  .subLogo {
+  .subTitle {
     color: #ffffff;
     font-style: normal;
     font-weight: 100;
     font-size: 16px;
     margin-bottom: 18px;
   }
-  button {
-    width: 345px;
-    height: 64px;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15);
-    border-radius: 100px;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 22px;
-    color: #ffffff;
-  }
   .loginButton {
+    @include button;
     background: #ffba00;
     margin-bottom: 18px;
   }
   .createAccountButton {
+    @include button;
     background: #6318af;
+  }
+  .bottomText {
+    /* Find out more about us! Visit our website */
+    position: absolute;
+    left: 142px;
+    bottom: 50px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    cursor: pointer;
+    .firstText {
+      color: #ffffff;
+    }
+    .secondText {
+      color: #ffba00;
+    }
   }
 }

@@ -7,8 +7,8 @@ const AuthMain = () => {
 
   return (
     <div className={styles.authMainBox}>
-      <span className={styles.logo}>MKTFY</span>
-      <span className={styles.subLogo}> Buy and sell stuff!</span>
+      <span className={styles.title}>MKTFY</span>
+      <span className={styles.subTitle}> Buy and sell stuff!</span>
       <button
         className={styles.loginButton}
         onClick={() => setIsShowLogin(true)}
@@ -21,6 +21,10 @@ const AuthMain = () => {
       >
         Create account
       </button>
+      <p className={styles.bottomText}>
+        <span className={styles.firstText}>Find out more about us! </span>
+        <span className={styles.secondText}>Visit our website</span>
+      </p>
     </div>
   );
 };
