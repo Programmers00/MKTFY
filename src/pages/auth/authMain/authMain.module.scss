@@ -1,5 +1,7 @@
 // mixins for button
 @import "../../../styles/mixins";
+// variabled for color
+@import "../../../styles/variabled";
 
 .authMainBox {
   background-size: 100%;
@@ -12,12 +14,12 @@
   justify-content: center;
   align-items: center;
   .title {
-    color: #ffffff;
+    color: $white;
     font-size: 70px;
     font-weight: 600;
   }
   .subTitle {
-    color: #ffffff;
+    color: $white;
     font-style: normal;
     font-weight: 100;
     font-size: 16px;
@@ -25,12 +27,12 @@
   }
   .loginButton {
     @include button;
-    background: #ffba00;
+    background: $yellow;
     margin-bottom: 18px;
   }
   .createAccountButton {
     @include button;
-    background: #6318af;
+    background: $purple;
   }
   .bottomText {
     /* Find out more about us! Visit our website */
@@ -43,10 +45,10 @@
     text-align: center;
     cursor: pointer;
     .firstText {
-      color: #ffffff;
+      color: $white;
     }
     .secondText {
-      color: #ffba00;
+      color: $yellow;
     }
   }
 }
