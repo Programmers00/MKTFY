@@ -19,6 +19,9 @@ const Login = () => {
   // params data
   const [email, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  // eye icon for password visibility
+  const [passwordInputType, setPasswordInputType] = useState("password");
+  const [eyeIcon, setEyeIcon] = useState("eyeSlash");
   // response data
   const [state, setState] = useState({
     loading: true,
@@ -61,6 +64,17 @@ const Login = () => {
       }, 2000);
     }
   }, [data?.status]);
+  /** password toggle: change input type and icon */
+  const onToggle = () => {
+    // change icon
+    setEyeIcon((prevEyeIcon) =>
+      prevEyeIcon === "eyeSlash" ? "eye" : "eyeSlash"
+    );
+    // change input type
+    setPasswordInputType((prevPasswordInputType) =>
+      prevPasswordInputType === "password" ? "text" : "password"
+    );
+  };
 
   return !showLottie ? (
     <Modal>
@@ -84,14 +98,22 @@ const Login = () => {
           <label className={styles.passwordLabel}>
             Password
             <br />
-            <input
-              className={styles.passwordInput}
-              type="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              placeholder="Insert your password"
-              autoComplete="password"
-            />
+            <div className={styles.passwordInputBox}>
+              <input
+                className={styles.passwordInput}
+                type={passwordInputType}
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                placeholder="Insert your password"
+                autoComplete="password"
+              />
+              <img
+                alt="eye"
+                className={styles.eyeIcon}
+                src={require(`../../../assets/icons/${eyeIcon}.png`)}
+                onClick={() => onToggle()}
+              />
+            </div>
           </label>
           <br />
           <p className={styles.forgetPassword}>Forget password</p>

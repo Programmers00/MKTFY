@@ -21,8 +21,19 @@
     font-size: 16px;
     line-height: 22px;
     color: $black;
+    .passwordInputBox {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      .eyeIcon {
+        padding-right: 10px;
+        position: absolute;
+        display: flex;
+        cursor: pointer;
+      }
+    }
     .emailInput,
-    .passwordInput {
+    .passwordInputBox .passwordInput {
       box-sizing: border-box;
       display: flex;
       flex-direction: row;
