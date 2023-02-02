@@ -1,4 +1,4 @@
 export default {
-  // onlyMockup for api => true or false
-  onlyMockup: false,
+  // isOnlyMockup for test => true or false
+  isOnlyMockup: false,
 };

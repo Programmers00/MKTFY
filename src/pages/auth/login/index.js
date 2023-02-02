@@ -2,26 +2,25 @@ import { useState } from "react";
 // wrapper component
 import Modal from "../../../components/modal";
 import styles from "./login.module.scss";
-// processApi
-import { processApi } from "../../../utils/processApi";
+// custom api => processApi
+import { getLogin } from "../../../api/login";
 
+/** Login */
 const Login = () => {
   const [email, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  /** call api */
-  // don't add url when create api from.
-  // if no url makes error
-  const options = {
+  /** request data for api */
+  const requestLoginApi = {
     url: "https://icanhazdadjoke.com",
     params: { email: email, password: password },
     method: "get",
     headers: { Accept: "application/json" },
   };
-
-  const handleSubmit = async (event) => {
+  /** click login button => call api*/
+  const onClickLogin = async (event) => {
     event.preventDefault();
-    const { loading, data, error } = await processApi(options);
+    const { loading, data, error } = await getLogin(requestLoginApi);
     console.log("loading, data, error", loading, data, error);
   };
 
@@ -29,7 +28,7 @@ const Login = () => {
     <Modal>
       <div className={styles.loginBox}>
         <span className={styles.loginTitle}>Welcome back!</span>
-        <form className={styles.loginForm} onSubmit={handleSubmit}>
+        <form className={styles.loginForm} onSubmit={onClickLogin}>
           <label className={styles.emailLabel}>
             Email
             <br />
