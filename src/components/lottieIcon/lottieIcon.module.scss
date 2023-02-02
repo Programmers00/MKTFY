@@ -1,0 +1,22 @@
+// color $white
+@import "../../styles//variabled";
+
+.lottieBox {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .title {
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 54px;
+    text-align: center;
+    color: $white;
+  }
+  .lottie {
+    width: 300px;
+    height: 300px;
+  }
+}
