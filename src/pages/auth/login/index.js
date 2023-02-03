@@ -157,7 +157,18 @@ const Login = () => {
           <p className={styles.forgetPassword}>Forget password</p>
           <br />
           <div className={styles.loginButtonBox}>
-            <button className={styles.loginButton} type="submit">
+            <button
+              className={styles.loginButton}
+              type="submit"
+              // disabled when email, password are empty or email validation message exist
+              disabled={
+                email.length === 0 ||
+                password.length === 0 ||
+                emailValidationMessage.length !== 0
+                  ? true
+                  : false
+              }
+            >
               Log In
             </button>
           </div>
