@@ -37,9 +37,9 @@ const Login = () => {
 
   // email input options
   // -> max length limitator
-  const maxLengthLimitator = (value) => {
-    return value.length <= 240;
-  };
+  // const maxLengthLimitator = (value) => {
+  //   return value.length <= 320;
+  // };
   // -> validation
   const validation = {
     // regex
@@ -52,7 +52,7 @@ const Login = () => {
     value: email,
     onChange: onEmailChange,
     validationMessage: emailValidationMessage,
-  } = useValidator("", maxLengthLimitator, validation);
+  } = useValidator("", "", validation);
 
   // lottie show true when login success
   const [showLottie, setShowLottie] = useState(false);
@@ -125,6 +125,7 @@ const Login = () => {
               placeholder="Insert your email"
               autoComplete="email"
               autoFocus
+              maxLength={320}
             />
             <span className={styles.validationWarning}>
               {emailValidationMessage}
@@ -157,7 +158,7 @@ const Login = () => {
           <br />
           <p
             className={styles.forgetPassword}
-            onClick={() => (navigate = "/forgotPassword")}
+            onClick={() => navigate("/auth/forgotPasswordSubmitEmail")}
           >
             Forget password
           </p>
