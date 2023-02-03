@@ -1,3 +1,5 @@
+// scss style variabled for color red
+import variabled from "../../../styles/_variabled.scss";
 import { useEffect, useState } from "react";
 // wrapper component
 import Modal from "../../../components/modal";
@@ -10,6 +12,11 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 // lottieFile
 import LottieIcon from "../../../components/lottieIcon";
+// hooks
+import { useValidator } from "../../../hooks/useValidator";
+// constants
+import { regex, validationMessage } from "../../../constants";
+
 /** Login */
 const Login = () => {
   // navigate
@@ -17,7 +24,6 @@ const Login = () => {
   // redux
   const dispatch = useDispatch();
   // params data
-  const [email, setUsername] = useState("");
   const [password, setPassword] = useState("");
   // eye icon for password visibility
   const [passwordInputType, setPasswordInputType] = useState("password");
@@ -28,8 +34,29 @@ const Login = () => {
     data: null,
     error: null,
   });
+
+  // email input options
+  // -> max length limitator
+  const maxLengthLimitator = (value) => {
+    return value.length <= 240;
+  };
+  // -> validation
+  const validation = {
+    // regex
+    regex: regex.email,
+    // validation error messagevalidation
+    message: validationMessage.email,
+  };
+  // useValidator hook
+  const {
+    value: email,
+    onChange: onEmailChange,
+    validationMessage: emailValidationMessage,
+  } = useValidator("", maxLengthLimitator, validation);
+
   // lottie show true when login success
   const [showLottie, setShowLottie] = useState(false);
+
   /** request data for api */
   const requestLoginApi = {
     url: "https://icanhazdadjoke.com",
@@ -37,6 +64,7 @@ const Login = () => {
     method: "get",
     headers: { Accept: "application/json" },
   };
+
   /** click login button => call api*/
   const onClickLogin = async (event) => {
     event.preventDefault();
@@ -45,12 +73,11 @@ const Login = () => {
     // save state
     setState(state);
   };
-  // distribute updated state
-  const { loading, data, error } = { ...state };
+
   // when response success, show lottie icons after 2 seconds go to useMain("/") page
   // login success => isAuthenticated :true
   useEffect(() => {
-    if (!loading && data?.status === 200) {
+    if (!state?.loading && state?.data?.status === 200) {
       // update isAuthenticated
       dispatch({ type: "authenticated", isAuthenticated: true });
       // show lottie
@@ -63,7 +90,8 @@ const Login = () => {
         setShowLottie(false);
       }, 2000);
     }
-  }, [data?.status]);
+  }, [state?.data?.status]);
+
   /** password toggle: change input type and icon */
   const onToggle = () => {
     // change icon
@@ -86,13 +114,20 @@ const Login = () => {
             <br />
             <input
               className={styles.emailInput}
+              style={
+                emailValidationMessage.length !== 0
+                  ? { borderColor: variabled.red }
+                  : {}
+              }
               type="text"
               value={email}
-              onChange={(event) => setUsername(event.target.value)}
+              onChange={onEmailChange}
               placeholder="Insert your email"
               autoComplete="email"
             />
-            <span className={styles.validationWarning}>Validation</span>
+            <span className={styles.validationWarning}>
+              {emailValidationMessage}
+            </span>
           </label>
           <br />
           <label className={styles.passwordLabel}>
@@ -114,6 +149,9 @@ const Login = () => {
                 onClick={() => onToggle()}
               />
             </div>
+            <span className={styles.validationWarning}>
+              {state?.error ? "Invalid email/password" : ""}
+            </span>
           </label>
           <br />
           <p className={styles.forgetPassword}>Forget password</p>

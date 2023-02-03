@@ -6,3 +6,15 @@ $white: #ffffff;
 $red: #ff2c2c;
 $black: #313131;
 $grey: #d9d9d9;
+
+// export makes to use in js
+:export {
+  purple: $purple;
+  hoverPurple: $hoverPurple;
+  yellow: $yellow;
+  hoverYellow: $hoverYellow;
+  white: $white;
+  red: $red;
+  black: $black;
+  grey: $grey;
+}
