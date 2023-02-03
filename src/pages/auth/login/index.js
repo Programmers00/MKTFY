@@ -124,6 +124,7 @@ const Login = () => {
               onChange={onEmailChange}
               placeholder="Insert your email"
               autoComplete="email"
+              autoFocus
             />
             <span className={styles.validationWarning}>
               {emailValidationMessage}
@@ -154,7 +155,12 @@ const Login = () => {
             </span>
           </label>
           <br />
-          <p className={styles.forgetPassword}>Forget password</p>
+          <p
+            className={styles.forgetPassword}
+            onClick={() => (navigate = "/forgotPassword")}
+          >
+            Forget password
+          </p>
           <br />
           <div className={styles.loginButtonBox}>
             <button
