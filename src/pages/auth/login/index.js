@@ -156,12 +156,14 @@ const Login = () => {
             </span>
           </label>
           <br />
-          <p
-            className={styles.forgetPassword}
-            onClick={() => navigate("/auth/forgotPasswordSubmitEmail")}
-          >
-            Forget password
-          </p>
+          <div className={styles.forgotPasswordBox}>
+            <p
+              className={styles.forgotPassword}
+              onClick={() => navigate("/auth/forgotPasswordSubmitEmail")}
+            >
+              Forgot password
+            </p>
+          </div>
           <br />
           <div className={styles.loginButtonBox}>
             <button

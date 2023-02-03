@@ -53,21 +53,24 @@
       font-size: 14px;
     }
   }
-  .forgetPassword {
-    font-weight: 600;
-    font-size: 14px;
-    text-align: right;
-    color: $yellow;
-    cursor: pointer;
+  .forgotPasswordBox {
+    display: flex;
+    .forgotPassword {
+      font-weight: 600;
+      font-size: 14px;
+      color: $yellow;
+      margin-left: auto;
+      cursor: pointer;
+    }
   }
   .loginButtonBox {
     display: flex;
     justify-content: center;
     .loginButton {
       @include button;
-      background: $grey;
-      &:hover {
-        background: $yellow;
+      background: $yellow;
+      &:disabled {
+        background: $grey;
       }
     }
   }
