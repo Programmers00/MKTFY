@@ -1,6 +1,6 @@
+import { useEffect, useState } from "react";
 // scss style variabled for color red
 import variabled from "../../../styles/_variabled.scss";
-import { useEffect, useState } from "react";
 // wrapper component
 import Modal from "../../../components/modal";
 import styles from "./login.module.scss";
@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 // lottieFile
 import LottieIcon from "../../../components/lottieIcon";
-// hooks
+// customed hooks
 import { useValidator } from "../../../hooks/useValidator";
 // constants
 import { regex, validationMessage } from "../../../constants";

@@ -6,6 +6,7 @@ $white: #ffffff;
 $red: #ff2c2c;
 $black: #313131;
 $grey: #d9d9d9;
+$gray: #4d4d4d;
 
 // export makes to use in js
 :export {
@@ -17,4 +18,5 @@ $grey: #d9d9d9;
   red: $red;
   black: $black;
   grey: $grey;
+  gray: $gray;
 }
