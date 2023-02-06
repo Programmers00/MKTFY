@@ -13,8 +13,8 @@ import { useValidator } from "../../../hooks/useValidator";
 // constants
 import { regex, validationMessage } from "../../../constants";
 
-/** ForgtPassword */
-const ForgtPassword = () => {
+/** ForgotPassword */
+const ForgotPassword = () => {
   // navigate
   const navigate = useNavigate();
   // email input options
@@ -66,7 +66,7 @@ const ForgtPassword = () => {
 
   return (
     <Modal onClickBackButton={() => navigate("/auth/login")}>
-      <div className={styles.ForgtPasswordBox}>
+      <div className={styles.ForgotPasswordBox}>
         <span className={styles.title}>Forgot Password?</span>
         <span className={styles.subTitle}>
           It’s okay, these things happen. Please enter your email in the field
@@ -120,4 +120,4 @@ const ForgtPassword = () => {
   );
 };
 
-export default ForgtPassword;
+export default ForgotPassword;
