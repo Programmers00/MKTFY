@@ -1,15 +1,18 @@
-import { useState } from "react";
+// styles
 import styles from "./modal.module.scss";
+// navigate
 import { useNavigate } from "react-router-dom";
-const Modal = ({ children, onClickBackButton }) => {
-  const [
-    isShowBackButton,
-    setIsShowBackButton = () => {
-      console.log("##backButton");
-    },
-  ] = useState(false);
-  const navigate = useNavigate();
 
+/** Modal: params => children, onClickBackButton(implement in parents) */
+const Modal = ({ children, onClickBackButton }) => {
+  // navigate
+  const navigate = useNavigate();
+  // backButton show: true or false(default)
+  let isShowBackButton = false;
+  // onClickBackButton is function => show back button
+  if (typeof onClickBackButton === "function") {
+    isShowBackButton = true;
+  }
   return (
     <div className={styles.modalBox}>
       <div className={styles.modalContent}>
