@@ -60,7 +60,7 @@ const ForgtPassword = () => {
   useEffect(() => {
     if (!state?.loading && state?.data?.status === 200) {
       // go userMain page
-      navigate("/auth/forgotPasswordSubmitCode");
+      navigate("/auth/resetPassword");
     }
   }, [state?.data?.status]);
 
