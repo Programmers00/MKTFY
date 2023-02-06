@@ -7,8 +7,8 @@ import Auth from "./pages/auth";
 import AuthMain from "./pages/auth/authMain";
 import Login from "./pages/auth/login";
 import ForgotPassword from "./pages/auth/login/forgotPassword";
-import ForgotPasswordSubmitCode from "./pages/auth/login/forgotPasswordSubmitCode";
-import ResetPassword from "./pages/auth/login/resetPassword";
+import ResetPasswordVerification from "./pages/auth/login/resetPasswordVerification";
+import ResetPasswordComplete from "./pages/auth/login/resetPasswordComplete";
 import CreateAccount from "./pages/auth/createAccount";
 import CreatePassword from "./pages/auth/createAccount/createPassword";
 // userMain pages
@@ -44,10 +44,14 @@ const App = () => {
               <Route exact path="forgotPassword" element={<ForgotPassword />} />
               <Route
                 exact
-                path="forgotPasswordSubmitCode"
-                element={<ForgotPasswordSubmitCode />}
+                path="resetPasswordVerification"
+                element={<ResetPasswordVerification />}
               />
-              <Route exact path="resetPassword" element={<ResetPassword />} />
+              <Route
+                exact
+                path="resetPasswordComplete"
+                element={<ResetPasswordComplete />}
+              />
               <Route exact path="createAccount" element={<CreateAccount />} />
               <Route exact path="createPassword" element={<CreatePassword />} />
               {/* <Route path="*" element={<div>Opps</div>} /> */}

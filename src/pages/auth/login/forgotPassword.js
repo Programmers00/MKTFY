@@ -60,7 +60,7 @@ const ForgotPassword = () => {
   useEffect(() => {
     if (!state?.loading && state?.data?.status === 200) {
       // go userMain page
-      navigate("/auth/resetPassword");
+      navigate("/auth/resetPasswordVerification");
     }
   }, [state?.data?.status]);
 
