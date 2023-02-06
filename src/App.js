@@ -6,7 +6,7 @@ import store from "./store";
 import Auth from "./pages/auth";
 import AuthMain from "./pages/auth/authMain";
 import Login from "./pages/auth/login";
-import ForgotPasswordSubmitEmail from "./pages/auth/login/forgotPasswordSubmitEmail";
+import ForgotPassword from "./pages/auth/login/forgotPassword";
 import ForgotPasswordSubmitCode from "./pages/auth/login/forgotPasswordSubmitCode";
 import ResetPassword from "./pages/auth/login/resetPassword";
 import CreateAccount from "./pages/auth/createAccount";
@@ -41,11 +41,7 @@ const App = () => {
             <Route exact path="/auth/*" element={<Auth />}>
               <Route index element={<AuthMain />} />
               <Route exact path="login" element={<Login />} />
-              <Route
-                exact
-                path="forgotPasswordSubmitEmail"
-                element={<ForgotPasswordSubmitEmail />}
-              />
+              <Route exact path="forgotPassword" element={<ForgotPassword />} />
               <Route
                 exact
                 path="forgotPasswordSubmitCode"

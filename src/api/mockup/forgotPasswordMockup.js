@@ -1,4 +1,4 @@
-export const forgotPasswordSubmitEmailMockup = (options) => {
+export const forgotPasswordMockup = (options) => {
   // success
   if (options?.params?.email === "admin@domain.com")
     return {

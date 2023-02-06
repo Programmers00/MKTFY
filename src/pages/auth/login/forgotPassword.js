@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 // scss style variabled for color red
 import variabled from "../../../styles/_variabled.scss";
-import styles from "./forgotPasswordSubmitEmail.module.scss";
+import styles from "./forgotPassword.module.scss";
 // custom api => processApi
-import { getForgotPasswordSubmitEmail } from "../../../api/forgotPasswordSubmitEmail";
+import { getForgotPassword } from "../../../api/forgotPassword";
 // wrapper component
 import Modal from "../../../components/modal";
 // navigate
@@ -13,8 +13,8 @@ import { useValidator } from "../../../hooks/useValidator";
 // constants
 import { regex, validationMessage } from "../../../constants";
 
-/** ForgtPasswordSubmitEmail */
-const ForgtPasswordSubmitEmail = () => {
+/** ForgtPassword */
+const ForgtPassword = () => {
   // navigate
   const navigate = useNavigate();
   // email input options
@@ -39,7 +39,7 @@ const ForgtPasswordSubmitEmail = () => {
   } = useValidator("", "", validation);
 
   /** request data for api */
-  const requestForgotPasswordSendEmailApi = {
+  const requestForgotPasswordApi = {
     url: "https://icanhazdadjoke.com",
     params: { email: email },
     method: "get",
@@ -50,9 +50,7 @@ const ForgtPasswordSubmitEmail = () => {
   const onClickSubmit = async (event) => {
     event.preventDefault();
     // request submit
-    const state = await getForgotPasswordSubmitEmail(
-      requestForgotPasswordSendEmailApi
-    );
+    const state = await getForgotPassword(requestForgotPasswordApi);
     // save state
     setState(state);
   };
@@ -68,7 +66,7 @@ const ForgtPasswordSubmitEmail = () => {
 
   return (
     <Modal onClickBackButton={() => navigate("/auth/login")}>
-      <div className={styles.ForgtPasswordSubmitEmailBox}>
+      <div className={styles.ForgtPasswordBox}>
         <span className={styles.title}>Forgot Password?</span>
         <span className={styles.subTitle}>
           It’s okay, these things happen. Please enter your email in the field
@@ -122,4 +120,4 @@ const ForgtPasswordSubmitEmail = () => {
   );
 };
 
-export default ForgtPasswordSubmitEmail;
+export default ForgtPassword;
