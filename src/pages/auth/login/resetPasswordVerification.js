@@ -71,11 +71,16 @@ const ResetPasswordVerification = () => {
                 verificationCode={verificationCode}
               />
             </div>
+            <span className={styles.verificationWarningBox}>
+              <div className={styles.verificationWarning}>
+                {state?.error ? "Invalid verification code" : ""}
+              </div>
+            </span>
           </label>
           <br />
-          <div className={styles.forgotPasswordBox}>
+          <div className={styles.resendCodeBox}>
             <p
-              className={styles.forgotPassword}
+              className={styles.resendCode}
               onClick={() => navigate("/auth/forgotPassword")}
             >
               I didn’t receive the code, please send it again
