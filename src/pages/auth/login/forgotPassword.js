@@ -55,7 +55,7 @@ const ForgotPassword = () => {
     setState(state);
   };
 
-  // when response success, show lottie icons after 2 seconds go to useMain("/") page
+  // when response success, go to useMain("/auth/resetPasswordVerification") page
   // submit success => isAuthenticated :true
   useEffect(() => {
     if (!state?.loading && state?.data?.status === 200) {
