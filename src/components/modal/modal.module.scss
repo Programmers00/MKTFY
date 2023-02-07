@@ -17,16 +17,17 @@
       flex-wrap: wrap;
       width: 100%;
       top: 30px;
-      cursor: pointer;
       .modalBackButton {
         position: relative;
         margin-right: auto;
         left: 20px;
+        cursor: pointer;
       }
       .modalCloseButton {
         position: relative;
         margin-left: auto;
         right: 20px;
+        cursor: pointer;
       }
     }
   }
