@@ -74,6 +74,8 @@ const CreateAccount = () => {
     message: validationMessage.country,
   };
 
+  const cityList = ["Calgary", "Camrose", "Brooks"];
+
   // useValidator hooks
   // 1. first name
   const {
@@ -110,7 +112,7 @@ const CreateAccount = () => {
     value: city,
     onChange: onCityChange,
     validationMessage: cityValidationMessage,
-  } = useValidator("", "", validationCity);
+  } = useValidator("Calgary", "", validationCity);
   // 7. province
   const {
     value: province,
@@ -323,9 +325,13 @@ const CreateAccount = () => {
                       : {}
                   }
                 >
-                  <option value="Calgary">Calgary</option>
-                  <option value="Camrose">Camrose</option>
-                  <option value="Brooks">Brooks</option>
+                  {cityList.map((city) => {
+                    return (
+                      <option value={city} key={city}>
+                        {city}
+                      </option>
+                    );
+                  })}
                 </select>
                 <span className={styles.validationWarningBox}>
                   <div className={styles.validationWarning}>
