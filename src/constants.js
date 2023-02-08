@@ -4,8 +4,8 @@ export const regex = {
   firstName: /^[A-Z][a-z]+$/,
   // Noh
   lastName: /^[A-Z][a-z]+$/,
-  // +(1)000-0000
-  phone: /^\+\d{1}\(\d{3}\)\d{3}-\d{4}$/,
+  // +1 (000) 000-0000
+  phone: /^\+\d{1}\s\(\d{3}\)\s\d{3}-\d{4}$/,
   // 100 Main St
   streetAddress: /^\d+\s[a-zA-Z\s]+$/,
   // Calgary
@@ -16,7 +16,7 @@ export const regex = {
   country: /^[a-zA-Z\s]+$/,
   //account@domain.com
   email:
-    /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/,
+    /^[0-9a-zA-Z]([-_]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/,
   // minimum of 8 and maximum of 10 characters, at least one uppercase letter, one lowercase letter, one number and at least one special character
   password:
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,10}/,

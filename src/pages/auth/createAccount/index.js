@@ -130,6 +130,7 @@ const CreateAccount = () => {
     console.log("##submit", registerForm);
     navigate("/auth/createPassword");
   };
+
   // register form
   const registerForm = {
     firstName,
@@ -138,6 +139,42 @@ const CreateAccount = () => {
     phone,
     streetAddress,
     city,
+  };
+
+  // formattedPhoneNumber
+  const [formattedPhoneNumber, setFormattedPhoneNumber] = useState("");
+  useEffect(() => {
+    setFormattedPhoneNumber(formatterPhoneNumber(phone));
+  }, [phone]);
+
+  /** formatter for phone number */
+  const formatterPhoneNumber = (value) => {
+    // if input value is nothing, default return +1
+    if (!value) return `+1${value}`;
+
+    // clean the input for any non-digit values.
+    const phoneNumber = value.replace(/[^\d]/g, "");
+
+    // phoneNumberLength is used to know when to apply our formatting for the phone number
+    const phoneNumberLength = phoneNumber.length;
+
+    // if phoneNumberLength is less than 2, return +1
+    if (phoneNumberLength < 2) {
+      return `+1`;
+    }
+    // if phoneNumberLength is less than 5, return +1 (000
+    if (phoneNumberLength < 5) {
+      return `+1 (${phoneNumber.slice(1, 4)}`;
+    }
+    // if phoneNumberLength is less than 8, return +1 (000) 000
+    if (phoneNumberLength < 8) {
+      return `+1 (${phoneNumber.slice(1, 4)}) ${phoneNumber.slice(4)}`;
+    }
+    // finally, return +1 (000) 000-0000
+    return `+1 (${phoneNumber.slice(1, 4)}) ${phoneNumber.slice(
+      4,
+      7
+    )}-${phoneNumber.slice(7)}`;
   };
 
   return (
@@ -228,10 +265,10 @@ const CreateAccount = () => {
                 className={styles.input}
                 type="tel"
                 placeholder="+1(000)000-0000"
-                value={phone}
+                value={formattedPhoneNumber}
                 onChange={onPhoneChange}
                 autoComplete="tel"
-                maxLength={15}
+                maxLength={17}
                 style={
                   phoneValidationMessage.length !== 0
                     ? { borderColor: variabled.red }
