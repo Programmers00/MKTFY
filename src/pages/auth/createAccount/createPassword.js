@@ -73,7 +73,7 @@ const CreatePassword = () => {
   return !showLottie ? (
     <Modal onClickBackButton={() => navigate("/auth/createAccount")}>
       <div className={styles.resetPasswordCompleteBox}>
-        <span className={styles.title}>Reset Password?</span>
+        <span className={styles.title}>Create Password</span>
         <span className={styles.subTitle}>
           The password must have at least 6 characters and must contain 1
           uppercase and 1 number.
@@ -89,7 +89,15 @@ const CreatePassword = () => {
                 : {}
             }
           >
-            Password
+            <span>
+              Password{" "}
+              {password.length > 10 ? (
+                <span style={{ color: variabled.green }}>Strong</span>
+              ) : (
+                <span style={{ color: variabled.hoverYellow }}>Week</span>
+              )}
+            </span>
+
             <br />
             <div className={styles.passwordInputBox}>
               <input
@@ -139,7 +147,7 @@ const CreatePassword = () => {
               password !== passwordConfirm ? { color: variabled.purple } : {}
             }
           >
-            Password Confirm
+            Confirm Password
             <br />
             <div className={styles.passwordInputBox}>
               <input
@@ -175,7 +183,7 @@ const CreatePassword = () => {
             </div>
             <span className={styles.passwordMatchWarningBox}>
               <div className={styles.passwordMatchWarning}>
-                {password !== passwordConfirm ? "Password does NOT match" : ""}
+                {password !== passwordConfirm ? "Password does not match" : ""}
               </div>
             </span>
           </label>
