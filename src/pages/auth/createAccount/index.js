@@ -162,7 +162,7 @@ const CreateAccount = () => {
                 value={firstName}
                 onChange={onFirstNameChange}
                 autoComplete="given-name"
-                maxLength={20}
+                maxLength={256}
                 style={
                   firstNameValidationMessage.length !== 0
                     ? { borderColor: variabled.red }
@@ -185,7 +185,7 @@ const CreateAccount = () => {
                 value={lastName}
                 onChange={onLastNameChange}
                 autoComplete="family-name"
-                maxLength={20}
+                maxLength={256}
                 style={
                   lastNameValidationMessage.length !== 0
                     ? { borderColor: variabled.red }
@@ -256,7 +256,7 @@ const CreateAccount = () => {
                 value={streetAddress}
                 onChange={onStreetAddressChange}
                 autoComplete="street-address"
-                maxLength={50}
+                maxLength={60}
                 style={
                   streetAddressValidationMessage.length !== 0
                     ? { borderColor: variabled.red }
@@ -273,9 +273,8 @@ const CreateAccount = () => {
               <label className={styles.label}>
                 City
                 <br />
-                <input
+                <select
                   className={styles.input}
-                  type="text"
                   placeholder="City name"
                   value={city}
                   onChange={onCityChange}
@@ -286,7 +285,11 @@ const CreateAccount = () => {
                       ? { borderColor: variabled.red }
                       : {}
                   }
-                />
+                >
+                  <option value="Calgary">Calgary</option>
+                  <option value="Camrose">Camrose</option>
+                  <option value="Brooks">Brooks</option>
+                </select>
                 <span className={styles.validationWarningBox}>
                   <div className={styles.validationWarning}>
                     {cityValidationMessage}
