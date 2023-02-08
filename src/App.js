@@ -11,6 +11,8 @@ import ResetPasswordVerification from "./pages/auth/login/resetPasswordVerificat
 import ResetPasswordComplete from "./pages/auth/login/resetPasswordComplete";
 import CreateAccount from "./pages/auth/createAccount";
 import CreatePassword from "./pages/auth/createAccount/createPassword";
+import TermsOfService from "./pages/auth/createAccount/termOfService";
+import PrivacyPolicy from "./pages/auth/createAccount/privacyPolicy";
 // userMain pages
 import UserMain from "./pages/userMain";
 import Deals from "./pages/userMain/contents/deals";
@@ -54,6 +56,8 @@ const App = () => {
               />
               <Route exact path="createAccount" element={<CreateAccount />} />
               <Route exact path="createPassword" element={<CreatePassword />} />
+              <Route exact path="termsOfService" element={<TermsOfService />} />
+              <Route exact path="privacyPolicy" element={<PrivacyPolicy />} />
               {/* <Route path="*" element={<div>Opps</div>} /> */}
             </Route>
             {/* user main with private router logic */}

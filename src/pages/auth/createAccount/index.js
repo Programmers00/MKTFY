@@ -130,7 +130,7 @@ const CreateAccount = () => {
     console.log("##submit", registerForm);
     navigate("/auth/createPassword");
   };
-
+  // register form
   const registerForm = {
     firstName,
     lastName,
