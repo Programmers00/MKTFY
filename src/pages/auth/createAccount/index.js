@@ -16,6 +16,10 @@ import { useNavigate } from "react-router-dom";
 const CreateAccount = () => {
   // navigate
   const navigate = useNavigate();
+
+  // select box cities list
+  const cityList = ["Calgary", "Camrose", "Brooks"];
+
   // validations
   // 1. first name
   const validationFirstName = {
@@ -73,8 +77,6 @@ const CreateAccount = () => {
     // validation error messagevalidation
     message: validationMessage.country,
   };
-
-  const cityList = ["Calgary", "Camrose", "Brooks"];
 
   // useValidator hooks
   // 1. first name

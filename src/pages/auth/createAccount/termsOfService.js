@@ -1,9 +1,9 @@
 // scss styles
-import styles from "./privacyPolicy.module.scss";
+import styles from "./termsOfService.module.scss";
 // navigate
 import { useNavigate } from "react-router-dom";
 
-export const PrivacyPolicy = () => {
+export const TermsOfService = () => {
   const navigate = useNavigate();
   return (
     <div className={styles.wholeBox}>
@@ -19,7 +19,7 @@ export const PrivacyPolicy = () => {
         </div>
         <div className={styles.contentBox}>
           <div className={styles.content}>
-            <div className={styles.title}>MKTFY Privacy policy</div>
+            <div className={styles.title}>MKTFY Terms and services</div>
             <br />
             <div className={styles.description}>
               These Terms of Service constitute a legally binding agreement made
@@ -78,4 +78,4 @@ export const PrivacyPolicy = () => {
     </div>
   );
 };
-export default PrivacyPolicy;
+export default TermsOfService;

@@ -11,7 +11,7 @@ import ResetPasswordVerification from "./pages/auth/login/resetPasswordVerificat
 import ResetPasswordComplete from "./pages/auth/login/resetPasswordComplete";
 import CreateAccount from "./pages/auth/createAccount";
 import CreatePassword from "./pages/auth/createAccount/createPassword";
-import TermsOfService from "./pages/auth/createAccount/termOfService";
+import TermsOfService from "./pages/auth/createAccount/termsOfService";
 import PrivacyPolicy from "./pages/auth/createAccount/privacyPolicy";
 // userMain pages
 import UserMain from "./pages/userMain";
