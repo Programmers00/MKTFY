@@ -91,10 +91,12 @@ const CreatePassword = () => {
           >
             <span>
               Password{" "}
-              {password.length > 10 ? (
+              {password.length === 0 ? (
+                ""
+              ) : password.length > 10 ? (
                 <span style={{ color: variabled.green }}>Strong</span>
               ) : (
-                <span style={{ color: variabled.hoverYellow }}>Week</span>
+                <span style={{ color: variabled.hoverYellow }}>Weak</span>
               )}
             </span>
 
