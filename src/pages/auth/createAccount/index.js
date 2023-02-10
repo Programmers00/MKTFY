@@ -7,9 +7,9 @@ import styles from "./index.module.scss";
 import Modal from "../../../components/modal";
 // use validator hook
 import { useValidator } from "../../../hooks/useValidator";
-// constants
+// constants for regex, validations
 import { regex, validationMessage } from "../../../constants";
-// options for regex, validations
+// naviagate
 import { useNavigate } from "react-router-dom";
 // useDispatch for sending action to redux
 import { useDispatch, useSelector } from "react-redux";
@@ -22,12 +22,10 @@ const CreateAccount = () => {
   // redux
   const dispatch = useDispatch();
   const currentSignupForm = useSelector((state) => state.signup.signupForm);
-  console.log("##currentSignupForm", currentSignupForm);
-  // if (currentSignupForm.email) {
-  //   initEmail = currentSignupForm.email;
-  // }
 
   /** data */
+  // formattedPhoneNumber
+  const [formattedPhoneNumber, setFormattedPhoneNumber] = useState("");
   // select box cities list
   const cityList = ["Calgary", "Camrose", "Brooks"];
   // validations data
@@ -87,6 +85,12 @@ const CreateAccount = () => {
     // validation error messagevalidation
     message: validationMessage.country,
   };
+
+  /** uesEffect */
+  // realtime set formatted phone number
+  useEffect(() => {
+    setFormattedPhoneNumber(formatterPhoneNumber(phone));
+  }, [phone]);
 
   /** hooks */
   // useValidator hooks
@@ -198,23 +202,15 @@ const CreateAccount = () => {
     country,
   };
 
-  /** click submit button => if email is not duplicate, save sinup form in redux and go createPassword page*/
+  /** functions */
+  /** click submit button => save sinup form in redux and go createPassword page*/
   const onClickSubmit = async (event) => {
     event.preventDefault();
-    const isEmailDuplicated = false;
-    if (!isEmailDuplicated) {
-      // save sign up form in redux
-      dispatch({ type: "SIGNUP", signupForm });
-      // go to createPassword page
-      navigate("/auth/createPassword");
-    }
+    // save sign up form in redux
+    dispatch({ type: "SIGNUP", signupForm });
+    // go to createPassword page
+    navigate("/auth/createPassword");
   };
-
-  // formattedPhoneNumber
-  const [formattedPhoneNumber, setFormattedPhoneNumber] = useState("");
-  useEffect(() => {
-    setFormattedPhoneNumber(formatterPhoneNumber(phone));
-  }, [phone]);
 
   /** formatter for phone number */
   const formatterPhoneNumber = (value) => {

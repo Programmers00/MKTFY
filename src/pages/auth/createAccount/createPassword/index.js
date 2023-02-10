@@ -18,34 +18,51 @@ import { webAuth } from "../../../../utils/webAuth";
 
 /** CreatePassword */
 const CreatePassword = () => {
+  /** initialize */
   // redux
   const dispatch = useDispatch();
   const signupForm = useSelector((state) => state.signup.signupForm);
+  // navigate
+  const navigate = useNavigate();
 
+  /** data */
+  // password
   const [password, setPassword] = useState("");
   // eye icon for password visibility
   const [passwordInputType, setPasswordInputType] = useState("password");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
   // eye icon for password confirm visibility
   const [passwordConfirmInputType, setPasswordConfirmInputType] =
     useState("password");
+  // check password = password confirm
+  const [passwordConfirm, setPasswordConfirm] = useState("");
   // lottie show true when login success
   const [isShowLottie, setIsShowLottie] = useState(false);
   // check box checked or not
   const [isChecked, setIsChecked] = useState(false);
-  // navigate
-  const navigate = useNavigate();
 
-  /** click submit button => webAuth */
+  /** useEffect */
+  // detect password and realtime update in redux
+  useEffect(() => {
+    dispatch({
+      type: "CREATE_PASSWORD",
+      password,
+    });
+  }, [password]);
+
+  /** functions */
+  /** click submit button => webAuth signup try */
   const onClickSubmit = async (event) => {
     event.preventDefault();
     // webAuth sign up try with signup form from redux
     webAuth.signup(signupForm, (err, res) => {
+      // signup fail: email duplicate
       if (err && err.statusCode === 400 && err.code === "invalid_signup") {
-        alert("##email is duplicated");
+        alert("email is duplicated");
         // go userMain page
         navigate("/auth/createAccount");
-      } else if (res) {
+      }
+      // signup success
+      else if (res) {
         // show lottie
         setIsShowLottie(true);
         // dispatch: remove signup form data in redux
@@ -62,12 +79,6 @@ const CreatePassword = () => {
       }
     });
   };
-  useEffect(() => {
-    dispatch({
-      type: "CREATE_PASSWORD",
-      password,
-    });
-  }, [password]);
 
   /** password toggle: change input type and icon */
   const onToggle = (type) => {
