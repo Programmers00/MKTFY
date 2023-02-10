@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import variabled from "../../../styles/_variabled.scss";
 // wrapper component
 import Modal from "../../../components/modal";
-import styles from "./login.module.scss";
+import styles from "./index.module.scss";
 // custom api => processApi
 import { getLogin } from "../../../api/login";
 // navigate

@@ -1,71 +1,73 @@
 import { useState, useEffect } from "react";
 // scss style variabled for color red
-import variabled from "../../../styles/_variabled.scss";
+import variabled from "../../../../styles/_variabled.scss";
 // css styles
-import styles from "./resetPasswordComplete.module.scss";
-// custom api => processApi
-import { getResetPasswordComplete } from "../../../api/resetPasswordComplete";
+import styles from "./index.module.scss";
 // wrapper component
-import Modal from "../../../components/modal";
+import Modal from "../../../../components/modal";
 // navigate
 import { useNavigate } from "react-router-dom";
 // lottieFile
-import LottieIcon from "../../../components/lottieIcon";
+import LottieIcon from "../../../../components/lottieIcon";
+// link to move page
+import { Link } from "react-router-dom";
+// useDispatch for sending action to redux
+import { useSelector, useDispatch } from "react-redux";
+// webAuth from auth0-js
+import { webAuth } from "../../../../utils/webAuth";
 
-/** ResetPasswordComplete */
-const ResetPasswordComplete = () => {
+/** CreatePassword */
+const CreatePassword = () => {
+  // redux
+  const dispatch = useDispatch();
+  const signupForm = useSelector((state) => state.signup.signupForm);
+
   const [password, setPassword] = useState("");
   // eye icon for password visibility
   const [passwordInputType, setPasswordInputType] = useState("password");
-
   const [passwordConfirm, setPasswordConfirm] = useState("");
   // eye icon for password confirm visibility
   const [passwordConfirmInputType, setPasswordConfirmInputType] =
     useState("password");
   // lottie show true when login success
-  const [showLottie, setShowLottie] = useState(false);
+  const [isShowLottie, setIsShowLottie] = useState(false);
+  // check box checked or not
+  const [isChecked, setIsChecked] = useState(false);
   // navigate
   const navigate = useNavigate();
-  // response data
-  const [state, setState] = useState({
-    loading: true,
-    data: null,
-    error: null,
-  });
 
-  /** request data for api */
-  const requestResetPasswordCompleteApi = {
-    url: "https://icanhazdadjoke.com",
-    params: { password: password },
-    method: "get",
-    headers: { Accept: "application/json" },
-  };
-
-  /** click submit button => call api*/
+  /** click submit button => webAuth */
   const onClickSubmit = async (event) => {
     event.preventDefault();
-    // request submit
-    const state = await getResetPasswordComplete(
-      requestResetPasswordCompleteApi
-    );
-    // save state
-    setState(state);
-  };
-  // when response success, go to useMain("/auth/login") page
-  // submit success => isAuthenticated :true
-  useEffect(() => {
-    if (!state?.loading && state?.data?.status === 200) {
-      // show lottie
-      setShowLottie(true);
-      // after 2seconds
-      setTimeout(() => {
+    // webAuth sign up try with signup form from redux
+    webAuth.signup(signupForm, (err, res) => {
+      if (err && err.statusCode === 400 && err.code === "invalid_signup") {
+        alert("##email is duplicated");
         // go userMain page
-        navigate("/auth/login");
-        // unshow lottie(return default value:false)
-        setShowLottie(false);
-      }, 2000);
-    }
-  }, [state?.data?.status]);
+        navigate("/auth/createAccount");
+      } else if (res) {
+        // show lottie
+        setIsShowLottie(true);
+        // dispatch: remove signup form data in redux
+        dispatch({
+          type: "INIT",
+        });
+        // after 2seconds
+        setTimeout(() => {
+          // go login page
+          navigate("/auth/login");
+          // unshow lottie(return default value:false)
+          setIsShowLottie(false);
+        }, 2000);
+      }
+    });
+  };
+  useEffect(() => {
+    dispatch({
+      type: "CREATE_PASSWORD",
+      password,
+    });
+  }, [password]);
 
   /** password toggle: change input type and icon */
   const onToggle = (type) => {
@@ -82,12 +84,10 @@ const ResetPasswordComplete = () => {
     );
   };
 
-  return !showLottie ? (
-    <Modal
-      onClickBackButton={() => navigate("/auth/resetPasswordVerification")}
-    >
+  return !isShowLottie ? (
+    <Modal onClickBackButton={() => navigate("/auth/createAccount")}>
       <div className={styles.resetPasswordCompleteBox}>
-        <span className={styles.title}>Reset Password?</span>
+        <span className={styles.title}>Create Password</span>
         <span className={styles.subTitle}>
           The password must have at least 6 characters and must contain 1
           uppercase and 1 number.
@@ -103,7 +103,17 @@ const ResetPasswordComplete = () => {
                 : {}
             }
           >
-            Password
+            <span>
+              Password{" "}
+              {password.length === 0 ? (
+                ""
+              ) : password.length > 10 ? (
+                <span style={{ color: variabled.green }}>Strong</span>
+              ) : (
+                <span style={{ color: variabled.hoverYellow }}>Weak</span>
+              )}
+            </span>
+
             <br />
             <div className={styles.passwordInputBox}>
               <input
@@ -124,7 +134,7 @@ const ResetPasswordComplete = () => {
               <img
                 alt="eye"
                 className={styles.eyeIcon}
-                src={require(`../../../assets/icons/${
+                src={require(`../../../../assets/icons/${
                   (password.length < 6 ||
                     !/[A-Z]/.test(password) ||
                     !/\d/.test(password)) &&
@@ -153,7 +163,7 @@ const ResetPasswordComplete = () => {
               password !== passwordConfirm ? { color: variabled.purple } : {}
             }
           >
-            Password Confirm
+            Confirm Password
             <br />
             <div className={styles.passwordInputBox}>
               <input
@@ -172,7 +182,7 @@ const ResetPasswordComplete = () => {
               <img
                 alt="eye"
                 className={styles.eyeIcon}
-                src={require(`../../../assets/icons/${
+                src={require(`../../../../assets/icons/${
                   password !== passwordConfirm &&
                   passwordConfirmInputType === "password"
                     ? "eyeSlashPurple"
@@ -189,7 +199,7 @@ const ResetPasswordComplete = () => {
             </div>
             <span className={styles.passwordMatchWarningBox}>
               <div className={styles.passwordMatchWarning}>
-                {password !== passwordConfirm ? "Password does NOT match" : ""}
+                {password !== passwordConfirm ? "Password does not match" : ""}
               </div>
             </span>
           </label>
@@ -199,7 +209,7 @@ const ResetPasswordComplete = () => {
               <img
                 alt="check"
                 className={styles.checkIcon}
-                src={require(`../../../assets/icons/${
+                src={require(`../../../../assets/icons/${
                   password.length > 5 ? "checkConfirm" : "check"
                 }.png`)}
               />
@@ -209,7 +219,7 @@ const ResetPasswordComplete = () => {
               <img
                 alt="check"
                 className={styles.checkIcon}
-                src={require(`../../../assets/icons/${
+                src={require(`../../../../assets/icons/${
                   /[A-Z]/.test(password) ? "checkConfirm" : "check"
                 }.png`)}
               />
@@ -219,13 +229,34 @@ const ResetPasswordComplete = () => {
               <img
                 alt="check"
                 className={styles.checkIcon}
-                src={require(`../../../assets/icons/${
+                src={require(`../../../../assets/icons/${
                   /\d/.test(password) ? "checkConfirm" : "check"
                 }.png`)}
               />
               1 Number
             </div>
           </div>
+          <div className={styles.checkBox}>
+            <img
+              alt="check"
+              className={styles.checkBoxIcon}
+              src={require(`../../../../assets/icons/${
+                isChecked ? "checkBox" : "blankBox"
+              }.png`)}
+              onClick={() => setIsChecked((prev) => !prev)}
+            />
+            <div className={styles.text}>
+              <span>By checking this box, you agree to our</span>{" "}
+              <span className={styles.hilightText}>
+                <Link to="/auth/termsOfService">Terms of Service</Link>
+              </span>{" "}
+              and{" "}
+              <span className={styles.hilightText}>
+                <Link to="/auth/privacyPolicy">our Privacy Policy</Link>
+              </span>
+            </div>
+          </div>
+
           <div className={styles.submitButtonBox}>
             <button
               className={styles.submitButton}
@@ -234,20 +265,21 @@ const ResetPasswordComplete = () => {
                 password === passwordConfirm &&
                 password.length > 5 &&
                 /[A-Z]/.test(password) &&
-                /\d/.test(password)
+                /\d/.test(password) &&
+                isChecked === true
                   ? false
                   : true
               }
             >
-              Submit
+              Create account
             </button>
           </div>
         </form>
       </div>
     </Modal>
   ) : (
-    <LottieIcon title="Password succesfully reset!" />
+    <LottieIcon title="Account Created!" />
   );
 };
 
-export default ResetPasswordComplete;
+export default CreatePassword;

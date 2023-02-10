@@ -1,15 +1,15 @@
 // mixins for button
-@import "../../../styles/mixins";
+@import "../../../../styles/mixins";
 // variabled for color
-@import "../../../styles/variabled";
+@import "../../../../styles/variabled";
 
-.ForgotPasswordBox {
+.resetPasswordVerificationBox {
   padding: 100px 130px;
   display: flex;
   flex-direction: column;
   gap: 30px;
   .title {
-    /* Forgot Password? */
+    /* Reset Password? */
     font-weight: 700;
     font-size: 36px;
     text-align: center;
@@ -24,34 +24,56 @@
     color: $gray;
     align-self: stretch;
   }
-  .emailForm .emailLabel {
+  .verificationCodeForm .verificationCodeLabel {
     font-weight: 600;
     font-size: 16px;
     line-height: 22px;
     color: $black;
-    .emailInput {
+    .verificationCodeInputBox {
       box-sizing: border-box;
       display: flex;
       flex-direction: row;
       align-items: center;
       padding: 16px 10px;
-      width: 542px;
+      // width: 542px;
       height: 51px;
-      background: #ffffff;
+      background: $white;
       border: 1px solid #e2e2e2;
       border-radius: 4px;
       font-weight: 400;
       font-size: 14px;
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+      &[type="number"] {
+        -moz-appearance: none;
+      }
     }
-    .validationWarningBox {
+    .inputCodeBox {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: first baseline;
+    }
+    .verificationWarningBox {
       color: $red;
       font-weight: 400;
       font-size: 14px;
       display: flex;
       height: 15px;
-      .validationWarning {
+      .verificationWarning {
         padding-right: 5px;
       }
+    }
+  }
+  .resendCodeBox {
+    display: flex;
+    .resendCode {
+      font-weight: 600;
+      font-size: 14px;
+      color: $yellow;
+      margin-left: auto;
+      cursor: pointer;
     }
   }
 

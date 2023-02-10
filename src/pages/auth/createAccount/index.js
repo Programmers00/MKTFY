@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 // scss style variabled for color red
 import variabled from "../../../styles/_variabled.scss";
 // scss styles
-import styles from "./createAccount.module.scss";
+import styles from "./index.module.scss";
 // Modal Component
 import Modal from "../../../components/modal";
 // use validator hook

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 // scss
-import styles from "./authMain.module.scss";
+import styles from "./index.module.scss";
 
 const AuthMain = () => {
   const navigate = useNavigate();

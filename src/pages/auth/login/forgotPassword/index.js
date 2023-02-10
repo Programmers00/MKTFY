@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 // scss style variabled for color red
-import variabled from "../../../styles/_variabled.scss";
-import styles from "./forgotPassword.module.scss";
+import variabled from "../../../../styles/_variabled.scss";
+import styles from "./index.module.scss";
 // custom api => processApi
-import { getForgotPassword } from "../../../api/forgotPassword";
+import { getForgotPassword } from "../../../../api/forgotPassword";
 // wrapper component
-import Modal from "../../../components/modal";
+import Modal from "../../../../components/modal";
 // navigate
 import { useNavigate } from "react-router-dom";
 // customed hooks
-import { useValidator } from "../../../hooks/useValidator";
+import { useValidator } from "../../../../hooks/useValidator";
 // constants
-import { regex, validationMessage } from "../../../constants";
+import { regex, validationMessage } from "../../../../constants";
 
 /** ForgotPassword */
 const ForgotPassword = () => {

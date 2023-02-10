@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 // scss style variabled for color red
-import variabled from "../../../styles/_variabled.scss";
-import styles from "./resetPasswordVerification.module.scss";
+import variabled from "../../../../styles/_variabled.scss";
+import styles from "./index.module.scss";
 // custom api => processApi
-import { getResetPasswordVerification } from "../../../api/resetPasswordVerification";
+import { getResetPasswordVerification } from "../../../../api/resetPasswordVerification";
 // wrapper component
-import Modal from "../../../components/modal";
+import Modal from "../../../../components/modal";
 // input code compoenent
-import InputCode from "../../../components/inputCode";
+import InputCode from "../../../../components/inputCode";
 // navigate
 import { useNavigate } from "react-router-dom";
 

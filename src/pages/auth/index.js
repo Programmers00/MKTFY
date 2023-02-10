@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import styles from "./auth.module.scss";
+import styles from "./index.module.scss";
 
 const Auth = () => {
   return (
