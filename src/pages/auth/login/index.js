@@ -79,7 +79,7 @@ const Login = () => {
   useEffect(() => {
     if (!state?.loading && state?.data?.status === 200) {
       // update isAuthenticated
-      dispatch({ type: "authenticated", isAuthenticated: true });
+      dispatch({ type: "AUTHENTICATED", isAuthenticated: true });
       // show lottie
       setShowLottie(true);
       // after 2seconds

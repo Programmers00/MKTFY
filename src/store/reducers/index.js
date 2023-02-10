@@ -1,2 +1,3 @@
 import auth from "./auth";
-export { auth };
+import signup from "./signup";
+export { auth, signup };

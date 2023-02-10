@@ -9,10 +9,19 @@ import Modal from "../../../components/modal";
 import { useNavigate } from "react-router-dom";
 // lottieFile
 import LottieIcon from "../../../components/lottieIcon";
+// link to move page
 import { Link } from "react-router-dom";
+// useDispatch for sending action to redux
+import { useSelector, useDispatch } from "react-redux";
+// webAuth from auth0-js
+import { webAuth } from "../../../utils/webAuth";
 
 /** CreatePassword */
 const CreatePassword = () => {
+  // redux
+  const dispatch = useDispatch();
+  const signupForm = useSelector((state) => state.signup.signupForm);
+
   const [password, setPassword] = useState("");
   // eye icon for password visibility
   const [passwordInputType, setPasswordInputType] = useState("password");
@@ -21,39 +30,44 @@ const CreatePassword = () => {
   const [passwordConfirmInputType, setPasswordConfirmInputType] =
     useState("password");
   // lottie show true when login success
-  const [showLottie, setShowLottie] = useState(false);
+  const [isShowLottie, setIsShowLottie] = useState(false);
   // check box checked or not
   const [isChecked, setIsChecked] = useState(false);
   // navigate
   const navigate = useNavigate();
-  // // response data
-  // const [loading, setLoading] = useState(true);
-  // const [data, setData] = useState(null);
-  // const [error, setError] = useState(null);
 
-  /** click submit button => call api*/
+  /** click submit button => webAuth */
   const onClickSubmit = async (event) => {
     event.preventDefault();
-    // request submit
-    // const state = await getCreatePassword(requestCreatePasswordApi);
-    // save state
-    // setState(state);
+    // webAuth sign up try with signup form from redux
+    webAuth.signup(signupForm, (err, res) => {
+      if (err && err.statusCode === 400 && err.code === "invalid_signup") {
+        alert("##email is duplicated");
+        // go userMain page
+        navigate("/auth/createAccount");
+      } else if (res) {
+        // show lottie
+        setIsShowLottie(true);
+        // dispatch: remove signup form data in redux
+        dispatch({
+          type: "INIT",
+        });
+        // after 2seconds
+        setTimeout(() => {
+          // go login page
+          navigate("/auth/login");
+          // unshow lottie(return default value:false)
+          setIsShowLottie(false);
+        }, 2000);
+      }
+    });
   };
-  // when response success, go to useMain("/auth/login") page
-  // submit success => isAuthenticated :true
-  // useEffect(() => {
-  //   if (!loading && data?.status === 200) {
-  //     // show lottie
-  //     setShowLottie(true);
-  //     // after 2seconds
-  //     setTimeout(() => {
-  //       // go userMain page
-  //       navigate("/auth/login");
-  //       // unshow lottie(return default value:false)
-  //       setShowLottie(false);
-  //     }, 2000);
-  //   }
-  // }, [data?.status]);
+  useEffect(() => {
+    dispatch({
+      type: "CREATE_PASSWORD",
+      password,
+    });
+  }, [password]);
 
   /** password toggle: change input type and icon */
   const onToggle = (type) => {
@@ -70,7 +84,7 @@ const CreatePassword = () => {
     );
   };
 
-  return !showLottie ? (
+  return !isShowLottie ? (
     <Modal onClickBackButton={() => navigate("/auth/createAccount")}>
       <div className={styles.resetPasswordCompleteBox}>
         <span className={styles.title}>Create Password</span>
@@ -264,7 +278,7 @@ const CreatePassword = () => {
       </div>
     </Modal>
   ) : (
-    <LottieIcon title="Password succesfully reset!" />
+    <LottieIcon title="Account Created!" />
   );
 };
 

@@ -11,16 +11,26 @@ import { useValidator } from "../../../hooks/useValidator";
 import { regex, validationMessage } from "../../../constants";
 // options for regex, validations
 import { useNavigate } from "react-router-dom";
+// useDispatch for sending action to redux
+import { useDispatch, useSelector } from "react-redux";
 
 /** CreateAccount */
 const CreateAccount = () => {
+  /** initialize */
   // navigate
   const navigate = useNavigate();
+  // redux
+  const dispatch = useDispatch();
+  const currentSignupForm = useSelector((state) => state.signup.signupForm);
+  console.log("##currentSignupForm", currentSignupForm);
+  // if (currentSignupForm.email) {
+  //   initEmail = currentSignupForm.email;
+  // }
 
+  /** data */
   // select box cities list
   const cityList = ["Calgary", "Camrose", "Brooks"];
-
-  // validations
+  // validations data
   // 1. first name
   const validationFirstName = {
     // regex
@@ -78,71 +88,126 @@ const CreateAccount = () => {
     message: validationMessage.country,
   };
 
+  /** hooks */
   // useValidator hooks
   // 1. first name
   const {
     value: firstName,
     onChange: onFirstNameChange,
     validationMessage: firstNameValidationMessage,
-  } = useValidator("", "", validationFirstName);
+  } = useValidator(
+    currentSignupForm.user_metadata?.firstName?.length !== 0
+      ? currentSignupForm.user_metadata.firstName
+      : "",
+    "",
+    validationFirstName
+  );
   // 2. last name
   const {
     value: lastName,
     onChange: onLastNameChange,
     validationMessage: lastNameValidationMessage,
-  } = useValidator("", "", validationLastName);
+  } = useValidator(
+    currentSignupForm.user_metadata?.lastName?.length !== 0
+      ? currentSignupForm.user_metadata.lastName
+      : "",
+    "",
+    validationLastName
+  );
   // 3. email
   const {
     value: email,
     onChange: onEmailChange,
     validationMessage: emailValidationMessage,
-  } = useValidator("", "", validationEmail);
+  } = useValidator(
+    currentSignupForm.email.length !== 0 ? currentSignupForm.email : "",
+    "",
+    validationEmail
+  );
   // 4. phone
   const {
     value: phone,
     onChange: onPhoneChange,
     validationMessage: phoneValidationMessage,
-  } = useValidator("", "", validationPhone);
+  } = useValidator(
+    currentSignupForm.user_metadata?.phone?.length !== 0
+      ? currentSignupForm.user_metadata?.phone
+      : "",
+    "",
+    validationPhone
+  );
   // 5. street address
   const {
     value: streetAddress,
     onChange: onStreetAddressChange,
     validationMessage: streetAddressValidationMessage,
-  } = useValidator("", "", validationStreetAddress);
+  } = useValidator(
+    currentSignupForm.user_metadata?.streetAddress?.length !== 0
+      ? currentSignupForm.user_metadata?.streetAddress
+      : "",
+    "",
+    validationStreetAddress
+  );
   // 6. city
   const {
     value: city,
     onChange: onCityChange,
     validationMessage: cityValidationMessage,
-  } = useValidator("Calgary", "", validationCity);
+  } = useValidator(
+    currentSignupForm.user_metadata?.city?.length !== 0
+      ? currentSignupForm.user_metadata?.city
+      : "Calgary",
+    "",
+    validationCity
+  );
   // 7. province
   const {
     value: province,
     onChange: onProvinceChange,
     validationMessage: provinceValidationMessage,
-  } = useValidator("", "", validationProvince);
+  } = useValidator(
+    currentSignupForm.user_metadata?.province?.length !== 0
+      ? currentSignupForm.user_metadata?.province
+      : "",
+    "",
+    validationProvince
+  );
   // 8. country
   const {
     value: country,
     onChange: onCountryChange,
     validationMessage: countryValidationMessage,
-  } = useValidator("", "", validationCountry);
+  } = useValidator(
+    currentSignupForm.user_metadata?.country?.length !== 0
+      ? currentSignupForm.user_metadata?.country
+      : "",
+    "",
+    validationCountry
+  );
 
-  /** click submit button => call api*/
-  const onClickSubmit = async (event) => {
-    event.preventDefault();
-    console.log("##submit", registerForm);
-    navigate("/auth/createPassword");
-  };
-
-  // register form
-  const registerForm = {
+  /** data form for redux*/
+  // signup form
+  const signupForm = {
+    email,
     firstName,
     lastName,
-    email,
     phone,
     streetAddress,
     city,
+    province,
+    country,
+  };
+
+  /** click submit button => if email is not duplicate, save sinup form in redux and go createPassword page*/
+  const onClickSubmit = async (event) => {
+    event.preventDefault();
+    const isEmailDuplicated = false;
+    if (!isEmailDuplicated) {
+      // save sign up form in redux
+      dispatch({ type: "SIGNUP", signupForm });
+      // go to createPassword page
+      navigate("/auth/createPassword");
+    }
   };
 
   // formattedPhoneNumber

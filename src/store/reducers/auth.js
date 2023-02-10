@@ -1,6 +1,6 @@
 const auth = (state = { isAuthenticated: false }, action) => {
   switch (action.type) {
-    case "authenticated":
+    case "AUTHENTICATED":
       return { isAuthenticated: action.isAuthenticated };
     default:
       return state;
