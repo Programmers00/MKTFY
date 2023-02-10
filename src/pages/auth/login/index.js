@@ -1,110 +1,82 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 // scss style variabled for color red
 import variabled from "../../../styles/_variabled.scss";
 // wrapper component
 import Modal from "../../../components/modal";
+// scss styles
 import styles from "./index.module.scss";
-// custom api => processApi
-import { getLogin } from "../../../api/login";
 // navigate
 import { useNavigate } from "react-router-dom";
-// redux
-import { useDispatch } from "react-redux";
-// lottieFile
-import LottieIcon from "../../../components/lottieIcon";
+// useDispatch for sending action to redux
 // customed hooks
 import { useValidator } from "../../../hooks/useValidator";
-// constants
+// constants for regex, validations
 import { regex, validationMessage } from "../../../constants";
+// webAuth from auth0-js
+import { webAuth } from "../../../utils/webAuth";
 
 /** Login */
 const Login = () => {
+  /** initilzie */
   // navigate
   const navigate = useNavigate();
-  // redux
-  const dispatch = useDispatch();
-  // params data
+
+  /** data */
+  // password
   const [password, setPassword] = useState("");
   // eye icon for password visibility
   const [passwordInputType, setPasswordInputType] = useState("password");
-  const [eyeIcon, setEyeIcon] = useState("eyeSlash");
-  // response data
-  const [state, setState] = useState({
-    loading: true,
-    data: null,
-    error: null,
-  });
-
-  // email input options
-  // -> max length limitator
-  // const maxLengthLimitator = (value) => {
-  //   return value.length <= 320;
-  // };
-  // -> validation
+  // error for checking login fail
+  const [error, setError] = useState(0);
+  // validation data for email
   const validation = {
     // regex
     regex: regex.email,
     // validation error messagevalidation
     message: validationMessage.email,
   };
-  // useValidator hook
+
+  /** hooks */
+  // useValidator hook for email
   const {
     value: email,
     onChange: onEmailChange,
     validationMessage: emailValidationMessage,
   } = useValidator("", "", validation);
 
-  // lottie show true when login success
-  const [showLottie, setShowLottie] = useState(false);
-
-  /** request data for api */
-  const requestLoginApi = {
-    url: "https://icanhazdadjoke.com",
-    params: { email: email, password: password },
-    method: "get",
-    headers: { Accept: "application/json" },
+  /** parameter data */
+  // login form
+  const loginForm = {
+    realm: "Username-Password-Authentication",
+    email,
+    password,
   };
 
-  /** click login button => call api*/
+  /** functions */
+  /** click login button => if login success, go to userMain page(redirect) if not, error occur*/
   const onClickLogin = async (event) => {
     event.preventDefault();
-    // request login
-    const state = await getLogin(requestLoginApi);
-    // save state
-    setState(state);
+    webAuth.login(loginForm, (err) => {
+      // err.code => "too_many_attempts" , "access_denied"
+      console.log(
+        "#err.code",
+        err.code,
+        "#err.error_description",
+        err.error_description
+      );
+      setError(err.code);
+    });
   };
-
-  // when response success, show lottie icons after 2 seconds go to useMain("/") page
-  // login success => isAuthenticated :true
-  useEffect(() => {
-    if (!state?.loading && state?.data?.status === 200) {
-      // update isAuthenticated
-      dispatch({ type: "AUTHENTICATED", isAuthenticated: true });
-      // show lottie
-      setShowLottie(true);
-      // after 2seconds
-      setTimeout(() => {
-        // go userMain page
-        navigate("/");
-        // unshow lottie(return default value:false)
-        setShowLottie(false);
-      }, 2000);
-    }
-  }, [state?.data?.status]);
 
   /** password toggle: change input type and icon */
   const onToggle = () => {
-    // change icon
-    setEyeIcon((prevEyeIcon) =>
-      prevEyeIcon === "eyeSlash" ? "eye" : "eyeSlash"
-    );
-    // change input type
+    // change input type and "eye", "eyeSlash" icon
     setPasswordInputType((prevPasswordInputType) =>
       prevPasswordInputType === "password" ? "text" : "password"
     );
   };
 
-  return !showLottie ? (
+  return (
     <Modal>
       <div className={styles.loginBox}>
         <span className={styles.loginTitle}>Welcome back!</span>
@@ -147,12 +119,18 @@ const Login = () => {
               <img
                 alt="eye"
                 className={styles.eyeIcon}
-                src={require(`../../../assets/icons/${eyeIcon}.png`)}
+                src={require(`../../../assets/icons/${
+                  passwordInputType === "text" ? "eye" : "eyeSlash"
+                }.png`)}
                 onClick={() => onToggle()}
               />
             </div>
             <span className={styles.validationWarning}>
-              {state?.error ? "Invalid email/password" : ""}
+              {error === ""
+                ? ""
+                : error === "too_many_attempts"
+                ? "too many attempts"
+                : "Invalid email/password"}
             </span>
           </label>
           <br />
@@ -184,8 +162,6 @@ const Login = () => {
         </form>
       </div>
     </Modal>
-  ) : (
-    <LottieIcon />
   );
 };
 
