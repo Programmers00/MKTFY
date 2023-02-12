@@ -2,67 +2,77 @@ import { useState, useEffect } from "react";
 // scss style variabled for color red
 import variabled from "../../../../styles/_variabled.scss";
 import styles from "./index.module.scss";
-// custom api => processApi
-import { getForgotPassword } from "../../../../api/forgotPassword";
 // wrapper component
 import Modal from "../../../../components/modal";
 // navigate
 import { useNavigate } from "react-router-dom";
 // customed hooks
 import { useValidator } from "../../../../hooks/useValidator";
-// constants
+// constants for regex, validationMessage
 import { regex, validationMessage } from "../../../../constants";
+// passwordlessStart by auth0-js
+import { webAuth } from "../../../../utils/webAuth";
+// email for redux
+import { useDispatch } from "react-redux";
 
 /** ForgotPassword */
 const ForgotPassword = () => {
+  /** initialize */
   // navigate
   const navigate = useNavigate();
-  // email input options
-  // -> validation
+  // redux
+  const dispatch = useDispatch();
+
+  /** data */
+  const [error, setError] = useState(false);
+  // validation data for email
   const validation = {
     // regex
     regex: regex.email,
     // validation error messagevalidation
     message: validationMessage.email,
   };
-  // response data
-  const [state, setState] = useState({
-    loading: true,
-    data: null,
-    error: null,
-  });
-  // useValidator hook
+
+  /** hooks */
+  // useValidator hook for email
   const {
     value: email,
     onChange: onEmailChange,
     validationMessage: emailValidationMessage,
   } = useValidator("", "", validation);
 
-  /** request data for api */
-  const requestForgotPasswordApi = {
-    url: "https://icanhazdadjoke.com",
-    params: { email: email },
-    method: "get",
-    headers: { Accept: "application/json" },
+  /** parameter data */
+  // seding a code to email form
+  const codeToEmailForm = {
+    // is it possible to use client_secret??
+    client_secret:
+      "bmNX6FBTxSb6Wq9LCqEHrYCxwqpyVsL7FYj2cphbQO2A9KrlQujdwVdFqmW4OcHA",
+    connection: "email",
+    send: "code",
+    email,
   };
 
-  /** click submit button => call api*/
+  /** functions */
+  /** click submit button => seding a code to email */
   const onClickSubmit = async (event) => {
     event.preventDefault();
-    // request submit
-    const state = await getForgotPassword(requestForgotPasswordApi);
-    // save state
-    setState(state);
+    // seding a code to email form
+    webAuth.passwordlessStart(codeToEmailForm, (err, res) => {
+      // seding a code: fail
+      if (err) {
+        // error => true
+        setError(true);
+        console.error(err);
+      }
+      // seding a code: success
+      else {
+        localStorage.setItem("user_email", email);
+        // go to reset password verification page
+        navigate("/auth/resetPasswordVerification");
+        console.log(res);
+      }
+    });
   };
-
-  // when response success, go to useMain("/auth/resetPasswordVerification") page
-  // submit success => isAuthenticated :true
-  useEffect(() => {
-    if (!state?.loading && state?.data?.status === 200) {
-      // go userMain page
-      navigate("/auth/resetPasswordVerification");
-    }
-  }, [state?.data?.status]);
 
   return (
     <Modal onClickBackButton={() => navigate("/auth/login")}>
@@ -93,7 +103,7 @@ const ForgotPassword = () => {
             />
             <span className={styles.validationWarningBox}>
               <div className={styles.validationWarning}>
-                {state?.error ? "Invalid email" : ""}
+                {error ? "Invalid email" : ""}
               </div>
               <div className={styles.validationWarning}>
                 {emailValidationMessage}

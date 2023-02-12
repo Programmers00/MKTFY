@@ -3,69 +3,76 @@ import { useState, useEffect } from "react";
 import variabled from "../../../../styles/_variabled.scss";
 // css styles
 import styles from "./index.module.scss";
-// custom api => processApi
-import { getResetPasswordComplete } from "../../../../api/resetPasswordComplete";
 // wrapper component
 import Modal from "../../../../components/modal";
 // navigate
 import { useNavigate } from "react-router-dom";
+// passwordlesslogin by auth0-js
+import { webAuth } from "../../../../utils/webAuth";
+// isAuthenticated for redux
 // lottieFile
-import LottieIcon from "../../../../components/lottieIcon";
+// import LottieIcon from "../../../../components/lottieIcon";
 
 /** ResetPasswordComplete */
 const ResetPasswordComplete = () => {
+  /** initialize */
+  // navigate
+  const navigate = useNavigate();
+  // email for redux
+  const email = localStorage.getItem("user_email");
+
+  /** data */
+  // password
   const [password, setPassword] = useState("");
   // eye icon for password visibility
   const [passwordInputType, setPasswordInputType] = useState("password");
-
-  const [passwordConfirm, setPasswordConfirm] = useState("");
   // eye icon for password confirm visibility
   const [passwordConfirmInputType, setPasswordConfirmInputType] =
     useState("password");
+  // checking password error message
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+
   // lottie show true when login success
-  const [showLottie, setShowLottie] = useState(false);
-  // navigate
-  const navigate = useNavigate();
-  // response data
-  const [state, setState] = useState({
-    loading: true,
-    data: null,
-    error: null,
-  });
+  // const [showLottie, setShowLottie] = useState(false);
 
-  /** request data for api */
-  const requestResetPasswordCompleteApi = {
-    url: "https://icanhazdadjoke.com",
-    params: { password: password },
-    method: "get",
-    headers: { Accept: "application/json" },
-  };
-
-  /** click submit button => call api*/
-  const onClickSubmit = async (event) => {
-    event.preventDefault();
-    // request submit
-    const state = await getResetPasswordComplete(
-      requestResetPasswordCompleteApi
-    );
-    // save state
-    setState(state);
-  };
-  // when response success, go to useMain("/auth/login") page
-  // submit success => isAuthenticated :true
+  /** useEffect */
+  // get and save access token
   useEffect(() => {
-    if (!state?.loading && state?.data?.status === 200) {
-      // show lottie
-      setShowLottie(true);
-      // after 2seconds
-      setTimeout(() => {
-        // go userMain page
-        navigate("/auth/login");
-        // unshow lottie(return default value:false)
-        setShowLottie(false);
-      }, 2000);
-    }
-  }, [state?.data?.status]);
+    //
+    webAuth.parseHash({ hash: window.location.hash }, (err, res) => {
+      if (err) {
+        console.error("##err", err);
+      } else {
+        console.log("##res", res);
+        sessionStorage.setItem("id_token", res.idToken);
+        sessionStorage.setItem("access_token", res.accessToken);
+        sessionStorage.setItem("nonce", res.idTokenPayload.nonce);
+      }
+    });
+  }, []);
+
+  const changePasswordForm = {
+    connection: "Username-Password-Authentication", //"Username-Password-Authentication"
+    email: email,
+    // accessToken: sessionStorage.getItem("access_token"),
+    // password,
+  };
+
+  /** functions */
+  /********************** need to change... it is for sending a new password page to email*/
+  /** click submit button =>*/
+  const onClickSubmit = async (event) => {
+    console.log("changePasswordForm", changePasswordForm);
+    event.preventDefault();
+    webAuth.changePassword(changePasswordForm, (err, res) => {
+      if (err) {
+        console.error("##err", err);
+      } else {
+        console.log("res", res);
+      }
+    });
+    webAuth.passwordlessVerify();
+  };
 
   /** password toggle: change input type and icon */
   const onToggle = (type) => {
@@ -82,7 +89,7 @@ const ResetPasswordComplete = () => {
     );
   };
 
-  return !showLottie ? (
+  return (
     <Modal
       onClickBackButton={() => navigate("/auth/resetPasswordVerification")}
     >
@@ -245,8 +252,6 @@ const ResetPasswordComplete = () => {
         </form>
       </div>
     </Modal>
-  ) : (
-    <LottieIcon title="Password succesfully reset!" />
   );
 };
 

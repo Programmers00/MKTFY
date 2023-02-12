@@ -2,69 +2,67 @@ import { useState, useEffect } from "react";
 // scss style variabled for color red
 import variabled from "../../../../styles/_variabled.scss";
 import styles from "./index.module.scss";
-// custom api => processApi
-import { getResetPasswordVerification } from "../../../../api/resetPasswordVerification";
 // wrapper component
 import Modal from "../../../../components/modal";
 // input code compoenent
 import InputCode from "../../../../components/inputCode";
 // navigate
 import { useNavigate } from "react-router-dom";
+// passwordlesslogin by auth0-js
+import { webAuth } from "../../../../utils/webAuth";
+// email for redux
 
 /** ResetPasswordVerification */
 const ResetPasswordVerification = () => {
+  /** initialize */
   // navigate
   const navigate = useNavigate();
-  // response data
-  const [state, setState] = useState({
-    loading: true,
-    data: null,
-    error: null,
-  });
+  // redux
+  const email = localStorage.getItem("user_email");
+
+  /** data */
   // verification code
   const [verificationCode, setVerificationCode] = useState("");
+  const [error, setError] = useState("");
 
-  /** request data for api */
-  const requestResetPasswordVerificationApi = {
-    url: "https://icanhazdadjoke.com",
-    params: { verificationCode: verificationCode },
-    method: "get",
-    headers: { Accept: "application/json" },
+  /** parameter data */
+  const codeVerificationForm = {
+    connection: "email",
+    email,
+    verificationCode,
+    redirectUri: "http://localhost:3000/auth/resetPasswordComplete",
   };
 
-  /** click submit button => call api*/
+  /** click submit button => verify the code, if success go to reset password complete page */
   const onClickSubmit = async (event) => {
     event.preventDefault();
-    // request submit
-    const state = await getResetPasswordVerification(
-      requestResetPasswordVerificationApi
-    );
-    // save state
-    setState(state);
+    // err.code => "invalid_request", "access_denied"
+    webAuth.passwordlessLogin(codeVerificationForm, (err) => {
+      if (err.code === "access_denied")
+        console.log(
+          "#err.code",
+          err.code,
+          "#err.error_description",
+          err.error_description
+        );
+      setError(err.code);
+    });
   };
-  // when response success, go to useMain("/auth/resetPasswordVerification") page
-  // submit success => isAuthenticated :true
-  useEffect(() => {
-    console.log("##tate", state);
-    if (!state?.loading && state?.data?.status === 200) {
-      // go userMain page
-      navigate("/auth/resetPasswordComplete");
-    }
-  }, [state?.data?.status]);
 
   return (
     <Modal onClickBackButton={() => navigate("/auth/forgotPassword")}>
       <div className={styles.resetPasswordVerificationBox}>
         <span className={styles.title}>Reset Password?</span>
         <span className={styles.subTitle}>
-          A code has been sent to your email {"pearl_the_cat@g*****"}, Please
-          enter the verification code below.
+          A code has been sent to your email {email}, Please enter the
+          verification code below.
         </span>
         <form className={styles.verificationCodeForm} onSubmit={onClickSubmit}>
           <label className={styles.verificationCodeLabel}>
             Verification code
             <br />
             <div className={styles.verificationCodeInputBox}>
+              {/* input code component: number only, auto curser */}
               <InputCode
                 length={6}
                 setVerificationCode={setVerificationCode}
@@ -73,7 +71,11 @@ const ResetPasswordVerification = () => {
             </div>
             <span className={styles.verificationWarningBox}>
               <div className={styles.verificationWarning}>
-                {state?.error ? "Invalid verification code" : ""}
+                {error === ""
+                  ? ""
+                  : error === "invalid_request"
+                  ? "Invalid request "
+                  : "Invalid email/password"}
               </div>
             </span>
           </label>

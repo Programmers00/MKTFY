@@ -5,6 +5,6 @@ export const webAuth = new auth0js.WebAuth({
   clientID: "1EsYcmuX1TcAUO2Qos1X70DiRPTHsfpL", //required
   redirectUri: "http://localhost:3000/", //optional, if don't use here, you have to add in your parameter
   audience: "https://dev-ebwghc3efkan16do.us.auth0.com/api/v2/", //optional, if don't use here, you have to add in your parameter
-  responseType: "token", //optional, if don't use here, you have to add in your parameter
+  responseType: "token id_token", //optional, if don't use here, you have to add in your parameter
   scope: "read:current_user update:current_user_metadata", //optional
 });
