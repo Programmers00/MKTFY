@@ -86,12 +86,6 @@ const CreateAccount = () => {
     message: validationMessage.country,
   };
 
-  /** uesEffect */
-  // realtime set formatted phone number
-  useEffect(() => {
-    setFormattedPhoneNumber(formatterPhoneNumber(phone));
-  }, [phone]);
-
   /** hooks */
   // useValidator hooks
   // 1. first name
@@ -188,7 +182,6 @@ const CreateAccount = () => {
     "",
     validationCountry
   );
-
   /** data form for redux*/
   // signup form
   const signupForm = {
@@ -241,6 +234,12 @@ const CreateAccount = () => {
       7
     )}-${phoneNumber.slice(7)}`;
   };
+
+  /** uesEffect */
+  // realtime set formatted phone number
+  useEffect(() => {
+    setFormattedPhoneNumber(formatterPhoneNumber(phone));
+  }, [phone]);
 
   return (
     <Modal>
