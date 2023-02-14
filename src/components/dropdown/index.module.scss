@@ -1,0 +1,59 @@
+// mixins for button
+@import "../../styles/mixins";
+// variabled for color
+@import "../../styles/variabled";
+
+.dropdownBox {
+  position: relative;
+  background: transparent;
+  .button {
+    cursor: pointer;
+  }
+  .menu {
+    display: absolute;
+  }
+  .menu > .menuContentTailLeft {
+    padding-block: 15px;
+    left: 10px; //speach bubble location
+    margin: 20px auto;
+    border: 4px solid $white;
+    background-color: $white;
+    min-width: 300px;
+    position: absolute;
+    border-radius: 10px;
+    &::before {
+      content: "";
+      width: 0px;
+      height: 0px;
+      position: absolute;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid $white;
+      left: 10px; //speach bubble tail location
+      top: -20px;
+    }
+  }
+  .menu > .menuContentTailRight {
+    padding-block: 15px;
+    right: 10px; //speach bubble location
+    margin: 20px auto;
+    border: 4px solid $white;
+    background-color: $white;
+    min-width: 300px;
+    position: absolute;
+    border-radius: 10px;
+    &::before {
+      content: "";
+      width: 0px;
+      height: 0px;
+      position: absolute;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid $white;
+      right: 10px; //speach bubble tail location
+      top: -20px;
+    }
+  }
+}
