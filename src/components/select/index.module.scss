@@ -1,0 +1,84 @@
+// mixins for button
+@import "../../styles/mixins";
+// variabled for color
+@import "../../styles/variabled";
+
+.selectBox {
+  padding-inline: 10px;
+  font-weight: 600;
+  font-size: 20px;
+  min-width: 160px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  .selectInput {
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+    .selectSelectedValue {
+      .selectTags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        .selectTagItem {
+          background-color: transparent;
+          padding: 2px 4px;
+          border-radius: 2px;
+          display: flex;
+          align-items: center;
+          .selectTagClose {
+            display: flex;
+            align-items: center;
+          }
+        }
+      }
+    }
+  }
+  .selectMenu {
+    padding: 25px;
+    top: 55px;
+    position: absolute;
+    border-radius: 10px;
+    overflow: auto;
+    // max-height: 200px;
+    background-color: $white;
+    z-index: 99;
+    .searchBox {
+      display: flex;
+      border: solid 1px $black;
+      align-items: center;
+      justify-content: center;
+      input {
+        width: 100%;
+        border: none;
+        padding: 5px;
+        &:focus {
+          outline: none;
+        }
+      }
+      .magnifier {
+        padding: 5px;
+      }
+    }
+    .selectItem,
+    .selected {
+      padding-block: 10px;
+      cursor: pointer;
+    }
+    .selectItem {
+      &:hover {
+        background-color: $lightGrey;
+        color: $purple;
+      }
+    }
+    .selected {
+      &:hover {
+        cursor: default;
+      }
+    }
+  }
+}

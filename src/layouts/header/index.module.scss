@@ -1,0 +1,24 @@
+// mixins for button
+@import "../../styles/mixins";
+// variabled for color
+@import "../../styles/variabled";
+
+.headerMainBox {
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  background-color: $darkestPurple;
+  .headerContentBox {
+    padding: 20px 60px;
+    background-color: $purple;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .logo {
+      font-size: 52px;
+      color: white;
+      width: 234.88px;
+      font-weight: 600;
+    }
+  }
+}

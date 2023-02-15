@@ -1,0 +1,45 @@
+// mixins for button
+@import "../../styles/mixins";
+// variabled for color
+@import "../../styles/variabled";
+
+.searchBarBox {
+  display: flex;
+  flex: row;
+  background: $white;
+  align-items: center;
+  width: 935.12px;
+  border-radius: 8px;
+  .formBox {
+    color: $black;
+    display: flex;
+    .categoryTitle {
+      text-align: center;
+      width: 125px;
+      font-weight: 600;
+      font-size: 20px;
+    }
+    .categoryContent {
+      padding-inline: 10px;
+      font-weight: 400;
+      font-size: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: start;
+    }
+    .categoryContent > .category {
+      padding: 10px 20px;
+      cursor: pointer;
+      &:hover {
+        background-color: $lightGrey;
+        color: $purple;
+      }
+    }
+    .borderSeperator {
+      padding-right: 0.5em;
+      border-right: 3px solid $black;
+      margin-right: 0.5em;
+    }
+  }
+}

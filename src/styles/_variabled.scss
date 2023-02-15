@@ -1,3 +1,4 @@
+$darkestPurple: #560f9f;
 $lightPurple: #9349de;
 $purple: #6318af;
 $hoverPurple: #843eca;
@@ -13,6 +14,7 @@ $lightGray: #e2e2e2;
 $green: #6cc04b;
 // export makes to use in js
 :export {
+  darkestPurple: $darkestPurple;
   lightPurple: $lightPurple;
   purple: $purple;
   hoverPurple: $hoverPurple;

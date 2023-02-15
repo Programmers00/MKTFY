@@ -1,0 +1,16 @@
+.navbarMainBox {
+  display: flex;
+  flex-direction: column;
+  background-color: green;
+  ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    text-decoration: none;
+    a {
+      text-decoration: none;
+    }
+  }
+}
