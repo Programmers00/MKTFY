@@ -2,7 +2,7 @@ import { useState } from "react";
 // scss
 import styles from "./index.module.scss";
 // components
-import Select from "../select"; //common
+import Select from "../../../components/select"; //common
 import Search from "./search"; //dependent
 
 /** search bar component in header */

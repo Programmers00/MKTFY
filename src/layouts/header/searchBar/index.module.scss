@@ -1,7 +1,7 @@
 // mixins for button
-@import "../../styles/mixins";
+@import "../../../styles/mixins";
 // variabled for color
-@import "../../styles/variabled";
+@import "../../../styles/variabled";
 
 .searchBarBox {
   display: flex;
@@ -9,6 +9,7 @@
   background: $white;
   align-items: center;
   width: 935.12px;
+  padding: 10px;
   border-radius: 8px;
   .formBox {
     color: $black;

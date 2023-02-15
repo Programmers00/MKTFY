@@ -15,7 +15,7 @@ const Select = ({
   isRightArrowIcon,
 }) => {
   /** data */
-  const [showMenu, setShowMenu] = useState(false);
+  const [isShowMenu, setIsShowMenu] = useState(false);
   // default select value is first value in list
   const [selectedValue, setSelectedValue] = useState(isMulti ? [] : options[0]);
   const [searchValue, setSearchValue] = useState("");
@@ -26,15 +26,15 @@ const Select = ({
   // set search value
   useEffect(() => {
     setSearchValue("");
-    if (showMenu && searchRef.current) {
+    if (isShowMenu && searchRef.current) {
       searchRef.current.focus();
     }
-  }, [showMenu]);
+  }, [isShowMenu]);
   // select label in menu: when click the item in menu, close the menu
   useEffect(() => {
     const handler = (event) => {
       if (inputRef.current && !inputRef.current.contains(event.target)) {
-        setShowMenu(false);
+        setIsShowMenu(false);
       }
     };
     // add click event
@@ -46,8 +46,8 @@ const Select = ({
   }, []);
   /** funcions */
   /** click select box: when click the select box, open or close the menu */
-  const handleInputClick = (e) => {
-    setShowMenu(!showMenu);
+  const handleInputClick = (event) => {
+    setIsShowMenu(!isShowMenu);
   };
   /** show select box label */
   const getDisplay = () => {
@@ -63,7 +63,7 @@ const Select = ({
             <div key={option.value} className={styles.selectTagsItem}>
               {option.label}
               <span
-                onClick={(e) => onTagRemove(e, option)}
+                onClick={(event) => onTagRemove(event, option)}
                 className={styles.selectTagsClose}
               >
                 <CloseIcon />
@@ -167,7 +167,7 @@ const Select = ({
           </div>
         </div>
       </div>
-      {showMenu && (
+      {isShowMenu && (
         <div className={styles.selectMenu}>
           {isSearchable && (
             <div className={styles.searchBox}>

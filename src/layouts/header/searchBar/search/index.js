@@ -1,7 +1,7 @@
 // scss
 import styles from "./index.module.scss";
 // svg icon
-import { MagnifierIcon } from "../../../assets/svgIcons";
+import { MagnifierIcon } from "../../../../assets/svgIcons";
 
 /** search component only for search bar */
 const Search = ({ searchWord, setSearchWord, onSubmit }) => {
