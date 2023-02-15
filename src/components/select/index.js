@@ -13,6 +13,7 @@ const Select = ({
   onChange,
   isLeftArrowIcon,
   isRightArrowIcon,
+  closeTrigger,
 }) => {
   /** data */
   const [isShowMenu, setIsShowMenu] = useState(false);
@@ -147,9 +148,16 @@ const Select = ({
         option.label.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0
     );
   };
+  // trigger to close the dropdown
+  useEffect(() => {
+    setIsShowMenu(false);
+  }, [closeTrigger]);
 
   return (
-    <div className={styles.selectBox}>
+    <div
+      className={styles.selectBox}
+      onClick={(event) => event.stopPropagation()}
+    >
       <div
         ref={inputRef}
         onClick={handleInputClick}
