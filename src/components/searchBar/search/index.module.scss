@@ -1,0 +1,29 @@
+// mixins for button
+@import "../../../styles/mixins";
+// variabled for color
+@import "../../../styles/variabled";
+
+.searchBox {
+  display: flex;
+  border: none;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 30px;
+  width: 600px;
+  input {
+    width: 100%;
+    overflow: auto;
+    font-weight: 600;
+    font-size: 20px;
+    color: $black;
+    border: none;
+    &:focus {
+      outline: none;
+    }
+  }
+  .magnifier {
+    cursor: pointer;
+    border: none;
+    background: none;
+  }
+}

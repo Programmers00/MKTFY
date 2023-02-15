@@ -11,7 +11,8 @@ const Select = ({
   isMulti,
   isSearchable,
   onChange,
-  isIcon,
+  isLeftArrowIcon,
+  isRightArrowIcon,
 }) => {
   /** data */
   const [showMenu, setShowMenu] = useState(false);
@@ -115,7 +116,7 @@ const Select = ({
     setSelectedValue(newValue);
     onChange(newValue);
   };
-  /** check selected item exist: true or false*/
+  /** check selected item exist: true or false for style*/
   const isSelected = (option) => {
     // check when multi select is active, same value count > 0 => true
     if (isMulti) {
@@ -154,9 +155,16 @@ const Select = ({
         onClick={handleInputClick}
         className={styles.selectInput}
       >
+        <div className={styles.selectTools}>
+          <div className={styles.selectTool}>
+            {isLeftArrowIcon && <ArrowIcon />}
+          </div>
+        </div>
         <div className={styles.selectSelectedValue}>{getDisplay()}</div>
         <div className={styles.selectTools}>
-          <div className={styles.selectTool}>{isIcon && <ArrowIcon />}</div>
+          <div className={styles.selectTool}>
+            {isRightArrowIcon && <ArrowIcon />}
+          </div>
         </div>
       </div>
       {showMenu && (

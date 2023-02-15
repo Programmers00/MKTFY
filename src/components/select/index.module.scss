@@ -37,6 +37,11 @@
         }
       }
     }
+    .selectTools {
+      .selectTool {
+        display: flex;
+      }
+    }
   }
   .selectMenu {
     padding: 25px;
