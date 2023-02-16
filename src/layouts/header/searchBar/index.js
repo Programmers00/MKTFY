@@ -42,11 +42,13 @@ const SearchBar = () => {
   };
   /** change category value and trigger to close select */
   const onChangeCategory = (event) => {
+    if (event.value === category) return;
     setCategory(event.value);
     onCloseTrigger();
   };
   /** change city value and trigger to close select */
   const onChangeCity = (event) => {
+    if (event.value === city) return;
     setCity(event.value);
     onCloseTrigger();
   };

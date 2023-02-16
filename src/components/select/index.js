@@ -154,10 +154,7 @@ const Select = ({
   }, [closeTrigger]);
 
   return (
-    <div
-      className={styles.selectBox}
-      onClick={(event) => event.stopPropagation()}
-    >
+    <div className={styles.selectBox}>
       <div
         ref={inputRef}
         onClick={handleInputClick}
@@ -176,7 +173,10 @@ const Select = ({
         </div>
       </div>
       {isShowMenu && (
-        <div className={styles.selectMenu}>
+        <div
+          onClick={(event) => event.stopPropagation()}
+          className={styles.selectMenu}
+        >
           {isSearchable && (
             <div className={styles.searchBox}>
               <span className={styles.magnifier}>
