@@ -21,112 +21,27 @@
       width: 234.88px;
       font-weight: 600;
     }
-    // dropdown "welcome"
-    .userTitle {
+    .buttons {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
+      flex-direction: row;
+      gap: 20px;
       align-items: center;
-      .welcome {
-        color: $white;
-        font-size: 12px;
-        font-weight: 300;
-      }
-      .userName {
-        color: $yellow;
-        font-size: 16px;
-        font-weight: 700;
-      }
-    }
-    .userContent {
-      padding: 16px;
-      align-items: flex-start;
-      // gap: 67px;
-      isolation: isolate;
-      width: 314px;
-      height: 500px;
-      display: flex;
-      flex-direction: column;
-      .infoBox {
+      .buttonBox {
+        padding: 10px;
         display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        padding-bottom: 16px;
-        .circle {
-          color: $white;
-          font-weight: 700;
-          font-size: 16px;
+        .button {
+          gap: 5px;
           display: flex;
-          justify-content: center;
           align-items: center;
-          width: 40px;
-          height: 40px;
-          padding: 10px;
-          border-radius: 200px;
-          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-          background-color: $darkestPurple;
-        }
-        .userName {
-          font-weight: 700;
-          font-size: 16px;
-          color: black;
-        }
-      }
-    }
-    .contentBox {
-      gap: 5px;
-      padding-bottom: 50px;
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      span {
-        font-weight: 700;
-        font-size: 14px;
-        color: #313131;
-      }
-      a {
-        gap: 10px;
-        display: flex;
-        align-items: center;
-        flex-direction: row;
-        font-weight: 400;
-        font-size: 14px;
-        color: $black;
-        list-style-type: none;
-        text-decoration: none;
-        &:hover {
-          background-color: $lightGrey;
-          color: $purple;
-        }
-        .notification {
-          color: $white;
-          display: flex;
-          flex-direction: column;
           justify-content: center;
-          align-items: center;
-          gap: 10px;
-          width: 29px;
-          height: 29px;
-          background: $darkestPurple;
-          border-radius: 4px;
-        }
-      }
-    }
-    .signOutBox {
-      width: 100%;
-      a {
-        color: $red;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-weight: 400;
-        font-size: 14px;
-        cursor: pointer;
-        &:hover {
-          background-color: $lightGrey;
-          color: $purple;
+          @include button;
+          width: 155px;
+          height: 50px;
+          background: $yellow;
+          &:disabled {
+            background: $hoverYellow;
+            cursor: auto;
+          }
         }
       }
     }
