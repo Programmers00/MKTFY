@@ -4,20 +4,23 @@ import { Link } from "react-router-dom";
 import styles from "./index.module.scss";
 // icons
 import { HamburgerIcon } from "../../../assets/svgIcons";
+/** navber in header */
 export const Navbar = () => {
+  /** data */
+  // navbar title, url
   const navbar = [
-    { url: "/", title: "Deals" },
-    { url: "/carsVehicles", title: "CarsVehicles" },
-    { url: "/furniture", title: "Furniture" },
-    { url: "electronics", title: "Electronics" },
-    { url: "/realEstate", title: "RealEstate" },
+    { title: "Deals", url: "/" },
+    { title: "CarsVehiclesurl ", url: "/carsVehicles" },
+    { title: "Furniture", url: "/furniture" },
+    { title: "Electronics", url: "electronics" },
+    { title: "RealEstate", url: "/realEstate" },
   ];
   return (
     <nav className={styles.navbarMainBox}>
       <ul>
         <form
           onClick={() => {
-            console.log("#");
+            console.log("#clicked category");
           }}
         >
           <label>
