@@ -1,16 +1,43 @@
+// mixins for button
+@import "../../../styles/mixins";
+// variabled for color
+@import "../../../styles/variabled";
 .navbarMainBox {
   display: flex;
   flex-direction: column;
-  background-color: green;
+  background-color: $purple;
   ul {
     list-style-type: none;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 10px;
+    gap: 60px;
     text-decoration: none;
+    form {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      label {
+        cursor: pointer;
+        display: flex;
+      }
+      input {
+        cursor: pointer;
+        padding: 0;
+        border: none;
+        background: none;
+        text-decoration: none;
+        font-weight: 400;
+        font-size: 20px;
+        color: $white;
+      }
+    }
     a {
       text-decoration: none;
+      font-weight: 400;
+      font-size: 20px;
+      color: $white;
     }
   }
 }

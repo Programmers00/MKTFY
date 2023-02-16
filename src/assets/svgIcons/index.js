@@ -4,6 +4,7 @@ import MagnifierIcon from "./magnifierIcon";
 import SingOutIcon from "./signOutIcon";
 import NotificationIcon from "./notificationIcon";
 import NotificationActiveIcon from "./notificationActiveIcon";
+import HamburgerIcon from "./hamburgerIcon";
 
 export {
   ArrowIcon,
@@ -12,4 +13,5 @@ export {
   SingOutIcon,
   NotificationIcon,
   NotificationActiveIcon,
+  HamburgerIcon,
 };

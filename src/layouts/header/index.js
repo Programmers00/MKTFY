@@ -20,8 +20,6 @@ const Header = () => {
         <SearchBar></SearchBar>
         <WelcomeDropdown userName={userName} />
         <NotificationDropdown />
-        <div>Notification</div>
-        <div>Create Offer</div>
       </div>
       <Navbar></Navbar>
     </div>
