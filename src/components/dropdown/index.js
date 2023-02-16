@@ -37,34 +37,36 @@ const Dropdown = ({ children, isLeftTail, isRightTail, closeTrigger }) => {
 
   return (
     <div className={styles.dropdownBox}>
-      <div
-        ref={contentRef}
-        className={styles.contentBox}
-        onClick={(event) => event.stopPropagation()}
-      >
+      <div ref={contentRef} className={styles.contentBox}>
         <button onClick={handleInputClick} className={styles.button}>
           {children[0]}
         </button>
         {/* first children is for button */}
         {/* tail left */}
-        {isShowMenu && isLeftTail && (
-          <div className={styles.menu}>
-            <div className={styles.menuContentTailLeft}>
-              {/* second children is for content */}
-              {children[1]}
-            </div>
-          </div>
-        )}
-        {/* tail right */}
-        {isShowMenu && isRightTail && (
-          <div className={styles.menu}>
-            <div className={styles.menuContentTailRight}>
-              {/* second children is for content */}
-              {children[1]}
-            </div>
-          </div>
-        )}
       </div>
+      {isShowMenu && isLeftTail && (
+        <div
+          onClick={(event) => event.stopPropagation()}
+          className={styles.menu}
+        >
+          <div className={styles.menuContentTailLeft}>
+            {/* second children is for content */}
+            {children[1]}
+          </div>
+        </div>
+      )}
+      {/* tail right */}
+      {isShowMenu && isRightTail && (
+        <div
+          onClick={(event) => event.stopPropagation()}
+          className={styles.menu}
+        >
+          <div className={styles.menuContentTailRight}>
+            {/* second children is for content */}
+            {children[1]}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
