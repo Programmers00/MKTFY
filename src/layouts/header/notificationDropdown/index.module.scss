@@ -1,0 +1,70 @@
+// mixins for button
+@import "../../../styles/mixins";
+// variabled for color
+@import "../../../styles/variabled";
+
+// dropdown "welcome"
+.icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.notificationContentBox {
+  padding-block: 16px;
+  align-items: flex-start;
+  isolation: isolate;
+  width: 377px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  .title {
+    padding: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    color: $gray;
+  }
+  .content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+    &:hover {
+      cursor: pointer;
+      background-color: $lightGrey;
+    }
+    .circle {
+      color: $white;
+      font-weight: 700;
+      font-size: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 60px;
+      height: 60px;
+      padding: 10px;
+      border-radius: 200px;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      background-color: $darkestPurple;
+    }
+    .summaryBox {
+      display: flex;
+      flex-direction: column;
+      color: $gray;
+
+      .summary {
+        font-weight: 400;
+        font-size: 14px;
+      }
+      .date {
+        font-weight: 300;
+        font-size: 12px;
+      }
+    }
+  }
+}

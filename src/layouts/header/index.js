@@ -1,15 +1,14 @@
-// router
-import { Link } from "react-router-dom";
 // scss
 import styles from "./index.module.scss";
+/** components */
 // searchbar
 import SearchBar from "./searchBar";
+// welcome dropdown
+import WelcomeDropdown from "./welcomeDropdown";
+// notification dropdwon
+import NotificationDropdown from "./notificationDropdown";
 // Navbar
 import { Navbar } from "./navbar";
-// import Dropdown from "../../components/dropdown";
-// // svg icon
-// import { SingOutIcon } from "../../assets/svgIcons";
-import WelcomeDropdown from "./welcomeDropdown";
 
 const Header = () => {
   const userName = "Pearl The Cat";
@@ -20,7 +19,7 @@ const Header = () => {
         <div className={styles.logo}>MKTFY</div>
         <SearchBar></SearchBar>
         <WelcomeDropdown userName={userName} />
-        <div>User</div>
+        <NotificationDropdown />
         <div>Notification</div>
         <div>Create Offer</div>
       </div>
