@@ -10,7 +10,7 @@ export const Navbar = () => {
   // navbar title, url
   const navbar = [
     { title: "Deals", url: "/" },
-    { title: "CarsVehiclesurl ", url: "/carsVehicles" },
+    { title: "CarsVehicles ", url: "/carsVehicles" },
     { title: "Furniture", url: "/furniture" },
     { title: "Electronics", url: "electronics" },
     { title: "RealEstate", url: "/realEstate" },

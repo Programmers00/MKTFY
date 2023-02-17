@@ -1,0 +1,69 @@
+// mixins for button
+@import "../../styles/mixins";
+// variabled for color
+@import "../../styles/variabled";
+
+.cardBox {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 5px;
+  background: $white;
+  gap: 10px;
+  .cardTitle {
+    display: flex;
+    justify-content: start;
+    font-weight: 600;
+    font-size: 20px;
+    color: $black;
+  }
+  .itemsBox {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 25px;
+    padding-bottom: 15px;
+    .itemBox {
+      max-width: 235px;
+      max-height: 345px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
+      border-radius: 10px;
+      &:hover {
+        cursor: pointer;
+        background-color: $lightGrey;
+      }
+      img {
+        max-width: 235px;
+        max-height: 244px;
+      }
+      .contentBox {
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+        gap: 10px;
+        .itemTitle {
+          height: 38px;
+          max-width: 245px;
+          font-weight: 400;
+          font-size: 16px;
+          color: $gray;
+        }
+        .itemPrice {
+          font-weight: 600;
+          font-size: 16px;
+          color: $purple;
+        }
+      }
+    }
+  }
+  .navigationButton {
+    color: $lightPurple;
+    font-weight: 600;
+    font-size: 20px;
+    text-align: right;
+    cursor: pointer;
+  }
+}
