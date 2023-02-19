@@ -1,0 +1,156 @@
+// mixins for button
+@import "../../../../styles/mixins";
+// variabled for color
+@import "../../../../styles/variabled";
+
+.detailContentBox {
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .imageBox {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    max-height: 493px;
+    .verticalImageBox {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      width: 120px;
+
+      button {
+        border: none;
+        background: none;
+        cursor: pointer;
+      }
+      .upButton {
+        padding-bottom: 20px;
+      }
+      .downButton {
+        padding-top: 20px;
+      }
+      .images {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow-y: hidden;
+        gap: 15px;
+
+        .image {
+          border-radius: 10px;
+          width: 118px;
+          height: 278px;
+          border: transparent solid 1px;
+          transition: all 0.3s;
+          // transform: translateY(-140px);
+          // transform: translateY(-280px);
+        }
+        .selectedImage {
+        }
+      }
+    }
+    .showImage {
+      border-radius: 10px;
+      width: 648px;
+      height: 493px;
+    }
+  }
+  .contentBox {
+    padding-inline: 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    flex: 1;
+    .itemTitle {
+      font-weight: 700;
+      font-size: 40px;
+      color: $darkBlack;
+    }
+    .itemPriceBox {
+      display: flex;
+      .price {
+        font-weight: 700;
+        font-size: 40px;
+        color: $purple;
+      }
+      .itemStatus {
+        display: flex;
+        padding-left: 10px;
+      }
+    }
+    .buttonBox {
+      display: flex;
+      .button {
+        gap: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @include button;
+        width: 100%;
+        background: $purple;
+        &:hover {
+          background: $hoverPurple;
+          cursor: pointer;
+        }
+      }
+    }
+    .details {
+      font-weight: 700;
+      font-size: 16px;
+      color: $purple;
+    }
+    .description {
+      font-weight: 400;
+      font-size: 14px;
+      color: $darkBlack;
+    }
+    .sellerInfoBox {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      align-items: center;
+      .circle {
+        color: $white;
+        font-weight: 700;
+        font-size: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 60px;
+        height: 60px;
+        padding: 10px;
+        border-radius: 200px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        background-color: $darkestPurple;
+      }
+      .sellerInfo {
+        display: flex;
+        flex-direction: column;
+
+        .sellerName {
+          font-weight: 700;
+          font-size: 16px;
+          line-height: 22px;
+          color: $gray;
+        }
+        .listingBox {
+          display: flex;
+          flex-direction: row;
+          gap: 8px;
+          color: $black;
+          .sellerListingCount {
+            font-weight: 700;
+            font-size: 14px;
+          }
+          .listing {
+            font-weight: 400;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}

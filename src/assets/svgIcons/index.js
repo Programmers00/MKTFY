@@ -6,6 +6,12 @@ import NotificationIcon from "./notificationIcon";
 import NotificationActiveIcon from "./notificationActiveIcon";
 import HamburgerIcon from "./hamburgerIcon";
 import PlusIcon from "./plusIcon";
+import GreaterIcon from "./greaterIcon";
+import LabelIcon from "./labelIcon";
+import NewIcon from "./newIcon";
+import UsedIcon from "./usedIcon";
+import UpIcon from "./upIcon";
+import DownIcon from "./downIcon";
 
 export {
   ArrowIcon,
@@ -16,4 +22,10 @@ export {
   NotificationActiveIcon,
   HamburgerIcon,
   PlusIcon,
+  GreaterIcon,
+  LabelIcon,
+  NewIcon,
+  UsedIcon,
+  UpIcon,
+  DownIcon,
 };
