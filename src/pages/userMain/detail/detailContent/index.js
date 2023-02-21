@@ -3,8 +3,8 @@ import { useEffect, useState, useRef } from "react";
 import styles from "./index.module.scss";
 // scss style variabled for color red
 import variabled from "../../../../styles/_variabled.scss";
-// components
-
+// use navigate
+import { useNavigate } from "react-router-dom";
 // svg icon
 import {
   LabelIcon,
@@ -15,6 +15,11 @@ import {
 } from "../../../../assets/svgIcons";
 
 const DetailContent = ({ data }) => {
+  /** initialize */
+  // navigate
+  const navigate = useNavigate();
+  // image list's ref
+  const imageRef = useRef([]);
   // selected image's index
   const [selectedIndex, setSelectedIndex] = useState(0);
   // selected image
@@ -23,8 +28,7 @@ const DetailContent = ({ data }) => {
   );
   // scope 0 < selectedOrder < 2
   const [selectedOrder, setSelectedOrder] = useState(0);
-  // image list's ref
-  const imageRef = useRef([]);
+
   // detect selected image
   useEffect(() => {
     setSelectedImage(data.images[selectedIndex]);
@@ -67,7 +71,12 @@ const DetailContent = ({ data }) => {
       );
     }
   };
-
+  const onSubmit = () => {
+    console.log("##clicked (I wnat this!)");
+    navigate("/checkout", {
+      /** params */
+    });
+  };
   return (
     <div className={styles.detailContentBox}>
       <div className={styles.imageBox}>
@@ -115,7 +124,9 @@ const DetailContent = ({ data }) => {
           </div>
         </div>
         <div className={styles.buttonBox}>
-          <button className={styles.button}>I want this!</button>
+          <button className={styles.button} onClick={onSubmit}>
+            I want this!
+          </button>
         </div>
         <span className={styles.details}>Details</span>
         <div className={styles.description}>{data.description}</div>
