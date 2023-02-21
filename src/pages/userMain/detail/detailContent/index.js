@@ -15,50 +15,56 @@ import {
 } from "../../../../assets/svgIcons";
 
 const DetailContent = ({ data }) => {
+  // selected image's index
   const [selectedIndex, setSelectedIndex] = useState(0);
+  // selected image
   const [selectedImage, setSelectedImage] = useState(
     data.images[selectedIndex]
   );
-  // only 0 - 2
+  // scope 0 < selectedOrder < 2
   const [selectedOrder, setSelectedOrder] = useState(0);
-
+  // image list's ref
   const imageRef = useRef([]);
-
+  // detect selected image
   useEffect(() => {
-    if (selectedOrder === 0 && 0 <= selectedIndex && 2 >= selectedIndex) {
-      // change up
+    setSelectedImage(data.images[selectedIndex]);
+  }, [selectedIndex]);
+
+  /** move button ("up" or "down") */
+  const onMove = (direction) => {
+    // scope for selectedIndex (0 < selectedIndex < data.images.length -1)
+    const MIN_INDEX = 0;
+    const MAX_INDEX = data.images.length - 1;
+    // scope for selectedOrder (0 < selectedOrder < 2)
+    const MAX_ORDER = 2;
+    // click up button and slected index is bigger than min index
+    if (direction === "up" && selectedIndex > MIN_INDEX) {
+      // change selected index -1
+      setSelectedIndex((prev) => prev - 1);
+      // selected index  is bigger than max order => do nothing
+      if (selectedIndex > MAX_ORDER) return;
+      // change order index -1
+      setSelectedOrder((prev) => prev - 1);
+      // css function
       imageRef.current.forEach(
         selectedIndex === 2
-          ? (image) => (image.style.transform = `translateY(${-280}px)`)
-          : selectedIndex === 1
           ? (image) => (image.style.transform = `translateY(${-140}px)`)
           : (image) => (image.style.transform = `translateY(${0}px)`)
       );
     }
-    if (selectedOrder === 2 && selectedIndex < 5 && selectedIndex > 2) {
+    // click down button
+    if (direction === "down" && selectedIndex < MAX_INDEX) {
+      setSelectedIndex((prev) => prev + 1);
+      // selected index  is smaller than max order => do nothing
+      if (selectedIndex < MAX_ORDER) return;
+      // change order index +1
+      setSelectedOrder((prev) => prev + 1);
+      // css function
       imageRef.current.forEach(
-        selectedIndex === 3
+        selectedIndex === 2
           ? (image) => (image.style.transform = `translateY(${-140}px)`)
           : (image) => (image.style.transform = `translateY(${-280}px)`)
       );
-    }
-
-    setSelectedImage(data.images[selectedIndex]);
-    return window.addEventListener("click", (event) => {
-      return;
-    });
-  }, [selectedIndex]);
-
-  const onSelectImage = (direction) => {
-    if (direction === "up" && selectedIndex > 0) {
-      console.log("##up");
-      setSelectedIndex((prevIndex) => prevIndex - 1);
-      if (selectedIndex > 2) setSelectedOrder((prevOrder) => prevOrder - 1);
-    }
-
-    if (direction === "down" && data.images.length > selectedIndex + 1) {
-      setSelectedIndex((prevIndex) => prevIndex + 1);
-      if (selectedOrder < 2) setSelectedOrder((prevOrder) => prevOrder + 1);
     }
   };
 
@@ -66,10 +72,7 @@ const DetailContent = ({ data }) => {
     <div className={styles.detailContentBox}>
       <div className={styles.imageBox}>
         <div className={styles.verticalImageBox}>
-          <button
-            className={styles.upButton}
-            onClick={() => onSelectImage("up")}
-          >
+          <button className={styles.upButton} onClick={() => onMove("up")}>
             <UpIcon />
           </button>
           <div className={styles.images}>
@@ -93,14 +96,7 @@ const DetailContent = ({ data }) => {
               );
             })}
           </div>
-          <button
-            className={styles.downButton}
-            // onClick={() => {
-            //   console.log("##log");
-            //   // setSelectedIndex((prev) => prev + 1);
-            // }}
-            onClick={() => onSelectImage("down")}
-          >
+          <button className={styles.downButton} onClick={() => onMove("down")}>
             <DownIcon />
           </button>
         </div>
