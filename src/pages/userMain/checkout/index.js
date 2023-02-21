@@ -4,7 +4,7 @@ import styles from "./index.module.scss";
 import CategoryBar from "../../../components/categoryBar";
 import CheckoutContent from "./checkoutContent";
 
-/** detail page */
+/** checkout page */
 const Checkout = () => {
   const data = {
     id: "cat",
