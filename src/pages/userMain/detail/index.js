@@ -16,6 +16,7 @@ const Detail = () => {
       "The world's most beautiful cat. Pearl The Cat is a pretty cat who is grey with black stripes on top and spots on the belly. She likes catching flies and eating beef jerky as well as yogurt. This edition of Pearl The Cat includes toys for maximum Pearl enjoyment. (Batteries not included)",
     sellerInfo: {
       name: "Matt Smith",
+      contact: "+1 825-999-9999",
       listingCount: 2,
     },
   };

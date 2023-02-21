@@ -1,0 +1,79 @@
+// mixins for button
+@import "../../../../styles/mixins";
+// variabled for color
+@import "../../../../styles/variabled";
+
+.checkoutContentBox {
+  max-width: 527px;
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  border-radius: 10px;
+  gap: 27px;
+  .checkoutContentTitle {
+    font-weight: 700;
+    font-size: 40px;
+    color: $purple;
+  }
+  .checkoutContent {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    .image {
+      max-height: 125px;
+      flex: 1;
+      border-radius: 10px;
+    }
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      .title,
+      .price {
+        padding-inline: 24px;
+      }
+      .title {
+        font-weight: 600;
+        font-size: 14px;
+        color: $black;
+      }
+      .price {
+        font-weight: 700;
+        font-size: 16px;
+        color: $darkestPurple;
+      }
+    }
+  }
+  .priceBox {
+    color: $purple;
+    .total {
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .price {
+      font-weight: 600;
+      font-size: 34px;
+    }
+  }
+  .buttonBox {
+    padding: 10px;
+    display: flex;
+    .button {
+      text-decoration: none;
+      gap: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include button;
+      width: 100%;
+      background: $purple;
+      &:hover {
+        background: $hoverPurple;
+        cursor: pointer;
+      }
+    }
+  }
+}
