@@ -15,6 +15,7 @@ const createOffer = (
   },
   action
 ) => {
+  console.log("##action", action.type);
   switch (action.type) {
     // upload image
     case "UPLOAD_IMAGE":
@@ -23,6 +24,22 @@ const createOffer = (
         createOfferForm: {
           ...state.createOfferForm,
           images: [...action.images],
+        },
+      };
+    // create offer form
+    case "CREATE_OFFER_FORM":
+      return {
+        ...state,
+        createOfferForm: {
+          ...state.createOfferForm,
+          productName: action.createOfferForm.productName,
+          description: action.createOfferForm.description,
+          category: action.createOfferForm.category,
+          condition: action.createOfferForm.condition,
+          price: action.createOfferForm.price,
+          address: action.createOfferForm.address,
+          city: action.createOfferForm.city,
+          images: [...state.createOfferForm.images],
         },
       };
     // init: remove all data

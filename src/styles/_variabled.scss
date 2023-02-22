@@ -13,6 +13,7 @@ $gray: #4d4d4d;
 $lightGrey: #f7f7f7;
 $lightGray: #e2e2e2;
 $lightestGrey: #e5e5e5;
+$darkGrey: #969696;
 $green: #6cc04b;
 // export makes to use in js
 :export {
@@ -31,5 +32,6 @@ $green: #6cc04b;
   lightGrey: $lightGrey;
   lightGray: $lightGray;
   lightestGrey: $lightestGrey;
+  darkGrey: $darkGrey;
   green: $green;
 }
