@@ -14,6 +14,7 @@ import UpIcon from "./upIcon";
 import DownIcon from "./downIcon";
 import CameraIcon from "./cameraIcon";
 import XIcon from "./xIcon";
+import DropdownArrowIcon from "./dropdownArrowIcon";
 
 export {
   ArrowIcon,
@@ -32,4 +33,5 @@ export {
   DownIcon,
   CameraIcon,
   XIcon,
+  DropdownArrowIcon,
 };
