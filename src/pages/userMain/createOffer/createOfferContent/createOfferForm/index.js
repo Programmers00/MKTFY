@@ -21,7 +21,7 @@ const CreateOfferForm = () => {
   const currentCreateOfferForm = useSelector(
     (state) => state.createOffer.createOfferForm
   );
-
+  console.log("##", currentCreateOfferForm);
   /** data */
   // selectbox list data
   const cities = ["Calgary", "Camrose", "Brooks"];
@@ -87,13 +87,12 @@ const CreateOfferForm = () => {
       <label className={styles.label}>
         Description
         <br />
-        <input
-          className={styles.input}
-          type="textArea"
+        <textarea
+          className={styles.textArea}
           placeholder="Type the description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          maxLength={256}
+          maxLength={1024}
         />
       </label>
       <label className={styles.label}>

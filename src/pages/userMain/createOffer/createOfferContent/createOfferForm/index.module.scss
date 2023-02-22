@@ -15,9 +15,8 @@
     font-weight: 600;
     font-size: 16px;
     color: $black;
-    // padding-bottom: 6px;
-    // padding: 10px;
-    .input {
+    .input,
+    textArea {
       box-sizing: border-box;
       display: flex;
       flex-direction: row;
@@ -30,6 +29,9 @@
       border-radius: 4px;
       font-weight: 400;
       font-size: 14px;
+    }
+    .textArea {
+      height: 89px;
     }
     .validationWarningBox {
       color: $red;
