@@ -5,6 +5,11 @@ export const useValidator = (initialValue, limitator, { regex, message }) => {
   const [value, setValue] = useState(initialValue);
   const [validationMessage, setValidationMessage] = useState("");
   const onChange = (e) => {
+    // initialize when e is not object
+    if (typeof e !== "object") {
+      setValue(e);
+      return;
+    }
     const {
       target: { value },
     } = e;

@@ -1,0 +1,12 @@
+// mixins for button
+@import "../../../styles/mixins";
+// variabled for color
+@import "../../../styles/variabled";
+
+.mainBox {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 50px;
+}
