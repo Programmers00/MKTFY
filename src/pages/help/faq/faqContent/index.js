@@ -2,7 +2,7 @@
 import { useState } from "react";
 // scss
 import styles from "./index.module.scss";
-// component
+// svg icons
 import { DropdownArrowIcon } from "../../../../assets/svgIcons";
 
 const FaqContent = () => {
