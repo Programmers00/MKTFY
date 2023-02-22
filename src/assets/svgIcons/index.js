@@ -12,6 +12,8 @@ import NewIcon from "./newIcon";
 import UsedIcon from "./usedIcon";
 import UpIcon from "./upIcon";
 import DownIcon from "./downIcon";
+import CameraIcon from "./cameraIcon";
+import XIcon from "./xIcon";
 
 export {
   ArrowIcon,
@@ -28,4 +30,6 @@ export {
   UsedIcon,
   UpIcon,
   DownIcon,
+  CameraIcon,
+  XIcon,
 };
