@@ -5,29 +5,39 @@ import styles from "./index.module.scss";
 import variabled from "../../../../../styles/_variabled.scss";
 // svg icons
 import { CameraIcon, XIcon } from "../../../../../assets/svgIcons";
+// useDispatch for sending action to redux
+import { useDispatch, useSelector } from "react-redux";
 
 /** image uploader: parameter from images, setImages */
-const ImageUploader = ({ images, setImages }) => {
+const ImageUploader = () => {
   /** initialize */
+  // redux
+  const dispatch = useDispatch();
+  const currentCreateOfferForm = useSelector(
+    (state) => state.createOffer.createOfferForm
+  );
+  // images from redux
+  const images = currentCreateOfferForm.images;
   // input ref
   const inputRef = useRef(null);
   // drag active
   const [dragActive, setDragActive] = useState(false);
   // clicked image index
   const [clickedImage, setClickedImage] = useState(0);
-
   /** functions */
   /** set images */
   const handleFile = (files) => {
     // representing image
     if (clickedImage === 0) {
-      setImages(files);
+      // change
+      dispatch({ type: "UPLOAD_IMAGE", images: files });
       return;
     }
     // other image
     const newImages = [...images];
     newImages[clickedImage] = files[0];
-    setImages(newImages);
+    // setImages(newImages);
+    dispatch({ type: "UPLOAD_IMAGE", images: newImages });
   };
   /** trigger when drage files on the area */
   const handleDrag = (event) => {
@@ -115,7 +125,8 @@ const ImageUploader = ({ images, setImages }) => {
                     onClick={() => {
                       const newImages = [...images];
                       newImages[index] = null;
-                      setImages(newImages);
+                      // setImages(newImages);
+                      dispatch({ type: "UPLOAD_IMAGE", images: newImages });
                     }}
                   >
                     <XIcon />
