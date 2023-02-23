@@ -1,0 +1,73 @@
+// mixins for button
+@import "../../../../../../styles/mixins";
+// variabled for color
+@import "../../../../../../styles/variabled";
+
+.modalBox {
+  box-shadow: rgba(0, 0, 0, 0.5) 0 0 0 9999px;
+  z-index: 100;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 25px;
+  gap: 16px;
+  width: 335px;
+  height: 169px;
+  background: #ffffff;
+  border-radius: 20px;
+  top: calc(50% - 167.5px);
+  left: calc(50% - 84.5px);
+  border: solid 1px $darkGrey;
+  .modalTitle {
+    font-weight: 700;
+    font-size: 16px;
+    color: $black;
+  }
+  .content {
+    font-weight: 400;
+    font-size: 14px;
+    color: $black;
+  }
+  .buttonsBox {
+    display: flex;
+    justify-content: flex-end;
+    .buttons {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      .cancelButtonBox,
+      .yesButtonBox {
+        flex: 1;
+        display: flex;
+        justify-content: start;
+        .cancelButton {
+          @include button;
+          background: $white;
+          color: #969696;
+          width: 100%;
+          height: 37px;
+          border: 1px solid #969696;
+          border-radius: 100px;
+          padding: 10px 29px;
+          &:hover {
+            background: $grey;
+            cursor: pointer;
+          }
+        }
+        .yesButton {
+          @include button;
+          width: 100%;
+          height: 37px;
+          background: #6318af;
+          border-radius: 100px;
+          padding: 10px 29px;
+          &:hover {
+            background: $hoverPurple;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

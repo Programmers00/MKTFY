@@ -24,6 +24,7 @@ import RealEstate from "./pages/userMain/contents/realEstate";
 import AccountInformation from "./pages/userInfo/accountInformation";
 import ChangePassword from "./pages/userInfo/changePassword";
 import MyListings from "./pages/userInfo/myListings";
+import Product from "./pages/userInfo/product";
 import MyPurchases from "./pages/userInfo/myPurchases";
 // help pages
 import ContactUs from "./pages/help/contactUs";
@@ -76,6 +77,7 @@ const App = () => {
               />
               <Route exact path="changePassword" element={<ChangePassword />} />
               <Route exact path="myListings" element={<MyListings />} />
+              <Route exact path="product" element={<Product />} />
               <Route exact path="myPurchases" element={<MyPurchases />} />
               {/* help */}
               <Route exact path="contactUs" element={<ContactUs />} />
