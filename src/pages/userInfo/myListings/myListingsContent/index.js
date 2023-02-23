@@ -71,8 +71,8 @@ const MyListingsContent = () => {
 
   return (
     <div className={styles.myListingsContentBox}>
-      <span className={styles.myListingTitle}>My Listings</span>
-      <div className={styles.myListingNavbar}>
+      <span className={styles.myListingsTitle}>My Listings</span>
+      <div className={styles.myListingsNavbar}>
         <li
           onClick={() => {
             setShowItem("activeItems");
