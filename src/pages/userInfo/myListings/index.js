@@ -2,7 +2,7 @@
 import styles from "./index.module.scss";
 // components
 import CategoryBar from "../../../components/categoryBar";
-import MyListingsContent from "./myListingContent";
+import MyListingsContent from "./myListingsContent";
 
 /** my listing page */
 const MyListings = () => {
