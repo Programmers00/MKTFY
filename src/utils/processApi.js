@@ -1,6 +1,16 @@
-import defaultAxios from "axios";
+import { request } from "../utils/request";
 /** processApi util based in axios: parameter => options(url, params, method, header) */
-export const processApi = async (options, axiosInstance = defaultAxios) => {
+/**options example
+ const requestRealEstateOptions = {
+    url: "https://jsonplaceholder.typicode.com/posts", // it is possible to send whole url
+    url: "/contents", // baseUrl("http://localhost:3000/") + url("/contents") => "http://localhost:3000/contents"
+    meta: { apiVersion: '1.0.0'},
+    params: {},
+    method: "get",
+    headers: { Accept: "application/json" },
+  };
+ */
+export const processApi = async (options) => {
   //state
   let state = {
     loading: true,
@@ -8,7 +18,7 @@ export const processApi = async (options, axiosInstance = defaultAxios) => {
     error: null,
   };
   try {
-    const data = await axiosInstance(options);
+    const data = await request(options);
     state.data = data;
     state.loading = false;
   } catch (error) {
