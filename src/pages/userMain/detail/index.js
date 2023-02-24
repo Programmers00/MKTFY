@@ -13,15 +13,14 @@ const Detail = () => {
   /** initialize */
   const [data, setData] = useState(null);
   const { state } = useLocation();
-  console.log(state);
-
+  // request data options
   const requestDataOptions = {
     url: "https://jsonplaceholder.typicode.com/posts", //it is possible to send whole url
     // url: "/contents", // baseUrl("http://localhost:3000/") + url("/contents") => "http://localhost:3000/contents"
     params: { id: state.id },
     method: "get",
   };
-
+  /** get data from api */
   useEffect(() => {
     const getData = async () => {
       const responseData = await getDetail(requestDataOptions);
