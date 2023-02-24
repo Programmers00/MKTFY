@@ -13,12 +13,13 @@
     background-color: $purple;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    gap: 10px;
     .logo {
       font-size: 52px;
       color: white;
-      width: 234.88px;
+      min-width: 180px;
       font-weight: 600;
     }
     .buttons {
