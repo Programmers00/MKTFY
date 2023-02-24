@@ -1,226 +1,87 @@
+import { useEffect, useState } from "react";
 // scss
 import styles from "./index.module.scss";
 // components
 import ContentCard from "../../../../components/contentCard";
+// apis
+import {
+  getDeals,
+  getCarsVehicles,
+  getFurniture,
+  getElectronics,
+  getRealEstate,
+} from "../../../../api/userMain/contents/deals";
 
+/** deals page */
 const Deals = () => {
-  /** data: need to get this data from api */
-  const deals = {
-    id: "deals",
-    title: "Deals",
-    items: [
-      {
-        id: "cat1",
-        title: "Pearl The cat: Donut edtion",
-        img: "cat",
-        price: "500",
-      },
-      {
-        id: "cat2",
-        title: "Pearl The cat: Monster edtion",
-        img: "cat2",
-        price: "500",
-      },
-      {
-        id: "cat3",
-        title: "Pearl The cat: Christmas edtion",
-        img: "cat3",
-        price: "500",
-      },
-      {
-        id: "cat4",
-        title: "Pearl The cat: Halloween edtion",
-        img: "cat4",
-        price: "500",
-      },
-      {
-        id: "cat5",
-        title:
-          "Pearl The cat: Breakfast edtion Pearl The cat: Breakfast edtion",
-        img: "cat",
-        price: "500",
-      },
-      {
-        id: "cat6",
-        title: "Pearl The cat: Donut edtion",
-        img: "cat",
-        price: "500",
-      },
-      {
-        id: "cat7",
-        title: "Pearl The cat: Monster edtion",
-        img: "cat2",
-        price: "500",
-      },
-      {
-        id: "cat8",
-        title: "Pearl The cat: Christmas edtion",
-        img: "cat3",
-        price: "500",
-      },
-      {
-        id: "cat9",
-        title: "Pearl The cat: Halloween edtion",
-        img: "cat4",
-        price: "500",
-      },
-      {
-        id: "cat10",
-        title:
-          "Pearl The cat: Breakfast edtion Pearl The cat: Breakfast edtion",
-        img: "cat",
-        price: "500",
-      },
-    ],
+  /** initialize */
+  const [deals, setDeals] = useState({ id: "", title: "", items: [] });
+  const [carsVehicles, setCarsVehicles] = useState({
+    id: "",
+    title: "",
+    items: [],
+  });
+  const [furniture, setFurniture] = useState({ id: "", title: "", items: [] });
+  const [electronics, setElectronics] = useState({
+    id: "",
+    title: "",
+    items: [],
+  });
+  const [realEstate, setRealEstate] = useState({
+    id: "",
+    title: "",
+    items: [],
+  });
+
+  /** api options */
+  const requestDealsOptions = {
+    url: "https://jsonplaceholder.typicode.com/posts", //it is possible to send whole url
+    // url: "/contents", // baseUrl("http://localhost:3000/") + url("/contents") => "http://localhost:3000/contents"
+    // params: {},
+    method: "get",
   };
-  const carsVehicles = {
-    id: "carsVehicles",
-    title: "CarsVehicles",
-    items: [
-      {
-        id: "cat",
-        title: "Pearl The cat: Donut edtion",
-        img: "cat2",
-        price: "500",
-      },
-      {
-        id: "cat2",
-        title: "Pearl The cat: Monster edtion",
-        img: "cat2",
-        price: "500",
-      },
-      {
-        id: "cat3",
-        title: "Pearl The cat: Christmas edtion",
-        img: "cat2",
-        price: "500",
-      },
-      {
-        id: "cat4",
-        title: "Pearl The cat: Halloween edtion",
-        img: "cat2",
-        price: "500",
-      },
-      {
-        id: "cat5",
-        title:
-          "Pearl The cat: Breakfast edtion Pearl The cat: Breakfast edtion",
-        img: "cat2",
-        price: "500",
-      },
-    ],
+  const requestCarsVehiclesOptions = {
+    url: "/contents",
+    // params: {carsVehicles},
+    method: "get",
   };
-  const furniture = {
-    id: "furniture",
-    title: "Furniture",
-    items: [
-      {
-        id: "cat",
-        title: "Pearl The cat: Donut edtion",
-        img: "cat3",
-        price: "500",
-      },
-      {
-        id: "cat2",
-        title: "Pearl The cat: Monster edtion",
-        img: "cat3",
-        price: "500",
-      },
-      {
-        id: "cat3",
-        title: "Pearl The cat: Christmas edtion",
-        img: "cat3",
-        price: "500",
-      },
-      {
-        id: "cat4",
-        title: "Pearl The cat: Halloween edtion",
-        img: "cat3",
-        price: "500",
-      },
-      {
-        id: "cat5",
-        title:
-          "Pearl The cat: Breakfast edtion Pearl The cat: Breakfast edtion",
-        img: "cat3",
-        price: "500",
-      },
-    ],
+  const requestFurnitureOptions = {
+    url: "/contents",
+    // params: {furniture},
+    method: "get",
   };
-  const electronics = {
-    id: "electronics",
-    title: "Electronics",
-    items: [
-      {
-        id: "cat",
-        title: "Pearl The cat: Donut edtion",
-        img: "cat4",
-        price: "500",
-      },
-      {
-        id: "cat2",
-        title: "Pearl The cat: Monster edtion",
-        img: "cat4",
-        price: "500",
-      },
-      {
-        id: "cat3",
-        title: "Pearl The cat: Christmas edtion",
-        img: "cat4",
-        price: "500",
-      },
-      {
-        id: "cat4",
-        title: "Pearl The cat: Halloween edtion",
-        img: "cat4",
-        price: "500",
-      },
-      {
-        id: "cat5",
-        title:
-          "Pearl The cat: Breakfast edtion Pearl The cat: Breakfast edtion",
-        img: "cat4",
-        price: "500",
-      },
-    ],
+  const requestElectronicsOptions = {
+    url: "/contents",
+    // params: {electronics},
+    method: "get",
   };
-  const realEstate = {
-    id: "realEstate",
-    title: "RealEstate",
-    items: [
-      {
-        id: "cat",
-        title: "Pearl The cat: Donut edtion",
-        img: "cat",
-        price: "500",
-      },
-      {
-        id: "cat2",
-        title: "Pearl The cat: Monster edtion",
-        img: "cat",
-        price: "500",
-      },
-      {
-        id: "cat3",
-        title: "Pearl The cat: Christmas edtion",
-        img: "cat",
-        price: "500",
-      },
-      {
-        id: "cat4",
-        title: "Pearl The cat: Halloween edtion",
-        img: "cat",
-        price: "500",
-      },
-      {
-        id: "cat5",
-        title:
-          "Pearl The cat: Breakfast edtion Pearl The cat: Breakfast edtion",
-        img: "cat",
-        price: "500",
-      },
-    ],
+  const requestRealEstateOptions = {
+    url: "/contents",
+    // params: {realEstate},
+    method: "get",
   };
+  /** get datas from api */
+  useEffect(() => {
+    const getData = async () => {
+      /** request api*/
+      const responseDeals = await getDeals(requestDealsOptions);
+      const responseCarsVehicles = await getCarsVehicles(
+        requestCarsVehiclesOptions
+      );
+      const responseFurniture = await getFurniture(requestFurnitureOptions);
+      const responseElectronics = await getElectronics(
+        requestElectronicsOptions
+      );
+      const responseRealEstate = await getRealEstate(requestRealEstateOptions);
+      /** set response data */
+      setDeals(responseDeals.data);
+      setCarsVehicles(responseCarsVehicles.data);
+      setFurniture(responseFurniture.data);
+      setElectronics(responseElectronics.data);
+      setRealEstate(responseRealEstate.data);
+    };
+    getData();
+  }, []);
 
   return (
     <div className={styles.mainBox}>
