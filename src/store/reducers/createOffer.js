@@ -15,7 +15,6 @@ const createOffer = (
   },
   action
 ) => {
-  console.log("##action", action.type);
   switch (action.type) {
     // upload image
     case "UPLOAD_IMAGE":
