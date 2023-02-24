@@ -4,9 +4,15 @@ import styles from "./index.module.scss";
 /** item card: parameter => item
  * item : {id, title, img, price}
  */
-const ItemCard = (item) => {
+const ItemCard = ({ item, navigate }) => {
   return (
-    <div key={item.id} className={styles.itemBox}>
+    <div
+      key={item.id}
+      className={styles.itemBox}
+      onClick={() => {
+        navigate("/detail", { state: { id: item.id } });
+      }}
+    >
       <img src={require(`../../assets/images/${item.img}.png`)} alt="img" />
       <div className={styles.contentBox}>
         <div className={styles.itemTitle}>

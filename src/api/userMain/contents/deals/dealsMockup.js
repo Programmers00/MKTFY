@@ -9,7 +9,7 @@ export const dealsMockup = (options) => {
         title: "Deals",
         items: [
           {
-            id: "cat1",
+            id: "cat",
             title: "Pearl The cat: Donut edtion",
             img: "cat",
             price: "500",

@@ -15,23 +15,11 @@ import {
 /** deals page */
 const Deals = () => {
   /** initialize */
-  const [deals, setDeals] = useState({ id: "", title: "", items: [] });
-  const [carsVehicles, setCarsVehicles] = useState({
-    id: "",
-    title: "",
-    items: [],
-  });
-  const [furniture, setFurniture] = useState({ id: "", title: "", items: [] });
-  const [electronics, setElectronics] = useState({
-    id: "",
-    title: "",
-    items: [],
-  });
-  const [realEstate, setRealEstate] = useState({
-    id: "",
-    title: "",
-    items: [],
-  });
+  const [deals, setDeals] = useState(null);
+  const [carsVehicles, setCarsVehicles] = useState(null);
+  const [furniture, setFurniture] = useState(null);
+  const [electronics, setElectronics] = useState(null);
+  const [realEstate, setRealEstate] = useState(null);
 
   /** api options */
   const requestDealsOptions = {
@@ -85,14 +73,22 @@ const Deals = () => {
 
   return (
     <div className={styles.mainBox}>
-      <ContentCard content={deals} />
+      {deals && <ContentCard content={deals} />}
       <div className={styles.half}>
-        <ContentCard content={carsVehicles} isWidthHalf isNavigate />
-        <ContentCard content={furniture} isWidthHalf isNavigate />
+        {carsVehicles && (
+          <ContentCard content={carsVehicles} isWidthHalf isNavigate />
+        )}
+        {furniture && (
+          <ContentCard content={furniture} isWidthHalf isNavigate />
+        )}
       </div>
       <div className={styles.half}>
-        <ContentCard content={electronics} isWidthHalf isNavigate />
-        <ContentCard content={realEstate} isWidthHalf isNavigate />
+        {electronics && (
+          <ContentCard content={electronics} isWidthHalf isNavigate />
+        )}
+        {realEstate && (
+          <ContentCard content={realEstate} isWidthHalf isNavigate />
+        )}
       </div>
     </div>
   );
