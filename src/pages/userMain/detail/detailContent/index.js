@@ -109,11 +109,17 @@ const DetailContent = ({ data }) => {
             <DownIcon />
           </button>
         </div>
-        <img
-          className={styles.showImage}
-          alt="img"
-          src={require(`../../../../assets/images/${selectedImage}.png`)}
-        ></img>
+        {selectedImage ? (
+          <img
+            className={styles.showImage}
+            alt="img"
+            src={require(`../../../../assets/images/${selectedImage}.png`)}
+          ></img>
+        ) : (
+          <div className={styles.showImage}>
+            <div className={styles.noImage}> No Image</div>
+          </div>
+        )}
       </div>
       <div className={styles.contentBox}>
         <span className={styles.itemTitle}>{data.title}</span>

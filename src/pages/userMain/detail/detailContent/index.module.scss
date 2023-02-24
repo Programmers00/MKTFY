@@ -32,19 +32,19 @@
         padding-bottom: 20px;
       }
       .downButton {
-        padding-top: 20px;
+        padding-top: 16px;
       }
       .images {
         display: flex;
         flex-direction: column;
         height: 100%;
         overflow-y: hidden;
-        gap: 15px;
+        gap: 20px;
 
         .image {
           border-radius: 10px;
           width: 118px;
-          height: 278px;
+          height: 123px;
           border: transparent solid 1px;
           transition: all 0.3s;
           // transform: translateY(-140px);
@@ -58,6 +58,17 @@
       border-radius: 10px;
       width: 648px;
       height: 493px;
+      .noImage {
+        border-radius: 10px;
+        display: flex;
+        background-color: $lightGrey;
+        height: 100%;
+        border: 1px solid $darkGrey;
+        align-items: center;
+        justify-content: center;
+        color: $darkGrey;
+        font-size: 70px;
+      }
     }
   }
   .contentBox {
