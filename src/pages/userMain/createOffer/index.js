@@ -1,4 +1,3 @@
-import { useState } from "react";
 // scss
 import styles from "./index.module.scss";
 // components

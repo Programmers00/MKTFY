@@ -1,3 +1,5 @@
+// create offer api
+import { postCreateOffer } from "../../api/userMain/createOffer";
 /** actions : create offer */
 // uploade image action
 export const uploadImage = (files) => {
@@ -15,5 +17,16 @@ export const createOfferFormData = (createOfferForm) => {
 export const resetCreateOffer = () => {
   return (dispatch) => {
     dispatch({ type: "RESET_CREATE_OFFER" });
+  };
+};
+// request create offer acction
+export const requestCreateOffer = (createOfferForm) => {
+  return async (dispatch) => {
+    // dispatch({ type: "REQUEST_CREATE_OFFER" });
+    try {
+      return await postCreateOffer(createOfferForm);
+    } catch (error) {
+      console.log("##error", error);
+    }
   };
 };
