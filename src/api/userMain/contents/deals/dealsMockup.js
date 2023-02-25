@@ -1,7 +1,8 @@
 /** deals mockup */
 export const dealsMockup = (options) => {
   // success
-  if (options)
+  // if no params, deals
+  if (Object.keys(options.params).length === 0)
     return {
       loading: false,
       data: {
@@ -74,23 +75,8 @@ export const dealsMockup = (options) => {
       },
       error: null,
     };
-  // fail
-  return {
-    loading: false,
-    data: null,
-    error: {
-      code: "ERR_NETWORK",
-      message: "Network Error",
-      name: "AxiosError",
-      status: 404,
-    },
-  };
-};
-
-/** cars vehicles mockup */
-export const carsVehiclesMockup = (options) => {
-  // success
-  if (options)
+  // carsVehicles
+  else if (options.params.id === "carsVehicles") {
     return {
       loading: false,
       data: {
@@ -132,23 +118,9 @@ export const carsVehiclesMockup = (options) => {
       },
       error: null,
     };
-  // fail
-  return {
-    loading: false,
-    data: null,
-    error: {
-      code: "ERR_NETWORK",
-      message: "Network Error",
-      name: "AxiosError",
-      status: 404,
-    },
-  };
-};
-
-/** furniture mockup */
-export const furnitureMockup = (options) => {
-  // success
-  if (options)
+  }
+  // furniture
+  else if (options.params.id === "furniture")
     return {
       loading: false,
       data: {
@@ -190,23 +162,8 @@ export const furnitureMockup = (options) => {
       },
       error: null,
     };
-  // fail
-  return {
-    loading: false,
-    data: null,
-    error: {
-      code: "ERR_NETWORK",
-      message: "Network Error",
-      name: "AxiosError",
-      status: 404,
-    },
-  };
-};
-
-/** electronic mockup */
-export const electronicsMockup = (options) => {
-  // success
-  if (options)
+  // electronics
+  else if (options.params.id === "electronics")
     return {
       loading: false,
       data: {
@@ -248,23 +205,8 @@ export const electronicsMockup = (options) => {
       },
       error: null,
     };
-  // fail
-  return {
-    loading: false,
-    data: null,
-    error: {
-      code: "ERR_NETWORK",
-      message: "Network Error",
-      name: "AxiosError",
-      status: 404,
-    },
-  };
-};
-
-/** real estate mockup */
-export const realEstateMockup = (options) => {
-  // success
-  if (options)
+  // realEstate
+  else if (options.params.id === "realEstate")
     return {
       loading: false,
       data: {

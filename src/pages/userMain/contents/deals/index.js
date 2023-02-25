@@ -3,17 +3,14 @@ import { useEffect, useState } from "react";
 import styles from "./index.module.scss";
 // components
 import ContentCard from "../../../../components/contentCard";
-// apis
-import {
-  getDeals,
-  getCarsVehicles,
-  getFurniture,
-  getElectronics,
-  getRealEstate,
-} from "../../../../api/userMain/contents/deals";
+// redux stuff
+import { useDispatch } from "react-redux";
+// redux actions
+import { getDeals } from "../../../../store/actions/deals";
 
 /** deals page */
 const Deals = () => {
+  const dispatch = useDispatch();
   /** initialize */
   const [deals, setDeals] = useState(null);
   const [carsVehicles, setCarsVehicles] = useState(null);
@@ -23,50 +20,56 @@ const Deals = () => {
 
   /** api options */
   const requestDealsOptions = {
-    url: "https://jsonplaceholder.typicode.com/posts", //it is possible to send whole url
-    // url: "/contents", // baseUrl("http://localhost:3000/") + url("/contents") => "http://localhost:3000/contents"
-    // params: {},
+    // url: "https://jsonplaceholder.typicode.com/posts", //it is possible to send whole url
+    url: "/contents", // baseUrl("http://localhost:3000/") + url("/contents") => "http://localhost:3000/contents"
+    params: {},
     method: "get",
   };
   const requestCarsVehiclesOptions = {
     url: "/contents",
-    // params: {carsVehicles},
+    params: { id: "carsVehicles" },
     method: "get",
   };
   const requestFurnitureOptions = {
     url: "/contents",
-    // params: {furniture},
+    params: { id: "furniture" },
     method: "get",
   };
   const requestElectronicsOptions = {
     url: "/contents",
-    // params: {electronics},
+    params: { id: "electronics" },
     method: "get",
   };
   const requestRealEstateOptions = {
     url: "/contents",
-    // params: {realEstate},
+    params: { id: "realEstate" },
     method: "get",
   };
   /** get datas from api */
   useEffect(() => {
     const getData = async () => {
-      /** request api*/
-      const responseDeals = await getDeals(requestDealsOptions);
-      const responseCarsVehicles = await getCarsVehicles(
-        requestCarsVehiclesOptions
-      );
-      const responseFurniture = await getFurniture(requestFurnitureOptions);
-      const responseElectronics = await getElectronics(
-        requestElectronicsOptions
-      );
-      const responseRealEstate = await getRealEstate(requestRealEstateOptions);
-      /** set response data */
-      setDeals(responseDeals.data);
-      setCarsVehicles(responseCarsVehicles.data);
-      setFurniture(responseFurniture.data);
-      setElectronics(responseElectronics.data);
-      setRealEstate(responseRealEstate.data);
+      try {
+        /** redux request api*/
+        const responseDeals = await dispatch(getDeals(requestDealsOptions));
+        const responseCarsVehicles = await dispatch(
+          getDeals(requestCarsVehiclesOptions)
+        );
+        const responseFurniture = await dispatch(
+          getDeals(requestFurnitureOptions)
+        );
+        const responseElectronics = await dispatch(
+          getDeals(requestElectronicsOptions)
+        );
+        const responseRealEstate = await dispatch(
+          getDeals(requestRealEstateOptions)
+        );
+        /** set response data*/
+        setDeals(responseDeals.data);
+        setCarsVehicles(responseCarsVehicles.data);
+        setFurniture(responseFurniture.data);
+        setElectronics(responseElectronics.data);
+        setRealEstate(responseRealEstate.data);
+      } catch (error) {}
     };
     getData();
   }, []);
