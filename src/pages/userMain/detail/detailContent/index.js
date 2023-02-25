@@ -5,6 +5,10 @@ import styles from "./index.module.scss";
 import variabled from "../../../../styles/_variabled.scss";
 // use navigate
 import { useNavigate } from "react-router-dom";
+// redux dispatch
+import { useDispatch } from "react-redux";
+// redux actions
+import { requestCheckout } from "../../../../store/actions/detail";
 // svg icon
 import {
   LabelIcon,
@@ -18,6 +22,9 @@ const DetailContent = ({ data }) => {
   /** initialize */
   // navigate
   const navigate = useNavigate();
+  // redux dispatch
+  const dispacth = useDispatch();
+
   // image list's ref
   const imageRef = useRef([]);
   // selected image's index
@@ -71,12 +78,26 @@ const DetailContent = ({ data }) => {
       );
     }
   };
-  const onSubmit = () => {
-    console.log("##clicked (I wnat this!)");
-    navigate("/checkout", {
-      /** params */
-    });
+
+  // request data options for api
+  const requestOptions = {
+    url: "/checkout", // baseUrl("http://localhost:3000/") + url("/checkout") => "http://localhost:3000/checkout"
+    params: { id: data.id },
+    method: "post",
   };
+  /** functions */
+  // request chekout redux api
+  const onSubmit = async () => {
+    try {
+      const response = await dispacth(requestCheckout(requestOptions));
+      if (response.data.code === "SUCCESS") {
+        navigate("/checkout", { state: { data } });
+      }
+    } catch (error) {
+      console.log("#error", error);
+    }
+  };
+
   return (
     <div className={styles.detailContentBox}>
       <div className={styles.imageBox}>

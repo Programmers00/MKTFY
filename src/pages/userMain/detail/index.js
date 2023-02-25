@@ -4,7 +4,7 @@ import styles from "./index.module.scss";
 // components
 import CategoryBar from "../../../components/categoryBar";
 import DetailContent from "./detailContent";
-// get parameter from parameter
+// get parameter
 import { useLocation } from "react-router-dom";
 // redux dispatch
 import { useDispatch } from "react-redux";
