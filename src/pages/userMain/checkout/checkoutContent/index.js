@@ -9,7 +9,7 @@ const CheckoutContent = ({ data }) => {
 
   return (
     <div className={styles.checkoutContentBox}>
-      <span className={styles.checkoutContentTitle}>Checkout</span>
+      <span className={styles.checkoutContentTitle}>Confirm</span>
       <div className={styles.checkoutContent}>
         <img
           className={styles.image}
