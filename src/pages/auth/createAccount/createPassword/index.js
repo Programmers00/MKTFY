@@ -15,6 +15,8 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 // webAuth from auth0-js
 import { webAuth } from "../../../../utils/webAuth";
+// redux actions
+import { createPassword, resetSignup } from "../../../../store/actions/signup";
 
 /** CreatePassword */
 const CreatePassword = () => {
@@ -43,10 +45,7 @@ const CreatePassword = () => {
   /** useEffect */
   // detect password and realtime update in redux
   useEffect(() => {
-    dispatch({
-      type: "CREATE_PASSWORD",
-      password,
-    });
+    dispatch(createPassword(password));
   }, [password]);
 
   /** functions */
@@ -66,9 +65,7 @@ const CreatePassword = () => {
         // show lottie
         setIsShowLottie(true);
         // dispatch: remove signup form data in redux
-        dispatch({
-          type: "INIT",
-        });
+        dispatch(resetSignup());
         // after 2seconds
         setTimeout(() => {
           // go login page

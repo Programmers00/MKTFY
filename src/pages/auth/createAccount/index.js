@@ -13,7 +13,8 @@ import { regex, validationMessage } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 // useDispatch for sending action to redux
 import { useDispatch, useSelector } from "react-redux";
-
+// redux actions
+import { signup } from "../../../store/actions/signup";
 /** CreateAccount */
 const CreateAccount = () => {
   /** initialize */
@@ -200,7 +201,7 @@ const CreateAccount = () => {
   const onClickSubmit = async (event) => {
     event.preventDefault();
     // save sign up form in redux
-    dispatch({ type: "SIGNUP", signupForm });
+    dispatch(signup(signupForm));
     // go to createPassword page
     navigate("/auth/createPassword");
   };

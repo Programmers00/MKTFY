@@ -52,8 +52,8 @@ const signup = (
           password: action.password,
         },
       };
-    // init: remove all data
-    case "INIT":
+    // reset signup: remove all data
+    case "RESET_SIGNUP":
       return {
         signupForm,
       };
