@@ -11,6 +11,11 @@ import { useValidator } from "../../../../../hooks/useValidator";
 import { regex, validationMessage } from "../../../../../constants";
 // useDispatch for sending action to redux
 import { useDispatch, useSelector } from "react-redux";
+// redux actions
+import {
+  createOfferFormData,
+  resetCreateOffer,
+} from "../../../../../store/actions/createOffer";
 
 /** create offer form  */
 const CreateOfferForm = () => {
@@ -21,7 +26,6 @@ const CreateOfferForm = () => {
   const currentCreateOfferForm = useSelector(
     (state) => state.createOffer.createOfferForm
   );
-  console.log("##", currentCreateOfferForm);
   /** data */
   // selectbox list data
   const cities = ["Calgary", "Camrose", "Brooks"];
@@ -200,7 +204,7 @@ const CreateOfferForm = () => {
           className={styles.postYourOfferButton}
           type="submit"
           onClick={(e) => {
-            dispatch({ type: "CREATE_OFFER_FORM", createOfferForm });
+            dispatch(createOfferFormData(createOfferForm));
           }}
           disabled={
             productName.length === 0 ||
@@ -219,7 +223,7 @@ const CreateOfferForm = () => {
           className={styles.cancelButton}
           type="button"
           onClick={() => {
-            dispatch({ type: "INIT" });
+            dispatch(resetCreateOffer());
             navigate("/");
           }}
         >

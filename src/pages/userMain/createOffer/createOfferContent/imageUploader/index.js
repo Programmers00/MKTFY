@@ -7,6 +7,8 @@ import variabled from "../../../../../styles/_variabled.scss";
 import { CameraIcon, XIcon } from "../../../../../assets/svgIcons";
 // useDispatch for sending action to redux
 import { useDispatch, useSelector } from "react-redux";
+// redux actions
+import { uploadImage } from "../../../../../store/actions/createOffer";
 
 /** image uploader: parameter from images, setImages */
 const ImageUploader = () => {
@@ -30,14 +32,14 @@ const ImageUploader = () => {
     // representing image
     if (clickedImage === 0) {
       // change
-      dispatch({ type: "UPLOAD_IMAGE", images: files });
+      dispatch(uploadImage(files));
       return;
     }
     // other image
     const newImages = [...images];
     newImages[clickedImage] = files[0];
     // setImages(newImages);
-    dispatch({ type: "UPLOAD_IMAGE", images: newImages });
+    dispatch(uploadImage(newImages));
   };
   /** trigger when drage files on the area */
   const handleDrag = (event) => {
@@ -126,7 +128,7 @@ const ImageUploader = () => {
                       const newImages = [...images];
                       newImages[index] = null;
                       // setImages(newImages);
-                      dispatch({ type: "UPLOAD_IMAGE", images: newImages });
+                      dispatch(uploadImage(newImages));
                     }}
                   >
                     <XIcon />

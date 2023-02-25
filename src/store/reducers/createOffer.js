@@ -1,3 +1,4 @@
+// init create offer form
 const createOfferForm = {
   productName: "",
   description: "",
@@ -41,8 +42,8 @@ const createOffer = (
           images: [...state.createOfferForm.images],
         },
       };
-    // init: remove all data
-    case "INIT":
+    // reset create offer: remove all data
+    case "RESET_CREATE_OFFER":
       return {
         createOfferForm,
       };
