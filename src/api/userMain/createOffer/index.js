@@ -8,7 +8,7 @@ import envs from "../../../envs";
 const isOnlyMockup = envs.isOnlyMockup;
 
 /** post create offer: call api or mockup */
-export const postCreateOffer = async (options) => {
+export const postCreateOfferData = async (options) => {
   let isTest = true; // local variable Test => true
   return isOnlyMockup || isTest
     ? await createOfferMockup(options)
