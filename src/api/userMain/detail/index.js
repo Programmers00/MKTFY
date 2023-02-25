@@ -8,7 +8,7 @@ import envs from "../../../envs";
 const isOnlyMockup = envs.isOnlyMockup;
 
 /** getDetail: call api or mockup */
-export const getDetail = async (options) => {
+export const getDetailData = async (options) => {
   let isTest = true; // local variable Test => true
   return isOnlyMockup || isTest
     ? await detailMockup(options)

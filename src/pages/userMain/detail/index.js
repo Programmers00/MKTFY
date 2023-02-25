@@ -6,24 +6,27 @@ import CategoryBar from "../../../components/categoryBar";
 import DetailContent from "./detailContent";
 // get parameter from parameter
 import { useLocation } from "react-router-dom";
-
-import { getDetail } from "../../../api/userMain/detail";
+// redux dispatch
+import { useDispatch } from "react-redux";
+// redux actions
+import { getDetail } from "../../../store/actions/detail";
 /** detail page */
 const Detail = () => {
   /** initialize */
-  const [data, setData] = useState(null);
   const { state } = useLocation();
+  const dispacth = useDispatch();
+  const [data, setData] = useState(null);
+
   // request data options
-  const requestDataOptions = {
-    url: "https://jsonplaceholder.typicode.com/posts", //it is possible to send whole url
-    // url: "/contents", // baseUrl("http://localhost:3000/") + url("/contents") => "http://localhost:3000/contents"
+  const requestOptions = {
+    url: "/detail", // baseUrl("http://localhost:3000/") + url("/detail") => "http://localhost:3000/detail"
     params: { id: state.id },
     method: "get",
   };
   /** get data from api */
   useEffect(() => {
     const getData = async () => {
-      const responseData = await getDetail(requestDataOptions);
+      const responseData = await dispacth(getDetail(requestOptions));
       setData(responseData.data);
     };
     getData();
