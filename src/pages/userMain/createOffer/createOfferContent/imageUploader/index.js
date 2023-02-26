@@ -8,38 +8,37 @@ import { CameraIcon, XIcon } from "../../../../../assets/svgIcons";
 // useDispatch for sending action to redux
 import { useDispatch, useSelector } from "react-redux";
 // redux actions
-import { uploadImage } from "../../../../../store/actions/createOffer";
+import { setSelectedImages } from "../../../../../store/actions/createOffer/uploadImage";
 
 /** image uploader: parameter from images, setImages */
 const ImageUploader = () => {
   /** initialize */
   // redux
   const dispatch = useDispatch();
-  const currentCreateOfferForm = useSelector(
-    (state) => state.createOffer.createOfferForm
-  );
-  // images from redux
-  const images = currentCreateOfferForm.images;
+  // current selected images from redux
+  const currentSelectedImages = useSelector((state) => {
+    return state.uploadImages.selectedImages;
+  });
   // input ref
   const inputRef = useRef(null);
   // drag active
   const [dragActive, setDragActive] = useState(false);
   // clicked image index
   const [clickedImage, setClickedImage] = useState(0);
+
   /** functions */
   /** set images */
-  const handleFile = (files) => {
+  const handleFile = (selectedImages) => {
     // representing image
     if (clickedImage === 0) {
       // change
-      dispatch(uploadImage(files));
+      dispatch(setSelectedImages(selectedImages));
       return;
     }
     // other image
-    const newImages = [...images];
-    newImages[clickedImage] = files[0];
-    // setImages(newImages);
-    dispatch(uploadImage(newImages));
+    const newImages = [...currentSelectedImages];
+    newImages[clickedImage] = selectedImages[0];
+    dispatch(setSelectedImages(newImages));
   };
   /** trigger when drage files on the area */
   const handleDrag = (event) => {
@@ -88,7 +87,7 @@ const ImageUploader = () => {
         className={styles.dragDropContent}
         style={dragActive ? { backgroundColor: variabled.lightGray } : {}}
       >
-        {!images[0] ? (
+        {!currentSelectedImages[0] ? (
           <div className={styles.centerContent}>
             <div className={styles.iconBox}>
               <CameraIcon />
@@ -99,7 +98,7 @@ const ImageUploader = () => {
           <img
             alt="representingImg"
             className={styles.representingImage}
-            src={URL.createObjectURL(images[0])}
+            src={URL.createObjectURL(currentSelectedImages[0])}
           />
         )}
         <input
@@ -114,21 +113,20 @@ const ImageUploader = () => {
       <div className={styles.images}>
         {[1, 2, 3, 4].map((index) => (
           <div className={styles.imageBox} key={index}>
-            {images[index] ? (
+            {currentSelectedImages[index] ? (
               <>
                 <img
                   alt="img"
                   className={styles.image}
-                  src={URL.createObjectURL(images[index])}
+                  src={URL.createObjectURL(currentSelectedImages[index])}
                 />
                 <div className={styles.xIconBox}>
                   <div
                     className={styles.xIcon}
                     onClick={() => {
-                      const newImages = [...images];
+                      const newImages = [...currentSelectedImages];
                       newImages[index] = null;
-                      // setImages(newImages);
-                      dispatch(uploadImage(newImages));
+                      dispatch(setSelectedImages(newImages));
                     }}
                   >
                     <XIcon />

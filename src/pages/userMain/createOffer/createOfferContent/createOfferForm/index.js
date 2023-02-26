@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // use navigate
 import { useNavigate } from "react-router-dom";
 // scss
@@ -13,9 +13,9 @@ import { regex, validationMessage } from "../../../../../constants";
 import { useDispatch, useSelector } from "react-redux";
 // redux actions
 import {
-  createOfferFormData,
+  setCreateOffer,
   resetCreateOffer,
-} from "../../../../../store/actions/createOffer";
+} from "../../../../../store/actions/createOffer/createOffer";
 
 /** create offer form  */
 const CreateOfferForm = () => {
@@ -23,9 +23,10 @@ const CreateOfferForm = () => {
   const navigate = useNavigate();
   // redux
   const dispatch = useDispatch();
-  const currentCreateOfferForm = useSelector(
-    (state) => state.createOffer.createOfferForm
-  );
+  const currentParams = useSelector((state) => {
+    return state.createOffer.params;
+  });
+
   /** data */
   // selectbox list data
   const cities = ["Calgary", "Camrose", "Brooks"];
@@ -36,7 +37,7 @@ const CreateOfferForm = () => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("CarsVehicles");
   const [condition, setCondition] = useState("used");
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(0);
   const [city, setCity] = useState("calgary");
 
   /** regex and validation message */
@@ -54,16 +55,14 @@ const CreateOfferForm = () => {
     onChange: onAddressChange,
     validationMessage: streetAddressValidationMessage,
   } = useValidator(
-    currentCreateOfferForm.address?.length !== 0
-      ? currentCreateOfferForm.address
-      : "",
+    currentParams.address?.length !== 0 ? currentParams.address : "",
     "",
     validationAddress
   );
 
   /** data form for redux*/
   // create offer form
-  const createOfferForm = {
+  const params = {
     productName,
     description,
     category,
@@ -84,7 +83,10 @@ const CreateOfferForm = () => {
           placeholder="Type the product name"
           autoFocus
           value={productName}
-          onChange={(e) => setProductName(e.target.value)}
+          onChange={(e) => {
+            console.log("##e", e);
+            setProductName(e.target.value);
+          }}
           maxLength={256}
         />
       </label>
@@ -204,7 +206,7 @@ const CreateOfferForm = () => {
           className={styles.postYourOfferButton}
           type="submit"
           onClick={(e) => {
-            dispatch(createOfferFormData(createOfferForm));
+            dispatch(setCreateOffer(params));
           }}
           disabled={
             productName.length === 0 ||
@@ -223,7 +225,6 @@ const CreateOfferForm = () => {
           className={styles.cancelButton}
           type="button"
           onClick={() => {
-            dispatch(resetCreateOffer());
             navigate("/");
           }}
         >
