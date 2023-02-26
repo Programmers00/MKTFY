@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from "react-redux";
 // redux actions
 import {
   requestCreateOffer,
-  resetCreateOffer,
   setCreateOffer,
 } from "../../../../store/actions/createOffer/createOffer";
 import { requestUploadImages } from "../../../../store/actions/createOffer/uploadImage";
@@ -30,12 +29,6 @@ const CreateOfferContent = () => {
   const currentParams = useSelector((state) => {
     return state.createOffer.params;
   });
-  /** data */
-  const [params, setParams] = useState();
-  /** real time update params  */
-  useEffect(() => {
-    setParams(currentParams);
-  }, [currentParams]);
   /** functions */
   /** request create offer to api */
   const handleRequestCreateOffer = async (event) => {
@@ -50,23 +43,23 @@ const CreateOfferContent = () => {
         responseUploadImages.data.code === "SUCCESS" ||
         responseUploadImages.data.uploadedFiles.length > 0
       ) {
-        const newImagesId = [];
+        // new params (copy from redux current params)
+        const newParams = { ...currentParams };
+        // add images id
         responseUploadImages.data.uploadedFiles.forEach((uploadedFile) => {
-          newImagesId.push(uploadedFile.fileId);
+          newParams.imagesId.push(uploadedFile.fileId);
         });
-        params.imagesId = newImagesId;
-
-        dispatch(setCreateOffer(params));
-
-        const responseCreateOffer = await dispatch(requestCreateOffer(params));
+        // set create offer with new params
+        dispatch(setCreateOffer(newParams));
+        // request create offer
+        const responseCreateOffer = await dispatch(
+          requestCreateOffer(currentParams)
+        );
         if (responseCreateOffer.data.code === "SUCCESS") {
-          // dispatch(resetCreateOffer());
           navigate("/");
         }
       }
-    } catch (error) {
-      console.log("#error", error);
-    }
+    } catch (error) {}
   };
 
   return (

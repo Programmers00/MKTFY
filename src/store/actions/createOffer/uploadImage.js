@@ -1,9 +1,7 @@
-// upload images api
-// import { postCreateOfferData } from "../../api/userMain/createOffer";
-/** actions : upload images */
+// post upload images api
 import { postUploadImages } from "../../../api/userMain/createOffer";
 
-/** access token, request options for request upload images*/
+// access token, request options for request upload images
 const accessToken = localStorage.getItem("accessToken");
 const requestUploadImagesOptions = {
   url: "/api/uploadImage",
@@ -14,16 +12,16 @@ const requestUploadImagesOptions = {
   },
 };
 
-// set selected images action
+/** set selected images action */
 export const setSelectedImages = (selectedImages) => {
   return (dispatch) => {
     dispatch({ type: "SET_SELECTED_IMAGES", selectedImages: selectedImages });
   };
 };
 
-// rqeust upload images action
+/** requst upload images action */
 export const requestUploadImages = (images) => {
-  return async (dispatch) => {
+  return async () => {
     // create new FormData
     const formData = new FormData();
     // append images data to formData

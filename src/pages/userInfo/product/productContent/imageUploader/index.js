@@ -36,7 +36,6 @@ const ImageUploader = () => {
     // other image
     const newImages = [...images];
     newImages[clickedImage] = files[0];
-    // setImages(newImages);
     dispatch({ type: "UPLOAD_IMAGE", images: newImages });
   };
   /** trigger when drage files on the area */

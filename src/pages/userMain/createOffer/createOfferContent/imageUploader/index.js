@@ -6,7 +6,7 @@ import variabled from "../../../../../styles/_variabled.scss";
 // svg icons
 import { CameraIcon, XIcon } from "../../../../../assets/svgIcons";
 // useDispatch for sending action to redux
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 // redux actions
 import { setSelectedImages } from "../../../../../store/actions/createOffer/uploadImage";
 
@@ -15,16 +15,18 @@ const ImageUploader = () => {
   /** initialize */
   // redux
   const dispatch = useDispatch();
-  // current selected images from redux
-  const currentSelectedImages = useSelector((state) => {
-    return state.uploadImages.selectedImages;
-  });
   // input ref
   const inputRef = useRef(null);
   // drag active
   const [dragActive, setDragActive] = useState(false);
   // clicked image index
   const [clickedImage, setClickedImage] = useState(0);
+  const [selectedImageList, setSelectedImageList] = useState([]);
+
+  /** update data in redux */
+  useEffect(() => {
+    dispatch(setSelectedImages(selectedImageList));
+  }, [selectedImageList]);
 
   /** functions */
   /** set images */
@@ -32,13 +34,13 @@ const ImageUploader = () => {
     // representing image
     if (clickedImage === 0) {
       // change
-      dispatch(setSelectedImages(selectedImages));
+      setSelectedImageList(selectedImages);
       return;
     }
     // other image
-    const newImages = [...currentSelectedImages];
+    const newImages = [...selectedImageList];
     newImages[clickedImage] = selectedImages[0];
-    dispatch(setSelectedImages(newImages));
+    setSelectedImageList(newImages);
   };
   /** trigger when drage files on the area */
   const handleDrag = (event) => {
@@ -50,7 +52,7 @@ const ImageUploader = () => {
       setDragActive(false);
     }
   };
-  // triggers when file is dropped
+  /** triggers when file is dropped */
   const handleDrop = (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -59,7 +61,7 @@ const ImageUploader = () => {
       handleFile(event.dataTransfer.files);
     }
   };
-  // triggers when file is selected with click
+  /** triggers when file is selected with click */
   const handleChange = (event) => {
     setClickedImage(0);
     event.preventDefault();
@@ -71,7 +73,7 @@ const ImageUploader = () => {
       handleFile(event.target.files);
     }
   };
-  // triggers the input when the empty image is clicked
+  /** triggers the input when the empty image is clicked */
   const onClickEmptyImage = (index) => {
     setClickedImage(index);
     inputRef.current.click();
@@ -87,7 +89,7 @@ const ImageUploader = () => {
         className={styles.dragDropContent}
         style={dragActive ? { backgroundColor: variabled.lightGray } : {}}
       >
-        {!currentSelectedImages[0] ? (
+        {!selectedImageList[0] ? (
           <div className={styles.centerContent}>
             <div className={styles.iconBox}>
               <CameraIcon />
@@ -98,7 +100,7 @@ const ImageUploader = () => {
           <img
             alt="representingImg"
             className={styles.representingImage}
-            src={URL.createObjectURL(currentSelectedImages[0])}
+            src={URL.createObjectURL(selectedImageList[0])}
           />
         )}
         <input
@@ -113,20 +115,20 @@ const ImageUploader = () => {
       <div className={styles.images}>
         {[1, 2, 3, 4].map((index) => (
           <div className={styles.imageBox} key={index}>
-            {currentSelectedImages[index] ? (
+            {selectedImageList[index] ? (
               <>
                 <img
                   alt="img"
                   className={styles.image}
-                  src={URL.createObjectURL(currentSelectedImages[index])}
+                  src={URL.createObjectURL(selectedImageList[index])}
                 />
                 <div className={styles.xIconBox}>
                   <div
                     className={styles.xIcon}
                     onClick={() => {
-                      const newImages = [...currentSelectedImages];
+                      const newImages = [...selectedImageList];
                       newImages[index] = null;
-                      dispatch(setSelectedImages(newImages));
+                      setSelectedImageList(newImages);
                     }}
                   >
                     <XIcon />

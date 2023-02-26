@@ -1,5 +1,4 @@
 // init create offer form
-
 const initialState = {
   params: {
     productName: "",
@@ -12,9 +11,8 @@ const initialState = {
     imagesId: [],
   },
 };
-
+/** set create offer reducer */
 const setCreateOffer = (state = initialState, action) => {
-  console.log("##", action);
   switch (action.type) {
     // set offer form
     case "SET_CREATE_OFFER":

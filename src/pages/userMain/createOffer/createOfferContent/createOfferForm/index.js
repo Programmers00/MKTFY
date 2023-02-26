@@ -10,22 +10,17 @@ import { useValidator } from "../../../../../hooks/useValidator";
 // constants for regex, validations
 import { regex, validationMessage } from "../../../../../constants";
 // useDispatch for sending action to redux
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 // redux actions
-import {
-  setCreateOffer,
-  resetCreateOffer,
-} from "../../../../../store/actions/createOffer/createOffer";
+import { setCreateOffer } from "../../../../../store/actions/createOffer/createOffer";
 
 /** create offer form  */
 const CreateOfferForm = () => {
   /** initialize */
+  // navigate
   const navigate = useNavigate();
   // redux
   const dispatch = useDispatch();
-  const currentParams = useSelector((state) => {
-    return state.createOffer.params;
-  });
 
   /** data */
   // selectbox list data
@@ -54,11 +49,7 @@ const CreateOfferForm = () => {
     value: address,
     onChange: onAddressChange,
     validationMessage: streetAddressValidationMessage,
-  } = useValidator(
-    currentParams.address?.length !== 0 ? currentParams.address : "",
-    "",
-    validationAddress
-  );
+  } = useValidator("", "", validationAddress);
 
   /** data form for redux*/
   // create offer form
@@ -71,6 +62,11 @@ const CreateOfferForm = () => {
     address,
     city,
   };
+
+  /** update data in redux */
+  useEffect(() => {
+    dispatch(setCreateOffer(params));
+  }, [productName, description, category, condition, price, address, city]);
 
   return (
     <div className={styles.contentBox}>
@@ -205,9 +201,9 @@ const CreateOfferForm = () => {
         <button
           className={styles.postYourOfferButton}
           type="submit"
-          onClick={(e) => {
-            dispatch(setCreateOffer(params));
-          }}
+          // onClick={(e) => {
+          //   dispatch(setCreateOffer(params));
+          // }}
           disabled={
             productName.length === 0 ||
             description.length === 0 ||
