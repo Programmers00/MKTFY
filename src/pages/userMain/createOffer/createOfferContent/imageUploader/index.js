@@ -8,7 +8,7 @@ import { CameraIcon, XIcon } from "../../../../../assets/svgIcons";
 // useDispatch for sending action to redux
 import { useDispatch } from "react-redux";
 // redux actions
-import { setSelectedImages } from "../../../../../store/actions/createOffer/uploadImage";
+import { setSelectedImages } from "../../../../../store/actions/uploadImage";
 
 /** image uploader: parameter from images, setImages */
 const ImageUploader = () => {

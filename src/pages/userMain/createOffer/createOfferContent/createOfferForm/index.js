@@ -12,7 +12,7 @@ import { regex, validationMessage } from "../../../../../constants";
 // useDispatch for sending action to redux
 import { useDispatch } from "react-redux";
 // redux actions
-import { setCreateOffer } from "../../../../../store/actions/createOffer/createOffer";
+import { setCreateOffer } from "../../../../../store/actions/createOffer";
 
 /** create offer form  */
 const CreateOfferForm = () => {
@@ -79,10 +79,7 @@ const CreateOfferForm = () => {
           placeholder="Type the product name"
           autoFocus
           value={productName}
-          onChange={(e) => {
-            console.log("##e", e);
-            setProductName(e.target.value);
-          }}
+          onChange={(e) => setProductName(e.target.value)}
           maxLength={256}
         />
       </label>

@@ -12,8 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   requestCreateOffer,
   setCreateOffer,
-} from "../../../../store/actions/createOffer/createOffer";
-import { requestUploadImages } from "../../../../store/actions/createOffer/uploadImage";
+} from "../../../../store/actions/createOffer";
+import { requestUploadImages } from "../../../../store/actions/uploadImage";
 /** create offer content : component for create offer */
 const CreateOfferContent = () => {
   /** initialize */

@@ -1,5 +1,5 @@
 // poset create offer api
-import { postCreateOfferData } from "../../../api/userMain/createOffer";
+import { postCreateOfferData } from "../../api/userMain/createOffer";
 // request options for request offer
 const requestCreateOfferOptions = {
   url: "/api/postCreateOffer",
