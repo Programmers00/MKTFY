@@ -22,16 +22,13 @@ export const setSelectedImages = (selectedImages) => {
 /** requst upload images action */
 export const requestUploadImages = (images) => {
   return async () => {
-    console.log("####", images);
     // create new FormData
     const formData = new FormData();
     // append images data to formData
     for (let i = 0; i < images.length; i++) {
       formData.append("images", images[i]);
     }
-    console.log("####");
     try {
-      console.log("####");
       // post upload images
       return await postUploadImages({
         formData,
