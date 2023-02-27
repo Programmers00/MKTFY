@@ -1,47 +1,39 @@
 // react
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // scss
 import styles from "./index.module.scss";
 // components
 import HorizontalItemCard from "../../../../components/horizontalItemCard";
+// useDispatch for sending action to redux
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMyPurchases } from "../../../../store/actions/myPurchases";
 
 /** my purchases content component */
 const MyPurchasesContent = () => {
-  //  items
-  const items = [
-    {
-      id: "cat3",
-      title: "Pearl The cat: Christmas edtion",
-      img: "cat3",
-      price: "500",
-      date: "September 07 2020",
-      active: true,
-    },
-    {
-      id: "cat4",
-      title: "Pearl The cat: Halloween edtion",
-      img: "cat4",
-      price: "500",
-      date: "September 07 2020",
-      active: true,
-    },
-    {
-      id: "cat5",
-      title: "Pearl The cat: Breakfast edtion Pearl The cat: Breakfast edtion",
-      img: "cat",
-      price: "500",
-      date: "September 07 2020",
-      active: true,
-    },
-    {
-      id: "cat6",
-      title: "Pearl The cat: Donut edtion",
-      img: "cat",
-      price: "500",
-      date: "September 07 2020",
-      active: true,
-    },
-  ];
+  /** initialize */
+  // redux
+  const dispatch = useDispatch();
+  /** data */
+  const [items, setItems] = useState([]);
+
+  // request data options
+  const fetchMyPurchasesOptions = {
+    url: "/api/user/myPurchases",
+    params: {},
+  };
+  /** fetch data from api */
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await dispatch(
+          fetchMyPurchases(fetchMyPurchasesOptions)
+        );
+        const { items } = response.data;
+        setItems(items);
+      } catch (error) {}
+    };
+    getData();
+  }, []);
 
   return (
     <div className={styles.myPurchasesContentBox}>
