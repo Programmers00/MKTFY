@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 // scss
 import styles from "./index.module.scss";
@@ -6,13 +6,19 @@ import styles from "./index.module.scss";
 import Dropdown from "../../../components/dropdown";
 // svg icon
 import { SingOutIcon } from "../../../assets/svgIcons";
+// user name from redux
+import { useDispatch } from "react-redux";
+import { getMyListingsCount } from "../../../store/actions/welcomeDropdown";
 
 const WelcomeDropdown = ({ userName }) => {
+  /** initialize */
+  // dispatch
+  const dispatch = useDispatch();
   /** data */
   // trigger to close dropdown
   const [closeTrigger, setCloseTrigger] = useState(0);
   // notification
-  const myListingCount = 3;
+  const [myListingsCount, setMyListingsCount] = useState(0);
   // settings
   const settings = [
     { title: "Account Information", url: "/accountInformation" },
@@ -21,7 +27,7 @@ const WelcomeDropdown = ({ userName }) => {
     {
       title: "My listings",
       url: "/myListings",
-      notification: myListingCount,
+      notification: myListingsCount,
     },
   ];
   // helps
@@ -29,6 +35,31 @@ const WelcomeDropdown = ({ userName }) => {
     { title: "FAQ", url: "/faq" },
     { title: "Contact us", url: "/contactUs" },
   ];
+
+  /** request options */
+  // get my listings count
+  const getMyListingsCountOptions = {
+    url: "/api/user/myListingsCount",
+    params: {},
+  };
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        /** redux request api*/
+        // request my listings count
+        const responseMyListingsCount = await dispatch(
+          getMyListingsCount(getMyListingsCountOptions)
+        );
+
+        /** set response data*/
+        // set my listings
+        setMyListingsCount(responseMyListingsCount.data.myListingsCount);
+      } catch (error) {}
+    };
+    getData();
+  }, []);
+
   /** sign out: signout and close trigger */
   const onSignOut = () => {
     console.log("##sign Out");
@@ -59,10 +90,12 @@ const WelcomeDropdown = ({ userName }) => {
           {settings.map((element) => (
             <Link onClick={onCloseTrigger} key={element.title} to={element.url}>
               <p>{element.title}</p>
-              {element.notification && (
+              {element.notification && element.notification > 0 ? (
                 <div className={styles.notification}>
                   {element.notification}
                 </div>
+              ) : (
+                ""
               )}
             </Link>
           ))}
@@ -72,11 +105,6 @@ const WelcomeDropdown = ({ userName }) => {
           {help.map((element) => (
             <Link onClick={onCloseTrigger} key={element.title} to={element.url}>
               <p>{element.title}</p>
-              {element.notification && (
-                <div className={styles.notification}>
-                  {element.notification}
-                </div>
-              )}
             </Link>
           ))}
         </div>

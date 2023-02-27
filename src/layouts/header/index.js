@@ -28,6 +28,7 @@ const Header = () => {
   // welcome back user name
   const [userName, setUserName] = useState("");
   /** request options */
+  // get account information options for user name
   const getAccountInformationOptions = {
     url: "/api/user/accountInformation",
     params: {},
