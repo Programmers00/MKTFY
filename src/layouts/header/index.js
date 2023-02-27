@@ -16,7 +16,7 @@ import { Navbar } from "./navbar";
 import { PlusIcon } from "../../assets/svgIcons";
 // user name from redux
 import { useDispatch } from "react-redux";
-import { getAccountInformation } from "../../store/actions/accountInformation";
+import { fetchAccountInformation } from "../../store/actions/accountInformation";
 /** header in layout */
 const Header = () => {
   /** initialize */
@@ -40,7 +40,7 @@ const Header = () => {
         /** redux request api*/
         // request account information for user name
         const responseAccountInformation = await dispatch(
-          getAccountInformation(getAccountInformationOptions)
+          fetchAccountInformation(getAccountInformationOptions)
         );
 
         /** set response data*/

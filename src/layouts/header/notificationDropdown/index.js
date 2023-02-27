@@ -15,7 +15,7 @@ import {
   readNotification,
 } from "../../../store/actions/notifications";
 
-const WelcomeDropdown = ({ userName }) => {
+const WelcomeDropdown = () => {
   /** initialize */
   // dispatch
   const dispatch = useDispatch();

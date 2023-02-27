@@ -14,7 +14,7 @@ import { getDetail } from "../../../store/actions/detail";
 const Detail = () => {
   /** initialize */
   const { state } = useLocation();
-  const dispacth = useDispatch();
+  const dispatch = useDispatch();
   const [data, setData] = useState(null);
 
   // request data options
@@ -26,7 +26,7 @@ const Detail = () => {
   /** get data from api */
   useEffect(() => {
     const getData = async () => {
-      const responseData = await dispacth(getDetail(requestOptions));
+      const responseData = await dispatch(getDetail(requestOptions));
       setData(responseData.data);
     };
     getData();

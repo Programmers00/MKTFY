@@ -11,6 +11,10 @@ import { regex, validationMessage } from "../../../../constants";
 import { useNavigate } from "react-router-dom";
 // useDispatch for sending action to redux
 import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchAccountInformation,
+  updateAccountInformation,
+} from "../../../../store/actions/accountInformation";
 
 /** AccountInformation */
 const AccountInformation = () => {
@@ -193,14 +197,51 @@ const AccountInformation = () => {
     country,
   };
 
+  // request data options
+  const fetchAccountInformationOptions = {
+    url: "/api/accountInformation",
+    params: {},
+  };
+  // update account information options
+  const updateAccountInformationOptions = {
+    url: "/api/accountInformation",
+    params: signupForm,
+    method: "post",
+  };
+  /** fetch data from api */
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await dispatch(
+          fetchAccountInformation(fetchAccountInformationOptions)
+        );
+        const { accountInformation } = response.data;
+        onFirstNameChange(accountInformation.firstName);
+        onLastNameChange(accountInformation.lastName);
+        onEmailChange(accountInformation.email);
+        onPhoneChange(accountInformation.phone);
+        onStreetAddressChange(accountInformation.streetAddress);
+        onCityChange(accountInformation.city);
+        onProvinceChange(accountInformation.province);
+        onCountryChange(accountInformation.country);
+      } catch (error) {}
+    };
+    getData();
+  }, []);
+
   /** functions */
   /** click submit button => save sinup form in redux and go  page*/
   const onClickSubmit = async (event) => {
     event.preventDefault();
     // save sign up form in redux
-    dispatch({ type: "SIGNUP", signupForm });
-    // go to createPassword page
-    // success modal
+    const response = await dispatch(
+      updateAccountInformation(updateAccountInformationOptions)
+    );
+    if (response.data.code === "SUCCESS") {
+      console.log("#success", response);
+      // success page?
+      navigate("/");
+    }
   };
 
   /** formatter for phone number */
