@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 // scss
 import styles from "./index.module.scss";
 // naviagate
@@ -13,14 +14,45 @@ import NotificationDropdown from "./notificationDropdown";
 import { Navbar } from "./navbar";
 // button
 import { PlusIcon } from "../../assets/svgIcons";
-
+// user name from redux
+import { useDispatch } from "react-redux";
+import { getAccountInformation } from "../../store/actions/accountInformation";
 /** header in layout */
 const Header = () => {
   /** initialize */
   // navigate
   const navigate = useNavigate();
+  // dispatch
+  const dispatch = useDispatch();
   /** data */
-  const userName = "Pearl The Cat";
+  // welcome back user name
+  const [userName, setUserName] = useState("");
+  /** request options */
+  const getAccountInformationOptions = {
+    url: "/api/user/accountInformation",
+    params: {},
+  };
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        /** redux request api*/
+        // request account information for user name
+        const responseAccountInformation = await dispatch(
+          getAccountInformation(getAccountInformationOptions)
+        );
+
+        /** set response data*/
+        // set user name from account information
+        setUserName(
+          responseAccountInformation.data.accountInformation.firstName +
+            " " +
+            responseAccountInformation.data.accountInformation.lastName
+        );
+      } catch (error) {}
+    };
+    getData();
+  }, []);
 
   return (
     <div className={styles.headerMainBox}>

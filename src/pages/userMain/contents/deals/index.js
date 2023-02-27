@@ -20,30 +20,24 @@ const Deals = () => {
 
   /** api options */
   const requestDealsOptions = {
-    // url: "https://jsonplaceholder.typicode.com/posts", //it is possible to send whole url
-    url: "/contents", // baseUrl("http://localhost:3000/") + url("/contents") => "http://localhost:3000/contents"
+    url: "/contents",
     params: {},
-    method: "get",
   };
   const requestCarsVehiclesOptions = {
     url: "/contents",
     params: { id: "carsVehicles" },
-    method: "get",
   };
   const requestFurnitureOptions = {
     url: "/contents",
     params: { id: "furniture" },
-    method: "get",
   };
   const requestElectronicsOptions = {
     url: "/contents",
     params: { id: "electronics" },
-    method: "get",
   };
   const requestRealEstateOptions = {
     url: "/contents",
     params: { id: "realEstate" },
-    method: "get",
   };
   /** get datas from api */
   useEffect(() => {
