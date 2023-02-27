@@ -51,7 +51,6 @@ const WelcomeDropdown = ({ userName }) => {
         const responseMyListingsCount = await dispatch(
           getMyListingsCount(getMyListingsCountOptions)
         );
-        console.log("##responseMyListingsCount", responseMyListingsCount);
 
         /** set response data*/
         // set my listings

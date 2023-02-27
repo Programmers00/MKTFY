@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // use navigate
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 // scss
 import styles from "./index.module.scss";
 // scss style variabled for color red
@@ -10,21 +10,62 @@ import { useValidator } from "../../../../../hooks/useValidator";
 // constants for regex, validations
 import { regex, validationMessage } from "../../../../../constants";
 // useDispatch for sending action to redux
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+// redux actions
+import { setCreateOffer } from "../../../../../store/actions/createOffer";
+import { fetchProduct } from "../../../../../store/actions/product";
 // component
 import CancelListingModal from "./cancelListingModal";
 
 /** product form  */
 const ProductForm = () => {
+  const [isShowModal, setIsShowModal] = useState();
   /** initialize */
+  // parameter from router
+  const { state } = useLocation();
+  // navigate
   const navigate = useNavigate();
   // redux
   const dispatch = useDispatch();
-  const currentCreateOfferForm = useSelector(
-    (state) => state.createOffer.createOfferForm
-  );
-  const [isShowModal, setIsShowModal] = useState();
-  // console.log("##", currentCreateOfferForm);
+  /** data */
+  const [productId, setProductId] = useState("");
+
+  /** request options */
+  const fetchProdctionOption = {
+    url: "/api/user/product",
+    params: { id: productId },
+  };
+
+  /** set data from router parameter */
+  useEffect(() => {
+    setProductId(state.id);
+  }, []);
+
+  /** set data from router parameter */
+  useEffect(() => {
+    const getData = async () => {
+      // when product id is
+      if (productId !== "") {
+        try {
+          // request fetch product
+          const response = await dispatch(fetchProduct(fetchProdctionOption));
+          // when success, set data
+          if (response.data.code === "SUCCESS") {
+            const { item } = response.data;
+            setProductName(item.productName);
+            setDescription(item.description);
+            setCategory(item.category);
+            setCondition(item.condition);
+            onAddressChange(item.address);
+            setPrice(item.price);
+            setCity(item.city);
+          }
+        } catch (error) {}
+      }
+    };
+    getData();
+  }, [productId]);
+
   /** data */
   // selectbox list data
   const cities = ["Calgary", "Camrose", "Brooks"];
@@ -35,8 +76,8 @@ const ProductForm = () => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("CarsVehicles");
   const [condition, setCondition] = useState("used");
-  const [price, setPrice] = useState("");
-  const [city, setCity] = useState("calgary");
+  const [price, setPrice] = useState(0);
+  const [city, setCity] = useState("Brooks");
 
   /** regex and validation message */
   const validationAddress = {
@@ -52,17 +93,11 @@ const ProductForm = () => {
     value: address,
     onChange: onAddressChange,
     validationMessage: streetAddressValidationMessage,
-  } = useValidator(
-    currentCreateOfferForm.address?.length !== 0
-      ? currentCreateOfferForm.address
-      : "",
-    "",
-    validationAddress
-  );
+  } = useValidator("", "", validationAddress);
 
   /** data form for redux*/
   // create offer form
-  const createOfferForm = {
+  const params = {
     productName,
     description,
     category,
@@ -71,6 +106,11 @@ const ProductForm = () => {
     address,
     city,
   };
+
+  /** update data in redux */
+  useEffect(() => {
+    dispatch(setCreateOffer(params));
+  }, [productName, description, category, condition, price, address, city]);
 
   return (
     <div className={styles.contentBox}>
@@ -202,9 +242,9 @@ const ProductForm = () => {
         <button
           className={styles.postYourOfferButton}
           type="submit"
-          onClick={(e) => {
-            dispatch({ type: "CREATE_OFFER_FORM", createOfferForm });
-          }}
+          // onClick={(e) => {
+          //   dispatch({ type: "CREATE_OFFER_FORM", createOfferForm });
+          // }}
           disabled={
             productName.length === 0 ||
             description.length === 0 ||
@@ -222,8 +262,9 @@ const ProductForm = () => {
           className={styles.confirmSoldButton}
           type="button"
           onClick={() => {
-            dispatch({ type: "INIT" });
-            navigate("/myListings");
+            console.log("##api");
+            // dispatch({ type: "INIT" });
+            // navigate("/myListings");
           }}
         >
           Confirm sold

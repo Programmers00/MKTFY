@@ -1,12 +1,23 @@
 // scss
 import styles from "./index.module.scss";
+// navigate
+import { useNavigate } from "react-router-dom";
 
 /** horizontal item card: parameter => item
  * item : {id, title, img, price, date, active}
  */
 const HorizontalItemCard = ({ item }) => {
+  /** initialize */
+  // navigate
+  const navigate = useNavigate();
   return (
-    <div key={item.id} className={styles.itemBox}>
+    <div
+      key={item.id}
+      className={styles.itemBox}
+      onClick={() => {
+        navigate(item.active && "/product", { state: { id: item.id } });
+      }}
+    >
       <img src={require(`../../assets/images/${item.img}.png`)} alt="img" />
       <div className={styles.contentBox}>
         {item.date && <div className={styles.date}>{item.date}</div>}
