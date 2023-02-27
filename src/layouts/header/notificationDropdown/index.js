@@ -8,71 +8,76 @@ import {
   NotificationIcon,
   NotificationActiveIcon,
 } from "../../../assets/svgIcons";
+// user name from redux
+import { useDispatch } from "react-redux";
+import {
+  getNotifications,
+  readNotification,
+} from "../../../store/actions/notifications";
 
 const WelcomeDropdown = ({ userName }) => {
   /** initialize */
+  // dispatch
+  const dispatch = useDispatch();
   // trigger to close dropdown
   const [closeTrigger, setCloseTrigger] = useState(0);
   // check notification active
   const [isNotification, setIsNotification] = useState(false);
-  /** data */
-  // notification
-  const notification = [
-    {
-      notifier: "MKTFY",
-      summary: "Hey Pearl, welcome to MKTFY",
-      date: "September 22 2023",
-      isRead: false,
-      key: 6,
-    },
-    {
-      notifier: "MKTFY",
-      summary: "Let's create your first offer!",
-      date: "September 21 2023",
-      isRead: false,
-      key: 5,
-    },
-    {
-      notifier: "MKTFY",
-      summary: "Our Terms of Service has been updated!",
-      date: "September 20 2023",
-      isRead: true,
-      key: 4,
-    },
-    {
-      notifier: "MKTFY",
-      summary: "Hey Pearl, welcome to MKTFY",
-      date: "September 19 2023",
-      isRead: true,
-      key: 3,
-    },
-    {
-      notifier: "MKTFY",
-      summary: "Let's create your first offer!",
-      date: "September 05 2023",
-      isRead: true,
-      key: 2,
-    },
-    {
-      notifier: "MKTFY",
-      summary: "Our Terms of Service has been updated!",
-      date: "September 03 2023",
-      isRead: false,
-      key: 1,
-    },
-  ];
+
+  const [notifications, setNotifications] = useState([]);
+
+  /** request options */
+  // get notifications
+  const getNotificationsOptions = {
+    url: "/api/user/notifications",
+    params: {},
+  };
+  // read notificaion
+  const readNotificationOptions = {
+    url: "/api/user/notifications",
+    params: {},
+    method: "put",
+  };
+
   /** useEffect */
-  // notification check
+  /** when mounting, closing dropdown => works(call api)*/
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        /** redux request api*/
+        // request notifications
+        const responseNotifications = await dispatch(
+          getNotifications(getNotificationsOptions)
+        );
+
+        /** set response data*/
+        // set notifications
+        setNotifications(responseNotifications.data.notifications);
+      } catch (error) {}
+    };
+    getData();
+    // when clicked notification, close and requset notifications!
+  }, [closeTrigger]);
+
+  // notifications check
   useEffect(() => {
     setIsNotification(
-      notification.find((element) => element.isRead === true) !== undefined
+      notifications.find((element) => element.isRead === true) !== undefined
     );
-  }, []);
+  }, [notifications]);
 
   /** functions */
-  /** triger for close dropdown */
-  const onCloseTrigger = () => {
-    // always make new value => trigger
+  /** click notification, triger for close dropdown */
+  const onReadNotification = async (id) => {
+    try {
+      /** redux request api*/
+      // request read notification
+      const responseReadNotification = await dispatch(
+        readNotification(readNotificationOptions)
+      );
+      console.log("#responseReadNotification", responseReadNotification.data);
+    } catch (error) {}
+    // always make new value => trigger ==> request notifications trigger
     setCloseTrigger(new Date());
   };
 
@@ -87,13 +92,13 @@ const WelcomeDropdown = ({ userName }) => {
         {/* new for you */}
         {isNotification && <span className={styles.title}>New for you</span>}
         {/* new items */}
-        {notification.map((element) => {
+        {notifications.map((element) => {
           return (
             element.isRead && (
               <span
-                key={element.key}
+                key={element.id}
                 className={styles.content}
-                onClick={onCloseTrigger}
+                onClick={() => onReadNotification(element.id)}
               >
                 <div className={styles.circle}>{element.notifier}</div>
                 <div className={styles.summaryBox}>
@@ -109,13 +114,14 @@ const WelcomeDropdown = ({ userName }) => {
           Previously seen
         </span>
         {/* prev items */}
-        {notification.map((element) => {
+        {notifications.map((element) => {
           return (
             !element.isRead && (
               <span
-                key={element.key}
+                key={element.id}
                 className={styles.content}
-                onClick={onCloseTrigger}
+                // no function now, just close
+                onClick={() => setCloseTrigger(new Date())}
               >
                 <div className={styles.circle}>{element.notifier}</div>
                 <div className={styles.summaryBox}>
