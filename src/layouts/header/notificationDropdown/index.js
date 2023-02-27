@@ -19,12 +19,15 @@ const WelcomeDropdown = ({ userName }) => {
   /** initialize */
   // dispatch
   const dispatch = useDispatch();
+  /** data */
   // trigger to close dropdown
   const [closeTrigger, setCloseTrigger] = useState(0);
   // check notification active
   const [isNotification, setIsNotification] = useState(false);
-
+  // notifications
   const [notifications, setNotifications] = useState([]);
+  // notification id
+  const [clickedNotificationId, setClickedNotificationId] = useState("");
 
   /** request options */
   // get notifications
@@ -35,7 +38,7 @@ const WelcomeDropdown = ({ userName }) => {
   // read notificaion
   const readNotificationOptions = {
     url: "/api/user/notifications",
-    params: {},
+    params: { id: clickedNotificationId },
     method: "put",
   };
 
@@ -68,7 +71,8 @@ const WelcomeDropdown = ({ userName }) => {
 
   /** functions */
   /** click notification, triger for close dropdown */
-  const onReadNotification = async (id) => {
+  const onReadNotification = async (notificationId) => {
+    setClickedNotificationId(notificationId);
     try {
       /** redux request api*/
       // request read notification
