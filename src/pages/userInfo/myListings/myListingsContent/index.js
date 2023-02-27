@@ -1,73 +1,52 @@
 // react
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // scss
 import styles from "./index.module.scss";
 // components
 import HorizontalItemCard from "../../../../components/horizontalItemCard";
+// useDispatch for sending action to redux
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMyListings } from "../../../../store/actions/myListings";
 
-/** dmy listing content component */
+/** my listings content component */
 const MyListingsContent = () => {
+  /** initialize*/
+  // redux
+  const dispatch = useDispatch();
+  /** data */
   const [showItem, setShowItem] = useState("activeItems");
-  /** date */
-  // active items
-  const activeItems = [
-    {
-      id: "cat3",
-      title: "Pearl The cat: Christmas edtion",
-      img: "cat3",
-      price: "500",
-      date: "September 07 2020",
-      active: true,
-    },
-    {
-      id: "cat4",
-      title: "Pearl The cat: Halloween edtion",
-      img: "cat4",
-      price: "500",
-      date: "September 07 2020",
-      active: true,
-    },
-    {
-      id: "cat5",
-      title: "Pearl The cat: Breakfast edtion Pearl The cat: Breakfast edtion",
-      img: "cat",
-      price: "500",
-      date: "September 07 2020",
-      active: true,
-    },
-    {
-      id: "cat6",
-      title: "Pearl The cat: Donut edtion",
-      img: "cat",
-      price: "500",
-      date: "September 07 2020",
-      active: true,
-    },
-  ];
-  // sold items
-  const soldItems = [
-    {
-      id: "cat1",
-      title: "Pearl The cat: Donut edtion",
-      img: "cat",
-      price: "500",
-      active: false,
-    },
-    {
-      id: "cat2",
-      title: "Pearl The cat: Monster edtion",
-      img: "cat2",
-      price: "500",
-      active: false,
-    },
-    {
-      id: "cat3",
-      title: "Pearl The cat: Christmas edtion",
-      img: "cat3",
-      price: "500",
-      active: false,
-    },
-  ];
+  const [activeItems, setActiveItems] = useState([]);
+  const [soldItems, setSoldItems] = useState([]);
+
+  /** request data options */
+  // active options
+  const fetchMyListingsActiveOptions = {
+    url: "/api/user/myListings",
+    params: { status: "active" },
+  };
+  // sold options
+  const fetchMyListingsSoldOptions = {
+    url: "/api/user/myListings",
+    params: { status: "sold" },
+  };
+  /** fetch data from api */
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        // request fetch
+        const responseActiveItems = await dispatch(
+          fetchMyListings(fetchMyListingsActiveOptions)
+        );
+        const responseSoldItems = await dispatch(
+          fetchMyListings(fetchMyListingsSoldOptions)
+        );
+        // set data
+        setActiveItems(responseActiveItems.data.items);
+        setSoldItems(responseSoldItems.data.items);
+      } catch (error) {}
+    };
+    getData();
+  }, []);
 
   return (
     <div className={styles.myListingsContentBox}>
