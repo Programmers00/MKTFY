@@ -8,10 +8,17 @@ import variabled from "../../../../styles/_variabled.scss";
 import { useValidator } from "../../../../hooks/useValidator";
 // constants for regex, validationMessage
 import { regex, validationMessage } from "../../../../constants";
+// useDispatch for sending action to redux
+import { useDispatch } from "react-redux";
+// redux actions
+import { createContactUs } from "../../../../store/actions/contactUs";
 
 /** contact us content component */
 const ContactUsContent = () => {
   /** initialize */
+  // redux
+  const dispatch = useDispatch();
+  /** data */
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);
@@ -31,20 +38,26 @@ const ContactUsContent = () => {
     onChange: onEmailChange,
     validationMessage: emailValidationMessage,
   } = useValidator("", "", validation);
-  // contact us from for submit
-  const contactUsForm = {
-    name,
-    email,
-    message,
+  // request options
+  const requestOptions = {
+    url: "/api/help/contactUs",
+    params: {
+      name,
+      email,
+      message,
+    },
   };
+
   /**functions */
   /** submit function */
   const onClickSubmit = async (event) => {
     event.preventDefault();
-    console.log("#contactUsForm:", contactUsForm);
-    setName("");
-    setMessage("");
-    onEmailChange("");
+    const response = await dispatch(createContactUs(requestOptions));
+    if (response.data.code === "SUCCESS") {
+      setName("");
+      setMessage("");
+      onEmailChange("");
+    }
   };
 
   return (
