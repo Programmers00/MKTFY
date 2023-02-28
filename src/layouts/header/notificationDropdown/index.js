@@ -11,8 +11,8 @@ import {
 // user name from redux
 import { useDispatch } from "react-redux";
 import {
-  getNotifications,
-  readNotification,
+  fetchNotifications,
+  updateNotification,
 } from "../../../store/actions/notifications";
 
 const WelcomeDropdown = () => {
@@ -29,34 +29,19 @@ const WelcomeDropdown = () => {
   // notification id
   const [clickedNotificationId, setClickedNotificationId] = useState("");
 
-  /** request options */
-  // get notifications
-  const getNotificationsOptions = {
-    url: "/api/user/notifications",
-    params: {},
-  };
-  // read notificaion
-  const readNotificationOptions = {
-    url: "/api/user/notifications",
-    params: { id: clickedNotificationId },
-    method: "put",
-  };
+  /** params */
+  const getParams = {}; // params for get notification
+  const putParams = { id: clickedNotificationId }; // params for put notification
 
-  /** useEffect */
-  /** when mounting, closing dropdown => works(call api)*/
+  /** get data: when mounting, closing dropdown => works(call api)*/
   useEffect(() => {
     const getData = async () => {
-      try {
-        /** redux request api*/
-        // request notifications
-        const responseNotifications = await dispatch(
-          getNotifications(getNotificationsOptions)
-        );
-
-        /** set response data*/
-        // set notifications
-        setNotifications(responseNotifications.data.notifications);
-      } catch (error) {}
+      /** api: get notification */
+      const response = await dispatch(fetchNotifications(getParams));
+      /** if success, set data */
+      if (response.data.code === "SUCCESS") {
+        setNotifications(response.data.notifications);
+      }
     };
     getData();
     // when clicked notification, close and requset notifications!
@@ -72,15 +57,14 @@ const WelcomeDropdown = () => {
   /** functions */
   /** click notification, triger for close dropdown */
   const onReadNotification = async (notificationId) => {
+    // set clicked notification id for putParams
     setClickedNotificationId(notificationId);
-    try {
-      /** redux request api*/
-      // request read notification
-      const responseReadNotification = await dispatch(
-        readNotification(readNotificationOptions)
-      );
-      console.log("#responseReadNotification", responseReadNotification.data);
-    } catch (error) {}
+
+    /** api: put notificaion, when read */
+    const response = await dispatch(updateNotification(putParams));
+    if (response.data.code === "SUCCESS") {
+      console.log("#Success update notification");
+    }
     // always make new value => trigger ==> request notifications trigger
     setCloseTrigger(new Date());
   };

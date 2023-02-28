@@ -1,26 +1,34 @@
 import {
-  getNotificationsData,
+  getNotifications,
   putNotification,
 } from "../../api/header/notificationDropdown";
 
-/** actions : get notifications data */
-export const getNotifications = (options) => {
+/** action : get notifications */
+// options
+const getOptions = {
+  url: "/api/user/notifications",
+};
+export const fetchNotifications = (params) => {
   return async () => {
     try {
-      return await getNotificationsData(options);
+      return await getNotifications({ ...getOptions, params });
     } catch (error) {
-      console.log("Error");
+      console.log("#Error getNotifications:", error);
     }
   };
 };
 
-/** actions : read notification */
-export const readNotification = (options) => {
+/** action : put notification */
+const putOptions = {
+  url: "/api/user/notifications",
+  method: "put",
+};
+export const updateNotification = (params) => {
   return async () => {
     try {
-      return await putNotification(options);
+      return await putNotification({ ...putOptions, params });
     } catch (error) {
-      console.log("Error");
+      console.log("#Error putNotification", error);
     }
   };
 };
