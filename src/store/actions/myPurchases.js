@@ -1,12 +1,16 @@
 import { getMyPurchases } from "../../api/userInfo/myPurchases";
 
-/** actions : get account information data */
-export const fetchMyPurchases = (options) => {
+/** action : get my purchase */
+// options
+const options = {
+  url: "/api/user/myPurchases",
+};
+export const fetchMyPurchases = (params) => {
   return async () => {
     try {
-      return await getMyPurchases(options);
+      return await getMyPurchases({ ...options, params });
     } catch (error) {
-      console.log("Error");
+      console.log("#Error getMyPurchases:", error);
     }
   };
 };

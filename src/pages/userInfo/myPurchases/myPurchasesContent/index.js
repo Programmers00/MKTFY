@@ -5,7 +5,7 @@ import styles from "./index.module.scss";
 // components
 import HorizontalItemCard from "../../../../components/horizontalItemCard";
 // useDispatch for sending action to redux
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchMyPurchases } from "../../../../store/actions/myPurchases";
 
 /** my purchases content component */
@@ -16,21 +16,18 @@ const MyPurchasesContent = () => {
   /** data */
   const [items, setItems] = useState([]);
 
-  // request data options
-  const fetchMyPurchasesOptions = {
-    url: "/api/user/myPurchases",
-    params: {},
-  };
-  /** fetch data from api */
+  /** params */
+  const params = {};
+  /** get data from api*/
   useEffect(() => {
     const getData = async () => {
-      try {
-        const response = await dispatch(
-          fetchMyPurchases(fetchMyPurchasesOptions)
-        );
+      // fetch my purchases
+      const response = await dispatch(fetchMyPurchases(params));
+      // if success, set data
+      if (response.data.code === "SUCCESS") {
         const { items } = response.data;
         setItems(items);
-      } catch (error) {}
+      }
     };
     getData();
   }, []);
