@@ -49,12 +49,12 @@ const ChangePasswordContent = () => {
   const onClickSubmit = async (event) => {
     event.preventDefault();
     // seding a code to email form
-    webAuth.changePassword(changePasswordForm, (err, res) => {
-      if (err) {
-        console.error("##err", err);
-      } else {
-        console.log("res", res);
+    webAuth.changePassword(changePasswordForm, (error, response) => {
+      if (response) {
+        console.log("#Success:", response);
         setShowItem(1);
+      } else {
+        console.log("#Fail:", error);
       }
     });
   };
