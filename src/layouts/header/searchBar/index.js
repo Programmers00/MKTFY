@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // scss
 import styles from "./index.module.scss";
 // components
@@ -7,7 +7,6 @@ import Search from "./search"; //dependent
 
 /** search bar component in header */
 const SearchBar = () => {
-  const [closeTrigger, setCloseTrigger] = useState(0);
   /** data */
   // categories for Select component
   const categories = [
@@ -21,17 +20,23 @@ const SearchBar = () => {
   const cities = [
     { value: "calgary", label: "Calgary" },
     { value: "brooks", label: "Brooks" },
-    { value: "camrose", label: "camrose" },
+    { value: "camrose", label: "Camrose" },
   ];
-  /** initialize  */
-  const [category, setCategory] = useState(categories[0].value);
+
+  // user prefer city
+  const userCity = localStorage.getItem("userCity");
+  const [category, setCategory] = useState(categories[0]);
   const [searchWord, setSearchWord] = useState("");
-  const [city, setCity] = useState(cities[0].value);
+  const [city, setCity] = useState(
+    userCity ? cities.find((item) => item.value === userCity) : cities[0]
+  );
+  const [closeTrigger, setCloseTrigger] = useState(0);
+
   /** data form */
   const searchForm = {
-    category,
+    category: category.value,
     searchWord,
-    city,
+    city: city.value,
   };
   /** funcions */
   /** submit form */
@@ -68,6 +73,7 @@ const SearchBar = () => {
           // isIcon
           options={categories}
           onChange={onChangeCategory}
+          initSelectedValue={category}
         />
         <span className={styles.borderSeperator}></span>
         <Search
@@ -84,6 +90,7 @@ const SearchBar = () => {
           isLeftArrowIcon
           options={cities}
           onChange={onChangeCity}
+          initSelectedValue={city}
         />
       </form>
     </div>

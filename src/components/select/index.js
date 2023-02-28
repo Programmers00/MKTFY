@@ -11,6 +11,7 @@ const Select = ({
   isMulti,
   isSearchable,
   onChange,
+  initSelectedValue,
   isLeftArrowIcon,
   isRightArrowIcon,
   closeTrigger,
@@ -18,7 +19,9 @@ const Select = ({
   /** data */
   const [isShowMenu, setIsShowMenu] = useState(false);
   // default select value is first value in list
-  const [selectedValue, setSelectedValue] = useState(isMulti ? [] : options[0]);
+  const [selectedValue, setSelectedValue] = useState(
+    isMulti ? [] : initSelectedValue
+  );
   const [searchValue, setSearchValue] = useState("");
   /** refs */
   const searchRef = useRef();
