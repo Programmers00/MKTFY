@@ -1,8 +1,5 @@
-import { useEffect, useState, useRef } from "react";
 // scss
 import styles from "./index.module.scss";
-// scss style variabled for color red
-import variabled from "../../../../styles/_variabled.scss";
 
 const CheckoutContent = ({ data }) => {
   /** data */
