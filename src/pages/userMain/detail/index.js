@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom";
 // redux dispatch
 import { useDispatch } from "react-redux";
 // redux actions
-import { getDetail } from "../../../store/actions/detail";
+import { fetchDetail } from "../../../store/actions/detail";
 /** detail page */
 const Detail = () => {
   /** initialize */
@@ -17,16 +17,14 @@ const Detail = () => {
   const dispatch = useDispatch();
   const [data, setData] = useState(null);
 
-  // request data options
-  const requestOptions = {
-    url: "/detail", // baseUrl("http://localhost:3000/") + url("/detail") => "http://localhost:3000/detail"
-    params: { id: state.id },
-    method: "get",
+  /** params */
+  const params = {
+    id: state.id,
   };
   /** get data from api */
   useEffect(() => {
     const getData = async () => {
-      const response = await dispatch(getDetail(requestOptions));
+      const response = await dispatch(fetchDetail(params));
       if (response.data.code === "SUCCESS") {
         setData(response.data.item);
       }

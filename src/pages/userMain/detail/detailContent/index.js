@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 // redux dispatch
 import { useDispatch } from "react-redux";
 // redux actions
-import { requestCheckout } from "../../../../store/actions/detail";
+import { createCheckout } from "../../../../store/actions/detail";
 // svg icon
 import {
   LabelIcon,
@@ -79,22 +79,17 @@ const DetailContent = ({ data }) => {
     }
   };
 
-  // request data options for api
-  const requestOptions = {
-    url: "/checkout", // baseUrl("http://localhost:3000/") + url("/checkout") => "http://localhost:3000/checkout"
-    params: { id: data.id },
-    method: "post",
+  /** params */
+  const params = {
+    id: data.id,
   };
   /** functions */
-  // request chekout redux api
   const onSubmit = async () => {
-    try {
-      const response = await dispacth(requestCheckout(requestOptions));
-      if (response.data.code === "SUCCESS") {
-        navigate("/checkout", { state: { data } });
-      }
-    } catch (error) {
-      console.log("#error", error);
+    /** api */
+    const response = await dispacth(createCheckout(params));
+    // if success, go to checkout
+    if (response.data.code === "SUCCESS") {
+      navigate("/checkout", { state: { data } });
     }
   };
 

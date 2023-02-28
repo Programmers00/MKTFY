@@ -1,23 +1,32 @@
-// get detail data api
-import { getDetailData, postCheckout } from "../../api/userMain/detail";
-/** actions : get detail data, depending on params */
-/** get detail action*/
-export const getDetail = (requestOptions) => {
+import { getDetail, postCheckout } from "../../api/userMain/detail"; // api
+
+/** actions : get detail  */
+// options
+const detailOptions = {
+  url: "/detail",
+};
+export const fetchDetail = (params) => {
   return async () => {
     try {
-      return await getDetailData(requestOptions);
+      return await getDetail({ ...detailOptions, params });
     } catch (error) {
-      console.log("Error");
+      console.log("#Error fetchDetail:", error);
     }
   };
 };
+
 /** post checkout action */
-export const requestCheckout = (requestOptions) => {
+// options
+const checkoutOptions = {
+  url: "/checkout",
+  method: "post",
+};
+export const createCheckout = (params) => {
   return async () => {
     try {
-      return await postCheckout(requestOptions);
+      return await postCheckout({ ...checkoutOptions, params });
     } catch (error) {
-      console.log("Error");
+      console.log("#Error postCheckout:", error);
     }
   };
 };

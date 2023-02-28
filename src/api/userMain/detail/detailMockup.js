@@ -1,5 +1,5 @@
-/** detail mockup */
-export const detailMockup = (options) => {
+/** get detail mockup */
+export const getDetailMockup = (options) => {
   // success
   if (options.params.id === "cat")
     return {
@@ -134,8 +134,8 @@ export const detailMockup = (options) => {
   };
 };
 
-/** checkout mockup */
-export const checkoutMockup = (options) => {
+/** post checkout mockup */
+export const postCheckoutMockup = (options) => {
   // success
   if (options)
     return {
