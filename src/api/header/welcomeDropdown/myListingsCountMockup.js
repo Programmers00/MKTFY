@@ -1,5 +1,5 @@
-/** my lisings count mockup */
-export const myListingsCountMockup = (options) => {
+/** get my lisings count mockup */
+export const getMyListingsCountMockup = (options) => {
   // success
   if (options)
     // success
@@ -9,7 +9,7 @@ export const myListingsCountMockup = (options) => {
         code: "SUCCESS",
         status: 200,
         message: "Get My Listings Count Success",
-        myListingsCount: 3,
+        myListingsCount: 4,
       },
       error: null,
     };

@@ -1,12 +1,17 @@
-import { getMyListingsCountData } from "../../api/header/welcomeDropdown";
+import { getMyListingsCount } from "../../api/header/welcomeDropdown";
 
-/** actions : get my listings count data */
-export const getMyListingsCount = (options) => {
+/** action : get my listings count */
+// options
+const options = {
+  url: "/api/user/myListingsCount",
+  params: {},
+};
+export const fetchMyListingsCount = (params) => {
   return async () => {
     try {
-      return await getMyListingsCountData(options);
+      return await getMyListingsCount({ ...options, params });
     } catch (error) {
-      console.log("Error");
+      console.log("#Error getMyListingsCount:", error);
     }
   };
 };

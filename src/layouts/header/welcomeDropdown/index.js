@@ -8,7 +8,7 @@ import Dropdown from "../../../components/dropdown";
 import { SingOutIcon } from "../../../assets/svgIcons";
 // user name from redux
 import { useDispatch } from "react-redux";
-import { getMyListingsCount } from "../../../store/actions/welcomeDropdown";
+import { fetchMyListingsCount } from "../../../store/actions/welcomeDropdown";
 
 const WelcomeDropdown = ({ userName }) => {
   /** initialize */
@@ -36,26 +36,16 @@ const WelcomeDropdown = ({ userName }) => {
     { title: "Contact us", url: "/contactUs" },
   ];
 
-  /** request options */
-  // get my listings count
-  const getMyListingsCountOptions = {
-    url: "/api/user/myListingsCount",
-    params: {},
-  };
-
+  /** options */
+  const params = {};
+  /** get data */
   useEffect(() => {
     const getData = async () => {
-      try {
-        /** redux request api*/
-        // request my listings count
-        const responseMyListingsCount = await dispatch(
-          getMyListingsCount(getMyListingsCountOptions)
-        );
-
-        /** set response data*/
-        // set my listings
-        setMyListingsCount(responseMyListingsCount.data.myListingsCount);
-      } catch (error) {}
+      /** api: get my listing count */
+      const response = await dispatch(fetchMyListingsCount(params));
+      if (response.data.code === "SUCCESS") {
+        setMyListingsCount(response.data.myListingsCount);
+      }
     };
     getData();
   }, []);
