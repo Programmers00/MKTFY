@@ -1,5 +1,5 @@
-/** listings mockup */
-export const listingsMockup = (options) => {
+/** get listings mockup */
+export const getListingsMockup = (options) => {
   // success
   if (options.params.category === "")
     return {

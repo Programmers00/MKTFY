@@ -1,4 +1,4 @@
-import { listingsMockup } from "./dealsMockup";
+import { getListingsMockup } from "./dealsMockup";
 // process api for request api
 import { processApi } from "../../../../utils/processApi.js";
 // global variable: envs.isOnlyMockup for project mockup test
@@ -11,6 +11,6 @@ const isOnlyMockup = envs.isOnlyMockup;
 export const getListings = async (options) => {
   let isTest = true; // local variable Test => true
   return isOnlyMockup || isTest
-    ? await listingsMockup(options)
+    ? await getListingsMockup(options)
     : await processApi(options);
 };
