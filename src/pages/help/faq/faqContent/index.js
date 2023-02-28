@@ -5,7 +5,7 @@ import styles from "./index.module.scss";
 // svg icons
 import { DropdownArrowIcon } from "../../../../assets/svgIcons";
 // useDispatch for sending action to redux
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchFaq } from "../../../../store/actions/faq";
 
 const FaqContent = () => {
@@ -18,21 +18,15 @@ const FaqContent = () => {
   // selected item defalt data[0]
   const [selectedItem, setSelectedItem] = useState();
 
-  /** request data options */
-  // active options
-  const fetchFaqOptions = {
-    url: "/api/user/faq",
-    params: {},
-  };
-
-  /** fetch data from api */
+  /** get data from api */
   useEffect(() => {
     const getData = async () => {
-      // request fetch
-      const response = await dispatch(fetchFaq(fetchFaqOptions));
-      console.log("##response", response);
+      /** api */
+      const response = await dispatch(fetchFaq());
+      // if success, set data
       if (response.data.code === "SUCCESS") {
         setItems(response.data.items);
+        // default selected item
         setSelectedItem(response.data.items[0]);
       }
     };
