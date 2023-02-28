@@ -3,22 +3,34 @@ import {
   putAccountInformation,
 } from "../../api/userInfo/accountInformation";
 
-/** actions : get account information data */
-export const fetchAccountInformation = (options) => {
+/** action : get account information */
+// options
+const getOptions = {
+  url: "/api/accountInformation",
+};
+export const fetchAccountInformation = (params) => {
   return async () => {
     try {
-      return await getAccountInformation(options);
+      return await getAccountInformation({
+        ...getOptions,
+        params,
+      });
     } catch (error) {
       console.log("Error");
     }
   };
 };
 
-/** actions: update account information */
-export const updateAccountInformation = (options) => {
+/** action: update account information */
+// options
+const updateOptions = {
+  url: "/api/accountInformation",
+  method: "post",
+};
+export const updateAccountInformation = (params) => {
   return async () => {
     try {
-      return await putAccountInformation(options);
+      return await putAccountInformation({ ...updateOptions, params });
     } catch (error) {
       console.log("Error");
     }

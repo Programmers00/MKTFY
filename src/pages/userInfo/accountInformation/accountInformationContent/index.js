@@ -197,24 +197,17 @@ const AccountInformation = () => {
     country,
   };
 
-  // request data options
-  const fetchAccountInformationOptions = {
-    url: "/api/accountInformation",
-    params: {},
-  };
+  /** options */
+  const getParams = {};
   // update account information options
-  const updateAccountInformationOptions = {
-    url: "/api/accountInformation",
-    params: signupForm,
-    method: "post",
-  };
-  /** fetch data from api */
+  const updateParams = signupForm;
+  /** get data from api */
   useEffect(() => {
     const getData = async () => {
-      try {
-        const response = await dispatch(
-          fetchAccountInformation(fetchAccountInformationOptions)
-        );
+      /** api: fetch account information */
+      const response = await dispatch(fetchAccountInformation(getParams));
+      // if success, set data
+      if (response.data.code === "SUCCESS") {
         const { accountInformation } = response.data;
         onFirstNameChange(accountInformation.firstName);
         onLastNameChange(accountInformation.lastName);
@@ -224,22 +217,19 @@ const AccountInformation = () => {
         onCityChange(accountInformation.city);
         onProvinceChange(accountInformation.province);
         onCountryChange(accountInformation.country);
-      } catch (error) {}
+      }
     };
     getData();
   }, []);
 
   /** functions */
-  /** click submit button => save sinup form in redux and go  page*/
+  /** click submit button => save sinup form in redux and go userMain page*/
   const onClickSubmit = async (event) => {
     event.preventDefault();
-    // save sign up form in redux
-    const response = await dispatch(
-      updateAccountInformation(updateAccountInformationOptions)
-    );
+    /** api: update account information */
+    const response = await dispatch(updateAccountInformation(updateParams));
     if (response.data.code === "SUCCESS") {
-      console.log("#success", response);
-      // success page?
+      // need success page
       navigate("/");
     }
   };
