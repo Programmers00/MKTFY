@@ -28,7 +28,6 @@ const Detail = () => {
     const getData = async () => {
       const response = await dispatch(getDetail(requestOptions));
       if (response.data.code === "SUCCESS") {
-        console.log("response", response.data.item);
         setData(response.data.item);
       }
     };
