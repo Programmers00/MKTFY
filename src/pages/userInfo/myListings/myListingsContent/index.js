@@ -7,16 +7,25 @@ import HorizontalItemCard from "../../../../components/horizontalItemCard";
 // useDispatch for sending action to redux
 import { useDispatch } from "react-redux";
 import { fetchMyListings } from "../../../../store/actions/myListings";
+// navigate
+import { useNavigate } from "react-router-dom";
 
 /** my listings content component */
 const MyListingsContent = () => {
   /** initialize*/
   // redux
   const dispatch = useDispatch();
+  // navigate
+  const navigate = useNavigate();
   /** data */
   const [showItem, setShowItem] = useState("active");
   const [activeItems, setActiveItems] = useState([]);
   const [soldItems, setSoldItems] = useState([]);
+
+  /** functions */
+  const onClickItem = (item) => {
+    navigate("/product", { state: { id: item.id } });
+  };
 
   /** params */
   const activeParams = { status: "active" };
@@ -73,7 +82,13 @@ const MyListingsContent = () => {
       <div className={styles.contentBox}>
         {showItem === "active"
           ? activeItems.map((item, index) => {
-              return <HorizontalItemCard item={item} key={index} />;
+              return (
+                <HorizontalItemCard
+                  item={item}
+                  key={index}
+                  onClick={() => onClickItem(item)}
+                />
+              );
             })
           : soldItems.map((item, index) => {
               return <HorizontalItemCard item={item} key={index} />;
