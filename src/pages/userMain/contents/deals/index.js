@@ -6,56 +6,70 @@ import ContentCard from "../../../../components/contentCard";
 // redux stuff
 import { useDispatch } from "react-redux";
 // redux actions
-import { getDeals } from "../../../../store/actions/deals";
+import {
+  fetchDeals,
+  fetchCarsVehicles,
+  fetchFurniture,
+  fetchElectronics,
+  fetchRealEstate,
+} from "../../../../store/actions/deals";
 
 /** deals page */
 const Deals = () => {
+  /** initialze */
   const dispatch = useDispatch();
-  /** initialize */
+  /** data */
   const [deals, setDeals] = useState(null);
   const [carsVehicles, setCarsVehicles] = useState(null);
   const [furniture, setFurniture] = useState(null);
   const [electronics, setElectronics] = useState(null);
   const [realEstate, setRealEstate] = useState(null);
 
-  /** api options */
-  const requestDealsOptions = {
-    url: "/contents",
-    params: {},
+  /** params */
+  // user prefer city from localstorage
+  const userCity = localStorage.getItem("userCity");
+  // deals
+  const dealsParams = {
+    category: "",
+    city: userCity,
   };
-  const requestCarsVehiclesOptions = {
-    url: "/contents",
-    params: { id: "carsVehicles" },
+  // carsVehicles
+  const carsVehiclesParms = {
+    category: "carsVehicles",
+    city: userCity,
   };
-  const requestFurnitureOptions = {
-    url: "/contents",
-    params: { id: "furniture" },
+  // furniture
+  const furnitureParams = {
+    category: "furniture",
+    city: userCity,
   };
-  const requestElectronicsOptions = {
-    url: "/contents",
-    params: { id: "electronics" },
+  // electronics
+  const electronicsParms = {
+    category: "electronics",
+    city: userCity,
   };
-  const requestRealEstateOptions = {
-    url: "/contents",
-    params: { id: "realEstate" },
+  // realEstate
+  const realEstateParms = {
+    category: "realEstate",
+    city: userCity,
   };
   /** get datas from api */
   useEffect(() => {
     const getData = async () => {
       try {
-        /** redux request api*/
-        const responseDeals = await dispatch(getDeals(requestDealsOptions));
+        /** api*/
+        const responseDeals = await dispatch(fetchDeals(dealsParams));
         const responseCarsVehicles = await dispatch(
-          getDeals(requestCarsVehiclesOptions)
+          fetchCarsVehicles(carsVehiclesParms)
         );
         const responseFurniture = await dispatch(
-          getDeals(requestFurnitureOptions)
+          fetchFurniture(furnitureParams)
         );
         const responseElectronics = await dispatch(
-          getDeals(requestElectronicsOptions)
+          fetchElectronics(electronicsParms)
         );
         const responseRealEstate = await dispatch(
-          getDeals(requestRealEstateOptions)
+          fetchRealEstate(realEstateParms)
         );
         /** set response data*/
         setDeals(responseDeals.data);

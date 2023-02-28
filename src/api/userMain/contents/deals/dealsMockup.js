@@ -1,8 +1,7 @@
-/** deals mockup */
-export const dealsMockup = (options) => {
+/** listings mockup */
+export const listingsMockup = (options) => {
   // success
-  // if no params, deals
-  if (Object.keys(options.params).length === 0)
+  if (options.params.category === "")
     return {
       loading: false,
       data: {
@@ -10,73 +9,73 @@ export const dealsMockup = (options) => {
         title: "Deals",
         items: [
           {
-            id: "cat",
-            title: "Pearl The cat: Donut edtion",
-            img: "cat",
-            price: "500",
+            id: "cat1",
+            productName: "Pearl The cat: Donut edtion",
+            image: "cat",
+            price: "100",
           },
           {
             id: "cat2",
-            title: "Pearl The cat: Monster edtion",
-            img: "cat2",
-            price: "500",
+            productName: "Pearl The cat: Monster edtion",
+            image: "cat2",
+            price: "200",
           },
           {
             id: "cat3",
-            title: "Pearl The cat: Christmas edtion",
-            img: "cat3",
-            price: "500",
+            productName: "Pearl The cat: Christmas edtion",
+            image: "cat3",
+            price: "300",
           },
           {
             id: "cat4",
-            title: "Pearl The cat: Halloween edtion",
-            img: "cat4",
-            price: "500",
+            productName: "Pearl The cat: Halloween edtion",
+            image: "cat4",
+            price: "400",
           },
           {
             id: "cat5",
-            title:
+            productName:
               "Pearl The cat: Breakfast edtion Pearl The cat: Breakfast edtion",
-            img: "cat",
+            image: "cat",
             price: "500",
           },
           {
             id: "cat6",
-            title: "Pearl The cat: Donut edtion",
-            img: "cat",
-            price: "500",
+            productName: "Pearl The cat: Donut edtion",
+            image: "cat",
+            price: "600",
           },
           {
             id: "cat7",
-            title: "Pearl The cat: Monster edtion",
-            img: "cat2",
-            price: "500",
+            productName: "Pearl The cat: Monster edtion",
+            image: "cat2",
+            price: "700",
           },
           {
             id: "cat8",
-            title: "Pearl The cat: Christmas edtion",
-            img: "cat3",
-            price: "500",
+            productName: "Pearl The cat: Christmas edtion",
+            image: "cat3",
+            price: "800",
           },
           {
             id: "cat9",
-            title: "Pearl The cat: Halloween edtion",
-            img: "cat4",
-            price: "500",
+            productName: "Pearl The cat: Halloween edtion",
+            image: "cat4",
+            price: "900",
           },
           {
             id: "cat10",
-            title:
+            productName:
               "Pearl The cat: Breakfast edtion Pearl The cat: Breakfast edtion",
-            img: "cat",
-            price: "500",
+            image: "cat",
+            price: "1000",
           },
         ],
       },
       error: null,
     };
   // carsVehicles
-  else if (options.params.id === "carsVehicles") {
+  else if (options.params.category === "carsVehicles") {
     return {
       loading: false,
       data: {
@@ -85,33 +84,33 @@ export const dealsMockup = (options) => {
         items: [
           {
             id: "cat",
-            title: "Pearl The cat: Donut edtion",
-            img: "cat2",
+            productName: "Pearl The cat: Donut edtion",
+            image: "cat2",
             price: "500",
           },
           {
             id: "cat2",
-            title: "Pearl The cat: Monster edtion",
-            img: "cat2",
+            productName: "Pearl The cat: Monster edtion",
+            image: "cat2",
             price: "500",
           },
           {
             id: "cat3",
-            title: "Pearl The cat: Christmas edtion",
-            img: "cat2",
+            productName: "Pearl The cat: Christmas edtion",
+            image: "cat2",
             price: "500",
           },
           {
             id: "cat4",
-            title: "Pearl The cat: Halloween edtion",
-            img: "cat2",
+            productName: "Pearl The cat: Halloween edtion",
+            image: "cat2",
             price: "500",
           },
           {
             id: "cat5",
-            title:
+            productName:
               "Pearl The cat: Breakfast edtion Pearl The cat: Breakfast edtion",
-            img: "cat2",
+            image: "cat2",
             price: "500",
           },
         ],
@@ -120,7 +119,7 @@ export const dealsMockup = (options) => {
     };
   }
   // furniture
-  else if (options.params.id === "furniture")
+  else if (options.params.category === "furniture")
     return {
       loading: false,
       data: {
@@ -129,33 +128,33 @@ export const dealsMockup = (options) => {
         items: [
           {
             id: "cat",
-            title: "Pearl The cat: Donut edtion",
-            img: "cat3",
+            productName: "Pearl The cat: Donut edtion",
+            image: "cat3",
             price: "500",
           },
           {
             id: "cat2",
-            title: "Pearl The cat: Monster edtion",
-            img: "cat3",
+            productName: "Pearl The cat: Monster edtion",
+            image: "cat3",
             price: "500",
           },
           {
             id: "cat3",
-            title: "Pearl The cat: Christmas edtion",
-            img: "cat3",
+            productName: "Pearl The cat: Christmas edtion",
+            image: "cat3",
             price: "500",
           },
           {
             id: "cat4",
-            title: "Pearl The cat: Halloween edtion",
-            img: "cat3",
+            productName: "Pearl The cat: Halloween edtion",
+            image: "cat3",
             price: "500",
           },
           {
             id: "cat5",
-            title:
+            productName:
               "Pearl The cat: Breakfast edtion Pearl The cat: Breakfast edtion",
-            img: "cat3",
+            image: "cat3",
             price: "500",
           },
         ],
@@ -163,7 +162,7 @@ export const dealsMockup = (options) => {
       error: null,
     };
   // electronics
-  else if (options.params.id === "electronics")
+  else if (options.params.category === "electronics")
     return {
       loading: false,
       data: {
@@ -172,33 +171,33 @@ export const dealsMockup = (options) => {
         items: [
           {
             id: "cat",
-            title: "Pearl The cat: Donut edtion",
-            img: "cat4",
+            productName: "Pearl The cat: Donut edtion",
+            image: "cat4",
             price: "500",
           },
           {
             id: "cat2",
-            title: "Pearl The cat: Monster edtion",
-            img: "cat4",
+            productName: "Pearl The cat: Monster edtion",
+            image: "cat4",
             price: "500",
           },
           {
             id: "cat3",
-            title: "Pearl The cat: Christmas edtion",
-            img: "cat4",
+            productName: "Pearl The cat: Christmas edtion",
+            image: "cat4",
             price: "500",
           },
           {
             id: "cat4",
-            title: "Pearl The cat: Halloween edtion",
-            img: "cat4",
+            productName: "Pearl The cat: Halloween edtion",
+            image: "cat4",
             price: "500",
           },
           {
             id: "cat5",
-            title:
+            productName:
               "Pearl The cat: Breakfast edtion Pearl The cat: Breakfast edtion",
-            img: "cat4",
+            image: "cat4",
             price: "500",
           },
         ],
@@ -206,7 +205,7 @@ export const dealsMockup = (options) => {
       error: null,
     };
   // realEstate
-  else if (options.params.id === "realEstate")
+  else if (options.params.category === "realEstate")
     return {
       loading: false,
       data: {
@@ -215,33 +214,33 @@ export const dealsMockup = (options) => {
         items: [
           {
             id: "cat",
-            title: "Pearl The cat: Donut edtion",
-            img: "cat",
+            productName: "Pearl The cat: Donut edtion",
+            image: "cat",
             price: "500",
           },
           {
             id: "cat2",
-            title: "Pearl The cat: Monster edtion",
-            img: "cat",
+            productName: "Pearl The cat: Monster edtion",
+            image: "cat",
             price: "500",
           },
           {
             id: "cat3",
-            title: "Pearl The cat: Christmas edtion",
-            img: "cat",
+            productName: "Pearl The cat: Christmas edtion",
+            image: "cat",
             price: "500",
           },
           {
             id: "cat4",
-            title: "Pearl The cat: Halloween edtion",
-            img: "cat",
+            productName: "Pearl The cat: Halloween edtion",
+            image: "cat",
             price: "500",
           },
           {
             id: "cat5",
-            title:
+            productName:
               "Pearl The cat: Breakfast edtion Pearl The cat: Breakfast edtion",
-            img: "cat",
+            image: "cat",
             price: "500",
           },
         ],

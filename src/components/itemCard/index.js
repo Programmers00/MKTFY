@@ -2,7 +2,7 @@
 import styles from "./index.module.scss";
 
 /** item card: parameter => item
- * item : {id, title, img, price}
+ * item : {id, productName, image, price}
  */
 const ItemCard = ({ item, navigate }) => {
   return (
@@ -13,12 +13,12 @@ const ItemCard = ({ item, navigate }) => {
         navigate("/detail", { state: { id: item.id } });
       }}
     >
-      <img src={require(`../../assets/images/${item.img}.png`)} alt="img" />
+      <img src={require(`../../assets/images/${item.image}.png`)} alt="img" />
       <div className={styles.contentBox}>
         <div className={styles.itemTitle}>
-          {item.title.length < 50
-            ? item.title
-            : `${item.title.slice(0, 49)}...`}
+          {item.productName.length < 50
+            ? item.productName
+            : `${item.productName.slice(0, 49)}...`}
         </div>
         <div className={styles.itemPrice}>{`$${item.price}`}</div>
       </div>
