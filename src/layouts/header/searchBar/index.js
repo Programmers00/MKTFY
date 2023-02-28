@@ -54,7 +54,10 @@ const SearchBar = () => {
   /** change city value and trigger to close select */
   const onChangeCity = (event) => {
     if (event.value === city) return;
+    // params
     setCity(event.value);
+    // local storage
+    localStorage.setItem("userCity", event.value);
     onCloseTrigger();
   };
   /** trigger for close select */
