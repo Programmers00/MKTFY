@@ -5,7 +5,7 @@ import styles from "./index.module.scss";
 // components
 import HorizontalItemCard from "../../../../components/horizontalItemCard";
 // useDispatch for sending action to redux
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchMyListings } from "../../../../store/actions/myListings";
 
 /** my listings content component */
@@ -14,35 +14,28 @@ const MyListingsContent = () => {
   // redux
   const dispatch = useDispatch();
   /** data */
-  const [showItem, setShowItem] = useState("activeItems");
+  const [showItem, setShowItem] = useState("active");
   const [activeItems, setActiveItems] = useState([]);
   const [soldItems, setSoldItems] = useState([]);
 
-  /** request data options */
-  // active options
-  const fetchMyListingsActiveOptions = {
-    url: "/api/user/myListings",
-    params: { status: "active" },
-  };
+  /** params */
+  const activeParams = { status: "active" };
   // sold options
-  const fetchMyListingsSoldOptions = {
-    url: "/api/user/myListings",
-    params: { status: "sold" },
-  };
+  const soldParams = { status: "sold" };
   /** fetch data from api */
   useEffect(() => {
     const getData = async () => {
       try {
-        // request fetch
-        const responseActiveItems = await dispatch(
-          fetchMyListings(fetchMyListingsActiveOptions)
-        );
-        const responseSoldItems = await dispatch(
-          fetchMyListings(fetchMyListingsSoldOptions)
-        );
-        // set data
-        setActiveItems(responseActiveItems.data.items);
-        setSoldItems(responseSoldItems.data.items);
+        /** api */
+        const responseActive = await dispatch(fetchMyListings(activeParams));
+        const responseSold = await dispatch(fetchMyListings(soldParams));
+        /** set data */
+        if (responseActive.data.code === "SUCCESS") {
+          setActiveItems(responseActive.data.items);
+        }
+        if (responseSold.data.code === "SUCCESS") {
+          setSoldItems(responseSold.data.items);
+        }
       } catch (error) {}
     };
     getData();
@@ -54,10 +47,10 @@ const MyListingsContent = () => {
       <div className={styles.myListingsNavbar}>
         <li
           onClick={() => {
-            setShowItem("activeItems");
+            setShowItem("active");
           }}
           style={
-            showItem === "activeItems"
+            showItem === "active"
               ? { color: "purple", textDecoration: "underline 3px" }
               : {}
           }
@@ -66,10 +59,10 @@ const MyListingsContent = () => {
         </li>
         <li
           onClick={() => {
-            setShowItem("soldItems");
+            setShowItem("sold");
           }}
           style={
-            showItem === "soldItems"
+            showItem === "sold"
               ? { color: "purple", textDecoration: "underline 3px" }
               : {}
           }
@@ -78,7 +71,7 @@ const MyListingsContent = () => {
         </li>
       </div>
       <div className={styles.contentBox}>
-        {showItem === "activeItems"
+        {showItem === "active"
           ? activeItems.map((item, index) => {
               return <HorizontalItemCard item={item} key={index} />;
             })

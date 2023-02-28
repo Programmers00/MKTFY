@@ -1,12 +1,16 @@
 import { getMyListings } from "../../api/userInfo/myListings";
 
-/** actions : get my listings */
-export const fetchMyListings = (options) => {
+/** action : get my listings */
+// options
+const options = {
+  url: "/api/user/myListings",
+};
+export const fetchMyListings = (params) => {
   return async () => {
     try {
-      return await getMyListings(options);
+      return await getMyListings({ ...options, params });
     } catch (error) {
-      console.log("Error");
+      console.log("#Error getMyListings:", error);
     }
   };
 };
