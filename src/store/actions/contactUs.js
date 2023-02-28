@@ -1,13 +1,16 @@
 import { postContactUs } from "../../api/help/contactUs";
 
-/** actions : post contact us */
-// post contact us action
-export const createContactUs = (requestOptions) => {
+/** action : post contact us */
+// options
+const options = {
+  url: "/api/help/contactUs",
+};
+export const createContactUs = (params) => {
   return async () => {
     try {
-      return await postContactUs(requestOptions);
+      return await postContactUs({ ...options, params });
     } catch (error) {
-      console.log("Error");
+      console.log("#Error postContactUs:", error);
     }
   };
 };

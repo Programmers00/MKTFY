@@ -38,21 +38,21 @@ const ContactUsContent = () => {
     onChange: onEmailChange,
     validationMessage: emailValidationMessage,
   } = useValidator("", "", validation);
-  // request options
-  const requestOptions = {
-    url: "/api/help/contactUs",
-    params: {
-      name,
-      email,
-      message,
-    },
+
+  /** params */
+  const params = {
+    name,
+    email,
+    message,
   };
 
   /**functions */
   /** submit function */
   const onClickSubmit = async (event) => {
     event.preventDefault();
-    const response = await dispatch(createContactUs(requestOptions));
+    /** api: create contact us */
+    const response = await dispatch(createContactUs(params));
+    // if success, set default data
     if (response.data.code === "SUCCESS") {
       setName("");
       setMessage("");
