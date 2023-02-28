@@ -51,7 +51,9 @@ const Header = () => {
   return (
     <div className={styles.headerMainBox}>
       <div className={styles.headerContentBox}>
-        <div className={styles.logo}>MKTFY</div>
+        <div className={styles.logo} onClick={() => navigate("/")}>
+          MKTFY
+        </div>
         <SearchBar></SearchBar>
         <div className={styles.buttons}>
           <WelcomeDropdown userName={userName} />
