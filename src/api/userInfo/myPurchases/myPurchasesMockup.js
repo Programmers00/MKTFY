@@ -12,33 +12,33 @@ export const getMyPurchasesMockup = (options) => {
         items: [
           {
             id: "cat3",
-            title: "Pearl The cat: Christmas edtion",
-            img: "cat3",
+            productName: "Pearl The cat: Christmas edtion",
+            image: "cat3",
             price: "500",
             date: "September 07 2020",
             active: true,
           },
           {
             id: "cat4",
-            title: "Pearl The cat: Halloween edtion",
-            img: "cat4",
+            productName: "Pearl The cat: Halloween edtion",
+            image: "cat4",
             price: "500",
             date: "September 07 2020",
             active: true,
           },
           {
             id: "cat5",
-            title:
+            productName:
               "Pearl The cat: Breakfast edtion Pearl The cat: Breakfast edtion",
-            img: "cat",
+            image: "cat",
             price: "500",
             date: "September 07 2020",
             active: true,
           },
           {
             id: "cat6",
-            title: "Pearl The cat: Donut edtion",
-            img: "cat",
+            productName: "Pearl The cat: Donut edtion",
+            image: "cat",
             price: "500",
             date: "September 07 2020",
             active: true,
