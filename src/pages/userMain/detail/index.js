@@ -26,8 +26,11 @@ const Detail = () => {
   /** get data from api */
   useEffect(() => {
     const getData = async () => {
-      const responseData = await dispatch(getDetail(requestOptions));
-      setData(responseData.data);
+      const response = await dispatch(getDetail(requestOptions));
+      if (response.data.code === "SUCCESS") {
+        console.log("response", response.data.item);
+        setData(response.data.item);
+      }
     };
     getData();
   }, []);

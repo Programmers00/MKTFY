@@ -5,17 +5,22 @@ export const detailMockup = (options) => {
     return {
       loading: false,
       data: {
-        id: "cat",
-        images: ["cat"],
-        title: "Pearl The Cat: Toy edition",
-        price: "340.00",
-        status: "new",
-        description:
-          "The world's most beautiful cat. Pearl The Cat is a pretty cat who is grey with black stripes on top and spots on the belly. She likes catching flies and eating beef jerky as well as yogurt. This edition of Pearl The Cat includes toys for maximum Pearl enjoyment. (Batteries not included)",
-        sellerInfo: {
-          name: "Matt Smith",
-          contact: "+1 825-999-9999",
-          listingCount: 2,
+        code: "SUCCESS",
+        status: 200,
+        message: "Upload Images Success",
+        item: {
+          id: "cat",
+          images: ["cat"],
+          title: "Pearl The Cat: Toy edition",
+          price: "340.00",
+          status: "new",
+          description:
+            "The world's most beautiful cat. Pearl The Cat is a pretty cat who is grey with black stripes on top and spots on the belly. She likes catching flies and eating beef jerky as well as yogurt. This edition of Pearl The Cat includes toys for maximum Pearl enjoyment. (Batteries not included)",
+          sellerInfo: {
+            name: "Matt Smith",
+            contact: "+1 825-999-9999",
+            listingCount: 2,
+          },
         },
       },
       error: null,
@@ -24,17 +29,22 @@ export const detailMockup = (options) => {
     return {
       loading: false,
       data: {
-        id: "cat2",
-        images: ["cat", "cat2"],
-        title: "Pearl The Cat: Toy edition",
-        price: "340.00",
-        status: "new",
-        description:
-          "The world's most beautiful cat. Pearl The Cat is a pretty cat who is grey with black stripes on top and spots on the belly. She likes catching flies and eating beef jerky as well as yogurt. This edition of Pearl The Cat includes toys for maximum Pearl enjoyment. (Batteries not included)",
-        sellerInfo: {
-          name: "Matt Smith",
-          contact: "+1 825-999-9999",
-          listingCount: 2,
+        code: "SUCCESS",
+        status: 200,
+        message: "Upload Images Success",
+        item: {
+          id: "cat2",
+          images: ["cat2", "cat"],
+          title: "Pearl The Cat: Toy edition",
+          price: "340.00",
+          status: "new",
+          description:
+            "The world's most beautiful cat. Pearl The Cat is a pretty cat who is grey with black stripes on top and spots on the belly. She likes catching flies and eating beef jerky as well as yogurt. This edition of Pearl The Cat includes toys for maximum Pearl enjoyment. (Batteries not included)",
+          sellerInfo: {
+            name: "Matt Smith",
+            contact: "+1 825-999-9999",
+            listingCount: 2,
+          },
         },
       },
       error: null,
@@ -43,17 +53,22 @@ export const detailMockup = (options) => {
     return {
       loading: false,
       data: {
-        id: "cat3",
-        images: ["cat", "cat2", "cat3"],
-        title: "Pearl The Cat: Toy edition",
-        price: "340.00",
-        status: "new",
-        description:
-          "The world's most beautiful cat. Pearl The Cat is a pretty cat who is grey with black stripes on top and spots on the belly. She likes catching flies and eating beef jerky as well as yogurt. This edition of Pearl The Cat includes toys for maximum Pearl enjoyment. (Batteries not included)",
-        sellerInfo: {
-          name: "Matt Smith",
-          contact: "+1 825-999-9999",
-          listingCount: 2,
+        code: "SUCCESS",
+        status: 200,
+        message: "Upload Images Success",
+        item: {
+          id: "cat3",
+          images: ["cat", "cat2", "cat3"],
+          title: "Pearl The Cat: Toy edition",
+          price: "340.00",
+          status: "new",
+          description:
+            "The world's most beautiful cat. Pearl The Cat is a pretty cat who is grey with black stripes on top and spots on the belly. She likes catching flies and eating beef jerky as well as yogurt. This edition of Pearl The Cat includes toys for maximum Pearl enjoyment. (Batteries not included)",
+          sellerInfo: {
+            name: "Matt Smith",
+            contact: "+1 825-999-9999",
+            listingCount: 2,
+          },
         },
       },
       error: null,
@@ -62,17 +77,22 @@ export const detailMockup = (options) => {
     return {
       loading: false,
       data: {
-        id: "cat4",
-        images: ["cat", "cat2", "cat3", "cat4"],
-        title: "Pearl The Cat: Toy edition",
-        price: "340.00",
-        status: "new",
-        description:
-          "The world's most beautiful cat. Pearl The Cat is a pretty cat who is grey with black stripes on top and spots on the belly. She likes catching flies and eating beef jerky as well as yogurt. This edition of Pearl The Cat includes toys for maximum Pearl enjoyment. (Batteries not included)",
-        sellerInfo: {
-          name: "Matt Smith",
-          contact: "+1 825-999-9999",
-          listingCount: 2,
+        code: "SUCCESS",
+        status: 200,
+        message: "Upload Images Success",
+        item: {
+          id: "cat4",
+          images: ["cat", "cat2", "cat3", "cat4"],
+          title: "Pearl The Cat: Toy edition",
+          price: "340.00",
+          status: "new",
+          description:
+            "The world's most beautiful cat. Pearl The Cat is a pretty cat who is grey with black stripes on top and spots on the belly. She likes catching flies and eating beef jerky as well as yogurt. This edition of Pearl The Cat includes toys for maximum Pearl enjoyment. (Batteries not included)",
+          sellerInfo: {
+            name: "Matt Smith",
+            contact: "+1 825-999-9999",
+            listingCount: 2,
+          },
         },
       },
       error: null,
@@ -81,17 +101,22 @@ export const detailMockup = (options) => {
     return {
       loading: false,
       data: {
-        id: "cat5",
-        images: ["cat", "cat2", "cat3", "cat4", "cat"],
-        title: "Pearl The Cat: Toy edition",
-        price: "340.00",
-        status: "new",
-        description:
-          "The world's most beautiful cat. Pearl The Cat is a pretty cat who is grey with black stripes on top and spots on the belly. She likes catching flies and eating beef jerky as well as yogurt. This edition of Pearl The Cat includes toys for maximum Pearl enjoyment. (Batteries not included)",
-        sellerInfo: {
-          name: "Matt Smith",
-          contact: "+1 825-999-9999",
-          listingCount: 2,
+        code: "SUCCESS",
+        status: 200,
+        message: "Upload Images Success",
+        item: {
+          id: "cat5",
+          images: ["cat", "cat2", "cat3", "cat4", "cat"],
+          title: "Pearl The Cat: Toy edition",
+          price: "340.00",
+          status: "new",
+          description:
+            "The world's most beautiful cat. Pearl The Cat is a pretty cat who is grey with black stripes on top and spots on the belly. She likes catching flies and eating beef jerky as well as yogurt. This edition of Pearl The Cat includes toys for maximum Pearl enjoyment. (Batteries not included)",
+          sellerInfo: {
+            name: "Matt Smith",
+            contact: "+1 825-999-9999",
+            listingCount: 2,
+          },
         },
       },
       error: null,
