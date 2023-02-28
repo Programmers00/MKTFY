@@ -16,7 +16,7 @@ export const fetchAccountInformation = (params) => {
         params,
       });
     } catch (error) {
-      console.log("Error");
+      console.log("#Error getAccountInformation:", error);
     }
   };
 };
@@ -32,7 +32,7 @@ export const updateAccountInformation = (params) => {
     try {
       return await putAccountInformation({ ...updateOptions, params });
     } catch (error) {
-      console.log("Error");
+      console.log("#Error putAccountInformation:", error);
     }
   };
 };

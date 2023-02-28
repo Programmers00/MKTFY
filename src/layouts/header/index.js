@@ -27,29 +27,22 @@ const Header = () => {
   /** data */
   // welcome back user name
   const [userName, setUserName] = useState("");
-  /** request options */
-  // get account information options for user name
-  const getAccountInformationOptions = {
-    url: "/api/user/accountInformation",
-    params: {},
-  };
 
+  /** options */
+  // get account information options for user name
+  const params = {};
+
+  /** get data from api */
   useEffect(() => {
     const getData = async () => {
       try {
-        /** redux request api*/
-        // request account information for user name
-        const responseAccountInformation = await dispatch(
-          fetchAccountInformation(getAccountInformationOptions)
-        );
-
-        /** set response data*/
-        // set user name from account information
-        setUserName(
-          responseAccountInformation.data.accountInformation.firstName +
-            " " +
-            responseAccountInformation.data.accountInformation.lastName
-        );
+        /** api */
+        const response = await dispatch(fetchAccountInformation(params));
+        /** if success, set data */
+        if (response.data.code === "SUCCESS") {
+          const { firstName, lastName } = response.data.accountInformation;
+          setUserName(firstName + " " + lastName);
+        }
       } catch (error) {}
     };
     getData();
