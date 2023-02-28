@@ -1,5 +1,5 @@
 // get faq data api
-import { getFaq } from "../../api/userMain/faq";
+import { getFaq } from "../../api/help/faq";
 /** actions : get faq data */
 /** get faq action*/
 export const fetchFaq = (options) => {
