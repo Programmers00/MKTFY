@@ -9,6 +9,7 @@ import {
   electronics,
   realEstate,
 } from "./deals";
+import search from "./search";
 export {
   auth,
   signup,
@@ -19,4 +20,5 @@ export {
   furniture,
   electronics,
   realEstate,
+  search,
 };

@@ -1,5 +1,8 @@
 /** All redux, react-redux stuff */
 import { createStore, combineReducers, applyMiddleware } from "redux";
+
+import { persistStore, persistReducer } from "redux-persist";
+import storageSession from "redux-persist/lib/storage/session";
 import {
   auth,
   signup,
@@ -10,11 +13,15 @@ import {
   furniture,
   electronics,
   realEstate,
+  search,
 } from "./reducers";
 import thunk from "redux-thunk";
 
-const middlewares = [thunk];
-
+const storageConfig = {
+  key: "root",
+  storage: storageSession,
+  blacklist: [],
+};
 const rootReducer = combineReducers({
   auth,
   signup,
@@ -25,6 +32,14 @@ const rootReducer = combineReducers({
   furniture,
   electronics,
   realEstate,
+  search,
 });
+const middlewares = [thunk];
 
-export default createStore(rootReducer, applyMiddleware(...middlewares));
+let store = applyMiddleware(...middlewares)(createStore)(
+  persistReducer(storageConfig, rootReducer)
+);
+
+export const persistor = persistStore(store);
+// persistor.purge()
+export default store;
