@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 // actions
 import { fetchCarsVehicles } from "../../../../store/actions/deals";
 
-/** deals page */
+/** carsVehicles page */
 const CarsVehicles = () => {
   /** initialze */
   const dispatch = useDispatch();

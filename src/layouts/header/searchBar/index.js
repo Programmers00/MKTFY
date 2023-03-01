@@ -7,7 +7,7 @@ import Search from "./search"; //dependent
 // navigate
 import { useNavigate } from "react-router-dom";
 // redux
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // redux actions
 import {
   fetchDeals,
@@ -16,6 +16,8 @@ import {
   fetchElectronics,
   fetchRealEstate,
 } from "../../../store/actions/deals";
+
+import { setSearchParams } from "../../../store/actions/search";
 
 /** search bar component in header */
 const SearchBar = () => {
@@ -49,13 +51,28 @@ const SearchBar = () => {
   };
   // user prefer city from local storage
   const userCity = localStorage.getItem("userCity");
+
+  const currentParams = useSelector((state) => {
+    return state.search.params;
+  });
+
   // category
-  const [category, setCategory] = useState(categories[0]);
+  const [category, setCategory] = useState(
+    currentParams.category !== ""
+      ? categories.find((item) => item.value === currentParams.category)
+      : categories[0]
+  );
   // search
-  const [searchWord, setSearchWord] = useState("");
+  const [searchWord, setSearchWord] = useState(
+    currentParams.searchWord !== "" ? currentParams.searchWord : ""
+  );
   // city: if local sotrage has userCity? set userCity, not? set cities[0]
   const [city, setCity] = useState(
-    userCity ? cities.find((item) => item.value === userCity) : cities[0]
+    currentParams.city !== ""
+      ? cities.find((item) => item.value === currentParams.city)
+      : userCity
+      ? cities.find((item) => item.value === userCity)
+      : cities[0]
   );
   // trigger to close
   const [closeTrigger, setCloseTrigger] = useState(0);
@@ -66,10 +83,12 @@ const SearchBar = () => {
     searchWord,
     city: city.value,
   };
+
   /** funcions */
   /** submit form */
   const onSubmit = (event) => {
     event.preventDefault();
+    dispatch(setSearchParams(params));
     // trim: remove whitespace from both ends
     if (searchWord.trim().length === 0) return;
     const path = categoryPaths[params.category] || "/";
