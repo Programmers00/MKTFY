@@ -4,9 +4,26 @@ import styles from "./index.module.scss";
 // components
 import Select from "../../../components/select"; //common
 import Search from "./search"; //dependent
+// navigate
+import { useNavigate } from "react-router-dom";
+// redux
+import { useDispatch } from "react-redux";
+// redux actions
+import {
+  fetchDeals,
+  fetchCarsVehicles,
+  fetchFurniture,
+  fetchElectronics,
+  fetchRealEstate,
+} from "../../../store/actions/deals";
 
 /** search bar component in header */
 const SearchBar = () => {
+  /** initiailize */
+  // redux dispatch
+  const dispatch = useDispatch();
+  // navigate
+  const navigate = useNavigate();
   /** data */
   // categories for Select component
   const categories = [
@@ -22,18 +39,29 @@ const SearchBar = () => {
     { value: "brooks", label: "Brooks" },
     { value: "camrose", label: "Camrose" },
   ];
-
-  // user prefer city
+  // navigate path
+  const categoryPaths = {
+    all: "/",
+    carsVehicles: "/carsVehicles",
+    furniture: "/furniture",
+    electronics: "/electronics",
+    realEstate: "/realEstate",
+  };
+  // user prefer city from local storage
   const userCity = localStorage.getItem("userCity");
+  // category
   const [category, setCategory] = useState(categories[0]);
+  // search
   const [searchWord, setSearchWord] = useState("");
+  // city: if local sotrage has userCity? set userCity, not? set cities[0]
   const [city, setCity] = useState(
     userCity ? cities.find((item) => item.value === userCity) : cities[0]
   );
+  // trigger to close
   const [closeTrigger, setCloseTrigger] = useState(0);
 
   /** data form */
-  const searchForm = {
+  const params = {
     category: category.value,
     searchWord,
     city: city.value,
@@ -42,20 +70,45 @@ const SearchBar = () => {
   /** submit form */
   const onSubmit = (event) => {
     event.preventDefault();
-    if (searchWord.length === 0) return;
-    console.log("##send api", searchForm);
+    // trim: remove whitespace from both ends
+    if (searchWord.trim().length === 0) return;
+    const path = categoryPaths[params.category] || "/";
+    navigate(path);
+    switch (params.category) {
+      case "deals":
+        dispatch(fetchDeals(params));
+        dispatch(fetchCarsVehicles(params));
+        dispatch(fetchFurniture(params));
+        dispatch(fetchElectronics(params));
+        dispatch(fetchRealEstate(params));
+        break;
+      case "carsVehicles":
+        dispatch(fetchCarsVehicles(params));
+        break;
+      case "furniture":
+        dispatch(fetchFurniture(params));
+        break;
+      case "electronics":
+        dispatch(fetchElectronics(params));
+        break;
+      case "realEstate":
+        dispatch(fetchRealEstate(params));
+        break;
+      default:
+        break;
+    }
   };
   /** change category value and trigger to close select */
   const onChangeCategory = (event) => {
     if (event.value === category) return;
-    setCategory(event.value);
+    setCategory(event);
     onCloseTrigger();
   };
   /** change city value and trigger to close select */
   const onChangeCity = (event) => {
     if (event.value === city) return;
     // params
-    setCity(event.value);
+    setCity(event);
     // local storage
     localStorage.setItem("userCity", event.value);
     onCloseTrigger();

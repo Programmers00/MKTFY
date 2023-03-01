@@ -35,19 +35,16 @@ const Header = () => {
   /** get data from api */
   useEffect(() => {
     const getData = async () => {
-      try {
-        /** api */
-        const response = await dispatch(fetchAccountInformation(params));
-        /** if success, set data */
-        if (response.data.code === "SUCCESS") {
-          const { firstName, lastName } = response.data.accountInformation;
-          setUserName(firstName + " " + lastName);
-        }
-      } catch (error) {}
+      /** api */
+      const response = await dispatch(fetchAccountInformation(params));
+      /** if success, set data */
+      if (response.data.code === "SUCCESS") {
+        const { firstName, lastName } = response.data.accountInformation;
+        setUserName(firstName + " " + lastName);
+      }
     };
     getData();
   }, []);
-
   return (
     <div className={styles.headerMainBox}>
       <div className={styles.headerContentBox}>
