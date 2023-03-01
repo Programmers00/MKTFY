@@ -4,7 +4,7 @@ import styles from "./index.module.scss";
 // components
 import ContentCard from "../../../../components/contentCard";
 // redux stuff
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // redux actions
 import {
   fetchDeals,
@@ -18,12 +18,23 @@ import {
 const Deals = () => {
   /** initialze */
   const dispatch = useDispatch();
-  /** data */
-  const [deals, setDeals] = useState(null);
-  const [carsVehicles, setCarsVehicles] = useState(null);
-  const [furniture, setFurniture] = useState(null);
-  const [electronics, setElectronics] = useState(null);
-  const [realEstate, setRealEstate] = useState(null);
+
+  /** set data from redux*/
+  const deals = useSelector((state) => {
+    return state.deals.listings.data;
+  });
+  const carsVehicles = useSelector((state) => {
+    return state.carsVehicles.listings.data;
+  });
+  const furniture = useSelector((state) => {
+    return state.furniture.listings.data;
+  });
+  const electronics = useSelector((state) => {
+    return state.electronics.listings.data;
+  });
+  const realEstate = useSelector((state) => {
+    return state.realEstate.listings.data;
+  });
 
   /** params */
   // user prefer city from localstorage
@@ -31,55 +42,42 @@ const Deals = () => {
   // deals
   const dealsParams = {
     category: "",
+    searchWord: "",
     city: userCity,
   };
   // carsVehicles
-  const carsVehiclesParms = {
+  const carsVehiclesParams = {
     category: "carsVehicles",
+    searchWord: "",
     city: userCity,
   };
   // furniture
   const furnitureParams = {
     category: "furniture",
+    searchWord: "",
     city: userCity,
   };
   // electronics
-  const electronicsParms = {
+  const electronicsParams = {
     category: "electronics",
+    searchWord: "",
     city: userCity,
   };
   // realEstate
-  const realEstateParms = {
+  const realEstateParams = {
     category: "realEstate",
+    searchWord: "",
     city: userCity,
   };
-  /** get datas from api */
+
+  /** request api with redux */
   useEffect(() => {
-    const getData = async () => {
-      try {
-        /** api*/
-        const responseDeals = await dispatch(fetchDeals(dealsParams));
-        const responseCarsVehicles = await dispatch(
-          fetchCarsVehicles(carsVehiclesParms)
-        );
-        const responseFurniture = await dispatch(
-          fetchFurniture(furnitureParams)
-        );
-        const responseElectronics = await dispatch(
-          fetchElectronics(electronicsParms)
-        );
-        const responseRealEstate = await dispatch(
-          fetchRealEstate(realEstateParms)
-        );
-        /** set response data*/
-        setDeals(responseDeals.data);
-        setCarsVehicles(responseCarsVehicles.data);
-        setFurniture(responseFurniture.data);
-        setElectronics(responseElectronics.data);
-        setRealEstate(responseRealEstate.data);
-      } catch (error) {}
-    };
-    getData();
+    /** api*/
+    dispatch(fetchDeals(dealsParams));
+    dispatch(fetchCarsVehicles(carsVehiclesParams));
+    dispatch(fetchFurniture(furnitureParams));
+    dispatch(fetchElectronics(electronicsParams));
+    dispatch(fetchRealEstate(realEstateParams));
   }, []);
 
   return (

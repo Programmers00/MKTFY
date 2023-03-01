@@ -5,6 +5,9 @@ export const getListingsMockup = (options) => {
     return {
       loading: false,
       data: {
+        code: "SUCCESS",
+        status: 200,
+        message: "Get Deals Success",
         id: "deals",
         title: "Deals",
         items: [
@@ -79,6 +82,9 @@ export const getListingsMockup = (options) => {
     return {
       loading: false,
       data: {
+        code: "SUCCESS",
+        status: 200,
+        message: "Get CarsVehicles Success",
         id: "carsVehicles",
         title: "CarsVehicles",
         items: [
@@ -123,6 +129,9 @@ export const getListingsMockup = (options) => {
     return {
       loading: false,
       data: {
+        code: "SUCCESS",
+        status: 200,
+        message: "Get Furniture Success",
         id: "furniture",
         title: "Furniture",
         items: [
@@ -166,6 +175,9 @@ export const getListingsMockup = (options) => {
     return {
       loading: false,
       data: {
+        code: "SUCCESS",
+        status: 200,
+        message: "Get Electronics Success",
         id: "electronics",
         title: "Electronics",
         items: [
@@ -209,6 +221,9 @@ export const getListingsMockup = (options) => {
     return {
       loading: false,
       data: {
+        code: "SUCCESS",
+        status: 200,
+        message: "Get RealEstate Success",
         id: "realEstate",
         title: "RealEstate",
         items: [

@@ -5,14 +5,16 @@ import { getListings } from "../../api/userMain/contents/deals";
 const dealsOptions = {
   url: "/api/listings",
 };
-export const fetchDeals = (params) => {
-  return async () => {
-    try {
-      return await getListings({ ...dealsOptions, params });
-    } catch (error) {
-      console.log("#Error fetchDeals:", error);
+export const fetchDeals = (params) => async (dispatch) => {
+  try {
+    const response = await getListings({ ...dealsOptions, params });
+    if (response.data.code === "SUCCESS") {
+      // set data
+      dispatch({ type: "SET_DEALS", response });
     }
-  };
+  } catch (error) {
+    console.log("#Error fetchDeals:", error);
+  }
 };
 
 /** action: get cars vehicles */
@@ -20,14 +22,16 @@ export const fetchDeals = (params) => {
 const carsVehiclesOptions = {
   url: "/api/listings",
 };
-export const fetchCarsVehicles = (params) => {
-  return async () => {
-    try {
-      return await getListings({ ...carsVehiclesOptions, params });
-    } catch (error) {
-      console.log("#Error fetchCarsVehicles:", error);
+export const fetchCarsVehicles = (params) => async (dispatch) => {
+  try {
+    const response = await getListings({ ...carsVehiclesOptions, params });
+    // set data
+    if (response.data.code === "SUCCESS") {
+      dispatch({ type: "SET_CARSVEHICLES", response });
     }
-  };
+  } catch (error) {
+    console.log("#Error fetchCarsVehicles:", error);
+  }
 };
 
 /** action: get furniture */
@@ -35,14 +39,16 @@ export const fetchCarsVehicles = (params) => {
 const furnitureOptions = {
   url: "/api/listings",
 };
-export const fetchFurniture = (params) => {
-  return async () => {
-    try {
-      return await getListings({ ...furnitureOptions, params });
-    } catch (error) {
-      console.log("#Error fetchFurniture:", error);
+export const fetchFurniture = (params) => async (dispatch) => {
+  try {
+    const response = await getListings({ ...furnitureOptions, params });
+    // set data
+    if (response.data.code === "SUCCESS") {
+      dispatch({ type: "SET_FURNITURE", response });
     }
-  };
+  } catch (error) {
+    console.log("#Error fetchFurniture:", error);
+  }
 };
 
 /** action: get electronics */
@@ -50,14 +56,16 @@ export const fetchFurniture = (params) => {
 const electronicsOptions = {
   url: "/api/listings",
 };
-export const fetchElectronics = (params) => {
-  return async () => {
-    try {
-      return await getListings({ ...electronicsOptions, params });
-    } catch (error) {
-      console.log("#Error fetchElectronics:", error);
+export const fetchElectronics = (params) => async (dispatch) => {
+  try {
+    const response = await getListings({ ...electronicsOptions, params });
+    // set data
+    if (response.data.code === "SUCCESS") {
+      dispatch({ type: "SET_ELECTRONICS", response });
     }
-  };
+  } catch (error) {
+    console.log("#Error fetchElectronics:", error);
+  }
 };
 
 /** action: get real estate */
@@ -65,12 +73,14 @@ export const fetchElectronics = (params) => {
 const realEstateOptions = {
   url: "/api/listings",
 };
-export const fetchRealEstate = (params) => {
-  return async () => {
-    try {
-      return await getListings({ ...realEstateOptions, params });
-    } catch (error) {
-      console.log("#Error fetchRealEstate:", error);
+export const fetchRealEstate = (params) => async (dispatch) => {
+  try {
+    const response = await getListings({ ...realEstateOptions, params });
+    // set data
+    if (response.data.code === "SUCCESS") {
+      dispatch({ type: "SET_REALESTATE", response });
     }
-  };
+  } catch (error) {
+    console.log("#Error fetchRealEstate:", error);
+  }
 };
