@@ -11,22 +11,27 @@ const Select = ({
   isMulti,
   isSearchable,
   onChange,
-  initSelectedValue,
   isLeftArrowIcon,
   isRightArrowIcon,
   closeTrigger,
+  currentSelectedValue,
 }) => {
   /** data */
   const [isShowMenu, setIsShowMenu] = useState(false);
   // default select value is first value in list
   const [selectedValue, setSelectedValue] = useState(
-    isMulti ? [] : initSelectedValue
+    isMulti ? [] : currentSelectedValue
   );
   const [searchValue, setSearchValue] = useState("");
   /** refs */
   const searchRef = useRef();
   const inputRef = useRef();
   /**useEffect */
+  // set current selected value from parent
+  useEffect(() => {
+    setSelectedValue(currentSelectedValue);
+  }, [currentSelectedValue]);
+
   // set search value
   useEffect(() => {
     setSearchValue("");
@@ -97,11 +102,6 @@ const Select = ({
     let newValue;
     // multi select is active
     if (isMulti) {
-      console.log(
-        selectedValue.findIndex(
-          (selectedItem) => selectedItem.value === option.value
-        )
-      );
       // when click the selected item, return selected items count(0 - 4).
       // when click the unselected item, reuturn -1.
       // remove item which you click and return new value
@@ -120,6 +120,7 @@ const Select = ({
     setSelectedValue(newValue);
     onChange(newValue);
   };
+
   /** check selected item exist: true or false for style*/
   const isSelected = (option) => {
     // check when multi select is active, same value count > 0 => true

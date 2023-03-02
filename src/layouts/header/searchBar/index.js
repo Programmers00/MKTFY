@@ -8,14 +8,6 @@ import Search from "./search"; //dependent
 import { useNavigate } from "react-router-dom";
 // redux
 import { useDispatch, useSelector } from "react-redux";
-// redux actions
-import {
-  fetchDeals,
-  fetchCarsVehicles,
-  fetchFurniture,
-  fetchElectronics,
-  fetchRealEstate,
-} from "../../../store/actions/deals";
 
 import { setSearchParams } from "../../../store/actions/search";
 
@@ -52,13 +44,24 @@ const SearchBar = () => {
   // user prefer city from local storage
   const userCity = localStorage.getItem("userCity");
 
+  // current params from redux
   const currentParams = useSelector((state) => {
     return state.search.params;
   });
 
+  /** change data from current params(redux) */
+  useEffect(() => {
+    // set categry
+    onChangeCategory(
+      categories.find((item) => item.value === currentParams.category)
+    );
+    // set earch word
+    setSearchWord(currentParams.searchWord);
+  }, [currentParams]);
+
   // category
   const [category, setCategory] = useState(
-    currentParams.category !== ""
+    currentParams.category !== "all"
       ? categories.find((item) => item.value === currentParams.category)
       : categories[0]
   );
@@ -88,44 +91,21 @@ const SearchBar = () => {
   /** submit form */
   const onSubmit = (event) => {
     event.preventDefault();
-    dispatch(setSearchParams(params));
     // trim: remove whitespace from both ends
     if (searchWord.trim().length === 0) return;
+    dispatch(setSearchParams(params));
     const path = categoryPaths[params.category] || "/";
     navigate(path);
-    switch (params.category) {
-      case "deals":
-        dispatch(fetchDeals(params));
-        dispatch(fetchCarsVehicles(params));
-        dispatch(fetchFurniture(params));
-        dispatch(fetchElectronics(params));
-        dispatch(fetchRealEstate(params));
-        break;
-      case "carsVehicles":
-        dispatch(fetchCarsVehicles(params));
-        break;
-      case "furniture":
-        dispatch(fetchFurniture(params));
-        break;
-      case "electronics":
-        dispatch(fetchElectronics(params));
-        break;
-      case "realEstate":
-        dispatch(fetchRealEstate(params));
-        break;
-      default:
-        break;
-    }
   };
   /** change category value and trigger to close select */
   const onChangeCategory = (event) => {
-    if (event.value === category) return;
+    if (event === category) return;
     setCategory(event);
     onCloseTrigger();
   };
   /** change city value and trigger to close select */
   const onChangeCity = (event) => {
-    if (event.value === city) return;
+    if (event === city) return;
     // params
     setCity(event);
     // local storage
@@ -148,7 +128,7 @@ const SearchBar = () => {
           // isIcon
           options={categories}
           onChange={onChangeCategory}
-          initSelectedValue={category}
+          currentSelectedValue={category}
         />
         <span className={styles.borderSeperator}></span>
         <Search
@@ -165,7 +145,7 @@ const SearchBar = () => {
           isLeftArrowIcon
           options={cities}
           onChange={onChangeCity}
-          initSelectedValue={city}
+          currentSelectedValue={city}
         />
       </form>
     </div>

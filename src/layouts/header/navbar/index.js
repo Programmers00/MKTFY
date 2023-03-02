@@ -4,8 +4,13 @@ import { Link } from "react-router-dom";
 import styles from "./index.module.scss";
 // icons
 import { HamburgerIcon } from "../../../assets/svgIcons";
+// redux
+import { useDispatch, useSelector } from "react-redux";
+import { resetSearchParams } from "../../../store/actions/navbar";
 /** navber in header */
 export const Navbar = () => {
+  // redux dispatch
+  const dispatch = useDispatch();
   /** data */
   // navbar title, url
   const navbar = [
@@ -15,6 +20,12 @@ export const Navbar = () => {
     { title: "Electronics", url: "electronics" },
     { title: "RealEstate", url: "/realEstate" },
   ];
+  /** functions */
+  /** click navigation: reset search params(redux) */
+  const onClick = () => {
+    dispatch(resetSearchParams());
+  };
+
   return (
     <nav className={styles.navbarMainBox}>
       <ul>
@@ -30,7 +41,7 @@ export const Navbar = () => {
         </form>
         {navbar.map((element) => (
           <Link key={element.title} to={element.url}>
-            <li>{element.title}</li>
+            <li onClick={onClick}>{element.title}</li>
           </Link>
         ))}
       </ul>

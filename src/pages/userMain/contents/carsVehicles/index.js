@@ -6,32 +6,32 @@ import ContentCard from "../../../../components/contentCard";
 // redux stuff
 import { useDispatch, useSelector } from "react-redux";
 // actions
-import { fetchCarsVehicles } from "../../../../store/actions/deals";
+// import { fetchCarsVehicles } from "../../../../store/actions/deals";
 
 /** carsVehicles page */
 const CarsVehicles = () => {
   /** initialze */
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   /** set data from redux*/
   const carsVehicles = useSelector((state) => {
     return state.carsVehicles.listings.data;
   });
 
   /** params */
-  // user prefer city from localstorage
-  const userCity = localStorage.getItem("userCity");
-  // carsVehicles
-  const carsVehiclesParams = {
-    category: "carsVehicles",
-    searchWord: "",
-    city: userCity,
-  };
+  // // user prefer city from localstorage
+  // const userCity = localStorage.getItem("userCity");
+  // // carsVehicles
+  // const carsVehiclesParams = {
+  //   category: "carsVehicles",
+  //   searchWord: "",
+  //   city: userCity,
+  // };
 
   /** request api with redux */
-  useEffect(() => {
-    /** api*/
-    dispatch(fetchCarsVehicles(carsVehiclesParams));
-  }, []);
+  // useEffect(() => {
+  //   /** api*/
+  //   // dispatch(fetchCarsVehicles(carsVehiclesParams));
+  // }, []);
 
   return (
     <div className={styles.mainBox}>
