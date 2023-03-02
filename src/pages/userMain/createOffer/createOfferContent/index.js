@@ -5,15 +5,15 @@ import { useNavigate } from "react-router-dom";
 import styles from "./index.module.scss";
 // components
 import ImageUploader from "./imageUploader";
-import CreateOfferForm from "./createOfferForm";
+import DataForm from "./dataForm";
 // redux stuff
 import { useDispatch, useSelector } from "react-redux";
 // redux actions
 import {
-  requestCreateOffer,
+  createCreateOffer,
   setCreateOffer,
 } from "../../../../store/actions/createOffer";
-import { requestUploadImages } from "../../../../store/actions/uploadImage";
+import { createUploadImages } from "../../../../store/actions/uploadImage";
 /** create offer content : component for create offer */
 const CreateOfferContent = () => {
   /** initialize */
@@ -31,12 +31,13 @@ const CreateOfferContent = () => {
   });
   /** functions */
   /** request create offer to api */
-  const handleRequestCreateOffer = async (event) => {
+  const onCreateOffer = async (event) => {
+    console.log("##currentSelectedImages", currentSelectedImages);
     event.preventDefault();
     try {
       // request upload images api
       const responseUploadImages = await dispatch(
-        requestUploadImages(currentSelectedImages)
+        createUploadImages(currentSelectedImages)
       );
       if (
         // when request upload images success,
@@ -51,12 +52,12 @@ const CreateOfferContent = () => {
         });
         // set create offer with new params
         dispatch(setCreateOffer(newParams));
-        // request create offer
+        // create create offer
         const responseCreateOffer = await dispatch(
-          requestCreateOffer(currentParams)
+          createCreateOffer(currentParams)
         );
         if (responseCreateOffer.data.code === "SUCCESS") {
-          navigate("/");
+          // navigate("/");
         }
       }
     } catch (error) {}
@@ -64,12 +65,9 @@ const CreateOfferContent = () => {
 
   return (
     <div className={styles.createOfferContentBox}>
-      <form
-        className={styles.createOfferContentForm}
-        onSubmit={handleRequestCreateOffer}
-      >
+      <form className={styles.createOfferContentForm} onSubmit={onCreateOffer}>
         <ImageUploader />
-        <CreateOfferForm />
+        <DataForm />
       </form>
     </div>
   );

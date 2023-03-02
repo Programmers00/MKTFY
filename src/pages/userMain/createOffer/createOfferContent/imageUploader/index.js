@@ -26,24 +26,27 @@ const ImageUploader = () => {
   /** update data in redux */
   useEffect(() => {
     dispatch(setSelectedImages(selectedImageList));
+    // console.log("##selectedImageList", selectedImageList);
   }, [selectedImageList]);
 
   /** functions */
-  /** set images */
-  const handleFile = (selectedImages) => {
-    // representing image
-    if (clickedImage === 0) {
-      // change
-      setSelectedImageList(selectedImages);
-      return;
-    }
-    // other image
-    const newImages = [...selectedImageList];
-    newImages[clickedImage] = selectedImages[0];
+  /** add images */
+  const onAddImages = (selectedImages) => {
+    console.log("##selectedImageList", selectedImageList.length);
+    // can't access more than 5 images
+    if (selectedImageList.length > 4) return;
+    setSelectedImageList([...selectedImageList, ...selectedImages]);
+  };
+  /** remove images  */
+  const onRemoveImage = (index) => {
+    const newImages = [...selectedImageList].filter(
+      (item) => item !== [...selectedImageList][index]
+    );
     setSelectedImageList(newImages);
   };
+
   /** trigger when drage files on the area */
-  const handleDrag = (event) => {
+  const onDrag = (event) => {
     event.preventDefault();
     event.stopPropagation();
     if (event.type === "dragenter" || event.type === "dragover") {
@@ -53,39 +56,44 @@ const ImageUploader = () => {
     }
   };
   /** triggers when file is dropped */
-  const handleDrop = (event) => {
+  const onDrop = (event) => {
     event.preventDefault();
     event.stopPropagation();
     setDragActive(false);
     if (event.dataTransfer.files && event.dataTransfer.files[0]) {
-      handleFile(event.dataTransfer.files);
+      onAddImages(event.dataTransfer.files);
     }
   };
-  /** triggers when file is selected with click */
-  const handleChange = (event) => {
+  /** triggers when file is selected with click => issue: after I remove the image and add the same image, it is not working*/
+  const onChange = (event) => {
     setClickedImage(0);
     event.preventDefault();
-    if (event.target.files && event.target.files.length > 5) {
+    // selected image list + new selected images is larger than 5, prevent do function
+    if (
+      event.target.files &&
+      selectedImageList.length + event.target.files.length > 5
+    ) {
       alert("up to 5 photos");
       return;
     }
     if (event.target.files && event.target.files[0]) {
-      handleFile(event.target.files);
+      onAddImages(event.target.files);
     }
   };
   /** triggers the input when the empty image is clicked */
   const onClickEmptyImage = (index) => {
     setClickedImage(index);
+    if (selectedImageList.length > 4) return;
     inputRef.current.click();
   };
 
   return (
     <div className={styles.contentBox}>
       <label
-        onDragEnter={handleDrag}
-        onDragLeave={handleDrag}
-        onDragOver={handleDrag}
-        onDrop={handleDrop}
+        onDragEnter={onDrag}
+        onDragLeave={onDrag}
+        onDragOver={onDrag}
+        onDrop={onDrop}
         className={styles.dragDropContent}
         style={dragActive ? { backgroundColor: variabled.lightGray } : {}}
       >
@@ -104,12 +112,13 @@ const ImageUploader = () => {
           />
         )}
         <input
-          onChange={handleChange}
+          onChange={onChange}
           ref={inputRef}
           className={styles.hidingContent}
           type="file"
           multiple={true}
           accept=".jpg, .jpeg, .png"
+          disabled={selectedImageList.length > 4}
         />
       </label>
       <div className={styles.images}>
@@ -125,11 +134,7 @@ const ImageUploader = () => {
                 <div className={styles.xIconBox}>
                   <div
                     className={styles.xIcon}
-                    onClick={() => {
-                      const newImages = [...selectedImageList];
-                      newImages[index] = null;
-                      setSelectedImageList(newImages);
-                    }}
+                    onClick={() => onRemoveImage(index)}
                   >
                     <XIcon />
                   </div>

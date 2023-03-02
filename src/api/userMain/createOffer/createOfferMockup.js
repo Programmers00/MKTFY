@@ -1,5 +1,5 @@
 /** upload images mockup */
-export const uploadImagesMockup = (options) => {
+export const postUploadImagesMockup = (options) => {
   // success
   if (options)
     return {
@@ -44,8 +44,8 @@ export const uploadImagesMockup = (options) => {
   };
 };
 
-/** create offer mockup */
-export const createOfferMockup = (options) => {
+/** post create offer mockup */
+export const postCreateOfferMockup = (options) => {
   // success
   if (options)
     return {

@@ -1,7 +1,7 @@
-// poset create offer api
-import { postCreateOfferData } from "../../api/userMain/createOffer";
-// request options for request offer
-const requestCreateOfferOptions = {
+// post create offer api
+import { postCreateOffer } from "../../api/userMain/createOffer";
+// request options for create offer
+const options = {
   url: "/api/postCreateOffer",
   method: "post",
 };
@@ -13,12 +13,12 @@ export const setCreateOffer = (params) => {
   };
 };
 
-/** set request create offer action */
-export const requestCreateOffer = (params) => {
+/** create offer action */
+export const createCreateOffer = (params) => {
   return async () => {
     try {
-      return await postCreateOfferData({
-        ...requestCreateOfferOptions,
+      return await postCreateOffer({
+        ...options,
         params,
       });
     } catch (error) {}

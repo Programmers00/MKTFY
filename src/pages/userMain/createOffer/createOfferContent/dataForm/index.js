@@ -14,8 +14,8 @@ import { useDispatch } from "react-redux";
 // redux actions
 import { setCreateOffer } from "../../../../../store/actions/createOffer";
 
-/** create offer form  */
-const CreateOfferForm = () => {
+/** data from  */
+const DataForm = () => {
   /** initialize */
   // navigate
   const navigate = useNavigate();
@@ -228,4 +228,4 @@ const CreateOfferForm = () => {
   );
 };
 
-export default CreateOfferForm;
+export default DataForm;

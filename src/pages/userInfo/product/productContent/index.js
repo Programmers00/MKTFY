@@ -10,10 +10,10 @@ import ProductForm from "./productForm";
 import { useDispatch, useSelector } from "react-redux";
 // redux actions
 import {
-  requestCreateOffer,
+  createCreateOffer,
   setCreateOffer,
 } from "../../../../store/actions/createOffer";
-import { requestUploadImages } from "../../../../store/actions/uploadImage";
+import { createUploadImages } from "../../../../store/actions/uploadImage";
 
 /** product content : component for product edit */
 const ProductContent = () => {
@@ -31,16 +31,16 @@ const ProductContent = () => {
     return state.createOffer.params;
   });
   /** functions */
-  /** request create offer to api */
+  /** create create offer to api */
   const handleRequestCreateOffer = async (event) => {
     event.preventDefault();
     try {
-      // request upload images api
+      // create upload images api
       const responseUploadImages = await dispatch(
-        requestUploadImages(currentSelectedImages)
+        createUploadImages(currentSelectedImages)
       );
       if (
-        // when request upload images success,
+        // when create upload images success,
         responseUploadImages.data.code === "SUCCESS" ||
         responseUploadImages.data.uploadedFiles.length > 0
       ) {
@@ -54,7 +54,7 @@ const ProductContent = () => {
         dispatch(setCreateOffer(newParams));
         // request create offer
         const responseCreateOffer = await dispatch(
-          requestCreateOffer(currentParams)
+          createCreateOffer(currentParams)
         );
         if (responseCreateOffer.data.code === "SUCCESS") {
           navigate("/");

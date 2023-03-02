@@ -3,7 +3,7 @@ import { postUploadImages } from "../../api/userMain/createOffer";
 
 // access token, request options for request upload images
 const accessToken = localStorage.getItem("accessToken");
-const requestUploadImagesOptions = {
+const options = {
   url: "/api/uploadImage",
   method: "post",
   headers: {
@@ -19,8 +19,9 @@ export const setSelectedImages = (selectedImages) => {
   };
 };
 
-/** requst upload images action */
-export const requestUploadImages = (images) => {
+/** create upload images action */
+export const createUploadImages = (images) => {
+  console.log("##images", images);
   return async () => {
     // create new FormData
     const formData = new FormData();
@@ -32,7 +33,7 @@ export const requestUploadImages = (images) => {
       // post upload images
       return await postUploadImages({
         formData,
-        ...requestUploadImagesOptions,
+        ...options,
       });
     } catch (error) {}
   };

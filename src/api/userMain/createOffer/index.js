@@ -1,4 +1,7 @@
-import { uploadImagesMockup, createOfferMockup } from "./createOfferMockup";
+import {
+  postUploadImagesMockup,
+  postCreateOfferMockup,
+} from "./createOfferMockup";
 // process api for request api
 import { processApi } from "../../../utils/processApi.js";
 // global variable: envs.isOnlyMockup for project mockup test
@@ -11,14 +14,14 @@ const isOnlyMockup = envs.isOnlyMockup;
 export const postUploadImages = async (options) => {
   let isTest = true; // local variable Test => true
   return isOnlyMockup || isTest
-    ? await uploadImagesMockup(options)
+    ? await postUploadImagesMockup(options)
     : await processApi(options);
 };
 
 /** post create offer: call api or mockup */
-export const postCreateOfferData = async (options) => {
+export const postCreateOffer = async (options) => {
   let isTest = true; // local variable Test => true
   return isOnlyMockup || isTest
-    ? await createOfferMockup(options)
+    ? await postCreateOfferMockup(options)
     : await processApi(options);
 };
