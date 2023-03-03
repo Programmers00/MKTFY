@@ -33,7 +33,11 @@ const setCreateOffer = (state = initialState, action) => {
     // reset create offer: remove all data
     case "RESET_CREATE_OFFER":
       return {
-        state: initialState,
+        ...initialState,
+        params: {
+          ...initialState.params,
+          imagesId: [...initialState.params.imagesId],
+        },
       };
     default:
       return state;

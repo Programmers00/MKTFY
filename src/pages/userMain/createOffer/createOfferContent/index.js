@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 // redux actions
 import {
   createCreateOffer,
+  resetCreateOffer,
   setCreateOffer,
 } from "../../../../store/actions/createOffer";
 import { createUploadImages } from "../../../../store/actions/uploadImage";
@@ -32,7 +33,6 @@ const CreateOfferContent = () => {
   /** functions */
   /** request create offer to api */
   const onCreateOffer = async (event) => {
-    console.log("##currentSelectedImages", currentSelectedImages);
     event.preventDefault();
     try {
       // request upload images api
@@ -45,6 +45,7 @@ const CreateOfferContent = () => {
         responseUploadImages.data.uploadedFiles.length > 0
       ) {
         // new params (copy from redux current params)
+
         const newParams = { ...currentParams };
         // add images id
         responseUploadImages.data.uploadedFiles.forEach((uploadedFile) => {
@@ -57,7 +58,8 @@ const CreateOfferContent = () => {
           createCreateOffer(currentParams)
         );
         if (responseCreateOffer.data.code === "SUCCESS") {
-          // navigate("/");
+          navigate("/");
+          dispatch(resetCreateOffer());
         }
       }
     } catch (error) {}

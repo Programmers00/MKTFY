@@ -10,22 +10,22 @@ export const postUploadImagesMockup = (options) => {
         message: "Upload Images Success",
         uploadedFiles: [
           {
-            fileName: "image1.jpg",
+            fileName: "cat.jpg",
             fileType: "image/jpeg",
             fileSize: 234567,
-            fileId: "abc123",
+            fileId: "cat",
           },
           {
-            fileName: "image2.png",
+            fileName: "cat2.png",
             fileType: "image/png",
             fileSize: 345678,
-            fileId: "def456",
+            fileId: "cat2",
           },
           {
-            fileName: "image3.gif",
+            fileName: "cat3.gif",
             fileType: "image/gif",
             fileSize: 456789,
-            fileId: "ghi789",
+            fileId: "cat3",
           },
         ],
       },

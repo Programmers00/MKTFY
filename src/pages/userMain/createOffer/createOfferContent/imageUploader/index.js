@@ -32,8 +32,7 @@ const ImageUploader = () => {
   /** functions */
   /** add images */
   const onAddImages = (selectedImages) => {
-    console.log("##selectedImageList", selectedImageList.length);
-    // can't access more than 5 images
+    // can't exceed more than 5 images
     if (selectedImageList.length > 4) return;
     setSelectedImageList([...selectedImageList, ...selectedImages]);
   };
@@ -60,8 +59,16 @@ const ImageUploader = () => {
     event.preventDefault();
     event.stopPropagation();
     setDragActive(false);
+    // can't exceed more than 5 images
+    if (
+      event.dataTransfer.files &&
+      selectedImageList.length + event.dataTransfer.files.length > 5
+    ) {
+      alert("up to 5 photos");
+      return;
+    }
     if (event.dataTransfer.files && event.dataTransfer.files[0]) {
-      onAddImages(event.dataTransfer.files);
+      onAddImages(event.target.files);
     }
   };
   /** triggers when file is selected with click => issue: after I remove the image and add the same image, it is not working*/

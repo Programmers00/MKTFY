@@ -6,14 +6,19 @@ const options = {
   method: "post",
 };
 
-/** set create offer action */
+/** action: set create offer */
 export const setCreateOffer = (params) => {
   return (dispatch) => {
     dispatch({ type: "SET_CREATE_OFFER", params });
   };
 };
-
-/** create offer action */
+/** action: reset create offer */
+export const resetCreateOffer = () => {
+  return (dispatch) => {
+    dispatch({ type: "RESET_CREATE_OFFER" });
+  };
+};
+/** action: create create offer */
 export const createCreateOffer = (params) => {
   return async () => {
     try {
