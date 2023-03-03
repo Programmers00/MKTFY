@@ -5,14 +5,15 @@ import { useNavigate } from "react-router-dom";
 import styles from "./index.module.scss";
 // components
 import ImageUploader from "./imageUploader";
-import ProductForm from "./productForm";
+import DataForm from "./dataForm";
 // redux stuff
 import { useDispatch, useSelector } from "react-redux";
 // redux actions
 import {
-  createCreateOffer,
-  setCreateOffer,
-} from "../../../../store/actions/createOffer";
+  updateProduct,
+  resetProduct,
+  setProduct,
+} from "../../../../store/actions/product";
 import { createUploadImages } from "../../../../store/actions/uploadImage";
 
 /** product content : component for product edit */
@@ -26,13 +27,13 @@ const ProductContent = () => {
   const currentSelectedImages = useSelector((state) => {
     return state.uploadImages.selectedImages;
   });
-  // current params for redux
+  // current params from redux
   const currentParams = useSelector((state) => {
-    return state.createOffer.params;
+    return state.product.params;
   });
   /** functions */
-  /** create create offer to api */
-  const handleRequestCreateOffer = async (event) => {
+  /** update product to api */
+  const onUpdateProduct = async (event) => {
     event.preventDefault();
     try {
       // create upload images api
@@ -50,26 +51,22 @@ const ProductContent = () => {
         responseUploadImages.data.uploadedFiles.forEach((uploadedFile) => {
           newParams.imagesId.push(uploadedFile.fileId);
         });
-        // set create offer with new params
-        dispatch(setCreateOffer(newParams));
-        // request create offer
-        const responseCreateOffer = await dispatch(
-          createCreateOffer(currentParams)
-        );
-        if (responseCreateOffer.data.code === "SUCCESS") {
-          navigate("/");
+        // set product with new params
+        dispatch(setProduct(newParams));
+        // update product
+        const responseProduct = await dispatch(updateProduct(currentParams));
+        if (responseProduct.data.code === "SUCCESS") {
+          navigate("/myListings");
+          dispatch(resetProduct());
         }
       }
     } catch (error) {}
   };
   return (
     <div className={styles.productContentBox}>
-      <form
-        className={styles.productContentForm}
-        onSubmit={handleRequestCreateOffer}
-      >
+      <form className={styles.productContentForm} onSubmit={onUpdateProduct}>
         <ImageUploader />
-        <ProductForm />
+        <DataForm />
       </form>
     </div>
   );

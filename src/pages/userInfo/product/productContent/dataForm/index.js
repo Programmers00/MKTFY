@@ -12,8 +12,12 @@ import { regex, validationMessage } from "../../../../../constants";
 // useDispatch for sending action to redux
 import { useDispatch } from "react-redux";
 // redux actions
-import { setCreateOffer } from "../../../../../store/actions/createOffer";
-import { fetchProduct } from "../../../../../store/actions/product";
+import {
+  fetchProduct,
+  setProduct,
+  updateProduct,
+  removeProduct,
+} from "../../../../../store/actions/product";
 // component
 import CancelListingModal from "./cancelListingModal";
 
@@ -30,10 +34,9 @@ const ProductForm = () => {
   /** data */
   const [productId, setProductId] = useState("");
 
-  /** request options */
-  const fetchProdctionOption = {
-    url: "/api/user/product",
-    params: { id: productId },
+  /** get params */
+  const getParams = {
+    id: productId,
   };
 
   /** set data from router parameter */
@@ -48,7 +51,7 @@ const ProductForm = () => {
       if (productId !== "") {
         try {
           // request fetch product
-          const response = await dispatch(fetchProduct(fetchProdctionOption));
+          const response = await dispatch(fetchProduct(getParams));
           // when success, set data
           if (response.data.code === "SUCCESS") {
             const { item } = response.data;
@@ -77,7 +80,7 @@ const ProductForm = () => {
   const [category, setCategory] = useState("CarsVehicles");
   const [condition, setCondition] = useState("used");
   const [price, setPrice] = useState(0);
-  const [city, setCity] = useState("Brooks");
+  const [city, setCity] = useState("calgary");
 
   /** regex and validation message */
   const validationAddress = {
@@ -96,7 +99,7 @@ const ProductForm = () => {
   } = useValidator("", "", validationAddress);
 
   /** data form for redux*/
-  // create offer form
+  // put product offer form
   const params = {
     productName,
     description,
@@ -109,8 +112,36 @@ const ProductForm = () => {
 
   /** update data in redux */
   useEffect(() => {
-    dispatch(setCreateOffer(params));
+    dispatch(setProduct(params));
   }, [productName, description, category, condition, price, address, city]);
+
+  /** functions */
+
+  /** confirm sold */
+  // params
+  const putParams = {
+    id: productId,
+    active: false,
+  };
+  const onConfirm = async () => {
+    // active to false => sold out
+    const response = await dispatch(updateProduct(putParams));
+    if (response.data.code === "SUCCESS") {
+      navigate("/myListings");
+    }
+  };
+
+  /** cancel product post */
+  // params
+  const deleteParams = {
+    id: productId,
+  };
+  const onCancel = async () => {
+    const response = await dispatch(removeProduct(deleteParams));
+    if (response.data.code === "SUCCESS") {
+      navigate("/myListings");
+    }
+  };
 
   return (
     <div className={styles.contentBox}>
@@ -261,11 +292,7 @@ const ProductForm = () => {
         <button
           className={styles.confirmSoldButton}
           type="button"
-          onClick={() => {
-            console.log("##api");
-            // dispatch({ type: "INIT" });
-            // navigate("/myListings");
-          }}
+          onClick={onConfirm}
         >
           Confirm sold
         </button>
@@ -275,8 +302,6 @@ const ProductForm = () => {
           className={styles.cancelListingButton}
           type="button"
           onClick={() => {
-            // dispatch({ type: "INIT" });
-            // navigate("/");
             setIsShowModal(true);
           }}
         >
@@ -287,6 +312,7 @@ const ProductForm = () => {
         <CancelListingModal
           isShowModal={isShowModal}
           setIsShowModal={setIsShowModal}
+          onClickYes={onCancel}
         />
       )}
     </div>

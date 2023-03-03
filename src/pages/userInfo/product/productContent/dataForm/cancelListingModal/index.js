@@ -3,7 +3,7 @@ import { useRef, useEffect } from "react";
 // scss
 import styles from "./index.module.scss";
 /** cancel listing modal*/
-const CancelListingModal = ({ setIsShowModal }) => {
+const CancelListingModal = ({ setIsShowModal, onClickYes }) => {
   /** initialize */
   const modalRef = useRef();
   /** functions */
@@ -45,7 +45,7 @@ const CancelListingModal = ({ setIsShowModal }) => {
             <button
               className={styles.yesButton}
               type="button"
-              onClick={() => {}}
+              onClick={onClickYes}
             >
               Yes
             </button>

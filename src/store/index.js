@@ -14,6 +14,7 @@ import {
   electronics,
   realEstate,
   search,
+  product,
 } from "./reducers";
 import thunk from "redux-thunk";
 
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   electronics,
   realEstate,
   search,
+  product,
 });
 const middlewares = [thunk];
 
