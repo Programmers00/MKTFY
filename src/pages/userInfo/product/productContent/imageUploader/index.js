@@ -1,4 +1,6 @@
 import { useEffect, useState, useRef } from "react";
+// use navigate
+import { useNavigate, useLocation } from "react-router-dom";
 // scss
 import styles from "./index.module.scss";
 // scss style variabled for color
@@ -8,10 +10,43 @@ import { CameraIcon, XIcon } from "../../../../../assets/svgIcons";
 // useDispatch for sending action to redux
 import { useDispatch } from "react-redux";
 // redux actions
-import { setSelectedImages } from "../../../../../store/actions/uploadImage";
+import { setSelectedImages } from "../../../../../store/actions/productUploadImages";
+import { fetchProduct } from "../../../../../store/actions/product";
 
 /** image uploader: parameter from images, setImages */
 const ImageUploader = () => {
+  const [productId, setProductId] = useState("");
+  // parameter from router
+  const { state } = useLocation();
+  /** get params */
+  const getParams = {
+    id: productId,
+  };
+
+  /** set data from router parameter */
+  useEffect(() => {
+    setProductId(state.id);
+  }, []);
+
+  /** set data from router parameter */
+  useEffect(() => {
+    const getData = async () => {
+      // when product id is
+      if (productId !== "") {
+        try {
+          // request fetch product
+          const response = await dispatch(fetchProduct(getParams));
+          // when success, set data
+          if (response.data.code === "SUCCESS") {
+            const { item } = response.data;
+            setSelectedImageList([...item.images]);
+          }
+        } catch (error) {}
+      }
+    };
+    getData();
+  }, [productId]);
+
   /** initialize */
   // redux
   const dispatch = useDispatch();
@@ -115,7 +150,11 @@ const ImageUploader = () => {
           <img
             alt="representingImg"
             className={styles.representingImage}
-            src={URL.createObjectURL(selectedImageList[0])}
+            src={
+              typeof selectedImageList[0] === "string"
+                ? require(`../../../../../assets/images/${selectedImageList[0]}.png`)
+                : URL.createObjectURL(selectedImageList[0])
+            }
           />
         )}
         <input
@@ -136,7 +175,11 @@ const ImageUploader = () => {
                 <img
                   alt="img"
                   className={styles.image}
-                  src={URL.createObjectURL(selectedImageList[index])}
+                  src={
+                    typeof selectedImageList[index] === "string"
+                      ? require(`../../../../../assets/images/${selectedImageList[index]}.png`)
+                      : URL.createObjectURL(selectedImageList[index])
+                  }
                 />
                 <div className={styles.xIconBox}>
                   <div

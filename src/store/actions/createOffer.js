@@ -8,6 +8,7 @@ const options = {
 
 /** action: set create offer */
 export const setCreateOffer = (params) => {
+  console.log("##set Params", params);
   return (dispatch) => {
     dispatch({ type: "SET_CREATE_OFFER", params });
   };
@@ -20,6 +21,7 @@ export const resetCreateOffer = () => {
 };
 /** action: create create offer */
 export const createCreateOffer = (params) => {
+  console.log("##params", params);
   return async () => {
     try {
       return await postCreateOffer({

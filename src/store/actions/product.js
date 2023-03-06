@@ -26,6 +26,14 @@ export const setProduct = (params) => {
     dispatch({ type: "SET_PRODUCT", params });
   };
 };
+/** actio : set product images id */
+export const setProductImagesId = (imagesId) => {
+  console.log("#imagesId2=>", imagesId);
+
+  return (dispatch) => {
+    dispatch({ type: "SET_PRODUCT_IMAGES_ID", imagesId });
+  };
+};
 
 /** action : reset product */
 export const resetProduct = () => {
@@ -42,6 +50,7 @@ const putOptions = {
 
 /** action : put product */
 export const updateProduct = (params) => {
+  console.log("#update params", params);
   return async () => {
     try {
       return await putProduct({ ...putOptions, params });

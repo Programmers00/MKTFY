@@ -44,7 +44,7 @@ export const getProductMockup = (options) => {
           price: "400",
           address: "100 Main st",
           city: "Calgary",
-          images: ["cat2", "cat3", "cat4", "cat5"],
+          images: ["cat2", "cat3", "cat4", "cat"],
           active: true,
         },
       },
@@ -59,7 +59,7 @@ export const getProductMockup = (options) => {
         status: 200,
         message: "Get Product Success",
         item: {
-          id: "cat5",
+          id: "cat4",
           productName:
             "Pearl The cat: Breakfast edtion Pearl The cat: Breakfast edtion",
           description:

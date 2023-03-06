@@ -5,7 +5,7 @@ const initialState = {
 /** set selected images */
 const setSelectedImages = (state = initialState, action) => {
   switch (action.type) {
-    case "SET_SELECTED_IMAGES":
+    case "SET_PRODUCT_SELECTED_IMAGES":
       return {
         ...state,
         selectedImages: action.selectedImages,

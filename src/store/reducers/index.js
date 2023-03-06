@@ -1,7 +1,8 @@
 import auth from "./auth";
 import signup from "./signup";
 import createOffer from "./createOffer";
-import uploadImages from "./uploadImage";
+import createOfferUploadImages from "./createOfferUploadImages";
+import productUploadImages from "./productUploadImages";
 import {
   deals,
   carsVehicles,
@@ -14,7 +15,7 @@ import product from "./product";
 export {
   auth,
   signup,
-  uploadImages,
+  createOfferUploadImages,
   createOffer,
   deals,
   carsVehicles,
@@ -23,4 +24,5 @@ export {
   realEstate,
   search,
   product,
+  productUploadImages,
 };

@@ -8,7 +8,7 @@ import { CameraIcon, XIcon } from "../../../../../assets/svgIcons";
 // useDispatch for sending action to redux
 import { useDispatch } from "react-redux";
 // redux actions
-import { setSelectedImages } from "../../../../../store/actions/uploadImage";
+import { setSelectedImages } from "../../../../../store/actions/createOfferUploadImages";
 
 /** image uploader: parameter from images, setImages */
 const ImageUploader = () => {
@@ -26,6 +26,7 @@ const ImageUploader = () => {
   /** update data in redux */
   useEffect(() => {
     dispatch(setSelectedImages(selectedImageList));
+    console.log("##selectedImageList", typeof selectedImageList[0]);
     // console.log("##selectedImageList", selectedImageList);
   }, [selectedImageList]);
 

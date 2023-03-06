@@ -15,19 +15,22 @@ const options = {
 /** set selected images action */
 export const setSelectedImages = (selectedImages) => {
   return (dispatch) => {
-    dispatch({ type: "SET_SELECTED_IMAGES", selectedImages: selectedImages });
+    dispatch({
+      type: "SET_PRODUCT_SELECTED_IMAGES",
+      selectedImages: selectedImages,
+    });
   };
 };
 
 /** create upload images action */
 export const createUploadImages = (images) => {
-  console.log("##images", images);
   return async () => {
     // create new FormData
     const formData = new FormData();
-    // append images data to formData
-    for (let i = 0; i < images.length; i++) {
-      formData.append("images", images[i]);
+    const filteredImages = images.filter((image) => typeof image === "object");
+    // append image data to formData
+    for (let i = 0; i < filteredImages.length; i++) {
+      formData.append("image", filteredImages[i]);
     }
     try {
       // post upload images

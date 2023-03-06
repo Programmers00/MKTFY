@@ -6,7 +6,7 @@ import storageSession from "redux-persist/lib/storage/session";
 import {
   auth,
   signup,
-  uploadImages,
+  createOfferUploadImages,
   createOffer,
   deals,
   carsVehicles,
@@ -15,6 +15,7 @@ import {
   realEstate,
   search,
   product,
+  productUploadImages,
 } from "./reducers";
 import thunk from "redux-thunk";
 
@@ -26,7 +27,7 @@ const storageConfig = {
 const rootReducer = combineReducers({
   auth,
   signup,
-  uploadImages,
+  createOfferUploadImages,
   createOffer,
   deals,
   carsVehicles,
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   realEstate,
   search,
   product,
+  productUploadImages,
 });
 const middlewares = [thunk];
 
