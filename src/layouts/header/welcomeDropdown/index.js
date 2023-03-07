@@ -9,6 +9,9 @@ import { SingOutIcon } from "../../../assets/svgIcons";
 // user name from redux
 import { useDispatch } from "react-redux";
 import { fetchMyListingsCount } from "../../../store/actions/welcomeDropdown";
+// webAuth from auth0-js
+import { webAuth } from "../../../utils/webAuth";
+import envs from "../../../envs";
 
 const WelcomeDropdown = ({ userName }) => {
   /** initialize */
@@ -52,7 +55,9 @@ const WelcomeDropdown = ({ userName }) => {
 
   /** sign out: signout and close trigger */
   const onSignOut = () => {
-    console.log("##sign Out");
+    webAuth.logout({
+      returnTo: `${envs.devUrl}/auth`,
+    });
     onCloseTrigger();
   };
 
