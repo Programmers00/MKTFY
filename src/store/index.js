@@ -16,6 +16,7 @@ import {
   search,
   product,
   productUploadImages,
+  accountInformation,
 } from "./reducers";
 import thunk from "redux-thunk";
 
@@ -37,6 +38,7 @@ const rootReducer = combineReducers({
   search,
   product,
   productUploadImages,
+  accountInformation,
 });
 const middlewares = [thunk];
 

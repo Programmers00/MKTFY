@@ -23,7 +23,9 @@ const AccountInformation = () => {
   const navigate = useNavigate();
   // redux
   const dispatch = useDispatch();
-  const currentSignupForm = useSelector((state) => state.signup.signupForm);
+  const accountInformation = useSelector((state) => {
+    return state.accountInformation;
+  });
 
   /** data */
   // formattedPhoneNumber
@@ -96,8 +98,8 @@ const AccountInformation = () => {
     onChange: onFirstNameChange,
     validationMessage: firstNameValidationMessage,
   } = useValidator(
-    currentSignupForm.user_metadata?.firstName?.length !== 0
-      ? currentSignupForm.user_metadata.firstName
+    accountInformation.firstName?.length !== 0
+      ? accountInformation.firstName
       : "",
     "",
     validationFirstName
@@ -108,8 +110,8 @@ const AccountInformation = () => {
     onChange: onLastNameChange,
     validationMessage: lastNameValidationMessage,
   } = useValidator(
-    currentSignupForm.user_metadata?.lastName?.length !== 0
-      ? currentSignupForm.user_metadata.lastName
+    accountInformation.lastName?.length !== 0
+      ? accountInformation.lastName
       : "",
     "",
     validationLastName
@@ -120,7 +122,7 @@ const AccountInformation = () => {
     onChange: onEmailChange,
     validationMessage: emailValidationMessage,
   } = useValidator(
-    currentSignupForm.email.length !== 0 ? currentSignupForm.email : "",
+    accountInformation.email.length !== 0 ? accountInformation.email : "",
     "",
     validationEmail
   );
@@ -130,9 +132,7 @@ const AccountInformation = () => {
     onChange: onPhoneChange,
     validationMessage: phoneValidationMessage,
   } = useValidator(
-    currentSignupForm.user_metadata?.phone?.length !== 0
-      ? currentSignupForm.user_metadata?.phone
-      : "",
+    accountInformation.phone?.length !== 0 ? accountInformation.phone : "",
     "",
     validationPhone
   );
@@ -142,8 +142,8 @@ const AccountInformation = () => {
     onChange: onStreetAddressChange,
     validationMessage: streetAddressValidationMessage,
   } = useValidator(
-    currentSignupForm.user_metadata?.streetAddress?.length !== 0
-      ? currentSignupForm.user_metadata?.streetAddress
+    accountInformation.streetAddress?.length !== 0
+      ? accountInformation.streetAddress
       : "",
     "",
     validationStreetAddress
@@ -154,9 +154,7 @@ const AccountInformation = () => {
     onChange: onCityChange,
     validationMessage: cityValidationMessage,
   } = useValidator(
-    currentSignupForm.user_metadata?.city?.length !== 0
-      ? currentSignupForm.user_metadata?.city
-      : "Calgary",
+    accountInformation.city?.length !== 0 ? accountInformation.city : "Calgary",
     "",
     validationCity
   );
@@ -166,8 +164,8 @@ const AccountInformation = () => {
     onChange: onProvinceChange,
     validationMessage: provinceValidationMessage,
   } = useValidator(
-    currentSignupForm.user_metadata?.province?.length !== 0
-      ? currentSignupForm.user_metadata?.province
+    accountInformation.province?.length !== 0
+      ? accountInformation.province
       : "",
     "",
     validationProvince
@@ -178,15 +176,12 @@ const AccountInformation = () => {
     onChange: onCountryChange,
     validationMessage: countryValidationMessage,
   } = useValidator(
-    currentSignupForm.user_metadata?.country?.length !== 0
-      ? currentSignupForm.user_metadata?.country
-      : "",
+    accountInformation.country?.length !== 0 ? accountInformation.country : "",
     "",
     validationCountry
   );
-  /** data form for redux*/
-  // signup form
-  const signupForm = {
+  /** update params form for redux*/
+  const updateParams = {
     email,
     firstName,
     lastName,
@@ -199,27 +194,19 @@ const AccountInformation = () => {
 
   /** options */
   const getParams = {};
-  // update account information options
-  const updateParams = signupForm;
   /** get data from api */
   useEffect(() => {
-    const getData = async () => {
-      /** api: fetch account information */
-      const response = await dispatch(fetchAccountInformation(getParams));
-      // if success, set data
-      if (response.data.code === "SUCCESS") {
-        const { accountInformation } = response.data;
-        onFirstNameChange(accountInformation.firstName);
-        onLastNameChange(accountInformation.lastName);
-        onEmailChange(accountInformation.email);
-        onPhoneChange(accountInformation.phone);
-        onStreetAddressChange(accountInformation.streetAddress);
-        onCityChange(accountInformation.city);
-        onProvinceChange(accountInformation.province);
-        onCountryChange(accountInformation.country);
-      }
-    };
-    getData();
+    if (accountInformation.email === "") {
+      dispatch(fetchAccountInformation(getParams));
+    }
+    onFirstNameChange(accountInformation.firstName);
+    onLastNameChange(accountInformation.lastName);
+    onEmailChange(accountInformation.email);
+    onPhoneChange(accountInformation.phone);
+    onStreetAddressChange(accountInformation.streetAddress);
+    onCityChange(accountInformation.city);
+    onProvinceChange(accountInformation.province);
+    onCountryChange(accountInformation.country);
   }, []);
 
   /** functions */

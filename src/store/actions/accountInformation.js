@@ -9,12 +9,19 @@ const getOptions = {
   url: "/api/accountInformation",
 };
 export const fetchAccountInformation = (params) => {
-  return async () => {
+  return async (dispatch) => {
     try {
-      return await getAccountInformation({
+      const response = await getAccountInformation({
         ...getOptions,
         params,
       });
+      response.data.code === "SUCCESS" &&
+        dispatch({
+          type: "SET_ACCOUNT_INFORMATION",
+          informationAccount: response.data.accountInformation,
+        });
+
+      // return response;
     } catch (error) {
       console.log("#Error getAccountInformation:", error);
     }

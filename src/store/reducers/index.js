@@ -12,6 +12,7 @@ import {
 } from "./deals";
 import search from "./search";
 import product from "./product";
+import accountInformation from "./accountInformation";
 export {
   auth,
   signup,
@@ -25,4 +26,5 @@ export {
   search,
   product,
   productUploadImages,
+  accountInformation,
 };

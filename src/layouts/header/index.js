@@ -15,7 +15,7 @@ import { Navbar } from "./navbar";
 // button
 import { PlusIcon } from "../../assets/svgIcons";
 // user name from redux
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchAccountInformation } from "../../store/actions/accountInformation";
 /** header in layout */
 const Header = () => {
@@ -24,26 +24,18 @@ const Header = () => {
   const navigate = useNavigate();
   // dispatch
   const dispatch = useDispatch();
-  /** data */
-  // welcome back user name
-  const [userName, setUserName] = useState("");
-
+  // use selector
+  const accountInformation = useSelector((state) => {
+    return state.accountInformation;
+  });
   /** options */
   // get account information options for user name
   const params = {};
 
   /** get data from api */
   useEffect(() => {
-    const getData = async () => {
-      /** api */
-      const response = await dispatch(fetchAccountInformation(params));
-      /** if success, set data */
-      if (response.data.code === "SUCCESS") {
-        const { firstName, lastName } = response.data.accountInformation;
-        setUserName(firstName + " " + lastName);
-      }
-    };
-    getData();
+    accountInformation.email === "" &&
+      dispatch(fetchAccountInformation(params));
   }, []);
   return (
     <div className={styles.headerMainBox}>
@@ -53,7 +45,11 @@ const Header = () => {
         </div>
         <SearchBar></SearchBar>
         <div className={styles.buttons}>
-          <WelcomeDropdown userName={userName} />
+          <WelcomeDropdown
+            userName={
+              accountInformation.firstName + " " + accountInformation.lastName
+            }
+          />
           <NotificationDropdown />
           <div className={styles.buttonBox}>
             <button
