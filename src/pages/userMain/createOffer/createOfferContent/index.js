@@ -45,20 +45,16 @@ const CreateOfferContent = () => {
         responseUploadImages.data.uploadedFiles.length > 0
       ) {
         // new params (copy from redux current params)
-        const newParams = { ...currentParams };
+        const newParams = JSON.parse(JSON.stringify(currentParams));
         // add images id
         responseUploadImages.data.uploadedFiles.forEach((uploadedFile) => {
-          console.log("##newParams", newParams);
-          console.log("##currentParams", currentParams);
           newParams.imagesId.push(uploadedFile.fileId);
         });
-        newParams.imagesId.push("CATTT");
-        // set create offer with new params
-        // dispatch(setCreateOffer(newParams));
         // create create offer
         const responseCreateOffer = await dispatch(
-          createCreateOffer(currentParams)
+          createCreateOffer(newParams)
         );
+        // success =>
         if (responseCreateOffer.data.code === "SUCCESS") {
           navigate("/");
           dispatch(resetCreateOffer());

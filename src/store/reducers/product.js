@@ -30,15 +30,6 @@ const setProduct = (state = initialState, action) => {
           imagesId: [...state.params.imagesId],
         },
       };
-    case "SET_PRODUCT_IMAGES_ID":
-      console.log("#imagesId3=>", action.imagesId);
-      return {
-        ...state,
-        params: {
-          ...state.params,
-          imagesId: [...action.imagesId],
-        },
-      };
     // reset create offer: remove all data
     case "RESET_PRODUCT":
       return {

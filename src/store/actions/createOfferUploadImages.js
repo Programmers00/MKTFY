@@ -24,7 +24,6 @@ export const setSelectedImages = (selectedImages) => {
 
 /** create upload images action */
 export const createUploadImages = (images) => {
-  console.log("##images", images);
   return async () => {
     // create new FormData
     const formData = new FormData();
