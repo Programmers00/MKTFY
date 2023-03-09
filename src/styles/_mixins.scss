@@ -12,3 +12,12 @@
   border: none;
   cursor: pointer;
 }
+
+@mixin mainBox {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-block: 50px;
+  padding-inline: 180px;
+}

@@ -13,7 +13,7 @@ const ContentCard = ({ isWidthHalf, isNavigate, isExtendable, content }) => {
   const navigate = useNavigate();
   return (
     // is width half
-    <div className={styles.cardBox} style={isWidthHalf && { width: "46%" }}>
+    <div className={styles.cardBox} style={isWidthHalf && { width: "47%" }}>
       <span className={styles.cardTitle}>
         {content.title === "Deal" ? `${content.title}...` : content.title}
       </span>
