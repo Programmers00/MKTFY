@@ -20,11 +20,11 @@ export const useValidator = (initialValue, limitator, { regex, message }) => {
     }
     // validation not ok => set validation message
     if (!regex.test(value)) {
-      setValidationMessage(message);
+      setTimeout(() => setValidationMessage(message), 800);
     }
     // validation ok or input value length is 0 => no validation message
     if (regex.test(value) || value.length === 0) {
-      setValidationMessage("");
+      setTimeout(() => setValidationMessage(""), 800);
     }
     // will update when set value is true(limitator is true)
     if (willUpdate) {
