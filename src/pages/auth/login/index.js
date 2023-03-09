@@ -27,7 +27,7 @@ const Login = () => {
   // eye icon for password visibility
   const [passwordInputType, setPasswordInputType] = useState("password");
   // error for checking login fail
-  const [error, setError] = useState(0);
+  const [error, setError] = useState("");
   // validation data for email
   const validation = {
     // regex
@@ -64,6 +64,7 @@ const Login = () => {
         "#err.error_description",
         err.error_description
       );
+      console.log("##code", err.code);
       setError(err.code);
     });
   };
