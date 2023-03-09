@@ -13,6 +13,7 @@ import {
 import search from "./search";
 import product from "./product";
 import accountInformation from "./accountInformation";
+import token from "./token";
 export {
   auth,
   signup,
@@ -27,4 +28,5 @@ export {
   product,
   productUploadImages,
   accountInformation,
+  token,
 };

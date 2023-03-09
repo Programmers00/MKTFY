@@ -11,6 +11,8 @@ import { useDispatch } from "react-redux";
 import { fetchMyListingsCount } from "../../../store/actions/welcomeDropdown";
 // webAuth from auth0-js
 import { webAuth } from "../../../utils/webAuth";
+// actions
+import { resetToken } from "../../../store/actions/token";
 import envs from "../../../envs";
 
 const WelcomeDropdown = ({ userName }) => {
@@ -58,6 +60,8 @@ const WelcomeDropdown = ({ userName }) => {
     webAuth.logout({
       returnTo: `${envs.devUrl}/auth`,
     });
+    // reset token
+    dispatch(resetToken());
     onCloseTrigger();
   };
 

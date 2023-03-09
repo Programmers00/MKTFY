@@ -17,6 +17,7 @@ import {
   product,
   productUploadImages,
   accountInformation,
+  token,
 } from "./reducers";
 import thunk from "redux-thunk";
 
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
   product,
   productUploadImages,
   accountInformation,
+  token,
 });
 const middlewares = [thunk];
 
