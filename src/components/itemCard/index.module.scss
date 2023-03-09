@@ -16,8 +16,10 @@
     background-color: $verySubtleGray;
   }
   img {
+    border-radius: 10px 10px 0px 0px;
     width: 235px;
     height: 244px;
+    object-fit: cover;
   }
   .contentBox {
     display: flex;

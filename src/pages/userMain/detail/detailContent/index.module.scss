@@ -49,6 +49,7 @@
           transition: all 0.3s;
           // transform: translateY(-140px);
           // transform: translateY(-280px);
+          object-fit: cover;
         }
         .selectedImage {
         }
@@ -58,6 +59,7 @@
       border-radius: 10px;
       width: 648px;
       height: 493px;
+      object-fit: contain;
       .noImage {
         border-radius: 10px;
         display: flex;
