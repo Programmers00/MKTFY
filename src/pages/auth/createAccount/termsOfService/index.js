@@ -7,7 +7,11 @@ export const TermsOfService = () => {
   // const navigate = useNavigate();
   return (
     <div className={styles.wholeBox}>
-      <div className={styles.topBoxImage}></div>
+      <img
+        className={styles.topImage}
+        src={"/assets/background/backgroundTop.png"}
+        alt="topImage"
+      ></img>
       <div className={styles.bottomBox}>
         <div className={styles.buttonBox}>
           <img

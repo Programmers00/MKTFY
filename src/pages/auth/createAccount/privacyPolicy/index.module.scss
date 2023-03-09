@@ -4,15 +4,14 @@
 @import "../../../../styles/variabled";
 
 .wholeBox {
+  height: 100vh;
   background-color: $white;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  .topBoxImage {
-    background-size: contain;
-    height: 400px;
-    background-repeat: no-repeat;
-    background-image: url("../../../../assets/background/backgroundTop.png");
+  align-items: center;
+  .topImage {
+    object-fit: contain;
   }
   .bottomBox {
     height: 100%;
