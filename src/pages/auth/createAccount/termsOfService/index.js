@@ -1,10 +1,10 @@
 // scss styles
 import styles from "./index.module.scss";
 // navigate
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 export const TermsOfService = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   return (
     <div className={styles.wholeBox}>
       <div className={styles.topBoxImage}></div>
@@ -12,7 +12,10 @@ export const TermsOfService = () => {
         <div className={styles.buttonBox}>
           <img
             src={"/assets/icons/Arrow.png"}
-            onClick={() => navigate("/auth/createPassword")}
+            onClick={() => {
+              window.close();
+              // navigate("/auth/createPassword")
+            }}
             className={styles.backButton}
             alt="<"
           ></img>
@@ -67,7 +70,10 @@ export const TermsOfService = () => {
             <div className={styles.buttonBox}>
               <button
                 className={styles.button}
-                onClick={() => navigate("/auth/createPassword")}
+                onClick={() => {
+                  window.close();
+                  // navigate("/auth/createPassword")
+                }}
               >
                 acknowledge
               </button>

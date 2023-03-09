@@ -244,23 +244,29 @@ const CreatePassword = () => {
               1 Number
             </div>
           </div>
-          <div className={styles.checkBox}>
+          <div
+            className={styles.checkBox}
+            onClick={() => setIsChecked((prev) => !prev)}
+          >
             <img
               alt="check"
               className={styles.checkBoxIcon}
               src={require(`../../../../assets/icons/${
                 isChecked ? "checkBox" : "blankBox"
               }.png`)}
-              onClick={() => setIsChecked((prev) => !prev)}
             />
             <div className={styles.text}>
               <span>By checking this box, you agree to our</span>{" "}
               <span className={styles.hilightText}>
-                <Link to="/auth/termsOfService">Terms of Service</Link>
+                <Link to="/auth/termsOfService" target="_blank">
+                  Terms of Service
+                </Link>
               </span>{" "}
               and{" "}
               <span className={styles.hilightText}>
-                <Link to="/auth/privacyPolicy">our Privacy Policy</Link>
+                <Link to="/auth/privacyPolicy" target="_blank">
+                  our Privacy Policy
+                </Link>
               </span>
             </div>
           </div>
