@@ -165,7 +165,7 @@ const DataForm = () => {
         <div
           style={
             streetAddressValidationMessage.length !== 0
-              ? { borderColor: variabled.red }
+              ? { borderColor: variabled.mistakeRed }
               : {}
           }
         />

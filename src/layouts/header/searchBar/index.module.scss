@@ -6,13 +6,13 @@
 .searchBarBox {
   display: flex;
   flex: row;
-  background: $white;
+  background: $voidWhite;
   align-items: center;
   max-width: 935.12px;
   padding: 10px;
   border-radius: 8px;
   .formBox {
-    color: $black;
+    color: $titleGray;
     display: flex;
     width: 100%;
     .categoryTitle {
@@ -34,13 +34,13 @@
       padding: 10px 20px;
       cursor: pointer;
       &:hover {
-        background-color: $lightGrey;
-        color: $purple;
+        background-color: $verySubtleGray;
+        color: $occasionalPurple;
       }
     }
     .borderSeperator {
       padding-right: 0.5em;
-      border-right: 3px solid $black;
+      border-right: 3px solid $titleGray;
       margin-right: 0.5em;
     }
   }

@@ -13,7 +13,7 @@
     font-weight: 700;
     font-size: 36px;
     text-align: center;
-    color: $purple;
+    color: $occasionalPurple;
   }
   /* It's okay, these......*/
   .subTitle {
@@ -21,14 +21,14 @@
     height: 81px;
     font-weight: 600;
     font-size: 20px;
-    color: $gray;
+    color: $textGray;
     align-self: stretch;
   }
   .verificationCodeForm .verificationCodeLabel {
     font-weight: 600;
     font-size: 16px;
     line-height: 22px;
-    color: $black;
+    color: $titleGray;
     .verificationCodeInputBox {
       box-sizing: border-box;
       display: flex;
@@ -37,7 +37,7 @@
       padding: 16px 10px;
       // width: 542px;
       height: 51px;
-      background: $white;
+      background: $voidWhite;
       border: 1px solid #e2e2e2;
       border-radius: 4px;
       font-weight: 400;
@@ -56,7 +56,7 @@
       justify-content: first baseline;
     }
     .verificationWarningBox {
-      color: $red;
+      color: $mistakeRed;
       font-weight: 400;
       font-size: 14px;
       display: flex;
@@ -71,7 +71,7 @@
     .resendCode {
       font-weight: 600;
       font-size: 14px;
-      color: $yellow;
+      color: $warningYellow;
       margin-left: auto;
       cursor: pointer;
     }
@@ -82,9 +82,9 @@
     justify-content: center;
     .submitButton {
       @include button;
-      background: $purple;
+      background: $occasionalPurple;
       &:disabled {
-        background: $grey;
+        background: $disabledGray;
         cursor: auto;
       }
     }

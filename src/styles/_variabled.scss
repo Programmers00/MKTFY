@@ -1,37 +1,42 @@
-$darkestPurple: #560f9f;
 $lightPurple: #9349de;
-$purple: #6318af;
+$mediumestPurple: #6e20be;
+$darkestPurple: #560f9f;
+$occasionalPurple: #6318af;
 $hoverPurple: #843eca;
-$yellow: #ffba00;
+$goodGreen: #6cc04b;
+$subtleGray: #e2e2e2;
+$textGray: #4d4d4d;
+$disabledGray: #d9d9d9;
+$grayButtonGray: #969696;
+$textGray40: #4d4d4d;
+$titleGray: #313131;
+$verySubtleGray: #f7f7f7;
+$voidWhite: #ffffff;
+$mistakeRed: #ff2c2c;
+$warningYellow: #ffba00;
 $hoverYellow: #fdca40;
-$white: #ffffff;
-$red: #ff2c2c;
-$black: #313131;
-$darkBlack: #000000;
-$grey: #d9d9d9;
-$gray: #4d4d4d;
-$lightGrey: #f7f7f7;
-$lightGray: #e2e2e2;
-$lightestGrey: #e5e5e5;
-$darkGrey: #969696;
-$green: #6cc04b;
+$voidBlack: #000000;
+
+$lightGray: #e5e5e5;
 // export makes to use in js
 :export {
   darkestPurple: $darkestPurple;
   lightPurple: $lightPurple;
-  purple: $purple;
+  occasionalPurple: $occasionalPurple;
   hoverPurple: $hoverPurple;
-  yellow: $yellow;
+  goodGreen: $goodGreen;
+  subtleGray: $subtleGray;
+  textGray: $textGray;
+  disabledGray: $disabledGray;
+  grayButtonGray: $grayButtonGray;
+  textGray40: $textGray40;
+  verySubtleGray: $verySubtleGray;
+  titleGray: $titleGray;
+  voidWhite: $voidWhite;
+  mistakeRed: $mistakeRed;
+  warningYellow: $warningYellow;
   hoverYellow: $hoverYellow;
-  white: $white;
-  red: $red;
-  black: $black;
-  darkBlack: $darkBlack;
-  grey: $grey;
-  gray: $gray;
-  lightGrey: $lightGrey;
+
+  voidBlack: $voidBlack;
   lightGray: $lightGray;
-  lightestGrey: $lightestGrey;
-  darkGrey: $darkGrey;
-  green: $green;
 }

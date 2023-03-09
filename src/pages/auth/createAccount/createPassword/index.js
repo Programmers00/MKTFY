@@ -107,7 +107,7 @@ const CreatePassword = () => {
               password.length < 6 ||
               !/[A-Z]/.test(password) ||
               !/\d/.test(password)
-                ? { color: variabled.purple }
+                ? { color: variabled.occasionalPurple }
                 : {}
             }
           >
@@ -116,7 +116,7 @@ const CreatePassword = () => {
               {password.length === 0 ? (
                 ""
               ) : password.length > 10 ? (
-                <span style={{ color: variabled.green }}>Strong</span>
+                <span style={{ color: variabled.goodGreen }}>Strong</span>
               ) : (
                 <span style={{ color: variabled.hoverYellow }}>Weak</span>
               )}
@@ -135,7 +135,7 @@ const CreatePassword = () => {
                   password.length < 6 ||
                   !/[A-Z]/.test(password) ||
                   !/\d/.test(password)
-                    ? { borderColor: variabled.purple }
+                    ? { borderColor: variabled.occasionalPurple }
                     : {}
                 }
               />
@@ -168,7 +168,9 @@ const CreatePassword = () => {
           <label
             className={styles.passwordLabel}
             style={
-              password !== passwordConfirm ? { color: variabled.purple } : {}
+              password !== passwordConfirm
+                ? { color: variabled.occasionalPurple }
+                : {}
             }
           >
             Confirm Password
@@ -183,7 +185,7 @@ const CreatePassword = () => {
                 autoComplete="password"
                 style={
                   password !== passwordConfirm
-                    ? { borderColor: variabled.purple }
+                    ? { borderColor: variabled.occasionalPurple }
                     : {}
                 }
               />

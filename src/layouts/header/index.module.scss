@@ -10,7 +10,7 @@
   background-color: $darkestPurple;
   .headerContentBox {
     padding: 20px 60px;
-    background-color: $purple;
+    background-color: $occasionalPurple;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -18,7 +18,7 @@
     gap: 10px;
     .logo {
       font-size: 52px;
-      color: white;
+      color: $voidWhite;
       min-width: 180px;
       font-weight: 600;
       cursor: pointer;
@@ -39,7 +39,7 @@
           @include button;
           width: 155px;
           height: 50px;
-          background: $yellow;
+          background: $warningYellow;
           &:disabled {
             background: $hoverYellow;
             cursor: auto;

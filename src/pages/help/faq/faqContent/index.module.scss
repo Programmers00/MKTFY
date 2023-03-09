@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: row;
   .selectionsBox {
-    background: $white;
+    background: $voidWhite;
     ul {
       list-style: none;
       padding: 0;
@@ -23,12 +23,12 @@
         gap: 43px;
         width: 530px;
         height: 70px;
-        border-bottom: 1px solid $grey;
-        background-color: $white;
-        color: black;
+        border-bottom: 1px solid $disabledGray;
+        background-color: $voidWhite;
+        color: titleGray;
         text-decoration: none;
         &:disabled {
-          background-color: $lightGrey;
+          background-color: $verySubtleGray;
         }
         .iconBox {
           display: flex;
@@ -49,18 +49,18 @@
 
     width: 828px;
     height: 577px;
-    background: $lightGrey;
+    background: $verySubtleGray;
     .contentTitle {
       font-weight: 700;
       font-size: 40px;
       line-height: 54px;
-      color: $purple;
+      color: $occasionalPurple;
     }
     .contentDetail {
       font-weight: 400;
       font-size: 14px;
       line-height: 19px;
-      color: $darkBlack;
+      color: $voidBlack;
     }
   }
 }

@@ -50,11 +50,11 @@
     border-radius: 4px;
     overflow: auto;
     // max-height: 200px;
-    background-color: $white;
+    background-color: $voidWhite;
     z-index: 99;
     .searchBox {
       display: flex;
-      border: solid 1px $black;
+      border: solid 1px $titleGray;
       align-items: center;
       justify-content: center;
       input {
@@ -76,8 +76,8 @@
     }
     .selectItem {
       &:hover {
-        background-color: $lightGrey;
-        color: $purple;
+        background-color: $verySubtleGray;
+        color: $occasionalPurple;
       }
     }
     .selected {

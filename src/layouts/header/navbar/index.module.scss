@@ -5,7 +5,7 @@
 .navbarMainBox {
   display: flex;
   flex-direction: column;
-  background-color: $purple;
+  background-color: $occasionalPurple;
   ul {
     list-style-type: none;
     display: flex;
@@ -30,14 +30,14 @@
         text-decoration: none;
         font-weight: 400;
         font-size: 20px;
-        color: $white;
+        color: $voidWhite;
       }
     }
     a {
       text-decoration: none;
       font-weight: 400;
       font-size: 20px;
-      color: $white;
+      color: $voidWhite;
     }
   }
 }

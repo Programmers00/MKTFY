@@ -114,7 +114,7 @@ const DetailContent = ({ data }) => {
                   src={require(`../../../../assets/images/${image}.png`)}
                   style={
                     selectedIndex === index
-                      ? { border: `solid 1px ${variabled.purple}` }
+                      ? { border: `solid 1px ${variabled.occasionalPurple}` }
                       : undefined
                   }
                 ></img>

@@ -9,11 +9,11 @@
   flex-direction: row;
   gap: 10px;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
-  background-color: $white;
+  background-color: $voidWhite;
   border-radius: 10px;
   &:hover {
     cursor: pointer;
-    background-color: $lightGrey;
+    background-color: $verySubtleGray;
   }
   img {
     width: 391px;
@@ -35,12 +35,12 @@
       max-width: 245px;
       font-weight: 400;
       font-size: 16px;
-      color: $gray;
+      color: $textGray;
     }
     .itemPrice {
       font-weight: 600;
       font-size: 16px;
-      color: $purple;
+      color: $occasionalPurple;
     }
     .tagBox {
       display: flex;

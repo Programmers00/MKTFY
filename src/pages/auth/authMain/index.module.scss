@@ -14,12 +14,12 @@
   justify-content: center;
   align-items: center;
   .title {
-    color: $white;
+    color: $voidWhite;
     font-size: 70px;
     font-weight: 600;
   }
   .subTitle {
-    color: $white;
+    color: $voidWhite;
     font-style: normal;
     font-weight: 100;
     font-size: 16px;
@@ -27,7 +27,7 @@
   }
   .loginButton {
     @include button;
-    background: $yellow;
+    background: $warningYellow;
     margin-bottom: 18px;
     &:hover {
       background: $hoverYellow;
@@ -35,7 +35,7 @@
   }
   .createAccountButton {
     @include button;
-    background: $purple;
+    background: $occasionalPurple;
     &:hover {
       background: $hoverPurple;
     }
@@ -51,10 +51,10 @@
     text-align: center;
     cursor: pointer;
     .firstText {
-      color: $white;
+      color: $voidWhite;
     }
     .secondText {
-      color: $yellow;
+      color: $warningYellow;
     }
   }
 }

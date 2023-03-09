@@ -13,7 +13,7 @@
       align-items: center;
       padding: 24px;
       gap: 12px;
-      background: $white;
+      background: $voidWhite;
       border-radius: 10px 0px 0px 10px;
       .dragDropContent {
         display: flex;
@@ -86,7 +86,7 @@
       padding: 24px;
       gap: 24px;
       width: 692px;
-      background: $lightGrey;
+      background: $verySubtleGray;
       border-radius: 0px 10px 10px 0px;
     }
   }

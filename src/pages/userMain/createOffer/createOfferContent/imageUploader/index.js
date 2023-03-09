@@ -102,7 +102,7 @@ const ImageUploader = () => {
         onDragOver={onDrag}
         onDrop={onDrop}
         className={styles.dragDropContent}
-        style={dragActive ? { backgroundColor: variabled.lightGray } : {}}
+        style={dragActive ? { backgroundColor: variabled.subtleGray } : {}}
       >
         {!selectedImageList[0] ? (
           <div className={styles.centerContent}>

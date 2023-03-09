@@ -13,7 +13,7 @@
     font-weight: 700;
     font-size: 36px;
     text-align: center;
-    color: $purple;
+    color: $occasionalPurple;
   }
   /* It's okay, these......*/
   .subTitle {
@@ -21,14 +21,14 @@
     height: 81px;
     font-weight: 600;
     font-size: 20px;
-    color: $gray;
+    color: $textGray;
     align-self: stretch;
   }
   .emailForm .emailLabel {
     font-weight: 600;
     font-size: 16px;
     line-height: 22px;
-    color: $black;
+    color: $titleGray;
     .emailInput {
       box-sizing: border-box;
       display: flex;
@@ -44,7 +44,7 @@
       font-size: 14px;
     }
     .validationWarningBox {
-      color: $red;
+      color: $mistakeRed;
       font-weight: 400;
       font-size: 14px;
       display: flex;
@@ -60,9 +60,9 @@
     justify-content: center;
     .submitButton {
       @include button;
-      background: $purple;
+      background: $occasionalPurple;
       &:disabled {
-        background: $grey;
+        background: $disabledGray;
         cursor: auto;
       }
     }

@@ -5,7 +5,7 @@
 
 .wholeBox {
   height: 100vh;
-  background-color: $white;
+  background-color: $voidWhite;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -62,9 +62,9 @@
         padding-top: 32px;
         .button {
           @include button;
-          background: $purple;
+          background: $occasionalPurple;
           &:disabled {
-            background: $grey;
+            background: $disabledGray;
             cursor: auto;
           }
         }

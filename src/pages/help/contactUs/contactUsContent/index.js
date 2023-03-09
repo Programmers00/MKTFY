@@ -84,7 +84,7 @@ const ContactUsContent = () => {
             className={styles.input}
             style={
               emailValidationMessage.length !== 0
-                ? { borderColor: variabled.red }
+                ? { borderColor: variabled.mistakeRed }
                 : {}
             }
             type="text"

@@ -60,7 +60,7 @@ const MyListingsContent = () => {
           }}
           style={
             showItem === "active"
-              ? { color: "purple", textDecoration: "underline 3px" }
+              ? { color: "occasionalPurple", textDecoration: "underline 3px" }
               : {}
           }
         >
@@ -72,7 +72,7 @@ const MyListingsContent = () => {
           }}
           style={
             showItem === "sold"
-              ? { color: "purple", textDecoration: "underline 3px" }
+              ? { color: "occasionalPurple", textDecoration: "underline 3px" }
               : {}
           }
         >

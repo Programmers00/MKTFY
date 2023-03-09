@@ -9,12 +9,12 @@
   padding: 24px;
   gap: 24px;
   width: 692px;
-  background: $lightGrey;
+  background: $verySubtleGray;
   border-radius: 0px 10px 10px 0px;
   .label {
     font-weight: 600;
     font-size: 16px;
-    color: $black;
+    color: $titleGray;
     .input,
     textArea {
       box-sizing: border-box;
@@ -24,8 +24,8 @@
       padding: 16px 10px;
       width: 100%;
       height: 51px;
-      background-color: $white;
-      border: 1px solid $lightGray;
+      background-color: $voidWhite;
+      border: 1px solid $subtleGray;
       border-radius: 4px;
       font-weight: 400;
       font-size: 14px;
@@ -34,7 +34,7 @@
       height: 89px;
     }
     .validationWarningBox {
-      color: $red;
+      color: $mistakeRed;
       font-weight: 400;
       font-size: 14px;
       display: flex;
@@ -60,25 +60,25 @@
     justify-content: start;
     .postYourOfferButton {
       @include button;
-      background: $yellow;
+      background: $warningYellow;
       width: 100%;
       &:disabled {
-        background: $grey;
+        background: $disabledGray;
         cursor: auto;
       }
     }
     .confirmSoldButton {
       @include button;
       width: 100%;
-      background: $purple;
-      color: $white;
+      background: $occasionalPurple;
+      color: $voidWhite;
     }
     .cancelListingButton {
       @include button;
-      border: 1px solid $darkGrey;
+      border: 1px solid $grayButtonGray;
       width: 100%;
-      background: $white;
-      color: $darkGrey;
+      background: $voidWhite;
+      color: $grayButtonGray;
     }
   }
   .modalBox {
@@ -94,16 +94,16 @@
     border-radius: 20px;
     top: calc(50% - 167.5px);
     left: calc(50% - 84.5px);
-    border: solid 1px $darkGrey;
+    border: solid 1px $grayButtonGray;
     .modalTitle {
       font-weight: 700;
       font-size: 16px;
-      color: $black;
+      color: $titleGray;
     }
     .content {
       font-weight: 400;
       font-size: 14px;
-      color: $black;
+      color: $titleGray;
     }
     .buttonsBox {
       display: flex;
@@ -119,7 +119,7 @@
           justify-content: start;
           .cancelButton {
             @include button;
-            background: $white;
+            background: $voidWhite;
             color: #969696;
             width: 100%;
             height: 37px;
@@ -127,7 +127,7 @@
             border-radius: 100px;
             padding: 10px 29px;
             &:hover {
-              background: $grey;
+              background: $disabledGray;
               cursor: pointer;
             }
           }

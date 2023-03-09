@@ -11,12 +11,12 @@
   justify-content: center;
   align-items: center;
   .welcome {
-    color: $white;
+    color: $voidWhite;
     font-size: 12px;
     font-weight: 300;
   }
   .userName {
-    color: $yellow;
+    color: $warningYellow;
     font-size: 16px;
     font-weight: 700;
   }
@@ -38,7 +38,7 @@
     gap: 10px;
     padding-bottom: 16px;
     .circle {
-      color: $white;
+      color: $voidWhite;
       font-weight: 700;
       font-size: 16px;
       display: flex;
@@ -54,7 +54,7 @@
     .userName {
       font-weight: 700;
       font-size: 16px;
-      color: black;
+      color: titleGray;
     }
   }
 }
@@ -76,15 +76,15 @@
     flex-direction: row;
     font-weight: 400;
     font-size: 14px;
-    color: $black;
+    color: $titleGray;
     list-style-type: none;
     text-decoration: none;
     &:hover {
-      background-color: $lightGrey;
-      color: $purple;
+      background-color: $verySubtleGray;
+      color: $occasionalPurple;
     }
     .notification {
-      color: $white;
+      color: $voidWhite;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -100,7 +100,7 @@
 .signOutBox {
   width: 100%;
   a {
-    color: $red;
+    color: $mistakeRed;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -108,8 +108,8 @@
     font-size: 14px;
     cursor: pointer;
     &:hover {
-      background-color: $lightGrey;
-      color: $purple;
+      background-color: $verySubtleGray;
+      color: $occasionalPurple;
     }
   }
 }

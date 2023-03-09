@@ -13,14 +13,14 @@
     font-weight: 700;
     font-size: 36px;
     text-align: center;
-    color: $purple;
+    color: $occasionalPurple;
   }
   .loginForm .emailLabel,
   .loginForm .passwordLabel {
     font-weight: 600;
     font-size: 16px;
     line-height: 22px;
-    color: $black;
+    color: $titleGray;
     .passwordInputBox {
       display: flex;
       justify-content: flex-end;
@@ -48,7 +48,7 @@
       font-size: 14px;
     }
     .validationWarning {
-      color: $red;
+      color: $mistakeRed;
       font-weight: 400;
       font-size: 14px;
     }
@@ -58,7 +58,7 @@
     .forgotPassword {
       font-weight: 600;
       font-size: 14px;
-      color: $yellow;
+      color: $warningYellow;
       margin-left: auto;
       cursor: pointer;
     }
@@ -68,9 +68,9 @@
     justify-content: center;
     .loginButton {
       @include button;
-      background: $yellow;
+      background: $warningYellow;
       &:disabled {
-        background: $grey;
+        background: $disabledGray;
         cursor: auto;
       }
     }

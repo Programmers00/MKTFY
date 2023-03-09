@@ -8,13 +8,13 @@
   padding: 32px 16px;
   display: flex;
   flex-direction: column;
-  background-color: $white;
+  background-color: $voidWhite;
   border-radius: 10px;
   gap: 27px;
   .checkoutContentTitle {
     font-weight: 700;
     font-size: 40px;
-    color: $purple;
+    color: $occasionalPurple;
   }
   .checkoutContent {
     display: flex;
@@ -38,7 +38,7 @@
       .title {
         font-weight: 600;
         font-size: 14px;
-        color: $black;
+        color: $titleGray;
       }
       .price {
         font-weight: 700;
@@ -48,7 +48,7 @@
     }
   }
   .priceBox {
-    color: $purple;
+    color: $occasionalPurple;
     .total {
       font-weight: 700;
       font-size: 14px;
@@ -69,7 +69,7 @@
       justify-content: center;
       @include button;
       width: 100%;
-      background: $purple;
+      background: $occasionalPurple;
       &:hover {
         background: $hoverPurple;
         cursor: pointer;

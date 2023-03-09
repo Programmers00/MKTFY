@@ -267,7 +267,7 @@ const CreateAccount = () => {
                 maxLength={256}
                 style={
                   firstNameValidationMessage.length !== 0
-                    ? { borderColor: variabled.red }
+                    ? { borderColor: variabled.mistakeRed }
                     : {}
                 }
               />
@@ -290,7 +290,7 @@ const CreateAccount = () => {
                 maxLength={256}
                 style={
                   lastNameValidationMessage.length !== 0
-                    ? { borderColor: variabled.red }
+                    ? { borderColor: variabled.mistakeRed }
                     : {}
                 }
               />
@@ -307,7 +307,7 @@ const CreateAccount = () => {
                 className={styles.input}
                 style={
                   emailValidationMessage.length !== 0
-                    ? { borderColor: variabled.red }
+                    ? { borderColor: variabled.mistakeRed }
                     : {}
                 }
                 type="text"
@@ -336,7 +336,7 @@ const CreateAccount = () => {
                 maxLength={17}
                 style={
                   phoneValidationMessage.length !== 0
-                    ? { borderColor: variabled.red }
+                    ? { borderColor: variabled.mistakeRed }
                     : {}
                 }
               />
@@ -361,7 +361,7 @@ const CreateAccount = () => {
                 maxLength={60}
                 style={
                   streetAddressValidationMessage.length !== 0
-                    ? { borderColor: variabled.red }
+                    ? { borderColor: variabled.mistakeRed }
                     : {}
                 }
               />
@@ -384,7 +384,7 @@ const CreateAccount = () => {
                   maxLength={50}
                   style={
                     cityValidationMessage.length !== 0
-                      ? { borderColor: variabled.red }
+                      ? { borderColor: variabled.mistakeRed }
                       : {}
                   }
                 >
@@ -415,7 +415,7 @@ const CreateAccount = () => {
                   maxLength={50}
                   style={
                     provinceValidationMessage.length !== 0
-                      ? { borderColor: variabled.red }
+                      ? { borderColor: variabled.mistakeRed }
                       : {}
                   }
                 />
@@ -439,7 +439,7 @@ const CreateAccount = () => {
                 maxLength={50}
                 style={
                   countryValidationMessage.length !== 0
-                    ? { borderColor: variabled.red }
+                    ? { borderColor: variabled.mistakeRed }
                     : {}
                 }
               />

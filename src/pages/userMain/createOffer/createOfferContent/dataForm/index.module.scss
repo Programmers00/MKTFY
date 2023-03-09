@@ -9,12 +9,12 @@
   padding: 24px;
   gap: 24px;
   width: 692px;
-  background: $lightGrey;
+  background: $verySubtleGray;
   border-radius: 0px 10px 10px 0px;
   .label {
     font-weight: 600;
     font-size: 16px;
-    color: $black;
+    color: $titleGray;
     .input,
     textArea {
       box-sizing: border-box;
@@ -24,8 +24,8 @@
       padding: 16px 10px;
       width: 100%;
       height: 51px;
-      background-color: $white;
-      border: 1px solid $lightGray;
+      background-color: $voidWhite;
+      border: 1px solid $subtleGray;
       border-radius: 4px;
       font-weight: 400;
       font-size: 14px;
@@ -34,7 +34,7 @@
       height: 89px;
     }
     .validationWarningBox {
-      color: $red;
+      color: $mistakeRed;
       font-weight: 400;
       font-size: 14px;
       display: flex;
@@ -59,19 +59,19 @@
     justify-content: start;
     .postYourOfferButton {
       @include button;
-      background: $purple;
+      background: $occasionalPurple;
       width: 100%;
       &:disabled {
-        background: $grey;
+        background: $disabledGray;
         cursor: auto;
       }
     }
     .cancelButton {
       @include button;
-      border: 1px solid $darkGrey;
+      border: 1px solid $grayButtonGray;
       width: 100%;
-      background: $white;
-      color: $darkGrey;
+      background: $voidWhite;
+      color: $grayButtonGray;
     }
   }
 }

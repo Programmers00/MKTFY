@@ -106,7 +106,7 @@ const ResetPasswordComplete = () => {
               password.length < 6 ||
               !/[A-Z]/.test(password) ||
               !/\d/.test(password)
-                ? { color: variabled.purple }
+                ? { color: variabled.occasionalPurple }
                 : {}
             }
           >
@@ -124,7 +124,7 @@ const ResetPasswordComplete = () => {
                   password.length < 6 ||
                   !/[A-Z]/.test(password) ||
                   !/\d/.test(password)
-                    ? { borderColor: variabled.purple }
+                    ? { borderColor: variabled.occasionalPurple }
                     : {}
                 }
               />
@@ -157,7 +157,9 @@ const ResetPasswordComplete = () => {
           <label
             className={styles.passwordLabel}
             style={
-              password !== passwordConfirm ? { color: variabled.purple } : {}
+              password !== passwordConfirm
+                ? { color: variabled.occasionalPurple }
+                : {}
             }
           >
             Password Confirm
@@ -172,7 +174,7 @@ const ResetPasswordComplete = () => {
                 autoComplete="password"
                 style={
                   password !== passwordConfirm
-                    ? { borderColor: variabled.purple }
+                    ? { borderColor: variabled.occasionalPurple }
                     : {}
                 }
               />

@@ -76,7 +76,7 @@ const ChangePasswordContent = () => {
                 className={styles.emailInput}
                 style={
                   emailValidationMessage.length !== 0
-                    ? { borderColor: variabled.red }
+                    ? { borderColor: variabled.mistakeRed }
                     : {}
                 }
                 type="text"

@@ -8,14 +8,14 @@
   flex-direction: column;
   padding: 20px;
   border-radius: 5px;
-  background: $white;
+  background: $voidWhite;
   gap: 10px;
   .cardTitle {
     display: flex;
     justify-content: start;
     font-weight: 600;
     font-size: 20px;
-    color: $black;
+    color: $titleGray;
   }
   .itemsBox {
     display: flex;
@@ -33,7 +33,7 @@
       border-radius: 10px;
       &:hover {
         cursor: pointer;
-        background-color: $lightGrey;
+        background-color: $verySubtleGray;
       }
       img {
         max-width: 235px;
@@ -49,12 +49,12 @@
           max-width: 245px;
           font-weight: 400;
           font-size: 16px;
-          color: $gray;
+          color: $textGray;
         }
         .itemPrice {
           font-weight: 600;
           font-size: 16px;
-          color: $purple;
+          color: $occasionalPurple;
         }
       }
     }
