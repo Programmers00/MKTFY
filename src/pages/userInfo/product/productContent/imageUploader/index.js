@@ -147,15 +147,29 @@ const ImageUploader = () => {
             <p className={styles.text}>Choose or drag up to 5 photos</p>
           </div>
         ) : (
-          <img
-            alt="representingImg"
-            className={styles.representingImage}
-            src={
-              typeof selectedImageList[0] === "string"
-                ? require(`../../../../../assets/images/${selectedImageList[0]}.png`)
-                : URL.createObjectURL(selectedImageList[0])
-            }
-          />
+          <>
+            <img
+              alt="representingImg"
+              className={styles.representingImage}
+              src={
+                typeof selectedImageList[0] === "string"
+                  ? require(`../../../../../assets/images/${selectedImageList[0]}.png`)
+                  : URL.createObjectURL(selectedImageList[0])
+              }
+            />
+            <div className={styles.xIconBox}>
+              <div
+                className={styles.xIcon}
+                onClick={(e) => {
+                  // remove image, prevent other function
+                  e.preventDefault();
+                  onRemoveImage(0);
+                }}
+              >
+                <XIcon />
+              </div>
+            </div>
+          </>
         )}
         <input
           onChange={onChange}

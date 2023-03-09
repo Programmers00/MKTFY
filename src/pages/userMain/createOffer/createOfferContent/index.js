@@ -12,7 +12,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   createCreateOffer,
   resetCreateOffer,
-  setCreateOffer,
 } from "../../../../store/actions/createOffer";
 import { createUploadImages } from "../../../../store/actions/createOfferUploadImages";
 /** create offer content : component for create offer */
