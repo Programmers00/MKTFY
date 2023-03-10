@@ -96,15 +96,15 @@ const App = () => {
                   element={<ChangePassword />}
                 />
                 <Route exact path="myListings" element={<MyListings />} />
-                <Route exact path="product" element={<Product />} />
+                <Route exact path="myListings/:id" element={<Product />} />
                 <Route exact path="myPurchases" element={<MyPurchases />} />
                 {/* help */}
                 <Route exact path="contactUs" element={<ContactUs />} />
                 <Route exact path="faq" element={<FAQ />} />
                 {/* etc */}
-                <Route exact path="checkout" element={<Checkout />} />
+                <Route exact path="checkout/:id" element={<Checkout />} />
                 <Route exact path="createOffer" element={<CreateOffer />} />
-                <Route exact path="detail" element={<Detail />} />
+                <Route exact path="detail/:id" element={<Detail />} />
                 {/* <Route path="*" element={<div>Opps</div>} /> */}
               </Route>
             </Routes>

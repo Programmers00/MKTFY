@@ -10,7 +10,7 @@ const ItemCard = ({ item, navigate }) => {
       key={item.id}
       className={styles.itemBox}
       onClick={() => {
-        navigate("/detail", { state: { id: item.id } });
+        navigate(`/detail/${item.id}`, { state: { id: item.id } });
       }}
     >
       <img src={require(`../../assets/images/${item.image}.png`)} alt="img" />

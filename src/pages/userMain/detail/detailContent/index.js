@@ -89,7 +89,7 @@ const DetailContent = ({ data }) => {
     const response = await dispacth(createCheckout(params));
     // if success, go to checkout
     if (response.data.code === "SUCCESS") {
-      navigate("/checkout", { state: { data } });
+      navigate(`/checkout/${data.id}`, { state: { data } });
     }
   };
 

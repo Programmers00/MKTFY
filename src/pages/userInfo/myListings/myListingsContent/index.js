@@ -24,7 +24,7 @@ const MyListingsContent = () => {
 
   /** functions */
   const onClickItem = (item) => {
-    navigate("/product", { state: { id: item.id } });
+    navigate(`/myListings/${item.id}`, { state: { id: item.id } });
   };
 
   /** params */
