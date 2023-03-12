@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // actions
 import { setToken } from "../../store/actions/token";
+import { setLoadingTrue } from "../../store/actions/loading";
 
 /** userMain layout with private router */
 const UserMain = () => {
@@ -26,6 +27,8 @@ const UserMain = () => {
 
   // after login, set access token
   useEffect(() => {
+    // no accessToken => show loading
+    !accessToken && dispatch(setLoadingTrue());
     // get access token from url by using parseHash function
     webAuth.parseHash({ hash: window.location.hash }, (err, res) => {
       if (err) {
@@ -40,6 +43,7 @@ const UserMain = () => {
         if (res !== null) {
           // set token in redux
           dispatch(setToken(res.accessToken));
+
           // localStorage.setItem("accessToken", res.accessToken);
           // localStorage.setItem("idToken", res.idToken);
           // localStorage.setItem("nonce", res.idTokenPayload.nonce);

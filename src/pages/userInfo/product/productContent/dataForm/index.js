@@ -18,6 +18,7 @@ import {
   updateProduct,
   removeProduct,
 } from "../../../../../store/actions/product";
+import { setLoadingTrue } from "../../../../../store/actions/loading";
 // component
 import CancelListingModal from "./cancelListingModal";
 
@@ -127,6 +128,9 @@ const ProductForm = () => {
     // active to false => sold out
     const response = await dispatch(updateProduct(putParams));
     if (response.data.code === "SUCCESS") {
+      // show loading
+      dispatch(setLoadingTrue("Product Sold!"));
+      // navigate "myListing"
       navigate("/myListings");
     }
   };
@@ -139,6 +143,9 @@ const ProductForm = () => {
   const onCancel = async () => {
     const response = await dispatch(removeProduct(deleteParams));
     if (response.data.code === "SUCCESS") {
+      // // show loading
+      dispatch(setLoadingTrue("Product Canceled!"));
+      // navigate "myListings"
       navigate("/myListings");
     }
   };
@@ -273,9 +280,6 @@ const ProductForm = () => {
         <button
           className={styles.postYourOfferButton}
           type="submit"
-          // onClick={(e) => {
-          //   dispatch({ type: "CREATE_OFFER_FORM", createOfferForm });
-          // }}
           disabled={
             productName.length === 0 ||
             description.length === 0 ||

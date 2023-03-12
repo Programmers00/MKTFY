@@ -14,6 +14,7 @@ import search from "./search";
 import product from "./product";
 import accountInformation from "./accountInformation";
 import token from "./token";
+import loading from "./loading";
 export {
   auth,
   signup,
@@ -29,4 +30,5 @@ export {
   productUploadImages,
   accountInformation,
   token,
+  loading,
 };

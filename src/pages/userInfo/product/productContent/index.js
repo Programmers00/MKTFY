@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 // redux actions
 import { updateProduct, resetProduct } from "../../../../store/actions/product";
 import { createUploadImages } from "../../../../store/actions/productUploadImages";
-
+import { setLoadingTrue } from "../../../../store/actions/loading";
 /** product content : component for product edit */
 const ProductContent = () => {
   /** initialize */
@@ -57,8 +57,12 @@ const ProductContent = () => {
         // update product
         const responseProduct = await dispatch(updateProduct(newParams));
         if (responseProduct.data.code === "SUCCESS") {
-          navigate("/myListings");
+          // reset product
           dispatch(resetProduct());
+          // show loading
+          dispatch(setLoadingTrue("Product Saved"));
+          // navigate to "myListings"
+          navigate("/myListings");
         }
       }
     } catch (error) {}

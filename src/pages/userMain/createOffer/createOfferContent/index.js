@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 // navigate
 import { useNavigate } from "react-router-dom";
 // scss
@@ -14,6 +13,7 @@ import {
   resetCreateOffer,
 } from "../../../../store/actions/createOffer";
 import { createUploadImages } from "../../../../store/actions/createOfferUploadImages";
+import { setLoadingTrue } from "../../../../store/actions/loading";
 /** create offer content : component for create offer */
 const CreateOfferContent = () => {
   /** initialize */
@@ -55,8 +55,12 @@ const CreateOfferContent = () => {
         );
         // success =>
         if (responseCreateOffer.data.code === "SUCCESS") {
-          navigate("/");
+          // reset create offer data
           dispatch(resetCreateOffer());
+          // show loading
+          dispatch(setLoadingTrue("Product Posted!"));
+          // navigate "/"
+          navigate("/");
         }
       }
     } catch (error) {}

@@ -7,8 +7,6 @@ import styles from "./index.module.scss";
 import Modal from "../../../../components/modal";
 // navigate
 import { useNavigate } from "react-router-dom";
-// lottieFile
-import LottieIcon from "../../../../components/lottieIcon";
 // link to move page
 import { Link } from "react-router-dom";
 // useDispatch for sending action to redux
@@ -17,6 +15,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { webAuth } from "../../../../utils/webAuth";
 // redux actions
 import { createPassword, resetSignup } from "../../../../store/actions/signup";
+import { setLoadingTrue } from "../../../../store/actions/loading";
 
 /** CreatePassword */
 const CreatePassword = () => {
@@ -37,8 +36,6 @@ const CreatePassword = () => {
     useState("password");
   // check password = password confirm
   const [passwordConfirm, setPasswordConfirm] = useState("");
-  // lottie show true when login success
-  const [isShowLottie, setIsShowLottie] = useState(false);
   // check box checked or not
   const [isChecked, setIsChecked] = useState(false);
 
@@ -62,17 +59,12 @@ const CreatePassword = () => {
       }
       // signup success
       else if (res) {
-        // show lottie
-        setIsShowLottie(true);
         // dispatch: remove signup form data in redux
         dispatch(resetSignup());
-        // after 2seconds
-        setTimeout(() => {
-          // go login page
-          navigate("/auth/login");
-          // unshow lottie(return default value:false)
-          setIsShowLottie(false);
-        }, 2000);
+        // set loading page for 2seconds
+        dispatch(setLoadingTrue("Account Created!"));
+        // go login page
+        navigate("/auth/login");
       }
     });
   };
@@ -92,7 +84,7 @@ const CreatePassword = () => {
     );
   };
 
-  return !isShowLottie ? (
+  return (
     <Modal onClickBackButton={() => navigate("/auth/createAccount")}>
       <div className={styles.resetPasswordCompleteBox}>
         <span className={styles.title}>Create Password</span>
@@ -293,8 +285,6 @@ const CreatePassword = () => {
         </form>
       </div>
     </Modal>
-  ) : (
-    <LottieIcon title="Account Created!" />
   );
 };
 
