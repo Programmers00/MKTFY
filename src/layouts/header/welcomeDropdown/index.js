@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 // scss
 import styles from "./index.module.scss";
 // component
-import Dropdown from "../../../components/dropdown";
+import Dropdown from "../../../components/Dropdown";
 // svg icon
 import { SingOutIcon } from "../../../assets/svgIcons";
 // user name from redux

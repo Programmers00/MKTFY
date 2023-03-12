@@ -1,8 +1,8 @@
 // scss
 import styles from "./index.module.scss";
 // components
-import CategoryBar from "../../../components/categoryBar";
-import MyPurchasesContent from "./myPurchasesContent";
+import CategoryBar from "../../../components/CategoryBar";
+import MyPurchasesContent from "./MyPurchasesContent";
 
 /** my purchases page */
 const MyPurchases = () => {

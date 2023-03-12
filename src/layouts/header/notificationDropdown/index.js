@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 // scss
 import styles from "./index.module.scss";
 // component
-import Dropdown from "../../../components/dropdown";
+import Dropdown from "../../../components/Dropdown";
 // svg icon
 import {
   NotificationIcon,

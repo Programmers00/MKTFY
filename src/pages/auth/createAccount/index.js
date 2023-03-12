@@ -4,7 +4,7 @@ import variabled from "../../../styles/_variabled.scss";
 // scss styles
 import styles from "./index.module.scss";
 // Modal Component
-import Modal from "../../../components/modal";
+import Modal from "../../../components/Modal";
 // use validator hook
 import { useValidator } from "../../../hooks/useValidator";
 // constants for regex, validations

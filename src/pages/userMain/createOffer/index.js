@@ -1,8 +1,8 @@
 // scss
 import styles from "./index.module.scss";
 // components
-import CategoryBar from "../../../components/categoryBar";
-import CreateOfferContent from "./createOfferContent";
+import CategoryBar from "../../../components/CategoryBar";
+import CreateOfferContent from "./CreateOfferContent";
 
 /** create offer page */
 const CreateOffer = () => {

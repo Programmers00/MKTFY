@@ -1,8 +1,8 @@
 // scss
 import styles from "./index.module.scss";
 // components
-import CategoryBar from "../../../components/categoryBar";
-import AccountInfomationContent from "./accountInformationContent";
+import CategoryBar from "../../../components/CategoryBar";
+import AccountInfomationContent from "./AccountInformationContent";
 
 /** account information page */
 const AccountInformation = () => {

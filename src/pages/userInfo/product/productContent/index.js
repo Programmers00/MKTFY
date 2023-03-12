@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 // scss
 import styles from "./index.module.scss";
 // components
-import ImageUploader from "./imageUploader";
-import DataForm from "./dataForm";
+import ImageUploader from "./ImageUploader";
+import DataForm from "./DataForm";
 // redux stuff
 import { useDispatch, useSelector } from "react-redux";
 // redux actions

@@ -1,8 +1,8 @@
 // scss
 import styles from "./index.module.scss";
 // components
-import CategoryBar from "../../../components/categoryBar";
-import ChangePasswordContent from "./changePasswordContent";
+import CategoryBar from "../../../components/CategoryBar";
+import ChangePasswordContent from "./ChangePasswordContent";
 
 /** change password page */
 const ChangePassword = () => {

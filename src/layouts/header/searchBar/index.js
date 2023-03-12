@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 // scss
 import styles from "./index.module.scss";
 // components
-import Select from "../../../components/select"; //common
+import Select from "../../../components/Select"; //common
 import Search from "./search"; //dependent
 // navigate
 import { useNavigate } from "react-router-dom";

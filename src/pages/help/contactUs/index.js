@@ -1,8 +1,8 @@
 // scss
 import styles from "./index.module.scss";
 // components
-import CategoryBar from "../../../components/categoryBar";
-import ContactUsContent from "./contactUsContent";
+import CategoryBar from "../../../components/CategoryBar";
+import ContactUsContent from "./ContactUsContent";
 
 /** contact us page */
 const ContactUs = () => {

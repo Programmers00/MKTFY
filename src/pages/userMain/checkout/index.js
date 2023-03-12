@@ -4,8 +4,8 @@ import { useLocation } from "react-router-dom";
 // scss
 import styles from "./index.module.scss";
 // components
-import CategoryBar from "../../../components/categoryBar";
-import CheckoutContent from "./checkoutContent";
+import CategoryBar from "../../../components/CategoryBar";
+import CheckoutContent from "./CheckoutContent";
 
 /** checkout page */
 const Checkout = () => {

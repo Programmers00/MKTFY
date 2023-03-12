@@ -20,7 +20,7 @@ import {
 } from "../../../../../store/actions/product";
 import { setLoadingTrue } from "../../../../../store/actions/loading";
 // component
-import CancelListingModal from "./cancelListingModal";
+import CancelListingModal from "./CancelListingModal";
 
 /** product form  */
 const ProductForm = () => {

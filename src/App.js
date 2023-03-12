@@ -3,40 +3,40 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
 // auth pages
-import Auth from "./pages/auth";
-import AuthMain from "./pages/auth/authMain";
-import Login from "./pages/auth/login";
-import ForgotPassword from "./pages/auth/login/forgotPassword";
-import ResetPasswordVerification from "./pages/auth/login/resetPasswordVerification";
-import ResetPasswordComplete from "./pages/auth/login/resetPasswordComplete";
-import CreateAccount from "./pages/auth/createAccount";
-import CreatePassword from "./pages/auth/createAccount/createPassword";
-import TermsOfService from "./pages/auth/createAccount/termsOfService";
-import PrivacyPolicy from "./pages/auth/createAccount/privacyPolicy";
+import Auth from "./pages/Auth";
+import AuthMain from "./pages/Auth/AuthMain";
+import Login from "./pages/Auth/Login";
+import ForgotPassword from "./pages/Auth/Login/ForgotPassword";
+import ResetPasswordVerification from "./pages/Auth/Login/ResetPasswordVerification";
+import ResetPasswordComplete from "./pages/Auth/Login/ResetPasswordComplete";
+import CreateAccount from "./pages/Auth/CreateAccount";
+import CreatePassword from "./pages/Auth/CreateAccount/CreatePassword";
+import TermsOfService from "./pages/Auth/CreateAccount/TermsOfService";
+import PrivacyPolicy from "./pages/Auth/CreateAccount/PrivacyPolicy";
 // userMain pages
-import UserMain from "./pages/userMain";
-import Deals from "./pages/userMain/contents/deals";
-import CarsVehicles from "./pages/userMain/contents/carsVehicles";
-import Electronics from "./pages/userMain/contents/electronics";
-import Furniture from "./pages/userMain/contents/furniture";
-import RealEstate from "./pages/userMain/contents/realEstate";
+import UserMain from "./pages/UserMain";
+import Deals from "./pages/UserMain/Contents/Deals";
+import CarsVehicles from "./pages/UserMain/Contents/CarsVehicles";
+import Electronics from "./pages/UserMain/Contents/Electronics";
+import Furniture from "./pages/UserMain/Contents/Furniture";
+import RealEstate from "./pages/UserMain/Contents/RealEstate";
 // userInfo pages
-import AccountInformation from "./pages/userInfo/accountInformation";
-import ChangePassword from "./pages/userInfo/changePassword";
-import MyListings from "./pages/userInfo/myListings";
-import Product from "./pages/userInfo/product";
-import MyPurchases from "./pages/userInfo/myPurchases";
+import AccountInformation from "./pages/UserInfo/AccountInformation";
+import ChangePassword from "./pages/UserInfo/ChangePassword";
+import MyListings from "./pages/UserInfo/MyListings";
+import Product from "./pages/UserInfo/Product";
+import MyPurchases from "./pages/UserInfo/MyPurchases";
 // help pages
-import ContactUs from "./pages/help/contactUs";
-import FAQ from "./pages/help/faq";
+import ContactUs from "./pages/Help/ContactUs";
+import FAQ from "./pages/Help/FAQ";
 // etc pages
-import Checkout from "./pages/userMain/checkout";
-import CreateOffer from "./pages/userMain/createOffer";
-import Detail from "./pages/userMain/detail";
+import Checkout from "./pages/UserMain/Checkout";
+import CreateOffer from "./pages/UserMain/CreateOffer";
+import Detail from "./pages/UserMain/Detail";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor } from "./store";
 import { useSelector } from "react-redux";
-import Loading from "./components/loading";
+import Loading from "./components/Loading";
 
 // app is wrapped app main
 const App = () => {

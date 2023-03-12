@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 // scss
 import styles from "./index.module.scss";
 // components
-import HorizontalItemCard from "../../../../components/horizontalItemCard";
+import HorizontalItemCard from "../../../../components/HorizontalItemCard";
 // useDispatch for sending action to redux
 import { useDispatch } from "react-redux";
 import { fetchMyListings } from "../../../../store/actions/myListings";

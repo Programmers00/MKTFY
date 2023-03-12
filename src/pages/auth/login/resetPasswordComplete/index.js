@@ -4,7 +4,7 @@ import variabled from "../../../../styles/_variabled.scss";
 // css styles
 import styles from "./index.module.scss";
 // wrapper component
-import Modal from "../../../../components/modal";
+import Modal from "../../../../components/Modal";
 // navigate
 import { useNavigate } from "react-router-dom";
 // passwordlesslogin by auth0-js

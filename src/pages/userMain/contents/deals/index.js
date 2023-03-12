@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 // scss
 import styles from "./index.module.scss";
 // components
-import ContentCard from "../../../../components/contentCard";
+import ContentCard from "../../../../components/ContentCard";
 // redux stuff
 import { useDispatch, useSelector } from "react-redux";
 // redux actions

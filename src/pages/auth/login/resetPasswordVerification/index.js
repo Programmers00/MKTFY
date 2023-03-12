@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import variabled from "../../../../styles/_variabled.scss";
 import styles from "./index.module.scss";
 // wrapper component
-import Modal from "../../../../components/modal";
+import Modal from "../../../../components/Modal";
 // input code compoenent
-import InputCode from "../../../../components/inputCode";
+import InputCode from "../../../../components/InputCode";
 // navigate
 import { useNavigate } from "react-router-dom";
 // passwordlesslogin by auth0-js

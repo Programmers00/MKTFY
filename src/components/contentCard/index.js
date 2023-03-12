@@ -3,7 +3,7 @@ import styles from "./index.module.scss";
 // use navigate
 import { useNavigate } from "react-router-dom";
 // components
-import ItemCard from "../itemCard";
+import ItemCard from "../ItemCard";
 
 /** content card : parameter => isWidthHalf, isNavigate, isExtendable, content
  * content: {id, title, content:[id, title, img, price]}

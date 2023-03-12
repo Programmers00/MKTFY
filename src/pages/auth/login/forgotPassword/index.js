@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import variabled from "../../../../styles/_variabled.scss";
 import styles from "./index.module.scss";
 // wrapper component
-import Modal from "../../../../components/modal";
+import Modal from "../../../../components/Modal";
 // navigate
 import { useNavigate } from "react-router-dom";
 // customed hooks

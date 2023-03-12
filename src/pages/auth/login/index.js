@@ -2,7 +2,7 @@ import { useState } from "react";
 // scss style variabled for color red
 import variabled from "../../../styles/_variabled.scss";
 // wrapper component
-import Modal from "../../../components/modal";
+import Modal from "../../../components/Modal";
 // scss styles
 import styles from "./index.module.scss";
 // navigate
