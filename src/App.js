@@ -7,8 +7,7 @@ import Auth from "./pages/Auth";
 import AuthMain from "./pages/Auth/AuthMain";
 import Login from "./pages/Auth/Login";
 import ForgotPassword from "./pages/Auth/Login/ForgotPassword";
-import ResetPasswordVerification from "./pages/Auth/Login/ResetPasswordVerification";
-import ResetPasswordComplete from "./pages/Auth/Login/ResetPasswordComplete";
+import ResetPassword from "./pages/Auth/Login/ResetPassword";
 import CreateAccount from "./pages/Auth/CreateAccount";
 import CreatePassword from "./pages/Auth/CreateAccount/CreatePassword";
 import TermsOfService from "./pages/Auth/CreateAccount/TermsOfService";
@@ -65,16 +64,7 @@ const AppMain = () => {
               <Route index element={<AuthMain />} />
               <Route exact path="login" element={<Login />} />
               <Route exact path="forgotPassword" element={<ForgotPassword />} />
-              <Route
-                exact
-                path="resetPasswordVerification"
-                element={<ResetPasswordVerification />}
-              />
-              <Route
-                exact
-                path="resetPasswordComplete"
-                element={<ResetPasswordComplete />}
-              />
+              <Route exact path="resetPassword" element={<ResetPassword />} />
               <Route exact path="createAccount" element={<CreateAccount />} />
               <Route exact path="createPassword" element={<CreatePassword />} />
               <Route exact path="termsOfService" element={<TermsOfService />} />

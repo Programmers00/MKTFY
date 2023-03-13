@@ -12,16 +12,12 @@ import { useValidator } from "../../../../hooks/useValidator";
 import { regex, validationMessage } from "../../../../constants";
 // passwordlessStart by auth0-js
 import { webAuth } from "../../../../utils/webAuth";
-// email for redux
-import { useDispatch } from "react-redux";
 
 /** ForgotPassword */
 const ForgotPassword = () => {
   /** initialize */
   // navigate
   const navigate = useNavigate();
-  // redux
-  const dispatch = useDispatch();
 
   /** data */
   const [error, setError] = useState(false);
@@ -42,34 +38,23 @@ const ForgotPassword = () => {
   } = useValidator("", "", validation);
 
   /** parameter data */
-  // seding a code to email form
-  const codeToEmailForm = {
-    // is it possible to use client_secret??
-    client_secret:
-      "bmNX6FBTxSb6Wq9LCqEHrYCxwqpyVsL7FYj2cphbQO2A9KrlQujdwVdFqmW4OcHA",
-    connection: "email",
-    send: "code",
+  // change password form to change email
+  const changePasswordForm = {
+    connection: "Username-Password-Authentication", //"Username-Password-Authentication"
     email,
   };
 
   /** functions */
-  /** click submit button => seding a code to email */
-  const onClickSubmit = async (event) => {
+  /** click submit button => seding change password link to email */
+  const onClickSubmit = (event) => {
     event.preventDefault();
-    // seding a code to email form
-    webAuth.passwordlessStart(codeToEmailForm, (err, res) => {
-      // seding a code: fail
-      if (err) {
-        // error => true
-        setError(true);
-        console.error(err);
-      }
-      // seding a code: success
-      else {
-        localStorage.setItem("user_email", email);
-        // go to reset password verification page
-        navigate("/auth/resetPasswordVerification");
-        console.log(res);
+    // seding email by auth0-js
+    webAuth.changePassword(changePasswordForm, (error, response) => {
+      if (response) {
+        console.log("#Success:", response);
+        navigate("/auth/resetPassword");
+      } else {
+        console.log("#Fail:", error);
       }
     });
   };
