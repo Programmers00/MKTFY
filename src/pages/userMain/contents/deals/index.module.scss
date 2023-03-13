@@ -5,6 +5,7 @@
 
 .mainBox {
   @include mainBox;
+  background-color: $verySubtleGray;
   .half {
     justify-content: space-between;
     display: flex;

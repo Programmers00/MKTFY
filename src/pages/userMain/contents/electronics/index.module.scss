@@ -5,4 +5,5 @@
 
 .mainBox {
   @include mainBox;
+  background-color: $verySubtleGray;
 }

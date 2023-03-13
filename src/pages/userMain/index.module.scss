@@ -4,5 +4,6 @@
 @import "../../styles/variabled";
 
 .userMainBox {
-  background: $lightGray;
+  min-height: 100vh;
+  backdrop-filter: brightness(0.2) invert(1) grayscale(90%);
 }
