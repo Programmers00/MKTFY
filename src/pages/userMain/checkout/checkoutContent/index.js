@@ -1,8 +1,11 @@
 // scss
 import styles from "./index.module.scss";
+// navigate
+import { useNavigate } from "react-router-dom";
 
 const CheckoutContent = ({ data }) => {
   /** data */
+  const navigate = useNavigate();
 
   return (
     <div className={styles.checkoutContentBox}>
@@ -24,7 +27,10 @@ const CheckoutContent = ({ data }) => {
       </div>
       <div className={styles.buttonBox}>
         <a
-          href={`tel:${data.sellerInfo.contact}`}
+          // href={`tel:${data.sellerInfo.contact}`}
+          onClick={() => {
+            navigate(`/pickup/${data.id}`, { state: { data } });
+          }}
           className={styles.button}
           type="btton"
         >

@@ -154,10 +154,12 @@ const DetailContent = ({ data }) => {
         <div className={styles.description}>{data.description}</div>
         <div className={styles.sellerInfoBox}>
           <div className={styles.circle}>
-            {data.sellerInfo?.name?.charAt(0)}
+            {data.sellerInfo?.userName?.charAt(0)}
           </div>
           <div className={styles.sellerInfo}>
-            <span className={styles.sellerName}>{data.sellerInfo?.name}</span>
+            <span className={styles.sellerName}>
+              {data.sellerInfo?.userName}
+            </span>
             <span className={styles.listingBox}>
               <LabelIcon />
               <span

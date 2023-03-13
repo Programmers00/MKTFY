@@ -1,0 +1,74 @@
+// mixins for button
+@import "../../../../styles/mixins";
+// variabled for color
+@import "../../../../styles/variabled";
+
+.pickupContentBox {
+  max-width: 527px;
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: column;
+  background-color: $voidWhite;
+  border-radius: 10px;
+  gap: 27px;
+  .pickupContentTitle {
+    font-weight: 700;
+    font-size: 40px;
+    color: $occasionalPurple;
+  }
+  .userContent {
+    padding-inline: 16px;
+    align-items: flex-start;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    .infoBox {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 16px;
+      .circle {
+        color: $voidWhite;
+        font-weight: 700;
+        font-size: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        padding: 10px;
+        border-radius: 200px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        background-color: $darkestPurple;
+      }
+      .userName {
+        font-weight: 700;
+        font-size: 16px;
+        color: titleGray;
+      }
+    }
+  }
+  .buttonBox {
+    padding: 10px;
+    display: flex;
+    .button {
+      text-decoration: none;
+      gap: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include button;
+      width: 100%;
+      // ?
+      background: rgba(147, 73, 222, 0.2);
+      color: $lightPurple;
+      &:hover {
+        background: $hoverPurple;
+        color: $voidWhite;
+        cursor: pointer;
+      }
+    }
+  }
+}

@@ -31,6 +31,7 @@ import ContactUs from "./pages/Help/ContactUs";
 import FAQ from "./pages/Help/FAQ";
 // etc pages
 import Checkout from "./pages/UserMain/Checkout";
+import Pickup from "./pages/UserMain/Pickup";
 import CreateOffer from "./pages/UserMain/CreateOffer";
 import Detail from "./pages/UserMain/Detail";
 import { PersistGate } from "redux-persist/integration/react";
@@ -103,6 +104,7 @@ const AppMain = () => {
               <Route exact path="faq" element={<FAQ />} />
               {/* etc */}
               <Route exact path="checkout/:id" element={<Checkout />} />
+              <Route exact path="pickup/:id" element={<Pickup />} />
               <Route exact path="createOffer" element={<CreateOffer />} />
               <Route exact path="detail/:id" element={<Detail />} />
               {/* <Route path="*" element={<div>Opps</div>} /> */}
