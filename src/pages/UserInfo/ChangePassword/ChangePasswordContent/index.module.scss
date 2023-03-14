@@ -3,73 +3,114 @@
 // variabled for color
 @import "../../../../styles/variabled";
 
-.ChangePasswordBox {
-  width: 550px;
-  background: $voidWhite;
-  border-radius: 10px;
+.changePasswordBox {
   padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 30px;
-  // align-items: center;
+  background-color: $voidWhite;
+  max-width: 584px;
+  border-radius: 10px;
   .title {
-    /* change password */
-    align-self: flex-start;
+    /* change Password */
     font-weight: 700;
     font-size: 36px;
-    color: $occasionalPurple;
+    text-align: start;
+    color: $lightPurple;
   }
-  /* It's okay, these......*/
+  /* The password must have at least...*/
   .subTitle {
-    width: 542px;
+    width: 584px;
+    height: 54px;
     font-weight: 600;
     font-size: 20px;
+    line-height: 27px;
     color: $textGray;
   }
-  .emailForm .emailLabel {
+  .changePasswordForm {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  .changePasswordForm .passwordLabel {
     font-weight: 600;
     font-size: 16px;
+    line-height: 22px;
     color: $titleGray;
-    .emailInput {
+    .passwordInputBox {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      .eyeIcon {
+        padding-right: 10px;
+        position: absolute;
+        display: flex;
+        cursor: pointer;
+      }
+    }
+
+    .passwordInputBox .passwordInput {
       box-sizing: border-box;
       display: flex;
       flex-direction: row;
       align-items: center;
       padding: 16px 10px;
-      width: 542px;
-      background: $voidWhite;
-      border: 1px solid $subtleGray;
+      width: 100%;
+      height: 51px;
+      background: #ffffff;
+      border: 1px solid #e2e2e2;
       border-radius: 4px;
       font-weight: 400;
       font-size: 14px;
     }
-    .validationWarningBox {
+    .passwordMatchWarningBox {
       color: $mistakeRed;
       font-weight: 400;
       font-size: 14px;
       display: flex;
       height: 15px;
-      .validationWarning {
+      .passwordMatchverificationWarning {
         padding-right: 5px;
       }
     }
   }
-  .resendCodeBox {
+  .validationBox {
+    padding-inline: 20px;
     display: flex;
-    justify-content: flex-end;
-    .resendCode {
-      font-weight: 600;
-      font-size: 14px;
-      color: $warningYellow;
-      cursor: pointer;
+    flex-direction: column;
+    gap: 20px;
+    .validation {
+      padding: 5px;
+      display: flex;
+      text-align: center;
+      .checkIcon {
+        padding-right: 10px;
+      }
     }
   }
-
+  .checkBox {
+    padding: 5px;
+    display: flex;
+    text-align: center;
+    .checkBoxIcon {
+      padding-right: 10px;
+    }
+    .text {
+      font-size: 14px;
+      font-weight: 400;
+      color: $textGray;
+      padding: 0px;
+      .hilightText {
+        color: $lightPurple;
+      }
+    }
+  }
   .submitButtonBox {
     display: flex;
     justify-content: center;
     .submitButton {
       @include button;
+      width: 100%;
       background: $occasionalPurple;
       &:disabled {
         background: $disabledGray;

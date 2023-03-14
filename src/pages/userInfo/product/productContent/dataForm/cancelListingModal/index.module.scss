@@ -11,13 +11,13 @@
   flex-direction: column;
   justify-content: center;
   padding: 20px 25px;
-  gap: 16px;
-  width: 335px;
-  height: 169px;
-  background: #ffffff;
+  // gap: 16px;
+  width: 285px;
+  height: 129px;
+  background: $voidWhite;
   border-radius: 20px;
-  top: calc(50% - 167.5px);
-  left: calc(50% - 84.5px);
+  top: calc(50% - 142.5px);
+  left: calc(50% - 64.5px);
   border: solid 1px $grayButtonGray;
   .modalTitle {
     font-weight: 700;
