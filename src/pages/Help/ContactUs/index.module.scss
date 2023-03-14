@@ -1,0 +1,8 @@
+// mixins for mainBox
+@import "../../../styles/mixins";
+// variabled for color
+@import "../../../styles/variabled";
+
+.mainBox {
+  @include mainBox;
+}

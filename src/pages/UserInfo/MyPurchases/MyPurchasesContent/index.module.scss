@@ -1,0 +1,26 @@
+// mixins for button
+@import "../../../../styles/mixins";
+// variabled for color
+@import "../../../../styles/variabled";
+
+.myPurchasesContentBox {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  .myPurchasesTitle {
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 54px;
+    color: $titleGray;
+  }
+  .myPurchasesCount {
+    font-weight: 600;
+    font-size: 14px;
+    color: $textGray;
+  }
+  .contentBox {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}

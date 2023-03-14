@@ -1,0 +1,9 @@
+// mixins for button
+@import "../../styles/mixins";
+// variabled for color
+@import "../../styles/variabled";
+
+.userMainBox {
+  min-height: 100vh;
+  backdrop-filter: brightness(0.2) invert(1) grayscale(90%);
+}

@@ -1,0 +1,35 @@
+// mixin for background
+@import "../../styles/mixins";
+// variabled for color
+@import "../../styles/variabled";
+.loadingBackground {
+  // @include background;
+  .lottieBox {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .title {
+      font-weight: 700;
+      font-size: 40px;
+      line-height: 54px;
+      text-align: center;
+      color: $voidWhite;
+    }
+    .lottie {
+      width: 300px;
+      height: 300px;
+    }
+  }
+}
+
+// @keyframes animatedBackground {
+//   from {
+//     background-position: 0% 80%, 0% 55%, 0% 30%, 0% 0%;
+//   }
+//   to {
+//     background-position: 0% 60%, 0% 30%, 0% 20%, 0% 0%;
+//   }
+// }

@@ -1,0 +1,20 @@
+// mixins for button
+@import "../../styles/mixins";
+// variabled for color
+@import "../../styles/variabled";
+
+.categoryBar {
+  p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 400;
+    font-size: 14px;
+    color: $titleGray;
+    .categoryItem {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+    }
+  }
+}

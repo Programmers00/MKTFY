@@ -1,0 +1,60 @@
+// mixins for button
+@import "../../../styles/mixins";
+// variabled for color
+@import "../../../styles/variabled";
+
+.authMainBox {
+  background-size: 100%;
+  background-position: 0% 80%, 0% 55%, 0% 30%, 0% 0%;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .title {
+    color: $voidWhite;
+    font-size: 70px;
+    font-weight: 600;
+  }
+  .subTitle {
+    color: $voidWhite;
+    font-style: normal;
+    font-weight: 100;
+    font-size: 16px;
+    margin-bottom: 18px;
+  }
+  .loginButton {
+    @include button;
+    background: $warningYellow;
+    margin-bottom: 18px;
+    &:hover {
+      background: $hoverYellow;
+    }
+  }
+  .createAccountButton {
+    @include button;
+    background: $occasionalPurple;
+    &:hover {
+      background: $hoverPurple;
+    }
+  }
+  .bottomText {
+    /* Find out more about us! Visit our website */
+    position: absolute;
+    left: 142px;
+    bottom: 50px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    cursor: pointer;
+    .firstText {
+      color: $voidWhite;
+    }
+    .secondText {
+      color: $warningYellow;
+    }
+  }
+}

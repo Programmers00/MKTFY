@@ -1,0 +1,80 @@
+// mixins for button
+@import "../../../../styles/mixins";
+// variabled for color
+@import "../../../../styles/variabled";
+
+.ChangePasswordBox {
+  width: 550px;
+  background: $voidWhite;
+  border-radius: 10px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  // align-items: center;
+  .title {
+    /* change password */
+    align-self: flex-start;
+    font-weight: 700;
+    font-size: 36px;
+    color: $occasionalPurple;
+  }
+  /* It's okay, these......*/
+  .subTitle {
+    width: 542px;
+    font-weight: 600;
+    font-size: 20px;
+    color: $textGray;
+  }
+  .emailForm .emailLabel {
+    font-weight: 600;
+    font-size: 16px;
+    color: $titleGray;
+    .emailInput {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 16px 10px;
+      width: 542px;
+      background: $voidWhite;
+      border: 1px solid $subtleGray;
+      border-radius: 4px;
+      font-weight: 400;
+      font-size: 14px;
+    }
+    .validationWarningBox {
+      color: $mistakeRed;
+      font-weight: 400;
+      font-size: 14px;
+      display: flex;
+      height: 15px;
+      .validationWarning {
+        padding-right: 5px;
+      }
+    }
+  }
+  .resendCodeBox {
+    display: flex;
+    justify-content: flex-end;
+    .resendCode {
+      font-weight: 600;
+      font-size: 14px;
+      color: $warningYellow;
+      cursor: pointer;
+    }
+  }
+
+  .submitButtonBox {
+    display: flex;
+    justify-content: center;
+    .submitButton {
+      @include button;
+      background: $occasionalPurple;
+      &:disabled {
+        background: $disabledGray;
+        cursor: auto;
+      }
+    }
+  }
+}
