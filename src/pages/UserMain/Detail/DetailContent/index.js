@@ -57,11 +57,11 @@ const DetailContent = ({ data }) => {
       // change order index -1
       setSelectedOrder((prev) => prev - 1);
       // css function
-      // imageRef.current.forEach(
-      //   selectedIndex === 2
-      //     ? (image) => (image.style.transform = `translateY(${-140}px)`)
-      //     : (image) => (image.style.transform = `translateY(${0}px)`)
-      // );
+      imageRef.current.forEach(
+        selectedIndex === 2
+          ? (image) => (image.style.transform = `translateY(${-140}px)`)
+          : (image) => (image.style.transform = `translateY(${0}px)`)
+      );
     }
     // click down button
     if (direction === "down" && selectedIndex < MAX_INDEX) {
@@ -71,11 +71,11 @@ const DetailContent = ({ data }) => {
       // change order index +1
       setSelectedOrder((prev) => prev + 1);
       // css function
-      // imageRef.current.forEach(
-      //   selectedIndex === 2
-      //     ? (image) => (image.style.transform = `translateY(${-140}px)`)
-      //     : (image) => (image.style.transform = `translateY(${-280}px)`)
-      // );
+      imageRef.current.forEach(
+        selectedIndex === 2
+          ? (image) => (image.style.transform = `translateY(${-140}px)`)
+          : (image) => (image.style.transform = `translateY(${-280}px)`)
+      );
     }
   };
 
@@ -107,7 +107,7 @@ const DetailContent = ({ data }) => {
                   ref={(image) => (imageRef.current[index] = image)}
                   key={index}
                   onClick={() => {
-                    setSelectedIndex(index);
+                    // setSelectedIndex(index);
                   }}
                   className={styles.image}
                   alt="img"
