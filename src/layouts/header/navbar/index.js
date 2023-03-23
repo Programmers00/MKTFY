@@ -29,7 +29,7 @@ export const Navbar = () => {
   return (
     <nav className={styles.navbarMainBox}>
       <ul>
-        <form
+        {/* <form
           onClick={() => {
             console.log("#clicked category");
           }}
@@ -38,7 +38,7 @@ export const Navbar = () => {
             <HamburgerIcon />
           </label>
           <input value="Category" type="button" />
-        </form>
+        </form> */}
         {navbar.map((element) => (
           <Link key={element.title} to={element.url}>
             <li onClick={onClick}>{element.title}</li>
