@@ -79,11 +79,11 @@
     font-weight: 400;
     font-size: 16px;
   }
-  .nextButtonBox {
+  .saveButtonBox {
     flex: 1;
     display: flex;
     padding-top: 24px;
-    .nextButton {
+    .saveButton {
       @include button;
       background: $warningYellow;
       width: 100%;

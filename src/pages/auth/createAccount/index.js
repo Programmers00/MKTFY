@@ -73,19 +73,19 @@ const CreateAccount = () => {
     message: validationMessage.city,
   };
   // 7. province
-  const validationProvince = {
-    // regex
-    regex: regex.province,
-    // validation error messagevalidation
-    message: validationMessage.province,
-  };
+  // const validationProvince = {
+  //   // regex
+  //   regex: regex.province,
+  //   // validation error messagevalidation
+  //   message: validationMessage.province,
+  // };
   // 8. country
-  const validationCountry = {
-    // regex
-    regex: regex.country,
-    // validation error messagevalidation
-    message: validationMessage.country,
-  };
+  // const validationCountry = {
+  //   // regex
+  //   regex: regex.country,
+  //   // validation error messagevalidation
+  //   message: validationMessage.country,
+  // };
 
   /** hooks */
   // useValidator hooks
@@ -160,29 +160,29 @@ const CreateAccount = () => {
     validationCity
   );
   // 7. province
-  const {
-    value: province,
-    onChange: onProvinceChange,
-    validationMessage: provinceValidationMessage,
-  } = useValidator(
-    currentSignupForm.user_metadata?.province?.length !== 0
-      ? currentSignupForm.user_metadata?.province
-      : "",
-    "",
-    validationProvince
-  );
+  // const {
+  //   value: province,
+  //   onChange: onProvinceChange,
+  //   validationMessage: provinceValidationMessage,
+  // } = useValidator(
+  //   currentSignupForm.user_metadata?.province?.length !== 0
+  //     ? currentSignupForm.user_metadata?.province
+  //     : "",
+  //   "",
+  //   validationProvince
+  // );
   // 8. country
-  const {
-    value: country,
-    onChange: onCountryChange,
-    validationMessage: countryValidationMessage,
-  } = useValidator(
-    currentSignupForm.user_metadata?.country?.length !== 0
-      ? currentSignupForm.user_metadata?.country
-      : "",
-    "",
-    validationCountry
-  );
+  // const {
+  //   value: country,
+  //   onChange: onCountryChange,
+  //   validationMessage: countryValidationMessage,
+  // } = useValidator(
+  //   currentSignupForm.user_metadata?.country?.length !== 0
+  //     ? currentSignupForm.user_metadata?.country
+  //     : "",
+  //   "",
+  //   validationCountry
+  // );
   /** data form for redux*/
   // signup form
   const signupForm = {
@@ -192,8 +192,8 @@ const CreateAccount = () => {
     phone,
     streetAddress,
     city,
-    province,
-    country,
+    // province,
+    // country,
   };
 
   /** functions */
@@ -371,7 +371,37 @@ const CreateAccount = () => {
                 </div>
               </span>
             </label>
-            <div className={styles.cityProvinceBox}>
+            <label className={styles.label}>
+              City
+              <br />
+              <select
+                className={styles.input}
+                placeholder="City name"
+                value={city}
+                onChange={onCityChange}
+                autoComplete="address-level2"
+                maxLength={50}
+                style={
+                  cityValidationMessage.length !== 0
+                    ? { borderColor: variabled.mistakeRed }
+                    : {}
+                }
+              >
+                {cityList.map((city) => {
+                  return (
+                    <option value={city} key={city}>
+                      {city}
+                    </option>
+                  );
+                })}
+              </select>
+              <span className={styles.validationWarningBox}>
+                <div className={styles.validationWarning}>
+                  {cityValidationMessage}
+                </div>
+              </span>
+            </label>
+            {/* <div className={styles.cityProvinceBox}>
               <label className={styles.label}>
                 City
                 <br />
@@ -425,8 +455,8 @@ const CreateAccount = () => {
                   </div>
                 </span>
               </label>
-            </div>
-            <label className={styles.countryLabel}>
+            </div> */}
+            {/* <label className={styles.countryLabel}>
               Country
               <br />
               <input
@@ -448,7 +478,7 @@ const CreateAccount = () => {
                   {countryValidationMessage}
                 </div>
               </span>
-            </label>
+            </label> */}
             <div className={styles.nextButtonBox}>
               <button
                 className={styles.nextButton}
@@ -460,17 +490,18 @@ const CreateAccount = () => {
                   phone.length === 0 ||
                   streetAddress.length === 0 ||
                   city.length === 0 ||
-                  province.length === 0 ||
-                  country.length === 0 ||
+                  // province.length === 0 ||
+                  // country.length === 0 ||
                   firstNameValidationMessage.length !== 0 ||
                   lastNameValidationMessage.length !== 0 ||
                   emailValidationMessage.length !== 0 ||
                   phoneValidationMessage.length !== 0 ||
                   streetAddressValidationMessage.length !== 0 ||
-                  cityValidationMessage.length !== 0 ||
-                  provinceValidationMessage.length !== 0 ||
-                  countryValidationMessage.length !== 0
-                    ? true
+                  cityValidationMessage.length !== 0
+                    ? //   ||
+                      // provinceValidationMessage.length !== 0 ||
+                      // countryValidationMessage.length !== 0
+                      true
                     : false
                 }
               >
