@@ -37,6 +37,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistor } from "./store";
 import { useSelector } from "react-redux";
 import Loading from "./components/Loading";
+import "./app.scss";
 
 // app is wrapped app main
 const App = () => {

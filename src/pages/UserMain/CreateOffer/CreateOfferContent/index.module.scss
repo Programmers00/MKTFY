@@ -22,7 +22,7 @@
         width: 480px;
         height: 320px;
         background: #f7f7f7;
-        border: 1px dashed #6318af;
+        border: 1px dashed $occasionalPurple;
         border-radius: 6px;
         align-items: center;
         justify-content: center;
@@ -75,7 +75,7 @@
           align-items: center;
           width: 102px;
           height: 102px;
-          border: 1px dashed #6318af;
+          border: 1px dashed $occasionalPurple;
           border-radius: 6px;
         }
       }
