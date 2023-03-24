@@ -99,6 +99,10 @@ const Deals = () => {
           <ContentCard content={realEstate} isWidthHalf isNavigate />
         )}
       </div>
+      <div
+        className={styles.banner}
+        onClick={() => console.log("#download")}
+      ></div>
     </div>
   );
 };

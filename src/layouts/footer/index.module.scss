@@ -1,0 +1,75 @@
+// mixins for button
+@import "../../styles/mixins";
+// variabled for color
+@import "../../styles/variabled";
+
+.footerMainBox {
+  display: flex;
+  flex-direction: column;
+  background-color: $darkestPurple;
+  background-image: url("../../assets/images/footer.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 340px;
+  padding: 134px 245px;
+  justify-content: center;
+  .title {
+    color: $voidWhite;
+    font-size: 50px;
+    font-weight: bold;
+    padding-bottom: 45px;
+  }
+  /* Here at MKTFY we are human centric... */
+  .content {
+    color: $voidWhite;
+    display: flex;
+    flex-direction: row;
+    gap: 200px;
+    .detail {
+      font-weight: 200;
+      font-size: 20px;
+      line-height: 27px;
+      width: 273px;
+    }
+    .navigationBox {
+      display: flex;
+      flex-direction: row;
+      gap: 100px;
+      .navigation {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        .title {
+          font-size: 24px;
+          padding-bottom: 10px;
+        }
+        ul {
+          padding-left: 0px;
+          align-items: start;
+          list-style-type: none;
+          display: flex;
+          flex-direction: column;
+          justify-content: start;
+          text-decoration: none;
+          gap: 35px;
+          a {
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 20px;
+            color: $voidWhite;
+          }
+        }
+      }
+    }
+  }
+  .divisionLine {
+    border-top: 1px solid $disabledGray;
+    margin: 30px auto 10px;
+    width: 70%;
+  }
+  .copyright {
+    color: $disabledGray;
+    display: flex;
+    justify-content: center;
+  }
+}

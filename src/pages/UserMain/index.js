@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 // layout
 import Header from "../../layouts/header";
+import Footer from "../../layouts/footer";
 // scss
 import styles from "./index.module.scss";
 // webAuth from auth0-js library
@@ -57,6 +58,7 @@ const UserMain = () => {
       {/* layout header, content(outlet)  */}
       <Header />
       <Outlet />
+      <Footer />
     </div>
   );
 };
