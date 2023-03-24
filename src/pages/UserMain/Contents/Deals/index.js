@@ -101,6 +101,7 @@ const Deals = () => {
       </div>
       <div
         className={styles.banner}
+        // download url
         onClick={() => console.log("#download")}
       ></div>
     </div>

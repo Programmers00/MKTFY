@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 // scss
 import styles from "./index.module.scss";
 
+/** data */
 const detail =
   "Here at MKTFY we are human centric. We believe the stuff we buy, share and give are the backbone of our society — and we hope to ensure that we do this in a conscious way.";
 const navigation = [
@@ -24,12 +25,17 @@ const navigation = [
   },
 ];
 
+/** Footer */
 const Footer = () => {
   return (
     <div className={styles.footerMainBox}>
+      {/* title */}
       <span className={styles.title}>MKTFY</span>
+      {/* content */}
       <div className={styles.content}>
+        {/* left detail */}
         <div className={styles.detail}>{detail}</div>
+        {/* right navigation */}
         <div className={styles.navigationBox}>
           {navigation.map((element) => (
             <div className={styles.navigation}>
@@ -37,7 +43,7 @@ const Footer = () => {
               <ul>
                 {element.data.map((data) => (
                   <Link key={data.title} to={data.url}>
-                    <li onClick={() => {}}>{data.title}</li>
+                    <li>{data.title}</li>
                   </Link>
                 ))}
               </ul>
@@ -45,7 +51,9 @@ const Footer = () => {
           ))}
         </div>
       </div>
+      {/* divistion line */}
       <hr className={styles.divisionLine} />
+      {/* copyright */}
       <span className={styles.copyright}>Copyright @Launchpad by Vog 2021</span>
     </div>
   );
