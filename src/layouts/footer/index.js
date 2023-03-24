@@ -38,7 +38,7 @@ const Footer = () => {
         {/* right navigation */}
         <div className={styles.navigationBox}>
           {navigation.map((element) => (
-            <div className={styles.navigation}>
+            <div key={element.title} className={styles.navigation}>
               <span className={styles.title}>{element.title}</span>
               <ul>
                 {element.data.map((data) => (
@@ -54,7 +54,9 @@ const Footer = () => {
       {/* divistion line */}
       <hr className={styles.divisionLine} />
       {/* copyright */}
-      <span className={styles.copyright}>Copyright @Launchpad by Vog 2021</span>
+      <span className={styles.copyright}>
+        Copyright @NOhBUG @Launchpad by Vog 2023
+      </span>
     </div>
   );
 };

@@ -58,7 +58,9 @@ const WelcomeDropdown = ({ userName }) => {
   /** sign out: signout and close trigger */
   const onSignOut = () => {
     webAuth.logout({
-      returnTo: `${envs.devUrl}/auth`,
+      returnTo: `${
+        process.env.NODE_ENV === "development" ? envs.devUrl : envs.buildUrl
+      }/auth`,
     });
     // reset token
     dispatch(resetToken());
