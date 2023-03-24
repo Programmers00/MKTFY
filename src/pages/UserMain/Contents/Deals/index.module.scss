@@ -13,5 +13,8 @@
   .banner {
     height: 546px;
     background-image: url("../../../../assets/images/banner.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
   }
 }
