@@ -2,20 +2,18 @@
 import axios from "axios";
 // envs for global variables
 import envs from "../envs";
-// selector
-import { useSelector } from "react-redux";
 
 /** create axios */
 export const request = axios.create({
   baseURL: envs.baseUrl,
   timeout: 1000,
-  headers: { Accept: "application/json" },
+  headers: { Accept: "text/plain", "Content-Type": "application/json" },
 });
 
 // request interceptor to add the authentication token to all requests
 request.interceptors.request.use(
   (config) => {
-    const accessToken = useSelector((state) => state.token.accessToken);
+    const accessToken = sessionStorage.getItem("accessToken");
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
@@ -38,7 +36,7 @@ request.interceptors.response.use(
       //      ...??
 
       // Retry the original request with the new access token
-      const accessToken = useSelector((state) => state.token.accessToken);
+      const accessToken = sessionStorage.getItem("accessToken");
       originalRequest.headers.Authorization = `Bearer ${accessToken}`;
       return request(originalRequest);
     }

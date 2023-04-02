@@ -24,7 +24,7 @@ const UserMain = () => {
   const navigate = useNavigate();
   // dispatch for
   const dispatch = useDispatch();
-  const accessToken = useSelector((state) => state.token.accessToken);
+  const accessToken = sessionStorage.getItem("accessToken");
 
   // after login, set access token
   useEffect(() => {
@@ -44,6 +44,8 @@ const UserMain = () => {
         if (res !== null) {
           // set token in redux
           dispatch(setToken(res.accessToken));
+          // set token in sesstion storage
+          sessionStorage.setItem("accessToken", res.accessToken);
 
           // localStorage.setItem("accessToken", res.accessToken);
           // localStorage.setItem("idToken", res.idToken);
