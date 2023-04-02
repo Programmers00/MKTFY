@@ -1,6 +1,6 @@
 import { getMyPurchasesMockup } from "./myPurchasesMockup";
-// process api for request api
-import { processApi } from "../../../utils/processApi.js";
+// request api
+import request from "../../../utils/request";
 // global variable: envs.isOnlyMockup for project mockup test
 import envs from "../../../envs";
 
@@ -12,5 +12,5 @@ export const getMyPurchases = async (options) => {
   let isTest = true; // local variable Test => true
   return isOnlyMockup || isTest
     ? await getMyPurchasesMockup(options)
-    : await processApi(options);
+    : await request(options);
 };
