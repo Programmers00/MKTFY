@@ -98,7 +98,6 @@ const UserMain = () => {
     <div className={styles.userMainBox}>
       {/* layout header, content(outlet)  */}
       <Header />
-      <button onClick={() => login()}>TEST BUTTON</button>
       <Outlet />
       <Footer />
     </div>
