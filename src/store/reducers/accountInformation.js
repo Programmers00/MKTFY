@@ -6,8 +6,9 @@ const initialState = {
   phone: "",
   streetAddress: "",
   city: "",
-  province: "",
-  country: "",
+  // province: "",
+  // country: "",
+  id: "",
 };
 /** set account information reducer */
 const setAccountInformation = (state = initialState, action) => {
@@ -20,10 +21,11 @@ const setAccountInformation = (state = initialState, action) => {
         lastName: action.informationAccount.lastName,
         email: action.informationAccount.email,
         phone: action.informationAccount.phone,
-        streetAddress: action.informationAccount.streetAddress,
+        streetAddress: action.informationAccount.address,
         city: action.informationAccount.city,
-        province: action.informationAccount.province,
-        country: action.informationAccount.country,
+        // province: action.informationAccount.province,
+        // country: action.informationAccount.country,
+        id: action.informationAccount.id,
       };
     default:
       return state;

@@ -25,7 +25,8 @@ export const webAuth = new auth0js.WebAuth({
   redirectUri:
     process.env.NODE_ENV === "development" ? envs.devUrl : envs.buildUrl, //optional, if don't use here, you have to add in your parameter
   audience: findDomainInfo().audience, //optional, if don't use here, you have to add in your parameter
-  responseType: "token", //optional, if don't use here, you have to add in your parameter
+  // id_token for getting userId
+  responseType: "token id_token", //optional, if don't use here, you have to add in your parameter
   scope: "read:current_user update:current_user_metadata", //optional
   realm: findDomainInfo().realm,
 });

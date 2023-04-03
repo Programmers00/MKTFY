@@ -192,13 +192,8 @@ const AccountInformation = () => {
     // country,
   };
 
-  /** options */
-  const getParams = {};
   /** get data from api */
   useEffect(() => {
-    if (accountInformation.email === "") {
-      dispatch(fetchAccountInformation(getParams));
-    }
     onFirstNameChange(accountInformation.firstName);
     onLastNameChange(accountInformation.lastName);
     onEmailChange(accountInformation.email);

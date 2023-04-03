@@ -32,33 +32,24 @@ export const getAccountInformationMockup = (options) => {
   if (options)
     // success
     return {
-      loading: false,
+      statusText: "OK",
+      status: 200,
       data: {
-        code: "SUCCESS",
-        status: 200,
-        message: "Get Welcome Success",
-        accountInformation: {
-          firstName: "Samuel",
-          lastName: "Noh",
-          email: "nes0410@gmail.com",
-          phone: "+1 (825)999-9999",
-          streetAddress: "100 Main St",
-          city: "Camrose",
-          province: "Alberta",
-          country: "Canada",
-        },
+        address: "100 Main St",
+        city: "Calgary",
+        email: "admin@gmail.com",
+        firstName: "Samuel",
+        lastName: "Noh",
+        phone: "+1 (825) 994-4199",
+        id: "auth0|123a456e789bfd01a234efba",
       },
-      error: null,
     };
   // fail
   return {
-    loading: false,
-    data: null,
-    error: {
-      code: "ERR_NETWORK",
-      message: "Network Error",
-      name: "AxiosError",
-      status: 404,
+    status: 400,
+    statusText: "Bad Request",
+    data: {
+      message: "Unable to retrieve the requested user",
     },
   };
 };

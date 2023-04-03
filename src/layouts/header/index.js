@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 // scss
 import styles from "./index.module.scss";
 // naviagate
@@ -15,28 +14,17 @@ import { Navbar } from "./navbar";
 // button
 import { PlusIcon } from "../../assets/svgIcons";
 // user name from redux
-import { useDispatch, useSelector } from "react-redux";
-import { fetchAccountInformation } from "../../store/actions/accountInformation";
+import { useSelector } from "react-redux";
 /** header in layout */
 const Header = () => {
   /** initialize */
   // navigate
   const navigate = useNavigate();
   // dispatch
-  const dispatch = useDispatch();
   // use selector
   const accountInformation = useSelector((state) => {
     return state.accountInformation;
   });
-  /** options */
-  // get account information options for user name
-  const params = {};
-
-  /** get data from api */
-  useEffect(() => {
-    accountInformation.email === "" &&
-      dispatch(fetchAccountInformation(params));
-  }, []);
   return (
     <div className={styles.headerMainBox}>
       <div className={styles.headerContentBox}>

@@ -13,12 +13,18 @@ const postOptions = {
 export const createAccountInformation = (data) => {
   return async () => {
     try {
-      return await postAccountInformation({
+      const response = await postAccountInformation({
         ...postOptions,
         data,
       });
+      // success
+      if (response.status === 200) {
+        console.log("#Create Account Information Success", response);
+        sessionStorage.removeItem("signupForm");
+      }
     } catch (error) {
-      return error.response;
+      // fail
+      console.error("#Create Account Information Fail", error.response);
     }
   };
 };
@@ -26,24 +32,26 @@ export const createAccountInformation = (data) => {
 /** action : get account information */
 // options
 const getOptions = {
-  url: "/api/accountInformation",
+  url: "/api/User",
 };
-export const fetchAccountInformation = (params) => {
+// data <= id
+export const fetchAccountInformation = (data) => {
   return async (dispatch) => {
     try {
       const response = await getAccountInformation({
         ...getOptions,
-        params,
+        url: `${getOptions.url}/${data}`,
       });
-      response.data.code === "SUCCESS" &&
+      if (response.status === 200) {
+        console.log("#Fetch Account Information Success", response);
         dispatch({
           type: "SET_ACCOUNT_INFORMATION",
-          informationAccount: response.data.accountInformation,
+          informationAccount: response.data,
         });
-
-      // return response;
+      }
     } catch (error) {
-      console.log("#Error getAccountInformation:", error);
+      // fail
+      console.error("#Fetch Account Information Fail", error.response);
     }
   };
 };

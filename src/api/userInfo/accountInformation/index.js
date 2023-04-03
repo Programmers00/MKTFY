@@ -21,7 +21,7 @@ export const postAccountInformation = async (options) => {
 
 /** get account information data: call api or mockup */
 export const getAccountInformation = async (options) => {
-  let isTest = true; // local variable Test => true
+  let isTest = false; // local variable Test => true
   return isOnlyMockup || isTest
     ? await getAccountInformationMockup(options)
     : await request(options);
