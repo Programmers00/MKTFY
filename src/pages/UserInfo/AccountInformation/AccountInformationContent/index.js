@@ -11,10 +11,8 @@ import { regex, validationMessage } from "../../../../constants";
 import { useNavigate } from "react-router-dom";
 // useDispatch for sending action to redux
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchAccountInformation,
-  updateAccountInformation,
-} from "../../../../store/actions/accountInformation";
+import { updateAccountInformation } from "../../../../store/actions/accountInformation";
+import { setLoadingTrue } from "../../../../store/actions/loading";
 
 /** AccountInformation */
 const AccountInformation = () => {
@@ -182,11 +180,12 @@ const AccountInformation = () => {
   // );
   /** update params form for redux*/
   const updateParams = {
+    id: accountInformation.id,
     email,
     firstName,
     lastName,
     phone,
-    streetAddress,
+    address: streetAddress,
     city,
     // province,
     // country,
@@ -207,10 +206,13 @@ const AccountInformation = () => {
   /** functions */
   /** click submit button => save sinup form in redux and go userMain page*/
   const onClickSubmit = async (event) => {
+    console.log("updateParams.address", updateParams.address);
     event.preventDefault();
     /** api: update account information */
     const response = await dispatch(updateAccountInformation(updateParams));
-    if (response.data.code === "SUCCESS") {
+    if (response.status === 200) {
+      // set loading page for 2seconds
+      dispatch(setLoadingTrue("Account Information Changed!"));
       // need success page
       navigate("/");
     }

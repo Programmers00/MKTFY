@@ -59,23 +59,31 @@ export const putAccountInformationMockup = (options) => {
   if (options)
     // success
     return {
-      loading: false,
+      statusText: "OK",
+      status: 200,
       data: {
-        code: "SUCCESS",
-        status: 200,
-        message: "Put Account Information Success",
+        address: "100 Main St",
+        city: "Calgary",
+        email: "admin@gmail.com",
+        firstName: "Samuel",
+        lastName: "Noh",
+        phone: "+1 (825) 994-4199",
+        id: "auth0|123a456e789bfd01a234efba",
       },
-      error: null,
     };
   // fail
   return {
-    loading: false,
-    data: null,
-    error: {
-      code: "ERR_NETWORK",
-      message: "Network Error",
-      name: "AxiosError",
-      status: 404,
+    status: 400,
+    statusText: "Bad Request",
+    data: {
+      title: "One or more validation errors occurred.",
+      traceId: "00-af630d862617c3809b07442d213c9cd9-6d49bd0dcb0361ec-00",
+      type: "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+      status: 400,
+      error: {
+        Address: ["The Address field is required."],
+        Id: ["The Id field is required."],
+      },
     },
   };
 };

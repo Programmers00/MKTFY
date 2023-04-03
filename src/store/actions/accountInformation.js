@@ -59,15 +59,21 @@ export const fetchAccountInformation = (data) => {
 /** action: update account information */
 // options
 const updateOptions = {
-  url: "/api/accountInformation",
-  method: "post",
+  url: "/api/User",
+  method: "put",
 };
-export const updateAccountInformation = (params) => {
-  return async () => {
+export const updateAccountInformation = (data) => {
+  return async (dispatch) => {
     try {
-      return await putAccountInformation({ ...updateOptions, params });
+      const response = await putAccountInformation({ ...updateOptions, data });
+      if (response.status === 200) {
+        console.log("#Update Account Information Success", response);
+        dispatch(fetchAccountInformation(response.data.id));
+      }
+      return response;
     } catch (error) {
-      console.log("#Error putAccountInformation:", error);
+      console.error("#Update Account Information Fail:", error.response);
+      return error.response;
     }
   };
 };
