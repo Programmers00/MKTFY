@@ -1,4 +1,5 @@
 import {
+  postAccountInformationMockup,
   getAccountInformationMockup,
   putAccountInformationMockup,
 } from "./accountInformationMockup";
@@ -9,6 +10,14 @@ import envs from "../../../envs";
 
 // global variable
 const isOnlyMockup = envs.isOnlyMockup;
+
+/** post account information data: call api or mockup */
+export const postAccountInformation = async (options) => {
+  let isTest = false; // local variable Test => true
+  return isOnlyMockup || isTest
+    ? await postAccountInformationMockup(options)
+    : await request(options);
+};
 
 /** get account information data: call api or mockup */
 export const getAccountInformation = async (options) => {

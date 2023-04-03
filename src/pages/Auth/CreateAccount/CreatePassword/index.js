@@ -45,6 +45,14 @@ const CreatePassword = () => {
     dispatch(createPassword(password));
   }, [password]);
 
+  /** parameter data */
+  // login form
+  const loginForm = {
+    realm: "Username-Password-Authentication",
+    email: signupForm.email,
+    password,
+  };
+
   /** functions */
   /** click submit button => webAuth signup try */
   const onClickSubmit = async (event) => {
@@ -59,12 +67,22 @@ const CreatePassword = () => {
       }
       // signup success
       else if (res) {
+        console.log("##response signup success", res);
         // dispatch: remove signup form data in redux
         dispatch(resetSignup());
         // set loading page for 2seconds
         dispatch(setLoadingTrue("Account Created!"));
-        // go login page
-        navigate("/auth/login");
+        // set signup form in sessionStorage for auto login
+        sessionStorage.setItem("signupForm", JSON.stringify(res));
+        // auto login after auth0 signup success
+        webAuth.login(loginForm, (err) => {
+          console.error(
+            "#err.code",
+            err.code,
+            "#err.error_description",
+            err.error_description
+          );
+        });
       }
     });
   };

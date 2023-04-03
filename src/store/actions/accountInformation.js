@@ -1,7 +1,27 @@
 import {
+  postAccountInformation,
   getAccountInformation,
   putAccountInformation,
 } from "../../api/userInfo/accountInformation";
+
+/** action : post account information */
+// options
+const postOptions = {
+  url: "/api/User/register",
+  method: "post",
+};
+export const createAccountInformation = (data) => {
+  return async () => {
+    try {
+      return await postAccountInformation({
+        ...postOptions,
+        data,
+      });
+    } catch (error) {
+      return error.response;
+    }
+  };
+};
 
 /** action : get account information */
 // options

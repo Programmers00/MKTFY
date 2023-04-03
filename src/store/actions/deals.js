@@ -3,7 +3,7 @@ import { getListings } from "../../api/userMain/contents/deals";
 /** action: get deals */
 // options
 const dealsOptions = {
-  url: "/api/listings",
+  url: "/api/Product/Deals",
 };
 export const fetchDeals = (params) => async (dispatch) => {
   try {

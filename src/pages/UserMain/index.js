@@ -12,10 +12,11 @@ import { webAuth } from "../../utils/webAuth";
 // navigator
 import { useNavigate } from "react-router-dom";
 // redux
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 // actions
 import { setToken } from "../../store/actions/token";
 import { setLoadingTrue } from "../../store/actions/loading";
+import { createAccountInformation } from "../../store/actions/accountInformation";
 
 /** userMain layout with private router */
 const UserMain = () => {
@@ -25,7 +26,42 @@ const UserMain = () => {
   // dispatch for
   const dispatch = useDispatch();
   const accessToken = sessionStorage.getItem("accessToken");
+  const signupFormFromSessionStorage = JSON.parse(
+    sessionStorage.getItem("signupForm")
+  );
 
+  const login = async () => {
+    // signupForm
+    const {
+      Id,
+      email,
+      userMetadata: {
+        city,
+        firstName,
+        lastName,
+        phone,
+        streetAddress: address,
+      },
+    } = signupFormFromSessionStorage;
+    console.log(Id, email, city, firstName, lastName, phone);
+    const signupForm = {
+      id: `auth0|${Id}`,
+      email,
+      city,
+      firstName,
+      lastName,
+      phone,
+      address,
+    };
+
+    const response = await dispatch(createAccountInformation(signupForm));
+    if (response.status === 200) {
+      console.log("#Create Account Information Success", response);
+      sessionStorage.removeItem("signupForm");
+    } else {
+      console.error("#Create Account Information Fail", response);
+    }
+  };
   // after login, set access token
   useEffect(() => {
     // no accessToken => show loading
@@ -47,9 +83,12 @@ const UserMain = () => {
           // set token in sesstion storage
           sessionStorage.setItem("accessToken", res.accessToken);
 
-          // localStorage.setItem("accessToken", res.accessToken);
-          // localStorage.setItem("idToken", res.idToken);
-          // localStorage.setItem("nonce", res.idTokenPayload.nonce);
+          // if auto login(signup), there is signupForm => flag(signup or not)
+          // after login, call create account information api
+          const isAutoLogin =
+            signupFormFromSessionStorage &&
+            typeof signupFormFromSessionStorage === "object";
+          isAutoLogin && login();
         }
       }
     });
@@ -59,6 +98,7 @@ const UserMain = () => {
     <div className={styles.userMainBox}>
       {/* layout header, content(outlet)  */}
       <Header />
+      <button onClick={() => login()}>TEST BUTTON</button>
       <Outlet />
       <Footer />
     </div>
