@@ -55,54 +55,52 @@ const AppMain = () => {
 
   return (
     <>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <Router>
-          {/* auth */}
-          <Routes>
-            <Route exact path="/auth/*" element={<Auth />}>
-              <Route index element={<AuthMain />} />
-              <Route exact path="login" element={<Login />} />
-              <Route exact path="forgotPassword" element={<ForgotPassword />} />
-              <Route exact path="resetPassword" element={<ResetPassword />} />
-              <Route exact path="createAccount" element={<CreateAccount />} />
-              <Route exact path="createPassword" element={<CreatePassword />} />
-              <Route exact path="termsOfService" element={<TermsOfService />} />
-              <Route exact path="privacyPolicy" element={<PrivacyPolicy />} />
-              {/* <Route path="*" element={<div>Opps</div>} /> */}
-            </Route>
-            {/* user main with private router logic */}
-            <Route exact path="/*" element={<UserMain />}>
-              {/* contents */}
-              <Route exact index element={<Deals />} />
-              <Route exact path="carsVehicles" element={<CarsVehicles />} />
-              <Route exact path="electronics" element={<Electronics />} />
-              <Route exact path="furniture" element={<Furniture />} />
-              <Route exact path="realEstate" element={<RealEstate />} />
-              {/* userInfo */}
-              <Route
-                exact
-                path="accountInformation"
-                element={<AccountInformation />}
-              />
-              <Route exact path="changePassword" element={<ChangePassword />} />
-              <Route exact path="myListings" element={<MyListings />} />
-              <Route exact path="myListings/:id" element={<Product />} />
-              <Route exact path="myPurchases" element={<MyPurchases />} />
-              {/* help */}
-              <Route exact path="contactUs" element={<ContactUs />} />
-              <Route exact path="faq" element={<FAQ />} />
-              {/* etc */}
-              <Route exact path="checkout/:id" element={<Checkout />} />
-              <Route exact path="pickup/:id" element={<Pickup />} />
-              <Route exact path="createOffer" element={<CreateOffer />} />
-              <Route exact path="detail/:id" element={<Detail />} />
-              {/* <Route path="*" element={<div>Opps</div>} /> */}
-            </Route>
-          </Routes>
-        </Router>
-      )}
+      {isLoading && <Loading />}(
+      <Router>
+        {/* auth */}
+        <Routes>
+          <Route exact path="/auth/*" element={<Auth />}>
+            <Route index element={<AuthMain />} />
+            <Route exact path="login" element={<Login />} />
+            <Route exact path="forgotPassword" element={<ForgotPassword />} />
+            <Route exact path="resetPassword" element={<ResetPassword />} />
+            <Route exact path="createAccount" element={<CreateAccount />} />
+            <Route exact path="createPassword" element={<CreatePassword />} />
+            <Route exact path="termsOfService" element={<TermsOfService />} />
+            <Route exact path="privacyPolicy" element={<PrivacyPolicy />} />
+            {/* <Route path="*" element={<div>Opps</div>} /> */}
+          </Route>
+          {/* user main with private router logic */}
+          <Route exact path="/*" element={<UserMain />}>
+            {/* contents */}
+            <Route exact index element={<Deals />} />
+            <Route exact path="carsVehicles" element={<CarsVehicles />} />
+            <Route exact path="electronics" element={<Electronics />} />
+            <Route exact path="furniture" element={<Furniture />} />
+            <Route exact path="realEstate" element={<RealEstate />} />
+            {/* userInfo */}
+            <Route
+              exact
+              path="accountInformation"
+              element={<AccountInformation />}
+            />
+            <Route exact path="changePassword" element={<ChangePassword />} />
+            <Route exact path="myListings" element={<MyListings />} />
+            <Route exact path="myListings/:id" element={<Product />} />
+            <Route exact path="myPurchases" element={<MyPurchases />} />
+            {/* help */}
+            <Route exact path="contactUs" element={<ContactUs />} />
+            <Route exact path="faq" element={<FAQ />} />
+            {/* etc */}
+            <Route exact path="checkout/:id" element={<Checkout />} />
+            <Route exact path="pickup/:id" element={<Pickup />} />
+            <Route exact path="createOffer" element={<CreateOffer />} />
+            <Route exact path="detail/:id" element={<Detail />} />
+            {/* <Route path="*" element={<div>Opps</div>} /> */}
+          </Route>
+        </Routes>
+      </Router>
+      )
     </>
   );
 };

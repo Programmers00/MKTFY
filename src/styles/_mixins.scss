@@ -23,14 +23,10 @@
   padding-inline: 180px;
 }
 
-// @mixin background {
-//   background: $lightPurple;
-//   // src url
-//   background-image: url("/assets/background/background1.png"),
-//     url("/assets/background/background2.png"),
-//     url("/assets/background/background3.png"),
-//     url("/assets/background/background4.png");
-//   background-size: 100%;
-//   background-position: 0% 120%, 0% 80%, 0% 50%, 0% -40%;
-//   background-repeat: no-repeat;
-// }
+@mixin background {
+  background-color: $occasionalPurple;
+  font-family: "Open Sans", sans-serif;
+  background-image: url("../assets/images/clouds.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
