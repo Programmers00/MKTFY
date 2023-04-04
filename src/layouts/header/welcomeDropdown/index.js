@@ -62,8 +62,10 @@ const WelcomeDropdown = ({ userName }) => {
         process.env.NODE_ENV === "development" ? envs.devUrl : envs.buildUrl
       }/auth`,
     });
-    // reset token
+    // reset token in redux
     dispatch(resetToken());
+    // reset token in session storage
+    sessionStorage.clear();
     onCloseTrigger();
   };
 
