@@ -29,7 +29,7 @@ export const deals = (state = initailState, action) => {
 // carsVehicles
 export const carsVehicles = (state = initailState, action) => {
   switch (action.type) {
-    case "SET_CARSVEHICLES":
+    case "SET_VEHICLES":
       return {
         ...state,
         listings: action.response,
@@ -68,7 +68,7 @@ export const electronics = (state = initailState, action) => {
 // realEstate
 export const realEstate = (state = initailState, action) => {
   switch (action.type) {
-    case "SET_REALESTATE":
+    case "SET_REAL_ESTATE":
       return {
         ...state,
         listings: action.response,

@@ -16,7 +16,7 @@ request.interceptors.request.use(
     if (config.data instanceof FormData) {
       config.headers["Content-Type"] = "multipart/form-data";
     } else {
-      config.headers["Content-Type"] = "application/json; charset=utf8";
+      config.headers["Content-Type"] = "application/json";
     }
     config.headers.Authorization = `Bearer ${accessToken}`;
     return config;

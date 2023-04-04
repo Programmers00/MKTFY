@@ -13,7 +13,8 @@ const ItemCard = ({ item, navigate }) => {
         navigate(`/detail/${item.id}`, { state: { id: item.id } });
       }}
     >
-      <img src={require(`../../assets/images/${item.image}.png`)} alt="img" />
+      {/* <img src={require(`../../assets/images/${item.image}.png`)} alt="img" /> */}
+      <img src={item?.images[0]} alt="img" />
       <div className={styles.contentBox}>
         <div className={styles.itemTitle}>
           {item.productName.length < 50

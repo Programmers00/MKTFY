@@ -6,18 +6,14 @@ import ContentCard from "../../../../components/ContentCard";
 // redux stuff
 import { useDispatch, useSelector } from "react-redux";
 // redux actions
-import {
-  fetchDeals,
-  fetchCarsVehicles,
-  fetchFurniture,
-  fetchElectronics,
-  fetchRealEstate,
-} from "../../../../store/actions/deals";
+import { fetchDeals, fetchCategory } from "../../../../store/actions/deals";
 
 /** deals page */
 const Deals = () => {
   /** initialze */
   const dispatch = useDispatch();
+  /** flag for api call */
+  const accessToken = sessionStorage.getItem("accessToken");
 
   /** set data from redux*/
   const deals = useSelector((state) => {
@@ -38,65 +34,69 @@ const Deals = () => {
 
   /** params */
   // user prefer city from localstorage
-  const userCity = localStorage.getItem("userCity");
-  // deals
+  const userCity = JSON.parse(localStorage.getItem("userCity")).label;
+  // deals from my search history
   const dealsParams = {
-    category: "",
-    searchWord: "",
-    city: userCity,
-  };
-  // carsVehicles
-  const carsVehiclesParams = {
-    category: "carsVehicles",
-    searchWord: "",
-    city: userCity,
-  };
-  // furniture
-  const furnitureParams = {
-    category: "furniture",
-    searchWord: "",
-    city: userCity,
-  };
-  // electronics
-  const electronicsParams = {
-    category: "electronics",
-    searchWord: "",
-    city: userCity,
-  };
-  // realEstate
-  const realEstateParams = {
-    category: "realEstate",
-    searchWord: "",
     city: userCity,
   };
 
   /** request api with redux */
   useEffect(() => {
     /** api*/
-    dispatch(fetchDeals(dealsParams));
-    dispatch(fetchCarsVehicles(carsVehiclesParams));
-    dispatch(fetchFurniture(furnitureParams));
-    dispatch(fetchElectronics(electronicsParams));
-    dispatch(fetchRealEstate(realEstateParams));
+    if (accessToken) {
+      // fetch deals
+      dispatch(fetchDeals(dealsParams));
+      // categories
+      const categories = [
+        "VEHICLES",
+        "FURNITURE",
+        "ELECTRONICS",
+        "REAL_ESTATE",
+      ];
+      // fetch categories
+      categories.forEach((category) => {
+        dispatch(fetchCategory({ category, city: userCity }));
+      });
+    }
   }, []);
 
   return (
     <div className={styles.mainBox}>
-      {deals && <ContentCard content={deals} />}
+      {deals && <ContentCard content={deals} title={"Deals"} />}
       <div className={styles.half}>
         {carsVehicles && (
-          <ContentCard content={carsVehicles} isWidthHalf isNavigate />
+          <ContentCard
+            content={carsVehicles}
+            isWidthHalf
+            isNavigate
+            title="Cars&Vehicles"
+          />
         )}
         {furniture && (
-          <ContentCard content={furniture} isWidthHalf isNavigate />
+          <ContentCard
+            content={furniture}
+            isWidthHalf
+            isNavigate
+            title="Furniture"
+          />
         )}
       </div>
       <div className={styles.half}>
         {electronics && (
-          <ContentCard content={electronics} isWidthHalf isNavigate />
+          <ContentCard
+            content={electronics}
+            isWidthHalf
+            isNavigate
+            title="Electronics"
+          />
         )}
         {realEstate && (
-          <ContentCard content={realEstate} isWidthHalf isNavigate />
+          <ContentCard
+            content={realEstate}
+            isWidthHalf
+            isNavigate
+            title="RealEstate"
+          />
         )}
       </div>
       <div

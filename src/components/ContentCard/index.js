@@ -8,21 +8,27 @@ import ItemCard from "../ItemCard";
 /** content card : parameter => isWidthHalf, isNavigate, isExtendable, content
  * content: {id, title, content:[id, title, img, price]}
  */
-const ContentCard = ({ isWidthHalf, isNavigate, isExtendable, content }) => {
+const ContentCard = ({
+  isWidthHalf,
+  isNavigate,
+  isExtendable,
+  content,
+  title,
+}) => {
   /** initialize */
   const navigate = useNavigate();
   return (
     // is width half
     <div className={styles.cardBox} style={isWidthHalf && { width: "47%" }}>
       <span className={styles.cardTitle}>
-        {content.title === "Deal" ? `${content.title}...` : content.title}
+        {title === "Deals" ? `${title} for you` : title}
       </span>
       <div
         className={styles.itemsBox}
         // is extendable
         style={isExtendable && { flexWrap: "wrap" }}
       >
-        {content.items.map((item) => {
+        {content.map((item) => {
           return ItemCard({ item, navigate });
         })}
       </div>
@@ -32,7 +38,7 @@ const ContentCard = ({ isWidthHalf, isNavigate, isExtendable, content }) => {
           className={styles.navigationButton}
           onClick={() => {
             // navigate to content.title
-            navigate(`./${content.title.toLowerCase()}`);
+            navigate(`./${title.toLowerCase()}`);
           }}
         >
           Explore now
