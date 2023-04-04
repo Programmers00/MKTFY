@@ -105,17 +105,22 @@ const SearchBar = () => {
   };
   /** change city value and trigger to close select */
   const onChangeCity = (event) => {
-    if (event === city) return;
+    if (event.value === city.value) return;
     // params
     setCity(event);
     // local storage
-    localStorage.setItem("userCity", event.value);
+    localStorage.setItem("userCity", JSON.stringify(event));
     onCloseTrigger();
   };
   /** trigger for close select */
   const onCloseTrigger = () => {
     setCloseTrigger(new Date());
   };
+  // intitial city
+  useEffect(() => {
+    const city = JSON.parse(localStorage.getItem("userCity"));
+    setCity(city);
+  }, []);
 
   return (
     <div className={styles.searchBarBox}>
