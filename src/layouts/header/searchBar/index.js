@@ -8,7 +8,7 @@ import Search from "./search"; //dependent
 import { useNavigate } from "react-router-dom";
 // redux
 import { useDispatch, useSelector } from "react-redux";
-
+// redux action
 import { setSearchParams } from "../../../store/actions/search";
 
 /** search bar component in header */
@@ -21,11 +21,11 @@ const SearchBar = () => {
   /** data */
   // categories for Select component
   const categories = [
-    { value: "all", label: "All" },
-    { value: "carsVehicles", label: "CarsVehicles" },
-    { value: "furniture", label: "Furniture" },
-    { value: "electronics", label: "Electronics" },
-    { value: "realEstate", label: "Real Estate" },
+    { value: null, label: "All" },
+    { value: "VEHICLES", label: "CarsVehicles" },
+    { value: "FURNITURE", label: "Furniture" },
+    { value: "ELECTRONICS", label: "Electronics" },
+    { value: "REAL_ESTATE", label: "Real Estate" },
   ];
   // cities for Select component
   const cities = [
@@ -35,14 +35,13 @@ const SearchBar = () => {
   ];
   // navigate path
   const categoryPaths = {
-    all: "/",
-    carsVehicles: "/carsVehicles",
-    furniture: "/furniture",
-    electronics: "/electronics",
-    realEstate: "/realEstate",
+    REAL_ESTATE: "realEstate",
+    VEHICLES: "carsVehcles",
+    FURNITURE: "furniture",
+    ELECTRONICS: "electronics",
   };
   // user prefer city from local storage
-  const userCity = localStorage.getItem("userCity");
+  const userCity = JSON.parse(localStorage.getItem("userCity")).label;
 
   // current params from redux
   const currentParams = useSelector((state) => {
@@ -56,18 +55,18 @@ const SearchBar = () => {
       categories.find((item) => item.value === currentParams.category)
     );
     // set earch word
-    setSearchWord(currentParams.searchWord);
+    setSearch(currentParams.search);
   }, [currentParams]);
 
   // category
   const [category, setCategory] = useState(
-    currentParams.category !== "all"
+    currentParams.category !== null
       ? categories.find((item) => item.value === currentParams.category)
       : categories[0]
   );
   // search
-  const [searchWord, setSearchWord] = useState(
-    currentParams.searchWord !== "" ? currentParams.searchWord : ""
+  const [search, setSearch] = useState(
+    currentParams.search !== "" ? currentParams.search : ""
   );
   // city: if local sotrage has userCity? set userCity, not? set cities[0]
   const [city, setCity] = useState(
@@ -83,7 +82,7 @@ const SearchBar = () => {
   /** data form */
   const params = {
     category: category.value,
-    searchWord,
+    search,
     city: city.value,
   };
 
@@ -92,14 +91,15 @@ const SearchBar = () => {
   const onSubmit = (event) => {
     event.preventDefault();
     // trim: remove whitespace from both ends
-    if (searchWord.trim().length === 0) return;
+    if (search.trim().length === 0) return;
     dispatch(setSearchParams(params));
+
     const path = categoryPaths[params.category] || "/";
-    navigate(path);
+    navigate(path, { state: { isSearch: true } });
   };
   /** change category value and trigger to close select */
   const onChangeCategory = (event) => {
-    if (event === category) return;
+    if (event.value === category.value) return;
     setCategory(event);
     onCloseTrigger();
   };
@@ -136,11 +136,7 @@ const SearchBar = () => {
           currentSelectedValue={category}
         />
         <span className={styles.borderSeperator}></span>
-        <Search
-          searchWord={searchWord}
-          setSearchWord={setSearchWord}
-          onSubmit={onSubmit}
-        />
+        <Search search={search} setSearch={setSearch} onSubmit={onSubmit} />
         <span className={styles.borderSeperator}></span>
         <Select
           closeTrigger={closeTrigger}

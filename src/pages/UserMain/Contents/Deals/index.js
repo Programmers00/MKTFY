@@ -7,29 +7,38 @@ import ContentCard from "../../../../components/ContentCard";
 import { useDispatch, useSelector } from "react-redux";
 // redux actions
 import { fetchDeals, fetchCategory } from "../../../../store/actions/deals";
+// react router dom
+import { useLocation } from "react-router-dom";
 
 /** deals page */
 const Deals = () => {
   /** initialze */
   const dispatch = useDispatch();
+  const { state } = useLocation(); // checking isSearch from router(search or not)
+  /** data */
+  const [isSearch, setIsSearch] = useState(
+    state?.isSearch ? state.isSearch : false
+  );
+  // categories
+  const categories = ["VEHICLES", "FURNITURE", "ELECTRONICS", "REAL_ESTATE"];
   /** flag for api call */
   const accessToken = sessionStorage.getItem("accessToken");
 
   /** set data from redux*/
   const deals = useSelector((state) => {
-    return state.deals.listings.data;
+    return state.deals.data;
   });
   const carsVehicles = useSelector((state) => {
-    return state.carsVehicles.listings.data;
+    return state.carsVehicles.data;
   });
   const furniture = useSelector((state) => {
-    return state.furniture.listings.data;
+    return state.furniture.data;
   });
   const electronics = useSelector((state) => {
-    return state.electronics.listings.data;
+    return state.electronics.data;
   });
   const realEstate = useSelector((state) => {
-    return state.realEstate.listings.data;
+    return state.realEstate.data;
   });
 
   /** params */
@@ -43,30 +52,25 @@ const Deals = () => {
   /** request api with redux */
   useEffect(() => {
     /** api*/
-    if (accessToken) {
+    // when accessToken has, not isSearch
+    if (accessToken && !isSearch) {
       // fetch deals
       dispatch(fetchDeals(dealsParams));
-      // categories
-      const categories = [
-        "VEHICLES",
-        "FURNITURE",
-        "ELECTRONICS",
-        "REAL_ESTATE",
-      ];
       // fetch categories
       categories.forEach((category) => {
         dispatch(fetchCategory({ category, city: userCity }));
       });
     }
-  }, []);
+    setIsSearch(false);
+  }, [accessToken]);
 
   return (
     <div className={styles.mainBox}>
-      {deals && <ContentCard content={deals} title={"Deals"} />}
+      {deals && <ContentCard items={deals} title="Deals" />}
       <div className={styles.half}>
         {carsVehicles && (
           <ContentCard
-            content={carsVehicles}
+            items={carsVehicles}
             isWidthHalf
             isNavigate
             title="Cars&Vehicles"
@@ -74,7 +78,7 @@ const Deals = () => {
         )}
         {furniture && (
           <ContentCard
-            content={furniture}
+            items={furniture}
             isWidthHalf
             isNavigate
             title="Furniture"
@@ -84,7 +88,7 @@ const Deals = () => {
       <div className={styles.half}>
         {electronics && (
           <ContentCard
-            content={electronics}
+            items={electronics}
             isWidthHalf
             isNavigate
             title="Electronics"
@@ -92,7 +96,7 @@ const Deals = () => {
         )}
         {realEstate && (
           <ContentCard
-            content={realEstate}
+            items={realEstate}
             isWidthHalf
             isNavigate
             title="RealEstate"

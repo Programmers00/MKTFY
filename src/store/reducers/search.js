@@ -1,8 +1,8 @@
 /** initialize state */
 const initailState = {
   params: {
-    category: "all",
-    searchWord: "",
+    category: null,
+    search: "",
     city: "calgary",
   },
 };
@@ -14,7 +14,7 @@ const search = (state = initailState, action) => {
     case "SET_SEARCH_PARAMS":
       return {
         ...state,
-        params: action.params,
+        params: action.payload,
       };
     // reset search params(category, search word)
     case "RESET_SEARCH_PARAMS":
@@ -23,7 +23,7 @@ const search = (state = initailState, action) => {
         params: {
           ...state.params,
           category: initailState.params.category,
-          searchWord: initailState.params.searchWord,
+          search: initailState.params.search,
         },
       };
     default:

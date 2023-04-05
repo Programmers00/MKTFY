@@ -12,7 +12,7 @@ const ContentCard = ({
   isWidthHalf,
   isNavigate,
   isExtendable,
-  content,
+  items,
   title,
 }) => {
   /** initialize */
@@ -28,7 +28,7 @@ const ContentCard = ({
         // is extendable
         style={isExtendable && { flexWrap: "wrap" }}
       >
-        {content.map((item) => {
+        {items.map((item) => {
           return ItemCard({ item, navigate });
         })}
       </div>

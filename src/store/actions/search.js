@@ -1,36 +1,42 @@
-// redux actions
-import {
-  fetchDeals,
-  fetchCarsVehicles,
-  fetchFurniture,
-  fetchElectronics,
-  fetchRealEstate,
-} from "./deals";
+import { getSearch } from "../../api/header/search";
 
 /** action : set search params*/
-export const setSearchParams = (params) => {
-  return (dispatch) => {
-    dispatch({ type: "SET_SEARCH_PARAMS", params });
-
-    switch (params.category) {
-      case "deals":
-        dispatch(fetchDeals(params));
-        dispatch(fetchCarsVehicles(params));
-        dispatch(fetchFurniture(params));
-        dispatch(fetchElectronics(params));
-        dispatch(fetchRealEstate(params));
+const options = {
+  url: "/api/Product/search",
+  method: "post",
+};
+export const setSearchParams = (data) => {
+  console.log("#data", data);
+  return async (dispatch) => {
+    dispatch({ type: "SET_SEARCH_PARAMS", payload: data });
+    switch (data.category) {
+      case null:
+        const categories = [
+          null,
+          "VEHICLES",
+          "FURNITURE",
+          "ELECTRONICS",
+          "REAL_ESTATE",
+        ];
+        categories.forEach(async (category) => {
+          const response = await getSearch({
+            ...options,
+            data: {
+              ...data,
+              category,
+            },
+          });
+          response.status === 200 &&
+            dispatch({
+              type: `SET_${category}`,
+              payload: response.data,
+            });
+        });
         break;
-      case "carsVehicles":
-        dispatch(fetchCarsVehicles(params));
-        break;
-      case "furniture":
-        dispatch(fetchFurniture(params));
-        break;
-      case "electronics":
-        dispatch(fetchElectronics(params));
-        break;
-      case "realEstate":
-        dispatch(fetchRealEstate(params));
+      case data.category:
+        const response = await getSearch({ ...options, data });
+        response.status === 200 &&
+          dispatch({ type: `SET_${data.category}`, payload: response.data });
         break;
       default:
         break;

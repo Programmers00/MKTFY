@@ -6,15 +6,22 @@ import ContentCard from "../../../../components/ContentCard";
 // redux stuff
 import { useDispatch, useSelector } from "react-redux";
 // actions
-import { fetchElectronics } from "../../../../store/actions/deals";
+import { fetchCategory } from "../../../../store/actions/deals";
+// react router dom
+import { useLocation } from "react-router-dom";
 
 /** electronics page */
 const Electroinics = () => {
   /** initialze */
   const dispatch = useDispatch();
+  const { state } = useLocation(); // checking isSearch from router(search or not)
+  /** data */
+  const [isSearch, setIsSearch] = useState(
+    state?.isSearch ? state.isSearch : false
+  );
   /** set data from redux*/
   const electronics = useSelector((state) => {
-    return state.electronics.listings.data;
+    return state.electronics.data;
   });
 
   /** params */
@@ -23,21 +30,25 @@ const Electroinics = () => {
   // electronics
   const electronicsParams = {
     category: "electronics",
-    searchWord: "",
+    search: "",
     city: userCity,
   };
 
   /** request api with redux */
   useEffect(() => {
     /** api*/
-    dispatch(fetchElectronics(electronicsParams));
+    // when not isSearch
+    if (!isSearch) {
+      dispatch(fetchCategory(electronicsParams));
+    }
+    setIsSearch(false);
   }, []);
 
   return (
     <div className={styles.mainBox}>
       {/* {deals && <ContentCard content={deals} />} */}
       <div className={styles.half}>
-        {electronics && <ContentCard content={electronics} isExtendable />}
+        {electronics && <ContentCard items={electronics} isExtendable />}
       </div>
     </div>
   );
