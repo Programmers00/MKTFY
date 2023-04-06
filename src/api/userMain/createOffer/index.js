@@ -12,7 +12,7 @@ const isOnlyMockup = envs.isOnlyMockup;
 
 /** post upload images: call api or mockup */
 export const postUploadImages = async (options) => {
-  let isTest = true; // local variable Test => true
+  let isTest = false; // local variable Test => true
   return isOnlyMockup || isTest
     ? await postUploadImagesMockup(options)
     : await request(options);
@@ -20,7 +20,7 @@ export const postUploadImages = async (options) => {
 
 /** post create offer: call api or mockup */
 export const postCreateOffer = async (options) => {
-  let isTest = true; // local variable Test => true
+  let isTest = false; // local variable Test => true
   return isOnlyMockup || isTest
     ? await postCreateOfferMockup(options)
     : await request(options);

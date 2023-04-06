@@ -47,12 +47,12 @@ const ProductContent = () => {
         // existing selected images => add to new images id
         currentSelectedImages.forEach((existingSelectedImage) => {
           if (typeof existingSelectedImage === "string") {
-            newParams.imagesId.push(existingSelectedImage);
+            newParams.images.push(existingSelectedImage);
           }
         });
         // response uploaded images => add to new images id
         responseUploadImages.data.uploadedFiles.forEach((uploadedFile) => {
-          newParams.imagesId.push(uploadedFile.fileId);
+          newParams.images.push(uploadedFile.fileId);
         });
         // update product
         const responseProduct = await dispatch(updateProduct(newParams));

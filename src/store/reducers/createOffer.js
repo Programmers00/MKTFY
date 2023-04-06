@@ -5,10 +5,10 @@ const initialState = {
     description: "",
     category: "",
     condition: "",
-    price: "",
+    price: 0,
     address: "",
     city: "",
-    imagesId: [],
+    images: [],
   },
 };
 /** set create offer reducer */
@@ -20,14 +20,14 @@ const setCreateOffer = (state = initialState, action) => {
         ...state,
         params: {
           ...state.params,
-          productName: action.params.productName,
-          description: action.params.description,
-          category: action.params.category,
-          condition: action.params.condition,
-          price: action.params.price,
-          address: action.params.address,
-          city: action.params.city,
-          imagesId: [...state.params.imagesId],
+          productName: action.payload.productName,
+          description: action.payload.description,
+          category: action.payload.category,
+          condition: action.payload.condition,
+          price: action.payload.price,
+          address: action.payload.address,
+          city: action.payload.city,
+          images: [...state.params.images],
         },
       };
     // reset create offer: remove all data
@@ -36,7 +36,7 @@ const setCreateOffer = (state = initialState, action) => {
         ...initialState,
         params: {
           ...initialState.params,
-          imagesId: [...initialState.params.imagesId],
+          images: [...initialState.params.images],
         },
       };
     default:

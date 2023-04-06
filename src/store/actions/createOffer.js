@@ -1,15 +1,10 @@
 // post create offer api
 import { postCreateOffer } from "../../api/userMain/createOffer";
-// request options for create offer
-const options = {
-  url: "/api/postCreateOffer",
-  method: "post",
-};
 
 /** action: set create offer */
 export const setCreateOffer = (params) => {
   return (dispatch) => {
-    dispatch({ type: "SET_CREATE_OFFER", params });
+    dispatch({ type: "SET_CREATE_OFFER", payload: params });
   };
 };
 /** action: reset create offer */
@@ -19,12 +14,17 @@ export const resetCreateOffer = () => {
   };
 };
 /** action: create create offer */
-export const createCreateOffer = (params) => {
+// request options for create offer
+const options = {
+  url: "/api/Product",
+  method: "post",
+};
+export const createCreateOffer = (data) => {
   return async () => {
     try {
       return await postCreateOffer({
         ...options,
-        params,
+        data,
       });
     } catch (error) {}
   };

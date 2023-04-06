@@ -25,15 +25,15 @@ const DataForm = () => {
   /** data */
   // selectbox list data
   const cities = ["Calgary", "Camrose", "Brooks"];
-  const categories = ["CarsVehicles", "Furniture", "Electronics", "RealEstate"];
-  const conditions = ["new", "used"];
+  const categories = ["VEHICLES", "FURNITURE", "ELECTORNICS", "REAL_ESTATE"];
+  const conditions = ["NEW", "USED"];
   // form data
   const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("CarsVehicles");
-  const [condition, setCondition] = useState("used");
+  const [category, setCategory] = useState(categories[0]);
+  const [condition, setCondition] = useState(conditions[0]);
   const [price, setPrice] = useState(0);
-  const [city, setCity] = useState("calgary");
+  const [city, setCity] = useState(cities[0]);
 
   /** regex and validation message */
   const validationAddress = {

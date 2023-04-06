@@ -23,17 +23,14 @@ const ImageUploader = () => {
   // clicked image index
   const [clickedImage, setClickedImage] = useState(0);
   const [selectedImageList, setSelectedImageList] = useState([]);
-  console.log("###");
   /** update data in redux */
   useEffect(() => {
     dispatch(setSelectedImages(selectedImageList));
-    console.log("##selectedImageList", selectedImageList);
   }, [selectedImageList]);
 
   /** functions */
   /** add images */
   const onAddImages = (selectedImages) => {
-    console.log("##");
     // can't exceed more than 5 images
     if (selectedImageList.length > 4) return;
     setSelectedImageList([...selectedImageList, ...selectedImages]);

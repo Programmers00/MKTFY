@@ -1,17 +1,6 @@
 // post upload images api
 import { postUploadImages } from "../../api/userMain/createOffer";
 
-// access token, request options for request upload images
-const accessToken = localStorage.getItem("accessToken");
-const options = {
-  url: "/api/uploadImage",
-  method: "post",
-  headers: {
-    Authorization: `Bearer ${accessToken}`,
-    "content-type": "multipart/form-data",
-  },
-};
-
 /** set selected images action */
 export const setSelectedImages = (selectedImages) => {
   return (dispatch) => {
@@ -23,20 +12,27 @@ export const setSelectedImages = (selectedImages) => {
 };
 
 /** create upload images action */
+// access token, request options for request upload images
+const options = {
+  url: "/api/Upload",
+  method: "post",
+};
 export const createUploadImages = (images) => {
   return async () => {
     // create new FormData
-    const formData = new FormData();
+    let data = new FormData();
     // append images data to formData
     for (let i = 0; i < images.length; i++) {
-      formData.append("images", images[i]);
+      data.append("image", images[i]);
     }
     try {
       // post upload images
       return await postUploadImages({
-        formData,
+        data,
         ...options,
       });
-    } catch (error) {}
+    } catch (error) {
+      console.error("#error Create Upload Images Fail", error.response);
+    }
   };
 };

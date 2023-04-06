@@ -35,26 +35,26 @@ const CreateOfferContent = () => {
     event.preventDefault();
     try {
       // request upload images api
-      const responseUploadImages = await dispatch(
+      const response = await dispatch(
         createUploadImages(currentSelectedImages)
       );
       if (
         // when request upload images success,
-        responseUploadImages.data.code === "SUCCESS" ||
-        responseUploadImages.data.uploadedFiles.length > 0
+        response.status === 200 &&
+        response.data.length > 0
       ) {
         // new params (copy from redux current params)
         const newParams = JSON.parse(JSON.stringify(currentParams));
         // add images id
-        responseUploadImages.data.uploadedFiles.forEach((uploadedFile) => {
-          newParams.imagesId.push(uploadedFile.fileId);
+        response.data.forEach((uploadedFile) => {
+          newParams.images.push(uploadedFile.id);
         });
         // create create offer
         const responseCreateOffer = await dispatch(
           createCreateOffer(newParams)
         );
         // success =>
-        if (responseCreateOffer.data.code === "SUCCESS") {
+        if (responseCreateOffer.status === 200) {
           // reset create offer data
           dispatch(resetCreateOffer());
           // show loading

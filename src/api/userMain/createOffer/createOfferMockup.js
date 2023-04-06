@@ -3,44 +3,16 @@ export const postUploadImagesMockup = (options) => {
   // success
   if (options)
     return {
-      loading: false,
-      data: {
-        code: "SUCCESS",
-        status: 200,
-        message: "Upload Images Success",
-        uploadedFiles: [
-          {
-            fileName: "cat.jpg",
-            fileType: "image/jpeg",
-            fileSize: 234567,
-            fileId: "cat",
-          },
-          {
-            fileName: "cat2.png",
-            fileType: "image/png",
-            fileSize: 345678,
-            fileId: "cat2",
-          },
-          {
-            fileName: "cat3.gif",
-            fileType: "image/gif",
-            fileSize: 456789,
-            fileId: "cat3",
-          },
-        ],
-      },
-      error: null,
+      status: 200,
+      statusText: "OK",
+      data: [{ id: "b49da890-47e7-437d-a8fc-f03bdabf6397" }],
     };
   // fail
   return {
-    loading: false,
-    data: null,
-    error: {
-      code: "ERR_NETWORK",
-      message: "Network Error",
-      name: "AxiosError",
-      status: 404,
-    },
+    errors: { data: ["The JSON value could not be converted to System"] },
+    data: [],
+    status: 400,
+    title: "One or more validation errors occurred.",
   };
 };
 
@@ -49,23 +21,32 @@ export const postCreateOfferMockup = (options) => {
   // success
   if (options)
     return {
-      loading: false,
+      status: 200,
+      statusText: "OK",
       data: {
-        code: "SUCCESS",
-        status: 200,
-        message: "Success",
+        address: "99 Keroro St SW",
+        category: "REAL_ESTATE",
+        city: "Calgary",
+        condition: "NEW",
+        created: "2023-04-06T18:56:04.9809783Z",
+        description: "Kero?",
+        id: "703ae08d-2906-410c-a22a-f7283b9a98fa",
+        images: [
+          "https://mktfy-proof-staging.s3.ca-central-1.amazonaws.com/4905de7e-098e-44f0-8117-24178fc14814",
+        ],
+        price: 99,
+        productName: "Keoro",
+        sellerListingCount: null,
+        sellerProfile: null,
+        status: "ACTIVE",
+        userId: "auth0|642f13286698f24cf0b9e5b5",
       },
-      error: null,
     };
   // fail
   return {
-    loading: false,
-    data: null,
-    error: {
-      code: "ERR_NETWORK",
-      message: "Network Error",
-      name: "AxiosError",
-      status: 404,
-    },
+    errors: { data: ["The JSON value could not be converted to System"] },
+    data: [],
+    status: 400,
+    title: "One or more validation errors occurred.",
   };
 };

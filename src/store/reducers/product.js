@@ -5,10 +5,10 @@ const initialState = {
     description: "",
     category: "",
     condition: "",
-    price: "",
+    price: 0,
     address: "",
     city: "",
-    imagesId: [],
+    images: [],
   },
 };
 /** set product reducer */
@@ -27,7 +27,7 @@ const setProduct = (state = initialState, action) => {
           price: action.params.price,
           address: action.params.address,
           city: action.params.city,
-          imagesId: [...state.params.imagesId],
+          images: [...state.params.images],
         },
       };
     // reset create offer: remove all data
@@ -36,7 +36,7 @@ const setProduct = (state = initialState, action) => {
         ...initialState,
         params: {
           ...initialState.params,
-          imagesId: [...initialState.params.imagesId],
+          images: [...initialState.params.images],
         },
       };
     default:
