@@ -8,7 +8,7 @@ const setSelectedImages = (state = initialState, action) => {
     case "SET_CREATE_OFFER_SELECTED_IMAGES":
       return {
         ...state,
-        selectedImages: action.selectedImages,
+        selectedImages: action.payload,
       };
     default:
       return state;

@@ -17,7 +17,7 @@ export const setSelectedImages = (selectedImages) => {
   return (dispatch) => {
     dispatch({
       type: "SET_CREATE_OFFER_SELECTED_IMAGES",
-      selectedImages: selectedImages,
+      payload: selectedImages,
     });
   };
 };

@@ -12,6 +12,7 @@ import { setSelectedImages } from "../../../../../store/actions/createOfferUploa
 
 /** image uploader: parameter from images, setImages */
 const ImageUploader = () => {
+  var reader = new FileReader();
   /** initialize */
   // redux
   const dispatch = useDispatch();
@@ -22,16 +23,17 @@ const ImageUploader = () => {
   // clicked image index
   const [clickedImage, setClickedImage] = useState(0);
   const [selectedImageList, setSelectedImageList] = useState([]);
-
+  console.log("###");
   /** update data in redux */
   useEffect(() => {
     dispatch(setSelectedImages(selectedImageList));
-    // console.log("##selectedImageList", selectedImageList);
+    console.log("##selectedImageList", selectedImageList);
   }, [selectedImageList]);
 
   /** functions */
   /** add images */
   const onAddImages = (selectedImages) => {
+    console.log("##");
     // can't exceed more than 5 images
     if (selectedImageList.length > 4) return;
     setSelectedImageList([...selectedImageList, ...selectedImages]);
@@ -86,6 +88,9 @@ const ImageUploader = () => {
     if (event.target.files && event.target.files[0]) {
       onAddImages(event.target.files);
     }
+    // important! this line is for reset the value.
+    // if don't reset the value, same file can't choose after choosing same file
+    event.target.value = null;
   };
   /** triggers the input when the empty image is clicked */
   const onClickEmptyImage = (index) => {
