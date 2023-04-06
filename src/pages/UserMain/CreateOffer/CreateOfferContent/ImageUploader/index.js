@@ -12,7 +12,6 @@ import { setSelectedImages } from "../../../../../store/actions/createOfferUploa
 
 /** image uploader: parameter from images, setImages */
 const ImageUploader = () => {
-  var reader = new FileReader();
   /** initialize */
   // redux
   const dispatch = useDispatch();
