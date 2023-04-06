@@ -13,15 +13,10 @@ const postOptions = {
 export const createAccountInformation = (data) => {
   return async () => {
     try {
-      const response = await postAccountInformation({
+      return await postAccountInformation({
         ...postOptions,
         data,
       });
-      // success
-      if (response.status === 200) {
-        console.log("#Create Account Information Success", response);
-        sessionStorage.removeItem("signupForm");
-      }
     } catch (error) {
       // fail
       console.error("#Create Account Information Fail", error.response);
@@ -46,7 +41,7 @@ export const fetchAccountInformation = (data) => {
         console.log("#Fetch Account Information Success", response);
         dispatch({
           type: "SET_ACCOUNT_INFORMATION",
-          informationAccount: response.data,
+          payload: response.data,
         });
       }
     } catch (error) {

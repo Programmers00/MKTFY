@@ -35,7 +35,7 @@ const UserMain = () => {
   );
 
   /** function: signup api */
-  const singup = async () => {
+  const singup = async (uesrId) => {
     // signup form
     const signupForm = {
       id: `auth0|${signupFormFromSessionStorage.Id}`,
@@ -47,7 +47,14 @@ const UserMain = () => {
       address: signupFormFromSessionStorage.userMetadata.streetAddress,
     };
     // create account informatio api
-    dispatch(createAccountInformation(signupForm));
+    const response = dispatch(createAccountInformation(signupForm));
+    // success
+    if (response.status === 200) {
+      console.log("#Create Account Information Success", response);
+      sessionStorage.removeItem("signupForm");
+      // fetch account Information and set account information in redux
+      dispatch(fetchAccountInformation(uesrId));
+    }
   };
 
   // after login, set access token
@@ -72,15 +79,13 @@ const UserMain = () => {
           sessionStorage.setItem("accessToken", res.accessToken);
 
           const userId = res.idTokenPayload.sub; // user id -> ex) auth0|123a456e789bfd01a234efba
-          // fetch account Information and set account information in redux
-          dispatch(fetchAccountInformation(userId));
 
           // if auto login(signup), there is signupForm => flag(signup or not)
           // after login, call create account information api
           const isAutoLogin =
             signupFormFromSessionStorage &&
             typeof signupFormFromSessionStorage === "object";
-          isAutoLogin && singup();
+          isAutoLogin && singup(userId);
         }
       }
     });

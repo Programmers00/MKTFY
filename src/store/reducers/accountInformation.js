@@ -17,15 +17,15 @@ const setAccountInformation = (state = initialState, action) => {
     case "SET_ACCOUNT_INFORMATION":
       return {
         ...state,
-        firstName: action.informationAccount.firstName,
-        lastName: action.informationAccount.lastName,
-        email: action.informationAccount.email,
-        phone: action.informationAccount.phone,
-        streetAddress: action.informationAccount.address,
-        city: action.informationAccount.city,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+        email: action.payload.email,
+        phone: action.payload.phone,
+        streetAddress: action.payload.address,
+        city: action.payload.city,
         // province: action.informationAccount.province,
         // country: action.informationAccount.country,
-        id: action.informationAccount.id,
+        id: action.payload.id,
       };
     default:
       return state;
