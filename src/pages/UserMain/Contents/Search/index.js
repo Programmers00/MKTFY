@@ -38,7 +38,14 @@ const Search = () => {
   return (
     <div className={styles.mainBox}>
       <div className={styles.half}>
-        {searchItems && <ContentCard items={searchItems} isExtendable />}
+        {searchItems && (
+          <ContentCard
+            items={searchItems}
+            isExtendable
+            title={`Explore now`}
+            subtitle={params.search}
+          />
+        )}
       </div>
     </div>
   );

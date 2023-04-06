@@ -16,6 +16,9 @@
     font-weight: 600;
     font-size: 20px;
     color: $titleGray;
+    .cardSubtitle {
+      color: $occasionalPurple;
+    }
   }
   .itemsBox {
     display: flex;

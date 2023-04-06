@@ -14,6 +14,7 @@ const ContentCard = ({
   isExtendable,
   items,
   title,
+  subtitle,
 }) => {
   /** initialize */
   const navigate = useNavigate();
@@ -22,6 +23,9 @@ const ContentCard = ({
     <div className={styles.cardBox} style={isWidthHalf && { width: "47%" }}>
       <span className={styles.cardTitle}>
         {title === "Deals" ? `${title} for you` : title}
+        {subtitle && (
+          <span className={styles.cardSubtitle}>&nbsp;"{subtitle}"</span>
+        )}
       </span>
       <div
         className={styles.itemsBox}
