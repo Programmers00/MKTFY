@@ -4,49 +4,42 @@ import styles from "./index.module.scss";
 // components
 import ContentCard from "../../../../components/ContentCard";
 // redux stuff
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 // actions
 import { fetchCategory } from "../../../../store/actions/deals";
-// react router dom
-import { useLocation } from "react-router-dom";
 
 /** electronics page */
 const Electroinics = () => {
   /** initialze */
   const dispatch = useDispatch();
-  const { state } = useLocation(); // checking isSearch from router(search or not)
-  /** data */
-  const [isSearch, setIsSearch] = useState(
-    state?.isSearch ? state.isSearch : false
-  );
-  /** set data from redux*/
-  const electronics = useSelector((state) => {
-    return state.electronics.data;
-  });
-
+  /** state management */
+  const [electronics, setElectronics] = useState([]);
   /** params */
-  // user prefer city from localstorage
-  const userCity = localStorage.getItem("userCity");
-  // electronics
-  const electronicsParams = {
-    category: "electronics",
-    search: "",
+  const userCity = JSON.parse(localStorage.getItem("userCity")).label; // user prefer city from localstorage
+  // params data
+  const params = {
+    category: "ELECTRONICS",
     city: userCity,
   };
+  /** fetch data : realEstate */
+  const fetchData = async () => {
+    const response = await dispatch(fetchCategory(params));
+    // success
+    if (response.status === 200) {
+      console.log("#Fetch Electronics Success", response);
+      // set data
+      setElectronics(response.data);
+    }
+  };
 
-  /** request api with redux */
+  /** request api */
   useEffect(() => {
     /** api*/
-    // when not isSearch
-    if (!isSearch) {
-      dispatch(fetchCategory(electronicsParams));
-    }
-    setIsSearch(false);
+    fetchData();
   }, []);
 
   return (
     <div className={styles.mainBox}>
-      {/* {deals && <ContentCard content={deals} />} */}
       <div className={styles.half}>
         {electronics && <ContentCard items={electronics} isExtendable />}
       </div>

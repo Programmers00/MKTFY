@@ -19,6 +19,7 @@ import CarsVehicles from "./pages/UserMain/Contents/CarsVehicles";
 import Electronics from "./pages/UserMain/Contents/Electronics";
 import Furniture from "./pages/UserMain/Contents/Furniture";
 import RealEstate from "./pages/UserMain/Contents/RealEstate";
+import Search from "./pages/UserMain/Contents/Search";
 // userInfo pages
 import AccountInformation from "./pages/UserInfo/AccountInformation";
 import ChangePassword from "./pages/UserInfo/ChangePassword";
@@ -78,6 +79,7 @@ const AppMain = () => {
             <Route exact path="electronics" element={<Electronics />} />
             <Route exact path="furniture" element={<Furniture />} />
             <Route exact path="realEstate" element={<RealEstate />} />
+            <Route exact path="search" element={<Search />} />
             {/* userInfo */}
             <Route
               exact

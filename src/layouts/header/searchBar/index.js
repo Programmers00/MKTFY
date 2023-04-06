@@ -33,13 +33,6 @@ const SearchBar = () => {
     { value: "brooks", label: "Brooks" },
     { value: "camrose", label: "Camrose" },
   ];
-  // navigate path
-  const categoryPaths = {
-    REAL_ESTATE: "realEstate",
-    VEHICLES: "carsVehcles",
-    FURNITURE: "furniture",
-    ELECTRONICS: "electronics",
-  };
   // user prefer city from local storage
   const userCity = JSON.parse(localStorage.getItem("userCity")).label;
 
@@ -93,9 +86,7 @@ const SearchBar = () => {
     // trim: remove whitespace from both ends
     if (search.trim().length === 0) return;
     dispatch(setSearchParams(params));
-
-    const path = categoryPaths[params.category] || "/";
-    navigate(path, { state: { isSearch: true } });
+    navigate("/search", { state: { params } });
   };
   /** change category value and trigger to close select */
   const onChangeCategory = (event) => {

@@ -4,73 +4,74 @@ import styles from "./index.module.scss";
 // components
 import ContentCard from "../../../../components/ContentCard";
 // redux stuff
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 // redux actions
 import { fetchDeals, fetchCategory } from "../../../../store/actions/deals";
-// react router dom
-import { useLocation } from "react-router-dom";
 
 /** deals page */
 const Deals = () => {
   /** initialze */
   const dispatch = useDispatch();
-  const { state } = useLocation(); // checking isSearch from router(search or not)
-  /** data */
-  const [isSearch, setIsSearch] = useState(
-    state?.isSearch ? state.isSearch : false
-  );
-  // categories
-  const categories = ["VEHICLES", "FURNITURE", "ELECTRONICS", "REAL_ESTATE"];
   /** flag for api call */
   const accessToken = sessionStorage.getItem("accessToken");
-
-  /** set data from redux*/
-  const deals = useSelector((state) => {
-    return state.deals.data;
-  });
-  const carsVehicles = useSelector((state) => {
-    return state.carsVehicles.data;
-  });
-  const furniture = useSelector((state) => {
-    return state.furniture.data;
-  });
-  const electronics = useSelector((state) => {
-    return state.electronics.data;
-  });
-  const realEstate = useSelector((state) => {
-    return state.realEstate.data;
-  });
-
+  /** state management */
+  const [deals, setDeals] = useState([]);
+  const [vehicles, setVehicles] = useState([]);
+  const [furniture, setFurniture] = useState([]);
+  const [electronics, setElectronics] = useState([]);
+  const [realEstate, setRealEstate] = useState([]);
   /** params */
-  // user prefer city from localstorage
-  const userCity = JSON.parse(localStorage.getItem("userCity")).label;
-  // deals from my search history
-  const dealsParams = {
-    city: userCity,
+  const userCity = JSON.parse(localStorage.getItem("userCity")).label; // user prefer city from localstorage
+  const categories = ["VEHICLES", "FURNITURE", "ELECTRONICS", "REAL_ESTATE"]; // category parameter
+  /** fetch data : deals and categories */
+  const fetchData = async () => {
+    const response = await dispatch(fetchDeals({ city: userCity }));
+    // success
+    if (response.status === 200) {
+      console.log("#Fetch Deals Success", response);
+      // set data
+      setDeals(response.data);
+    }
+    // fetch categories
+    for (const category of categories) {
+      const response = await dispatch(
+        fetchCategory({ category, city: userCity })
+      );
+      if (response.status === 200) {
+        console.log("#Fetch Category Success", response);
+        switch (category) {
+          case "VEHICLES":
+            setVehicles(response.data);
+            break;
+          case "FURNITURE":
+            setFurniture(response.data);
+            break;
+          case "ELECTRONICS":
+            setElectronics(response.data);
+            break;
+          case "REAL_ESTATE":
+            setRealEstate(response.data);
+            break;
+          default:
+            break;
+        }
+      }
+    }
   };
 
   /** request api with redux */
   useEffect(() => {
     /** api*/
-    // when accessToken has, not isSearch
-    if (accessToken && !isSearch) {
-      // fetch deals
-      dispatch(fetchDeals(dealsParams));
-      // fetch categories
-      categories.forEach((category) => {
-        dispatch(fetchCategory({ category, city: userCity }));
-      });
-    }
-    setIsSearch(false);
+    accessToken && fetchData(); // fetch deals with accessToken(waiting for setting accessToken)
   }, [accessToken]);
 
   return (
     <div className={styles.mainBox}>
       {deals && <ContentCard items={deals} title="Deals" />}
       <div className={styles.half}>
-        {carsVehicles && (
+        {vehicles && (
           <ContentCard
-            items={carsVehicles}
+            items={vehicles}
             isWidthHalf
             isNavigate
             title="Cars&Vehicles"

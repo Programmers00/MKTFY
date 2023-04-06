@@ -4,51 +4,44 @@ import styles from "./index.module.scss";
 // components
 import ContentCard from "../../../../components/ContentCard";
 // redux stuff
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 // actions
 import { fetchCategory } from "../../../../store/actions/deals";
-// react router dom
-import { useLocation } from "react-router-dom";
 
 /** carsVehicles page */
 const CarsVehicles = () => {
   /** initialze */
   const dispatch = useDispatch();
-  const { state } = useLocation(); // checking isSearch from router(search or not)
-  /** data */
-  const [isSearch, setIsSearch] = useState(
-    state?.isSearch ? state.isSearch : false
-  );
-  /** set data from redux*/
-  const carsVehicles = useSelector((state) => {
-    return state.carsVehicles.data;
-  });
-
+  /** state management */
+  const [vehicles, setVehicles] = useState([]);
   /** params */
-  // // user prefer city from localstorage
-  const userCity = localStorage.getItem("userCity");
-  // carsVehicles
-  const carsVehiclesParams = {
-    category: "carsVehicles",
-    search: "",
+  const userCity = JSON.parse(localStorage.getItem("userCity")).label; // user prefer city from localstorage
+  // params data
+  const params = {
+    category: "VEHICLES",
     city: userCity,
   };
-
-  /** request api with redux */
-  useEffect(() => {
-    /** api*/
-    // when not isSearch
-    if (!isSearch) {
-      dispatch(fetchCategory(carsVehiclesParams));
+  /** fetch data : realEstate */
+  const fetchData = async () => {
+    const response = await dispatch(fetchCategory(params));
+    // success
+    if (response.status === 200) {
+      console.log("#Fetch Vehicles Success", response);
+      // set data
+      setVehicles(response.data);
     }
-    setIsSearch(false);
+  };
+
+  /** request api */
+  useEffect(() => {
+    /** fetch api */
+    fetchData();
   }, []);
 
   return (
     <div className={styles.mainBox}>
-      {/* {deals && <ContentCard content={deals} />} */}
       <div className={styles.half}>
-        {carsVehicles && <ContentCard items={carsVehicles} isExtendable />}
+        {vehicles && <ContentCard items={vehicles} isExtendable />}
       </div>
     </div>
   );

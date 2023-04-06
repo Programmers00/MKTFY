@@ -7,18 +7,13 @@ const MAX_RESULTS = 20;
 const dealsOptions = {
   url: "/api/Product/deals",
 };
-export const fetchDeals = (data) => async (dispatch) => {
+export const fetchDeals = (data) => async () => {
   try {
-    const response = await getDeals({
+    return await getDeals({
       ...dealsOptions,
       url: `${dealsOptions.url}?maxResults=${MAX_RESULTS}`,
       data,
     });
-    if (response.status === 200) {
-      console.log("#Fetch Deals Success", response);
-      // set data
-      dispatch({ type: "SET_DEALS", payload: response.data });
-    }
   } catch (error) {
     console.error("#Fetch Deals Fail", error.response);
   }
@@ -30,19 +25,14 @@ const categoryOptions = {
   url: "/api/Product/category",
   method: "post",
 };
-export const fetchCategory = (data) => async (dispatch) => {
+export const fetchCategory = (data) => async () => {
   // console.log("##category", data);
   try {
-    const response = await getCategory({
+    return await getCategory({
       ...categoryOptions,
       url: `${categoryOptions.url}?maxResults=${MAX_RESULTS}`,
       data,
     });
-    if (response.status === 200) {
-      console.log("#Fetch Category Success", response);
-      // set data
-      dispatch({ type: `SET_${data.category}`, payload: response.data });
-    }
   } catch (error) {
     console.error(`#Fetch Category Fail`, error.response);
   }
