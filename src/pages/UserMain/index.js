@@ -35,7 +35,7 @@ const UserMain = () => {
   );
 
   /** function: signup api */
-  const singup = async (uesrId) => {
+  const singup = async (userId) => {
     // signup form
     const signupForm = {
       id: `auth0|${signupFormFromSessionStorage.Id}`,
@@ -53,7 +53,7 @@ const UserMain = () => {
       console.log("#Create Account Information Success", response);
       sessionStorage.removeItem("signupForm");
       // fetch account Information and set account information in redux
-      dispatch(fetchAccountInformation(uesrId));
+      dispatch(fetchAccountInformation(userId));
     }
   };
 
@@ -85,7 +85,14 @@ const UserMain = () => {
           const isAutoLogin =
             signupFormFromSessionStorage &&
             typeof signupFormFromSessionStorage === "object";
-          isAutoLogin && singup(userId);
+          // auto login after register
+          if (isAutoLogin) {
+            singup(userId);
+          }
+          // just login
+          else {
+            dispatch(fetchAccountInformation(userId));
+          }
         }
       }
     });
