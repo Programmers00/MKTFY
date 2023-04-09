@@ -24,14 +24,24 @@ const DataForm = () => {
 
   /** data */
   // selectbox list data
-  const cities = ["Calgary", "Camrose", "Brooks"];
-  const categories = ["VEHICLES", "FURNITURE", "ELECTORNICS", "REAL_ESTATE"];
-  const conditions = ["NEW", "USED"];
+  const cities = ["Calgary", "Camrose", "Brooks"]; // for ui, params
+  // key for ui, value for param
+  const categories = [
+    { key: "Cars & Vehicles", value: "VEHICLES" },
+    { key: "Furniture", value: "FURNITURE" },
+    { key: "Electoronics", value: "ELECTORNICS" },
+    { key: "Real estate", value: "REAL_ESTATE" },
+  ];
+  // key for ui, value for param
+  const conditions = [
+    { key: "New", value: "NEW" },
+    { key: "Used", value: "USED" },
+  ];
   // form data
   const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState(categories[0]);
-  const [condition, setCondition] = useState(conditions[0]);
+  const [category, setCategory] = useState(categories[0].value);
+  const [condition, setCondition] = useState(conditions[0].value);
   const [price, setPrice] = useState(0);
   const [city, setCity] = useState(cities[0]);
 
@@ -100,13 +110,13 @@ const DataForm = () => {
         <select
           className={styles.input}
           placeholder="Choose the category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
+          value={category.value}
+          onChange={(e) => e.target.value}
         >
           {categories.map((category) => {
             return (
-              <option value={category} key={category}>
-                {category}
+              <option value={category.value} key={category.value}>
+                {category.key}
               </option>
             );
           })}
@@ -120,13 +130,13 @@ const DataForm = () => {
             <select
               className={styles.input}
               placeholder="Choose the condition"
-              value={condition}
+              value={condition.value}
               onChange={(e) => setCondition(e.target.value)}
             >
               {conditions.map((condition) => {
                 return (
-                  <option value={condition} key={condition}>
-                    {condition}
+                  <option value={condition.value} key={condition.value}>
+                    {condition.key}
                   </option>
                 );
               })}
