@@ -11,13 +11,9 @@ const CheckoutContent = ({ data }) => {
     <div className={styles.checkoutContentBox}>
       <span className={styles.checkoutContentTitle}>Confirm</span>
       <div className={styles.checkoutContent}>
-        <img
-          className={styles.image}
-          src={require(`../../../../assets/images/${data.images[0]}.png`)}
-          alt="img"
-        />
+        <img className={styles.image} src={data.images[0]} alt="img" />
         <div className={styles.content}>
-          <span className={styles.title}>{data.title}</span>
+          <span className={styles.title}>{data.productName}</span>
           <div className={styles.price}>{`$${data.price}`}</div>
         </div>
       </div>

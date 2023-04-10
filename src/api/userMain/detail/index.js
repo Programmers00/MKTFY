@@ -1,4 +1,4 @@
-import { getDetailMockup, postCheckoutMockup } from "./detailMockup";
+import { getDetailMockup, putCheckoutMockup } from "./detailMockup";
 // request api
 import request from "../../../utils/request";
 // global variable: envs.isOnlyMockup for project mockup test
@@ -9,16 +9,16 @@ const isOnlyMockup = envs.isOnlyMockup;
 
 /** get detail: call api or mockup */
 export const getDetail = async (options) => {
-  let isTest = true; // local variable Test => true
+  let isTest = false; // local variable Test => true
   return isOnlyMockup || isTest
     ? await getDetailMockup(options)
     : await request(options);
 };
 
 /** post checkout: call api or mockup */
-export const postCheckout = async (options) => {
-  let isTest = true; // local variable Test => true
+export const putCheckout = async (options) => {
+  let isTest = false; // local variable Test => true
   return isOnlyMockup || isTest
-    ? await postCheckoutMockup(options)
+    ? await putCheckoutMockup(options)
     : await request(options);
 };

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 // redux dispatch
 import { useDispatch } from "react-redux";
 // redux actions
-import { createCheckout } from "../../../../store/actions/detail";
+import { updateCheckout } from "../../../../store/actions/detail";
 // svg icon
 import {
   LabelIcon,
@@ -86,9 +86,10 @@ const DetailContent = ({ data }) => {
   /** functions */
   const onSubmit = async () => {
     /** api */
-    const response = await dispacth(createCheckout(params));
+    const response = await dispacth(updateCheckout(params));
+    console.log("##response", response);
     // if success, go to checkout
-    if (response.data.code === "SUCCESS") {
+    if (response.status === 200) {
       navigate(`/checkout/${data.id}`, { state: { data } });
     }
   };
@@ -111,7 +112,7 @@ const DetailContent = ({ data }) => {
                   }}
                   className={styles.image}
                   alt="img"
-                  src={require(`../../../../assets/images/${image}.png`)}
+                  src={image}
                   style={
                     selectedIndex === index
                       ? { border: `solid 1px ${variabled.occasionalPurple}` }
@@ -126,11 +127,7 @@ const DetailContent = ({ data }) => {
           </button>
         </div>
         {selectedImage ? (
-          <img
-            className={styles.showImage}
-            alt="img"
-            src={require(`../../../../assets/images/${selectedImage}.png`)}
-          ></img>
+          <img className={styles.showImage} alt="img" src={selectedImage}></img>
         ) : (
           <div className={styles.showImage}>
             <div className={styles.noImage}> No Image</div>
@@ -154,7 +151,7 @@ const DetailContent = ({ data }) => {
         <div className={styles.description}>{data.description}</div>
         <div className={styles.sellerInfoBox}>
           <div className={styles.circle}>
-            {data.sellerInfo?.userName?.charAt(0)}
+            {data.sellerProfile?.lastName?.charAt(0)}
           </div>
           <div className={styles.sellerInfo}>
             <span className={styles.sellerName}>
@@ -164,7 +161,7 @@ const DetailContent = ({ data }) => {
               <LabelIcon />
               <span
                 className={styles.sellerListingCount}
-              >{`${data.sellerInfo?.listingCount}`}</span>
+              >{`${data.sellerListingCount}`}</span>
               <span className={styles.listing}>listing</span>
             </span>
           </div>

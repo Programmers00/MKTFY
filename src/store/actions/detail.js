@@ -1,14 +1,17 @@
-import { getDetail, postCheckout } from "../../api/userMain/detail"; // api
+import { getDetail, putCheckout } from "../../api/userMain/detail"; // api
 
 /** actions : get detail  */
 // options
 const detailOptions = {
-  url: "/detail",
+  url: "/api/Product",
 };
-export const fetchDetail = (params) => {
+export const fetchDetail = (data) => {
   return async () => {
     try {
-      return await getDetail({ ...detailOptions, params });
+      return await getDetail({
+        ...detailOptions,
+        url: `${detailOptions.url}/${data.id}`,
+      });
     } catch (error) {
       console.log("#Error fetchDetail:", error);
     }
@@ -18,15 +21,18 @@ export const fetchDetail = (params) => {
 /** post checkout action */
 // options
 const checkoutOptions = {
-  url: "/checkout",
-  method: "post",
+  url: "/api/Product/checkout",
+  method: "put",
 };
-export const createCheckout = (params) => {
+export const updateCheckout = (data) => {
   return async () => {
     try {
-      return await postCheckout({ ...checkoutOptions, params });
+      return await putCheckout({
+        ...checkoutOptions,
+        url: `${checkoutOptions.url}/${data.id}`,
+      });
     } catch (error) {
-      console.log("#Error postCheckout:", error);
+      console.log("#Error putCheckout:", error);
     }
   };
 };

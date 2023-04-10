@@ -1,166 +1,91 @@
 /** get detail mockup */
 export const getDetailMockup = (options) => {
   // success
-  if (options.params.id === "cat")
+  if (options.data)
     return {
-      loading: false,
+      status: 200,
+      statusText: "OK",
       data: {
-        code: "SUCCESS",
-        status: 200,
-        message: "Upload Images Success",
-        item: {
-          id: "cat",
-          images: ["cat"],
-          title: "Pearl The Cat: Toy edition",
-          price: "340.00",
-          status: "new",
-          description:
-            "The world's most beautiful cat. Pearl The Cat is a pretty cat who is grey with black stripes on top and spots on the belly. She likes catching flies and eating beef jerky as well as yogurt. This edition of Pearl The Cat includes toys for maximum Pearl enjoyment. (Batteries not included)",
-          sellerInfo: {
-            userName: "Matt Smith",
-            contact: "+1 825-999-9999",
-            address: "12 12ave SW, Calgary, Alberta",
-            listingCount: 2,
-          },
+        id: "2bf9b8a2-8256-42a4-9fe2-adb9c903954c",
+        productName: "TEST321321321",
+        description: "TEST",
+        price: 12,
+        category: "FURNITURE",
+        condition: "USED",
+        status: "ACTIVE",
+        address: "3213",
+        city: "Calgary",
+        sellerListingCount: 14,
+        created: "2023-04-07T23:22:38.639347Z",
+        userId: "auth0|642f4b88b60b6913044f09fc",
+        sellerProfile: {
+          id: "auth0|642f4b88b60b6913044f09fc",
+          firstName: "Hatori",
+          lastName: "Hanzo",
+          email: "hh@hh.com",
+          phone: "911",
+          address: "123 St. E",
+          city: "Edmonton",
         },
+        images: [
+          "https://mktfy-proof-staging.s3.ca-central-1.amazonaws.com/9ce21266-46a5-473f-b0fd-bb89608a7ce7",
+          "https://mktfy-proof-staging.s3.ca-central-1.amazonaws.com/05c1481b-a617-40e2-ae4c-29c21fd87533",
+          "https://mktfy-proof-staging.s3.ca-central-1.amazonaws.com/105ea10a-197d-49cb-b831-3688849bd7c2",
+          "https://mktfy-proof-staging.s3.ca-central-1.amazonaws.com/3151480e-8b10-4f48-9caa-13543588eb03",
+          "https://mktfy-proof-staging.s3.ca-central-1.amazonaws.com/32d916f2-011e-4e2b-a0dd-fff978058795",
+        ],
       },
-      error: null,
-    };
-  else if (options.params.id === "cat2")
-    return {
-      loading: false,
-      data: {
-        code: "SUCCESS",
-        status: 200,
-        message: "Upload Images Success",
-        item: {
-          id: "cat2",
-          images: ["cat2", "cat"],
-          title: "Pearl The Cat: Toy edition",
-          price: "340.00",
-          status: "new",
-          description:
-            "The world's most beautiful cat. Pearl The Cat is a pretty cat who is grey with black stripes on top and spots on the belly. She likes catching flies and eating beef jerky as well as yogurt. This edition of Pearl The Cat includes toys for maximum Pearl enjoyment. (Batteries not included)",
-          sellerInfo: {
-            userName: "Matt Smith",
-            contact: "+1 825-999-9999",
-            address: "12 12ave SW, Calgary, Alberta",
-            listingCount: 2,
-          },
-        },
-      },
-      error: null,
-    };
-  else if (options.params.id === "cat3")
-    return {
-      loading: false,
-      data: {
-        code: "SUCCESS",
-        status: 200,
-        message: "Upload Images Success",
-        item: {
-          id: "cat3",
-          images: ["cat", "cat2", "cat3"],
-          title: "Pearl The Cat: Toy edition",
-          price: "340.00",
-          status: "new",
-          description:
-            "The world's most beautiful cat. Pearl The Cat is a pretty cat who is grey with black stripes on top and spots on the belly. She likes catching flies and eating beef jerky as well as yogurt. This edition of Pearl The Cat includes toys for maximum Pearl enjoyment. (Batteries not included)",
-          sellerInfo: {
-            userName: "Matt Smith",
-            contact: "+1 825-999-9999",
-            address: "12 12ave SW, Calgary, Alberta",
-            listingCount: 2,
-          },
-        },
-      },
-      error: null,
-    };
-  else if (options.params.id === "cat4")
-    return {
-      loading: false,
-      data: {
-        code: "SUCCESS",
-        status: 200,
-        message: "Upload Images Success",
-        item: {
-          id: "cat4",
-          images: ["cat", "cat2", "cat3", "cat4"],
-          title: "Pearl The Cat: Toy edition",
-          price: "340.00",
-          status: "new",
-          description:
-            "The world's most beautiful cat. Pearl The Cat is a pretty cat who is grey with black stripes on top and spots on the belly. She likes catching flies and eating beef jerky as well as yogurt. This edition of Pearl The Cat includes toys for maximum Pearl enjoyment. (Batteries not included)",
-          sellerInfo: {
-            userName: "Matt Smith",
-            contact: "+1 825-999-9999",
-            address: "12 12ave SW, Calgary, Alberta",
-            listingCount: 2,
-          },
-        },
-      },
-      error: null,
-    };
-  else if (options.params)
-    return {
-      loading: false,
-      data: {
-        code: "SUCCESS",
-        status: 200,
-        message: "Upload Images Success",
-        item: {
-          id: "cat5",
-          images: ["cat", "cat2", "cat3", "cat4", "cat"],
-          title: "Pearl The Cat: Toy edition",
-          price: "340.00",
-          status: "new",
-          description:
-            "The world's most beautiful cat. Pearl The Cat is a pretty cat who is grey with black stripes on top and spots on the belly. She likes catching flies and eating beef jerky as well as yogurt. This edition of Pearl The Cat includes toys for maximum Pearl enjoyment. (Batteries not included)",
-          sellerInfo: {
-            userName: "Matt Smith",
-            contact: "+1 825-999-9999",
-            address: "12 12ave SW, Calgary, Alberta",
-            listingCount: 2,
-          },
-        },
-      },
-      error: null,
     };
   // fail
   return {
-    loading: false,
-    data: null,
-    error: {
-      code: "ERR_NETWORK",
-      message: "Network Error",
-      name: "AxiosError",
-      status: 404,
+    status: 500,
+    statusText: "Internal Server Error",
+    data: {
+      message: "Unable to contact the database",
     },
   };
 };
 
 /** post checkout mockup */
-export const postCheckoutMockup = (options) => {
+export const putCheckoutMockup = (options) => {
   // success
   if (options)
     return {
-      loading: false,
+      status: 200,
+      statusText: "OK",
       data: {
-        code: "SUCCESS",
-        status: 200,
-        message: "Success",
+        id: "703ae08d-2906-410c-a22a-f7283b9a98fa",
+        productName: "Keoro",
+        description: "Kero?",
+        price: 99,
+        category: "REAL_ESTATE",
+        condition: "NEW",
+        status: "PENDING",
+        address: "99 Keroro St SW",
+        city: "Calgary",
+        sellerListingCount: null,
+        created: "2023-04-06T18:56:04.980978Z",
+        userId: "auth0|642f13286698f24cf0b9e5b5",
+        sellerProfile: {
+          id: "auth0|642f13286698f24cf0b9e5b5",
+          firstName: "Samuel",
+          lastName: "Noh",
+          email: "nes0410+00@gmail.com",
+          phone: "+1 (825) 994-4199",
+          address: "8 Bridlecrest Dr SW",
+          city: "Calgary",
+        },
+        images: [
+          "https://mktfy-proof-staging.s3.ca-central-1.amazonaws.com/4905de7e-098e-44f0-8117-24178fc14814",
+        ],
       },
-      error: null,
     };
   // fail
   return {
-    loading: false,
-    data: null,
-    error: {
-      code: "ERR_NETWORK",
-      message: "Network Error",
-      name: "AxiosError",
-      status: 404,
+    status: 500,
+    statusText: "Internal Server Error",
+    data: {
+      message: "Unable to contact the database",
     },
   };
 };

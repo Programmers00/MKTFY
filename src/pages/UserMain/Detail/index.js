@@ -23,13 +23,14 @@ const Detail = () => {
   };
   /** get data from api */
   useEffect(() => {
-    const getData = async () => {
+    const fetchData = async () => {
       const response = await dispatch(fetchDetail(params));
-      if (response.data.code === "SUCCESS") {
-        setData(response.data.item);
+      console.log("##response", response);
+      if (response.status === 200) {
+        setData(response.data);
       }
     };
-    getData();
+    fetchData();
   }, []);
   return (
     <div className={styles.mainBox}>
