@@ -13,7 +13,7 @@ const HorizontalItemCard = ({
   /** initialize */
   return (
     <div key={item.id} className={styles.itemBox} onClick={onClick}>
-      <img src={require(`../../assets/images/${item.image}.png`)} alt="img" />
+      <img src={item.images[0]} alt="img" />
       <div className={styles.contentBox}>
         {item.date && <div className={styles.date}>{item.date}</div>}
         <div className={styles.itemTitle}>
@@ -22,7 +22,7 @@ const HorizontalItemCard = ({
             : `${item.productName.slice(0, 49)}...`}
         </div>
         <div className={styles.itemPrice}>{`$${item.price}`}</div>
-        {!item.active && (
+        {!item.status === "ACTIVE" && (
           <div className={styles.tagBox}>
             <div className={styles.tag}>SALE CONFIRMED</div>
           </div>

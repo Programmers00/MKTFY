@@ -9,7 +9,7 @@ const isOnlyMockup = envs.isOnlyMockup;
 
 /** get my listings: call api or mockup */
 export const getMyListings = async (options) => {
-  let isTest = true; // local variable Test => true
+  let isTest = false; // local variable Test => true
   return isOnlyMockup || isTest
     ? await getMyListingsMockup(options)
     : await request(options);

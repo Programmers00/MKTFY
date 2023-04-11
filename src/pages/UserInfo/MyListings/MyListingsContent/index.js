@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 // scss
 import styles from "./index.module.scss";
+// scss style variabled for color occasionalPurple
+import variabled from "../../../../styles/_variabled.scss";
 // components
 import HorizontalItemCard from "../../../../components/HorizontalItemCard";
 // useDispatch for sending action to redux
@@ -20,6 +22,7 @@ const MyListingsContent = () => {
   /** data */
   const [showItem, setShowItem] = useState("active");
   const [activeItems, setActiveItems] = useState([]);
+  const [pendingItems, setPendingItems] = useState([]);
   const [soldItems, setSoldItems] = useState([]);
 
   /** functions */
@@ -27,27 +30,28 @@ const MyListingsContent = () => {
     navigate(`/myListings/${item.id}`, { state: { id: item.id } });
   };
 
-  /** params */
-  const activeParams = { status: "active" };
-  // sold options
-  const soldParams = { status: "sold" };
   /** fetch data from api */
   useEffect(() => {
-    const getData = async () => {
-      try {
-        /** api */
-        const responseActive = await dispatch(fetchMyListings(activeParams));
-        const responseSold = await dispatch(fetchMyListings(soldParams));
-        /** set data */
-        if (responseActive.data.code === "SUCCESS") {
-          setActiveItems(responseActive.data.items);
-        }
-        if (responseSold.data.code === "SUCCESS") {
-          setSoldItems(responseSold.data.items);
-        }
-      } catch (error) {}
+    const fetchData = async () => {
+      /** temporary data */
+      const tempActiveItems = [];
+      const tempPendingItems = [];
+      const tempSoldItems = [];
+      /** api */
+      // fetch my listings
+      const response = await dispatch(fetchMyListings());
+      // filtering ACTIVE, PENDING, SOLD
+      response.data.forEach((item) => {
+        if (item.status === "ACTIVE") tempActiveItems.push(item);
+        else if (item.status === "PENDING") tempPendingItems.push(item);
+        else tempSoldItems.push(item);
+      });
+      // set data
+      setActiveItems(tempActiveItems);
+      setPendingItems(tempPendingItems);
+      setSoldItems(tempSoldItems);
     };
-    getData();
+    fetchData();
   }, []);
 
   return (
@@ -60,7 +64,10 @@ const MyListingsContent = () => {
           }}
           style={
             showItem === "active"
-              ? { color: "occasionalPurple", textDecoration: "underline 3px" }
+              ? {
+                  color: variabled.occasionalPurple,
+                  textDecoration: "underline 3px",
+                }
               : {}
           }
         >
@@ -72,7 +79,10 @@ const MyListingsContent = () => {
           }}
           style={
             showItem === "sold"
-              ? { color: "occasionalPurple", textDecoration: "underline 3px" }
+              ? {
+                  color: variabled.occasionalPurple,
+                  textDecoration: "underline 3px",
+                }
               : {}
           }
         >
@@ -80,19 +90,52 @@ const MyListingsContent = () => {
         </li>
       </div>
       <div className={styles.contentBox}>
-        {showItem === "active"
-          ? activeItems.map((item, index) => {
-              return (
-                <HorizontalItemCard
-                  item={item}
-                  key={index}
-                  onClick={() => onClickItem(item)}
-                />
-              );
-            })
-          : soldItems.map((item, index) => {
-              return <HorizontalItemCard item={item} key={index} />;
-            })}
+        {/* active */}
+        {showItem === "active" ? (
+          <>
+            {/* Pending -> need action*/}
+            {pendingItems.length > 0 && (
+              <>
+                <span className={styles.contentTitle}>Pending</span>
+                {pendingItems.map((item, index) => {
+                  return (
+                    <HorizontalItemCard
+                      item={item}
+                      key={index}
+                      onClick={() => onClickItem(item)}
+                    />
+                  );
+                })}
+              </>
+            )}
+            {/* Available */}
+            {activeItems.length > 0 && (
+              <>
+                <span className={styles.contentTitle}>Available</span>
+                {activeItems.map((item, index) => {
+                  return (
+                    <HorizontalItemCard
+                      item={item}
+                      key={index}
+                      onClick={() => onClickItem(item)}
+                    />
+                  );
+                })}
+              </>
+            )}
+          </>
+        ) : (
+          // sold
+          soldItems.map((item, index) => {
+            return (
+              <HorizontalItemCard
+                item={item}
+                key={index}
+                onClick={() => onClickItem(item)}
+              />
+            );
+          })
+        )}
       </div>
     </div>
   );
