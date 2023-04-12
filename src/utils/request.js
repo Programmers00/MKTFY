@@ -2,6 +2,8 @@
 import axios from "axios";
 // envs for global variables
 import envs from "../envs";
+// webAuth from auth0-js
+import { webAuth } from "../utils/webAuth";
 
 /** create axios */
 export const request = axios.create({
@@ -25,26 +27,27 @@ request.interceptors.request.use(
 );
 
 // if needed, response interceptor to handle token refresh if the access token is expired
-// request.interceptors.response.use(
-//   (response) => response,
-//   async (error) => {
-//     const originalRequest = error.config;
-//     if (error.response.status === 401 && !originalRequest._retry) {
-//       originalRequest._retry = true;
+request.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      /** sign out: signout and close trigger */
+      webAuth.logout({
+        returnTo: `${
+          process.env.NODE_ENV === "development" ? envs.devUrl : envs.buildUrl
+        }/auth`,
+      });
+      alert("Token has expired");
+      // reset token in session storage
+      sessionStorage.clear();
 
-//       // webAuth.checkSession ???
-//       //   const refreshToken = localStorage.getItem("refreshToken");
-//       //    implement token refresh logic here using the refreshToken
-//       //      ...??
+      return request(originalRequest);
+    }
 
-//       // Retry the original request with the new access token
-//       const accessToken = sessionStorage.getItem("accessToken");
-//       originalRequest.headers.Authorization = `Bearer ${accessToken}`;
-//       return request(originalRequest);
-//     }
-
-//     return Promise.reject(error);
-//   }
-// );
+    return Promise.reject(error);
+  }
+);
 
 export default request;
