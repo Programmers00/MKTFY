@@ -1,6 +1,7 @@
 // init create offer form
 const initialState = {
   params: {
+    id: "",
     productName: "",
     description: "",
     category: "",
@@ -20,13 +21,14 @@ const setProduct = (state = initialState, action) => {
         ...state,
         params: {
           ...state.params,
-          productName: action.params.productName,
-          description: action.params.description,
-          category: action.params.category,
-          condition: action.params.condition,
-          price: action.params.price,
-          address: action.params.address,
-          city: action.params.city,
+          id: action.payload.id,
+          productName: action.payload.productName,
+          description: action.payload.description,
+          category: action.payload.category,
+          condition: action.payload.condition,
+          price: action.payload.price,
+          address: action.payload.address,
+          city: action.payload.city,
           images: [...state.params.images],
         },
       };

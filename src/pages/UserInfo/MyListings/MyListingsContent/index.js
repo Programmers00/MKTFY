@@ -27,7 +27,7 @@ const MyListingsContent = () => {
 
   /** functions */
   const onClickItem = (item) => {
-    navigate(`/myListings/${item.id}`, { state: { id: item.id } });
+    navigate(`/myListings/${item.id}`, { state: { item } });
   };
 
   /** fetch data from api */

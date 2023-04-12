@@ -1,7 +1,8 @@
 import {
   getProductMockup,
   putProductMockup,
-  deleteProductMockup,
+  putProductCompleteMockup,
+  putProductCancelMockup,
 } from "./productMockup";
 // request api
 import request from "../../../utils/request";
@@ -13,7 +14,7 @@ const isOnlyMockup = envs.isOnlyMockup;
 
 /** get product: call api or mockup */
 export const getProduct = async (options) => {
-  let isTest = true; // local variable Test => true
+  let isTest = false; // local variable Test => true
   return isOnlyMockup || isTest
     ? await getProductMockup(options)
     : await request(options);
@@ -21,16 +22,24 @@ export const getProduct = async (options) => {
 
 /** put product: call api or mockup */
 export const putProduct = async (options) => {
-  let isTest = true; // local variable Test => true
+  let isTest = false; // local variable Test => true
   return isOnlyMockup || isTest
     ? await putProductMockup(options)
     : await request(options);
 };
 
-/** delete product: call api or mockup */
-export const deleteProduct = async (options) => {
-  let isTest = true; // local variable Test => true
+/** put product complete: call api or mockup */
+export const putProductComplete = async (options) => {
+  let isTest = false; // local variable Test => true
   return isOnlyMockup || isTest
-    ? await deleteProductMockup(options)
+    ? await putProductCompleteMockup(options)
+    : await request(options);
+};
+
+/** put product cancel: call api or mockup */
+export const putProductCancel = async (options) => {
+  let isTest = false; // local variable Test => true
+  return isOnlyMockup || isTest
+    ? await putProductCancelMockup(options)
     : await request(options);
 };

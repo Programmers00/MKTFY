@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 // navigate
 import { useNavigate } from "react-router-dom";
 // scss
@@ -12,6 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateProduct, resetProduct } from "../../../../store/actions/product";
 import { createUploadImages } from "../../../../store/actions/productUploadImages";
 import { setLoadingTrue } from "../../../../store/actions/loading";
+// envs for storage
+import envs from "../../../../envs";
 /** product content : component for product edit */
 const ProductContent = () => {
   /** initialize */
@@ -39,24 +40,26 @@ const ProductContent = () => {
       );
       // when create upload images success,
       if (
-        responseUploadImages.data.code === "SUCCESS" ||
-        responseUploadImages.data.uploadedFiles.length > 0
+        responseUploadImages.status === 200 ||
+        responseUploadImages.data.length > 0
       ) {
         // new images id for params
         const newParams = JSON.parse(JSON.stringify(currentParams));
         // existing selected images => add to new images id
         currentSelectedImages.forEach((existingSelectedImage) => {
           if (typeof existingSelectedImage === "string") {
-            newParams.images.push(existingSelectedImage);
+            newParams.images.push(
+              existingSelectedImage.replace(envs.storageUrl, "")
+            );
           }
         });
         // response uploaded images => add to new images id
-        responseUploadImages.data.uploadedFiles.forEach((uploadedFile) => {
-          newParams.images.push(uploadedFile.fileId);
+        responseUploadImages.data.forEach((uploadedFile) => {
+          newParams.images.push(uploadedFile.id);
         });
         // update product
-        const responseProduct = await dispatch(updateProduct(newParams));
-        if (responseProduct.data.code === "SUCCESS") {
+        const response = await dispatch(updateProduct(newParams));
+        if (response.status === 200) {
           // reset product
           dispatch(resetProduct());
           // show loading

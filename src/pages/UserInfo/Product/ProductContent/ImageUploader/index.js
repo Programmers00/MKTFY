@@ -11,41 +11,13 @@ import { CameraIcon, XIcon } from "../../../../../assets/svgIcons";
 import { useDispatch } from "react-redux";
 // redux actions
 import { setSelectedImages } from "../../../../../store/actions/productUploadImages";
-import { fetchProduct } from "../../../../../store/actions/product";
 
 /** image uploader: parameter from images, setImages */
 const ImageUploader = () => {
-  const [productId, setProductId] = useState("");
   // parameter from router
-  const { state } = useLocation();
-  /** get params */
-  const getParams = {
-    id: productId,
-  };
-
-  /** set data from router parameter */
-  useEffect(() => {
-    setProductId(state.id);
-  }, []);
-
-  /** set data from router parameter */
-  useEffect(() => {
-    const getData = async () => {
-      // when product id is
-      if (productId !== "") {
-        try {
-          // request fetch product
-          const response = await dispatch(fetchProduct(getParams));
-          // when success, set data
-          if (response.data.code === "SUCCESS") {
-            const { item } = response.data;
-            setSelectedImageList([...item.images]);
-          }
-        } catch (error) {}
-      }
-    };
-    getData();
-  }, [productId]);
+  const {
+    state: { item },
+  } = useLocation();
 
   /** initialize */
   // redux
@@ -57,11 +29,14 @@ const ImageUploader = () => {
   // clicked image index
   const [clickedImage, setClickedImage] = useState(0);
   const [selectedImageList, setSelectedImageList] = useState([]);
+  /** initial data */
+  useState(() => {
+    setSelectedImageList([...item.images]);
+  }, []);
 
   /** update data in redux */
   useEffect(() => {
     dispatch(setSelectedImages(selectedImageList));
-    // console.log("##selectedImageList", selectedImageList);
   }, [selectedImageList]);
 
   /** functions */
@@ -121,6 +96,9 @@ const ImageUploader = () => {
     if (event.target.files && event.target.files[0]) {
       onAddImages(event.target.files);
     }
+    // important! this line is for reset the value.
+    // if don't reset the value, same file can't choose after choosing same file
+    event.target.value = null;
   };
   /** triggers the input when the empty image is clicked */
   const onClickEmptyImage = (index) => {
@@ -153,7 +131,7 @@ const ImageUploader = () => {
               className={styles.representingImage}
               src={
                 typeof selectedImageList[0] === "string"
-                  ? require(`../../../../../assets/images/${selectedImageList[0]}.png`)
+                  ? selectedImageList[0]
                   : URL.createObjectURL(selectedImageList[0])
               }
             />
@@ -191,7 +169,7 @@ const ImageUploader = () => {
                   className={styles.image}
                   src={
                     typeof selectedImageList[index] === "string"
-                      ? require(`../../../../../assets/images/${selectedImageList[index]}.png`)
+                      ? selectedImageList[index]
                       : URL.createObjectURL(selectedImageList[index])
                   }
                 />

@@ -13,10 +13,10 @@ import { regex, validationMessage } from "../../../../../constants";
 import { useDispatch } from "react-redux";
 // redux actions
 import {
-  fetchProduct,
+  // fetchProduct,
   setProduct,
-  updateProduct,
-  removeProduct,
+  updateProductComplete,
+  updateProductCancel,
 } from "../../../../../store/actions/product";
 import { setLoadingTrue } from "../../../../../store/actions/loading";
 // component
@@ -27,7 +27,9 @@ const ProductForm = () => {
   const [isShowModal, setIsShowModal] = useState();
   /** initialize */
   // parameter from router
-  const { state } = useLocation();
+  const {
+    state: { item },
+  } = useLocation();
   // navigate
   const navigate = useNavigate();
   // redux
@@ -35,53 +37,39 @@ const ProductForm = () => {
   /** data */
   const [productId, setProductId] = useState("");
 
-  /** get params */
-  const getParams = {
-    id: productId,
-  };
-
   /** set data from router parameter */
   useEffect(() => {
-    setProductId(state.id);
+    setProductName(item.productName);
+    setDescription(item.description);
+    setCategory(item.category);
+    setCondition(item.condition);
+    onAddressChange(item.address);
+    setPrice(item.price);
+    setCity(item.city);
   }, []);
-
-  /** set data from router parameter */
-  useEffect(() => {
-    const getData = async () => {
-      // when product id is
-      if (productId !== "") {
-        try {
-          // request fetch product
-          const response = await dispatch(fetchProduct(getParams));
-          // when success, set data
-          if (response.data.code === "SUCCESS") {
-            const { item } = response.data;
-            setProductName(item.productName);
-            setDescription(item.description);
-            setCategory(item.category);
-            setCondition(item.condition);
-            onAddressChange(item.address);
-            setPrice(item.price);
-            setCity(item.city);
-          }
-        } catch (error) {}
-      }
-    };
-    getData();
-  }, [productId]);
 
   /** data */
   // selectbox list data
   const cities = ["Calgary", "Camrose", "Brooks"];
-  const categories = ["CarsVehicles", "Furniture", "Electronics", "RealEstate"];
-  const conditions = ["new", "used"];
+  // key for ui, value for param
+  const categories = [
+    { key: "Cars & Vehicles", value: "VEHICLES" },
+    { key: "Furniture", value: "FURNITURE" },
+    { key: "Electoronics", value: "ELECTORNICS" },
+    { key: "Real estate", value: "REAL_ESTATE" },
+  ];
+  // key for ui, value for param
+  const conditions = [
+    { key: "New", value: "NEW" },
+    { key: "Used", value: "USED" },
+  ];
   // form data
   const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("CarsVehicles");
-  const [condition, setCondition] = useState("used");
+  const [category, setCategory] = useState(categories[0].value);
+  const [condition, setCondition] = useState(conditions[0].value);
   const [price, setPrice] = useState(0);
-  const [city, setCity] = useState("calgary");
+  const [city, setCity] = useState(cities[0]);
 
   /** regex and validation message */
   const validationAddress = {
@@ -101,7 +89,8 @@ const ProductForm = () => {
 
   /** data form for redux*/
   // put product offer form
-  const params = {
+  const putParams = {
+    id: item.id,
     productName,
     description,
     category,
@@ -113,21 +102,20 @@ const ProductForm = () => {
 
   /** update data in redux */
   useEffect(() => {
-    dispatch(setProduct(params));
+    dispatch(setProduct(putParams));
   }, [productName, description, category, condition, price, address, city]);
 
   /** functions */
 
   /** confirm sold */
   // params
-  const putParams = {
-    id: productId,
-    active: false,
+  const params = {
+    id: item.id,
   };
   const onConfirm = async () => {
     // active to false => sold out
-    const response = await dispatch(updateProduct(putParams));
-    if (response.data.code === "SUCCESS") {
+    const response = await dispatch(updateProductComplete(params));
+    if (response.status === 200) {
       // show loading
       dispatch(setLoadingTrue("Product Sold!"));
       // navigate "myListing"
@@ -136,13 +124,9 @@ const ProductForm = () => {
   };
 
   /** cancel product post */
-  // params
-  const deleteParams = {
-    id: productId,
-  };
   const onCancel = async () => {
-    const response = await dispatch(removeProduct(deleteParams));
-    if (response.data.code === "SUCCESS") {
+    const response = await dispatch(updateProductCancel(params));
+    if (response.status === 200) {
       // // show loading
       dispatch(setLoadingTrue("Product Canceled!"));
       // navigate "myListings"
@@ -187,8 +171,8 @@ const ProductForm = () => {
         >
           {categories.map((category) => {
             return (
-              <option value={category} key={category}>
-                {category}
+              <option value={category.value} key={category.value}>
+                {category.key}
               </option>
             );
           })}
@@ -207,8 +191,8 @@ const ProductForm = () => {
             >
               {conditions.map((condition) => {
                 return (
-                  <option value={condition} key={condition}>
-                    {condition}
+                  <option value={condition.value} key={condition.value}>
+                    {condition.key}
                   </option>
                 );
               })}

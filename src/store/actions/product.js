@@ -1,7 +1,8 @@
 import {
   getProduct,
   putProduct,
-  deleteProduct,
+  putProductComplete,
+  putProductCancel,
 } from "../../api/userInfo/product";
 
 /** get options */
@@ -22,8 +23,9 @@ export const fetchProduct = (params) => {
 
 /** action : set product */
 export const setProduct = (params) => {
+  console.log("##", params);
   return (dispatch) => {
-    dispatch({ type: "SET_PRODUCT", params });
+    dispatch({ type: "SET_PRODUCT", payload: params });
   };
 };
 
@@ -34,36 +36,59 @@ export const resetProduct = () => {
   };
 };
 
+/** action: put product */
 /** put options */
-const putOptions = {
-  url: "/api/product",
+const options = {
+  url: "/api/Product",
   method: "put",
 };
-
-/** action : put product */
-export const updateProduct = (params) => {
+export const updateProduct = (data) => {
   return async () => {
     try {
-      return await putProduct({ ...putOptions, params });
+      return await putProduct({
+        ...options,
+        data,
+      });
     } catch (error) {
-      console.log("Error");
+      console.log("Error", error.response);
     }
   };
 };
 
-/** delete options */
-const deleteOptions = {
-  url: "/api/product",
-  method: "delete",
+/** action : put product complete*/
+/** put options */
+const completeOptions = {
+  url: "/api/Product/complete",
+  method: "put",
+};
+export const updateProductComplete = (data) => {
+  return async () => {
+    try {
+      return await putProductComplete({
+        ...completeOptions,
+        url: `${completeOptions.url}/${data.id}`,
+      });
+    } catch (error) {
+      console.log("Error", error.response);
+    }
+  };
 };
 
 /** action : delete product */
-export const removeProduct = (params) => {
+/** cancel options */
+const cancelOptions = {
+  url: "/api/Product/cancel",
+  method: "put",
+};
+export const updateProductCancel = (data) => {
   return async () => {
     try {
-      return await deleteProduct({ ...deleteOptions, params });
+      return await putProductCancel({
+        ...cancelOptions,
+        url: `${cancelOptions.url}/${data.id}`,
+      });
     } catch (error) {
-      console.log("Error");
+      console.log("Error", error.response);
     }
   };
 };

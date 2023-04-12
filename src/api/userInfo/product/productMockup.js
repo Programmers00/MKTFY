@@ -160,29 +160,77 @@ export const putProductMockup = (options) => {
   };
 };
 
-/** delete product */
-export const deleteProductMockup = (options) => {
+/** put product complete */
+export const putProductCompleteMockup = (options) => {
   // success
   if (options)
     // success
     return {
-      loading: false,
+      status: 200,
+      statusText: "OK",
       data: {
-        code: "SUCCESS",
-        status: 200,
-        message: `delete Product ${options.params.id} Success`,
+        id: "04b4415d-8b2f-42e7-9cbe-21465bb7c87b",
+        productName: "Dororo",
+        description: "Dororo",
+        price: 199,
+        category: "VEHICLES",
+        condition: "NEW",
+        status: "COMPLETE",
+        address: "199 Dororo St SW",
+        city: "Calgary",
+        sellerListingCount: null,
+        created: "2023-04-06T18:40:46.898334Z",
+        userId: "auth0|642b1676b60b6913044e6270",
+        sellerProfile: null,
+        images: [
+          "https://mktfy-proof-staging.s3.ca-central-1.amazonaws.com/a8314d25-43ef-48cb-9fb4-ca574280d9a3",
+          "https://mktfy-proof-staging.s3.ca-central-1.amazonaws.com/68c40dd6-f9ee-4ab8-ae19-4dcf253ff011",
+          "https://mktfy-proof-staging.s3.ca-central-1.amazonaws.com/4eed387b-1e60-4f96-9594-b833f7ab1235",
+          "https://mktfy-proof-staging.s3.ca-central-1.amazonaws.com/9b145ec1-6d93-45c6-8dc6-31d78b3603f8",
+        ],
       },
-      error: null,
     };
   // fail
   return {
-    loading: false,
-    data: null,
-    error: {
-      code: "ERR_NETWORK",
-      message: "Network Error",
-      name: "AxiosError",
-      status: 404,
+    status: 400,
+    statusText: "Bad Request",
+    data: {
+      message: "This porduct does not hava a buyer",
     },
+  };
+};
+
+/** delete product */
+export const putProductCancelMockup = (options) => {
+  // success
+  if (options)
+    // success
+    return {
+      status: 200,
+      statusText: "OK",
+      data: {
+        id: "666581a3-010f-46af-ba8f-6c350a65dc05",
+        productName: "good one1234",
+        description: "good",
+        price: 110,
+        category: "REAL_ESTATE",
+        condition: "NEW",
+        status: "CANCELLED",
+        address: "10 string",
+        city: "Calgary",
+        sellerListingCount: null,
+        created: "2023-04-05T06:43:08.178519Z",
+        userId: "auth0|642b1676b60b6913044e6270",
+        sellerProfile: null,
+        images: [
+          "https://mktfy-proof-staging.s3.ca-central-1.amazonaws.com/39e25933-791a-4c9c-8d18-f18682280b78",
+        ],
+      },
+    };
+  // fail
+  return {
+    status: 400,
+    statusText: "Bad Request",
+    data: { message: "This product has a buyer and cannot be cancelled" },
   };
 };
