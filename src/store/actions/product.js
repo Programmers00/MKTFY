@@ -23,7 +23,6 @@ import {
 
 /** action : set product */
 export const setProduct = (params) => {
-  console.log("##", params);
   return (dispatch) => {
     dispatch({ type: "SET_PRODUCT", payload: params });
   };
