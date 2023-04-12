@@ -91,3 +91,22 @@ export const updateProductCancel = (data) => {
     }
   };
 };
+
+/** action : delete product */
+/** cancel options */
+const cancelsaleOptions = {
+  url: "/api/Product/cancelsale",
+  method: "put",
+};
+export const updateProductCancelsale = (data) => {
+  return async () => {
+    try {
+      return await putProductCancel({
+        ...cancelsaleOptions,
+        url: `${cancelsaleOptions.url}/${data.id}`,
+      });
+    } catch (error) {
+      console.log("Error", error.response);
+    }
+  };
+};

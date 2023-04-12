@@ -17,10 +17,11 @@ import {
   setProduct,
   updateProductComplete,
   updateProductCancel,
+  updateProductCancelsale,
 } from "../../../../../store/actions/product";
 import { setLoadingTrue } from "../../../../../store/actions/loading";
 // component
-import CancelListingModal from "./CancelListingModal";
+import ProductModal from "./ProductModal";
 
 /** product form  */
 const ProductForm = () => {
@@ -133,6 +134,16 @@ const ProductForm = () => {
       navigate("/myListings");
     }
   };
+  /** cancel sale */
+  const onCancelsale = async () => {
+    const response = await dispatch(updateProductCancelsale(params));
+    if (response.status === 200) {
+      // // show loading
+      dispatch(setLoadingTrue("Product Sale Canceled!"));
+      // navigate "myListings"
+      navigate("/myListings");
+    }
+  };
 
   return (
     <div className={styles.contentBox}>
@@ -140,6 +151,7 @@ const ProductForm = () => {
         Product name
         <br />
         <input
+          disabled={item.status !== "ACTIVE"}
           className={styles.input}
           type="text"
           placeholder="Type the product name"
@@ -153,6 +165,7 @@ const ProductForm = () => {
         Description
         <br />
         <textarea
+          disabled={item.status !== "ACTIVE"}
           className={styles.textArea}
           placeholder="Type the description"
           value={description}
@@ -164,6 +177,7 @@ const ProductForm = () => {
         Category
         <br />
         <select
+          disabled={item.status !== "ACTIVE"}
           className={styles.input}
           placeholder="Choose the category"
           value={category}
@@ -184,6 +198,7 @@ const ProductForm = () => {
             Condition
             <br />
             <select
+              disabled={item.status !== "ACTIVE"}
               className={styles.input}
               placeholder="Choose the condition"
               value={condition}
@@ -204,6 +219,7 @@ const ProductForm = () => {
             Price
             <br />
             <input
+              disabled={item.status !== "ACTIVE"}
               className={styles.input}
               pattern="[0-9]*"
               type="number"
@@ -220,6 +236,7 @@ const ProductForm = () => {
         Address
         <br />
         <input
+          disabled={item.status !== "ACTIVE"}
           className={styles.input}
           type="text"
           placeholder="Type your address"
@@ -245,6 +262,7 @@ const ProductForm = () => {
         City
         <br />
         <select
+          disabled={item.status !== "ACTIVE"}
           className={styles.input}
           value={city}
           onChange={(e) => setCity(e.target.value)}
@@ -260,47 +278,58 @@ const ProductForm = () => {
           })}
         </select>
       </label>
-      <div className={styles.postYourOfferButtonBox}>
-        <button
-          className={styles.postYourOfferButton}
-          type="submit"
-          disabled={
-            productName.length === 0 ||
-            description.length === 0 ||
-            price.length === 0 ||
-            address.length === 0
-              ? true
-              : false
-          }
-        >
-          Save changes
-        </button>
-      </div>
-      <div className={styles.confirmSoldButtonBox}>
-        <button
-          className={styles.confirmSoldButton}
-          type="button"
-          onClick={onConfirm}
-        >
-          Confirm sold
-        </button>
-      </div>
-      <div className={styles.cancelListingButtonBox}>
-        <button
-          className={styles.cancelListingButton}
-          type="button"
-          onClick={() => {
-            setIsShowModal(true);
-          }}
-        >
-          Cancel listing
-        </button>
-      </div>
+      {item.status === "ACTIVE" && (
+        <div className={styles.postYourOfferButtonBox}>
+          <button
+            className={styles.postYourOfferButton}
+            type="submit"
+            disabled={
+              productName.length === 0 ||
+              description.length === 0 ||
+              price.length === 0 ||
+              address.length === 0
+                ? true
+                : false
+            }
+          >
+            Save changes
+          </button>
+        </div>
+      )}
+      {item.status === "PENDING" && (
+        <div className={styles.confirmSoldButtonBox}>
+          <button
+            className={styles.confirmSoldButton}
+            type="button"
+            onClick={onConfirm}
+          >
+            Confirm sold
+          </button>
+        </div>
+      )}
+      {item.status !== "COMPLETE" && (
+        <div className={styles.cancelListingButtonBox}>
+          <button
+            className={styles.cancelListingButton}
+            type="button"
+            onClick={() => {
+              setIsShowModal(true);
+            }}
+          >
+            {item.status === "ACTIVE" ? "Cancel listing" : "Cancel sale"}
+          </button>
+        </div>
+      )}
       {isShowModal && (
-        <CancelListingModal
+        <ProductModal
           isShowModal={isShowModal}
           setIsShowModal={setIsShowModal}
-          onClickYes={onCancel}
+          onClickYes={item.status === "ACTIVE" ? onCancel : onCancelsale}
+          contentText={
+            item.status === "ACTIVE"
+              ? "You are about to cancel your listing. Are you sure?"
+              : "You are about to cancel your sale. Are you sure?"
+          }
         />
       )}
     </div>

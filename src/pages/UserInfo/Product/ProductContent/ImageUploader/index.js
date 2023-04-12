@@ -110,6 +110,7 @@ const ImageUploader = () => {
   return (
     <div className={styles.contentBox}>
       <label
+        disabled={item.status !== "ACTIVE"}
         onDragEnter={onDrag}
         onDragLeave={onDrag}
         onDragOver={onDrag}
@@ -141,7 +142,7 @@ const ImageUploader = () => {
                 onClick={(e) => {
                   // remove image, prevent other function
                   e.preventDefault();
-                  onRemoveImage(0);
+                  item.status === "ACTIVE" && onRemoveImage(0);
                 }}
               >
                 <XIcon />
@@ -156,7 +157,7 @@ const ImageUploader = () => {
           type="file"
           multiple={true}
           accept=".jpg, .jpeg, .png"
-          disabled={selectedImageList.length > 4}
+          disabled={selectedImageList.length > 4 || item.status !== "ACTIVE"}
         />
       </label>
       <div className={styles.images}>
@@ -176,7 +177,9 @@ const ImageUploader = () => {
                 <div className={styles.xIconBox}>
                   <div
                     className={styles.xIcon}
-                    onClick={() => onRemoveImage(index)}
+                    onClick={() =>
+                      item.status === "ACTIVE" && onRemoveImage(index)
+                    }
                   >
                     <XIcon />
                   </div>

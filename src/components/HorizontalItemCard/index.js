@@ -22,7 +22,7 @@ const HorizontalItemCard = ({
             : `${item.productName.slice(0, 49)}...`}
         </div>
         <div className={styles.itemPrice}>{`$${item.price}`}</div>
-        {!item.status === "ACTIVE" && (
+        {item.status === "COMPLETE" && (
           <div className={styles.tagBox}>
             <div className={styles.tag}>SALE CONFIRMED</div>
           </div>

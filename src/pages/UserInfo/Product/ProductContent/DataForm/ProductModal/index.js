@@ -3,7 +3,7 @@ import { useRef, useEffect } from "react";
 // scss
 import styles from "./index.module.scss";
 /** cancel listing modal*/
-const CancelListingModal = ({ setIsShowModal, onClickYes }) => {
+const ProductModal = ({ setIsShowModal, onClickYes, contentText }) => {
   /** initialize */
   const modalRef = useRef();
   /** functions */
@@ -25,9 +25,7 @@ const CancelListingModal = ({ setIsShowModal, onClickYes }) => {
   return (
     <div ref={modalRef} className={styles.modalBox}>
       <span className={styles.modalTitle}>Heads up!</span>
-      <p className={styles.content}>
-        You are about to cancel your listing. Are you sure?
-      </p>
+      <p className={styles.content}>{contentText}</p>
       <div className={styles.buttonsBox}>
         <div className={styles.buttons}>
           <div className={styles.cancelButtonBox}>
@@ -55,4 +53,4 @@ const CancelListingModal = ({ setIsShowModal, onClickYes }) => {
     </div>
   );
 };
-export default CancelListingModal;
+export default ProductModal;
