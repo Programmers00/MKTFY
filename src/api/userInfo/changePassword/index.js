@@ -1,6 +1,6 @@
 import {
-  getManagementApiAccessTokenMockup,
-  putChangePasswordMockup,
+  // getManagementApiAccessTokenMockup,
+  postChangePasswordMockup,
 } from "./changePasswordMockup";
 // request api
 import request from "../../../utils/request";
@@ -10,18 +10,18 @@ import envs from "../../../envs";
 // global variable
 const isOnlyMockup = envs.isOnlyMockup;
 
-/** get management api access token: call api or mockup */
-export const getManagementApiAccessToken = async (options) => {
-  let isTest = true; // local variable Test => true
-  return isOnlyMockup || isTest
-    ? await getManagementApiAccessTokenMockup(options)
-    : await request(options);
-};
+// /** get management api access token: call api or mockup */
+// export const getManagementApiAccessToken = async (options) => {
+//   let isTest = true; // local variable Test => true
+//   return isOnlyMockup || isTest
+//     ? await getManagementApiAccessTokenMockup(options)
+//     : await request(options);
+// };
 
 /** put change password : call api or mockup */
-export const putChangePassword = async (options) => {
-  let isTest = true; // local variable Test => true
+export const postChangePassword = async (options) => {
+  let isTest = false; // local variable Test => true
   return isOnlyMockup || isTest
-    ? await putChangePasswordMockup(options)
+    ? await postChangePasswordMockup(options)
     : await request(options);
 };

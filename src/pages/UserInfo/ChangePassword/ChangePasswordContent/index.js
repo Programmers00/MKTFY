@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 // scss style variabled for color red
 import variabled from "../../../../styles/_variabled.scss";
 // css styles
@@ -6,14 +6,14 @@ import styles from "./index.module.scss";
 // navigate
 import { useNavigate } from "react-router-dom";
 // link to move page
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 // useDispatch for sending action to redux
 import { useDispatch } from "react-redux";
 // webAuth from auth0-js
-import { webAuth } from "../../../../utils/webAuth";
+// import { webAuth } from "../../../../utils/webAuth";
 // redux actions
 import { setLoadingTrue } from "../../../../store/actions/loading";
-import { changePassword } from "../../../../store/actions/changePassword";
+import { updateChangePassword } from "../../../../store/actions/changePassword";
 // component
 import TryAgainModal from "./TryAgainModal";
 
@@ -28,23 +28,26 @@ const ChangePasswordContent = () => {
 
   /** data */
   // current password
-  const [currentPassword, setCurrentPassword] = useState("");
-  // password
-  const [password, setPassword] = useState("");
+  // const [currentPassword, setCurrentPassword] = useState("");
+  // new password
+  const [newPassword, setNewPassword] = useState("");
+  // confirm password
+  const [confirmPassword, setConfirmPassword] = useState("");
   // eye icon for password visibility
-  const [currentPasswordInputType, setCurrentPasswordInputType] =
-    useState("password");
+  // const [currentPasswordInputType, setCurrentPasswordInputType] =
+  //   useState("password");
   // eye icon for password visibility
-  const [passwordInputType, setPasswordInputType] = useState("password");
+  const [newPasswordInputType, setPasswordInputType] = useState("password");
   // eye icon for password confirm visibility
-  const [passwordConfirmInputType, setPasswordConfirmInputType] =
+  const [confirmPasswordInputType, setConfirmPasswordInputType] =
     useState("password");
   // check password = password confirm
-  const [passwordConfirm, setPasswordConfirm] = useState("");
+  // const [confirmPassword, setConfirmPassword] = useState("");
 
   const params = {
-    currentPassword,
-    password,
+    // currentPassword,
+    newPassword,
+    confirmPassword,
   };
 
   /** functions */
@@ -52,51 +55,31 @@ const ChangePasswordContent = () => {
   const onClickSubmit = async (event) => {
     event.preventDefault();
 
-    const response = await dispatch(changePassword(params));
-    console.log("##response", response);
-    // console.log("##response", response.data.code === "SUCCESS");
-    if (response.data?.code === "SUCCESS") {
+    const response = await dispatch(updateChangePassword(params));
+    if (response.status === 200) {
       dispatch(setLoadingTrue("Change Password"));
       navigate("/");
     } else {
       console.log("##show Modal");
       setIsShowModal(true);
     }
-    // webAuth sign up try with signup form from redux
-    // webAuth.signup(signupForm, (err, res) => {
-    //   // signup fail: email duplicate
-    //   if (err && err.statusCode === 400 && err.code === "invalid_signup") {
-    //     alert("email is duplicated");
-    //     // go userMain page
-    //     navigate("/auth/createAccount");
-    //   }
-    //   // signup success
-    //   else if (res) {
-    //     // dispatch: remove signup form data in redux
-    //     dispatch(resetSignup());
-    //     // set loading page for 2seconds
-    //     dispatch(setLoadingTrue("Account Created!"));
-    //     // go login page
-    //     navigate("/auth/login");
-    //   }
-    // });
   };
 
   /** password toggle: change input type and icon */
   const onToggle = (type) => {
-    if (type === "current") {
-      // change input type
-      setCurrentPasswordInputType((prevPasswordInputType) =>
-        prevPasswordInputType === "password" ? "text" : "password"
-      );
-      return;
-    } else if (type === "confirm") {
-      // change input type
-      setPasswordConfirmInputType((prevPasswordInputType) =>
-        prevPasswordInputType === "password" ? "text" : "password"
-      );
-      return;
-    }
+    // if (type === "current") {
+    // change input type
+    // setCurrentPasswordInputType((prevPasswordInputType) =>
+    //   prevPasswordInputType === "password" ? "text" : "password"
+    // );
+    // return;
+    // } else if (type === "confirm") {
+    // change input type
+    setConfirmPasswordInputType((prevPasswordInputType) =>
+      prevPasswordInputType === "password" ? "text" : "password"
+    );
+    // return;
+    // }
     // change input type
     setPasswordInputType((prevPasswordInputType) =>
       prevPasswordInputType === "password" ? "text" : "password"
@@ -107,7 +90,7 @@ const ChangePasswordContent = () => {
     <div className={styles.changePasswordBox}>
       <span className={styles.title}>Change Password</span>
       <form className={styles.changePasswordForm} onSubmit={onClickSubmit}>
-        <label className={styles.passwordLabel}>
+        {/* <label className={styles.passwordLabel}>
           <span>Current Password </span>
           <div className={styles.passwordInputBox}>
             <input
@@ -127,7 +110,7 @@ const ChangePasswordContent = () => {
               onClick={() => onToggle("current")}
             />
           </div>
-        </label>
+        </label> */}
 
         <span className={styles.subTitle}>
           The password must have at least 6 characters and must contain 1
@@ -137,18 +120,18 @@ const ChangePasswordContent = () => {
         <label
           className={styles.passwordLabel}
           style={
-            password.length < 6 ||
-            !/[A-Z]/.test(password) ||
-            !/\d/.test(password)
+            newPassword.length < 6 ||
+            !/[A-Z]/.test(newPassword) ||
+            !/\d/.test(newPassword)
               ? { color: variabled.occasionalPurple }
               : {}
           }
         >
           <span>
             Password{" "}
-            {password.length === 0 ? (
+            {newPassword.length === 0 ? (
               ""
-            ) : password.length > 10 ? (
+            ) : newPassword.length > 10 ? (
               <span style={{ color: variabled.goodGreen }}>Strong</span>
             ) : (
               <span style={{ color: variabled.hoverYellow }}>Weak</span>
@@ -157,15 +140,15 @@ const ChangePasswordContent = () => {
           <div className={styles.passwordInputBox}>
             <input
               className={styles.passwordInput}
-              type={passwordInputType}
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              placeholder="Insert your password"
+              type={newPasswordInputType}
+              value={newPassword}
+              onChange={(event) => setNewPassword(event.target.value)}
+              placeholder="Insert your new password"
               autoComplete="password"
               style={
-                password.length < 6 ||
-                !/[A-Z]/.test(password) ||
-                !/\d/.test(password)
+                newPassword.length < 6 ||
+                !/[A-Z]/.test(newPassword) ||
+                !/\d/.test(newPassword)
                   ? { borderColor: variabled.occasionalPurple }
                   : {}
               }
@@ -174,20 +157,20 @@ const ChangePasswordContent = () => {
               alt="eye"
               className={styles.eyeIcon}
               src={require(`../../../../assets/icons/${
-                (password.length < 6 ||
-                  !/[A-Z]/.test(password) ||
-                  !/\d/.test(password)) &&
-                passwordInputType === "password"
+                (newPassword.length < 6 ||
+                  !/[A-Z]/.test(newPassword) ||
+                  !/\d/.test(newPassword)) &&
+                newPasswordInputType === "password"
                   ? "eyeSlashPurple"
-                  : (password.length < 6 ||
-                      !/[A-Z]/.test(password) ||
-                      !/\d/.test(password)) &&
-                    passwordInputType !== "password"
+                  : (newPassword.length < 6 ||
+                      !/[A-Z]/.test(newPassword) ||
+                      !/\d/.test(newPassword)) &&
+                    newPasswordInputType !== "password"
                   ? "eyePurple"
-                  : password.length >= 5 &&
-                    /[A-Z]/.test(password) &&
-                    /\d/.test(password) &&
-                    passwordInputType === "password"
+                  : newPassword.length >= 5 &&
+                    /[A-Z]/.test(newPassword) &&
+                    /\d/.test(newPassword) &&
+                    newPasswordInputType === "password"
                   ? "eyeSlash"
                   : "eye"
               }.png`)}
@@ -198,7 +181,7 @@ const ChangePasswordContent = () => {
         <label
           className={styles.passwordLabel}
           style={
-            password !== passwordConfirm
+            newPassword !== confirmPassword
               ? { color: variabled.occasionalPurple }
               : {}
           }
@@ -207,13 +190,13 @@ const ChangePasswordContent = () => {
           <div className={styles.passwordInputBox}>
             <input
               className={styles.passwordInput}
-              type={passwordConfirmInputType}
-              value={passwordConfirm}
-              onChange={(event) => setPasswordConfirm(event.target.value)}
+              type={confirmPasswordInputType}
+              value={confirmPassword}
+              onChange={(event) => setConfirmPassword(event.target.value)}
               placeholder="Insert your password Confirm"
               autoComplete="password"
               style={
-                password !== passwordConfirm
+                newPassword !== confirmPassword
                   ? { borderColor: variabled.occasionalPurple }
                   : {}
               }
@@ -222,14 +205,14 @@ const ChangePasswordContent = () => {
               alt="eye"
               className={styles.eyeIcon}
               src={require(`../../../../assets/icons/${
-                password !== passwordConfirm &&
-                passwordConfirmInputType === "password"
+                newPassword !== confirmPassword &&
+                confirmPasswordInputType === "password"
                   ? "eyeSlashPurple"
-                  : password !== passwordConfirm &&
-                    passwordConfirmInputType !== "password"
+                  : newPassword !== confirmPassword &&
+                    confirmPasswordInputType !== "password"
                   ? "eyePurple"
-                  : password === passwordConfirm &&
-                    passwordConfirmInputType === "password"
+                  : newPassword === confirmPassword &&
+                    confirmPasswordInputType === "password"
                   ? "eyeSlash"
                   : "eye"
               }.png`)}
@@ -238,7 +221,7 @@ const ChangePasswordContent = () => {
           </div>
           <span className={styles.passwordMatchWarningBox}>
             <div className={styles.passwordMatchWarning}>
-              {password !== passwordConfirm ? "Password does not match" : ""}
+              {newPassword !== confirmPassword ? "Password does not match" : ""}
             </div>
           </span>
         </label>
@@ -248,7 +231,7 @@ const ChangePasswordContent = () => {
               alt="check"
               className={styles.checkIcon}
               src={require(`../../../../assets/icons/${
-                password.length > 5 ? "checkConfirm" : "check"
+                newPassword.length > 5 ? "checkConfirm" : "check"
               }.png`)}
             />
             At least 6 characters
@@ -258,7 +241,7 @@ const ChangePasswordContent = () => {
               alt="check"
               className={styles.checkIcon}
               src={require(`../../../../assets/icons/${
-                /[A-Z]/.test(password) ? "checkConfirm" : "check"
+                /[A-Z]/.test(newPassword) ? "checkConfirm" : "check"
               }.png`)}
             />
             1 Uppercase
@@ -268,7 +251,7 @@ const ChangePasswordContent = () => {
               alt="check"
               className={styles.checkIcon}
               src={require(`../../../../assets/icons/${
-                /\d/.test(password) ? "checkConfirm" : "check"
+                /\d/.test(newPassword) ? "checkConfirm" : "check"
               }.png`)}
             />
             1 Number
@@ -280,10 +263,10 @@ const ChangePasswordContent = () => {
             className={styles.submitButton}
             type="submit"
             disabled={
-              password === passwordConfirm &&
-              password.length > 5 &&
-              /[A-Z]/.test(password) &&
-              /\d/.test(password)
+              newPassword === confirmPassword &&
+              newPassword.length > 5 &&
+              /[A-Z]/.test(newPassword) &&
+              /\d/.test(newPassword)
                 ? false
                 : true
             }
