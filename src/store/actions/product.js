@@ -1,25 +1,25 @@
 import {
-  getProduct,
+  // getProduct,
   putProduct,
   putProductComplete,
   putProductCancel,
 } from "../../api/userInfo/product";
 
-/** get options */
-const getOptions = {
-  url: "/api/product",
-};
+// /** get options */
+// const getOptions = {
+//   url: "/api/product",
+// };
 
-/** action : get product */
-export const fetchProduct = (params) => {
-  return async () => {
-    try {
-      return await getProduct({ ...getOptions, params });
-    } catch (error) {
-      console.log("Error");
-    }
-  };
-};
+// /** action : get product */
+// export const fetchProduct = (params) => {
+//   return async () => {
+//     try {
+//       return await getProduct({ ...getOptions, params });
+//     } catch (error) {
+//       console.log("Error");
+//     }
+//   };
+// };
 
 /** action : set product */
 export const setProduct = (params) => {

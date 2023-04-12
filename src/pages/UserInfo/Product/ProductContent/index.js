@@ -48,9 +48,7 @@ const ProductContent = () => {
         // existing selected images => add to new images id
         currentSelectedImages.forEach((existingSelectedImage) => {
           if (typeof existingSelectedImage === "string") {
-            newParams.images.push(
-              existingSelectedImage.replace(envs.storageUrl, "")
-            );
+            newParams.images.push(existingSelectedImage);
           }
         });
         // response uploaded images => add to new images id

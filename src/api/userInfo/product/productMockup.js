@@ -1,137 +1,137 @@
 /** product mockup */
 /** get product */
-export const getProductMockup = (options) => {
-  // success
-  if (options.params.id === "cat3")
-    // success
-    return {
-      loading: false,
-      data: {
-        code: "SUCCESS",
-        status: 200,
-        message: "Get Product Success",
-        item: {
-          id: "cat3",
-          productName: "Pearl The Cat: Toy edition",
-          description:
-            "The world's most beautiful cat. Pearl The Cat is a pretty cat who is grey with black stripes on top and spots on the belly. She likes catching flies and eating beef jerky as well as yogurt. This edition of Pearl The Cat includes toys for maximum Pearl enjoyment. (Batteries not included)",
-          category: "CarsVehicles",
-          condition: "used",
-          price: "340",
-          address: "100 Main st",
-          city: "Calgary",
-          images: ["cat"],
-          active: true,
-        },
-      },
-      error: null,
-    };
-  if (options.params.id === "cat4")
-    // success
-    return {
-      loading: false,
-      data: {
-        code: "SUCCESS",
-        status: 200,
-        message: "Get Product Success",
-        item: {
-          id: "cat4",
-          productName: "Pearl The cat: Halloween edtion",
-          description:
-            "The world's most beautiful cat. Pearl The Cat is a pretty cat who is grey with black stripes on top and spots on the belly. She likes catching flies and eating beef jerky as well as yogurt. This edition of Pearl The Cat includes toys for maximum Pearl enjoyment. (Batteries not included)",
-          category: "CarsVehicles",
-          condition: "used",
-          price: "400",
-          address: "100 Main st",
-          city: "Calgary",
-          images: ["cat2", "cat3", "cat4", "cat"],
-          active: true,
-        },
-      },
-      error: null,
-    };
-  else if (options.params.id === "cat5")
-    // success
-    return {
-      loading: false,
-      data: {
-        code: "SUCCESS",
-        status: 200,
-        message: "Get Product Success",
-        item: {
-          id: "cat4",
-          productName:
-            "Pearl The cat: Breakfast edtion Pearl The cat: Breakfast edtion",
-          description:
-            "The world's most beautiful cat. Pearl The Cat is a pretty cat who is grey with black stripes on top and spots on the belly. She likes catching flies and eating beef jerky as well as yogurt. This edition of Pearl The Cat includes toys for maximum Pearl enjoyment. (Batteries not included)",
-          category: "CarsVehicles",
-          condition: "used",
-          price: "500",
-          address: "100 Main st",
-          city: "Calgary",
-          images: ["cat3"],
-          active: true,
-        },
-      },
-      error: null,
-    };
-  else if (options.params.id === "cat6")
-    // success
-    return {
-      loading: false,
-      data: {
-        code: "SUCCESS",
-        status: 200,
-        message: "Get Product Success",
-        item: {
-          id: "cat6",
-          productName: "Pearl The cat: Donut edtion",
-          description:
-            "The world's most beautiful cat. Pearl The Cat is a pretty cat who is grey with black stripes on top and spots on the belly. She likes catching flies and eating beef jerky as well as yogurt. This edition of Pearl The Cat includes toys for maximum Pearl enjoyment. (Batteries not included)",
-          category: "CarsVehicles",
-          condition: "used",
-          price: "600",
-          address: "100 Main st",
-          city: "Calgary",
-          images: ["cat4"],
-          active: true,
-        },
-      },
-      error: null,
-    };
-  // success
-  else if (options.params.id)
-    return {
-      loading: false,
-      data: {
-        code: "SUCCESS",
-        status: 200,
-        message: "Get Product Success",
-        item: {
-          productName: "cat3",
-          description: "cat3",
-          category: "CarsVehicles",
-          condition: "used",
-          price: 300,
-          address: "100 Main st",
-          city: "Calgary",
-          images: [],
-        },
-      },
-      error: null,
-    };
-  // fail
-  return {
-    loading: false,
-    data: null,
-    error: {
-      code: "ERR_NETWORK",
-      message: "Network Error",
-      name: "AxiosError",
-      status: 404,
-    },
-  };
-};
+// export const getProductMockup = (options) => {
+//   // success
+//   if (options.params.id === "cat3")
+//     // success
+//     return {
+//       loading: false,
+//       data: {
+//         code: "SUCCESS",
+//         status: 200,
+//         message: "Get Product Success",
+//         item: {
+//           id: "cat3",
+//           productName: "Pearl The Cat: Toy edition",
+//           description:
+//             "The world's most beautiful cat. Pearl The Cat is a pretty cat who is grey with black stripes on top and spots on the belly. She likes catching flies and eating beef jerky as well as yogurt. This edition of Pearl The Cat includes toys for maximum Pearl enjoyment. (Batteries not included)",
+//           category: "CarsVehicles",
+//           condition: "used",
+//           price: "340",
+//           address: "100 Main st",
+//           city: "Calgary",
+//           images: ["cat"],
+//           active: true,
+//         },
+//       },
+//       error: null,
+//     };
+//   if (options.params.id === "cat4")
+//     // success
+//     return {
+//       loading: false,
+//       data: {
+//         code: "SUCCESS",
+//         status: 200,
+//         message: "Get Product Success",
+//         item: {
+//           id: "cat4",
+//           productName: "Pearl The cat: Halloween edtion",
+//           description:
+//             "The world's most beautiful cat. Pearl The Cat is a pretty cat who is grey with black stripes on top and spots on the belly. She likes catching flies and eating beef jerky as well as yogurt. This edition of Pearl The Cat includes toys for maximum Pearl enjoyment. (Batteries not included)",
+//           category: "CarsVehicles",
+//           condition: "used",
+//           price: "400",
+//           address: "100 Main st",
+//           city: "Calgary",
+//           images: ["cat2", "cat3", "cat4", "cat"],
+//           active: true,
+//         },
+//       },
+//       error: null,
+//     };
+//   else if (options.params.id === "cat5")
+//     // success
+//     return {
+//       loading: false,
+//       data: {
+//         code: "SUCCESS",
+//         status: 200,
+//         message: "Get Product Success",
+//         item: {
+//           id: "cat4",
+//           productName:
+//             "Pearl The cat: Breakfast edtion Pearl The cat: Breakfast edtion",
+//           description:
+//             "The world's most beautiful cat. Pearl The Cat is a pretty cat who is grey with black stripes on top and spots on the belly. She likes catching flies and eating beef jerky as well as yogurt. This edition of Pearl The Cat includes toys for maximum Pearl enjoyment. (Batteries not included)",
+//           category: "CarsVehicles",
+//           condition: "used",
+//           price: "500",
+//           address: "100 Main st",
+//           city: "Calgary",
+//           images: ["cat3"],
+//           active: true,
+//         },
+//       },
+//       error: null,
+//     };
+//   else if (options.params.id === "cat6")
+//     // success
+//     return {
+//       loading: false,
+//       data: {
+//         code: "SUCCESS",
+//         status: 200,
+//         message: "Get Product Success",
+//         item: {
+//           id: "cat6",
+//           productName: "Pearl The cat: Donut edtion",
+//           description:
+//             "The world's most beautiful cat. Pearl The Cat is a pretty cat who is grey with black stripes on top and spots on the belly. She likes catching flies and eating beef jerky as well as yogurt. This edition of Pearl The Cat includes toys for maximum Pearl enjoyment. (Batteries not included)",
+//           category: "CarsVehicles",
+//           condition: "used",
+//           price: "600",
+//           address: "100 Main st",
+//           city: "Calgary",
+//           images: ["cat4"],
+//           active: true,
+//         },
+//       },
+//       error: null,
+//     };
+//   // success
+//   else if (options.params.id)
+//     return {
+//       loading: false,
+//       data: {
+//         code: "SUCCESS",
+//         status: 200,
+//         message: "Get Product Success",
+//         item: {
+//           productName: "cat3",
+//           description: "cat3",
+//           category: "CarsVehicles",
+//           condition: "used",
+//           price: 300,
+//           address: "100 Main st",
+//           city: "Calgary",
+//           images: [],
+//         },
+//       },
+//       error: null,
+//     };
+//   // fail
+//   return {
+//     loading: false,
+//     data: null,
+//     error: {
+//       code: "ERR_NETWORK",
+//       message: "Network Error",
+//       name: "AxiosError",
+//       status: 404,
+//     },
+//   };
+// };
 
 /** put product */
 export const putProductMockup = (options) => {
@@ -139,23 +139,45 @@ export const putProductMockup = (options) => {
   if (options)
     // success
     return {
-      loading: false,
+      status: 200,
+      statusText: "OK",
       data: {
-        code: "SUCCESS",
-        status: 200,
-        message: `Put Product ${options.params.id} Success`,
+        id: "4e31057e-9930-4e39-913b-e4b0d6250da9",
+        productName: "Keroro Collection",
+        description: "Keroro Collection",
+        price: 10,
+        category: "RealEstate",
+        condition: "used",
+        status: "ACTIVE",
+        address: "4 Keroro Collection",
+        city: "calgary",
+        sellerListingCount: null,
+        created: "2023-04-06T08:08:34.802597Z",
+        userId: "auth0|642b1676b60b6913044e6270",
+        sellerProfile: null,
+        images: [
+          "https://mktfy-proof-staging.s3.ca-central-1.amazonaws.com/9bc3eea0-95b7-4c77-9a6e-109d8e1ae12f",
+          "https://mktfy-proof-staging.s3.ca-central-1.amazonaws.com/c955965b-c0b0-4ec7-bc1a-14bcf2576385",
+          "https://mktfy-proof-staging.s3.ca-central-1.amazonaws.com/c955965b-c0b0-4ec7-bc1a-14bcf2576385",
+          "https://mktfy-proof-staging.s3.ca-central-1.amazonaws.com/61cc2814-021a-4568-b029-f0c86e00d2b8",
+        ],
       },
-      error: null,
     };
   // fail
   return {
-    loading: false,
-    data: null,
-    error: {
-      code: "ERR_NETWORK",
-      message: "Network Error",
-      name: "AxiosError",
-      status: 404,
+    status: 400,
+    statusText: "Bad Request",
+    data: {
+      type: "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+      title: "One or more validation errors occurred.",
+      status: 400,
+      traceId: "00-5fb8cb936012c369532bb07b3182166f-307d65adbfb7154a-00",
+      errors: {
+        data: ["The data field is required."],
+        "$.images[0]": [
+          "The JSON value could not be converted to System.Guid. Path: $.images[0] | LineNumber: 0 | BytePositionInLine: 322.",
+        ],
+      },
     },
   };
 };
