@@ -13,21 +13,23 @@ import { fetchDetail } from "../../../store/actions/detail";
 /** detail page */
 const Detail = () => {
   /** initialize */
+  // data from router
   const { state } = useLocation();
+  // redux
   const dispatch = useDispatch();
-  const [data, setData] = useState(null);
+  /** data state */
+  const [item, setItem] = useState(null);
 
-  /** params */
-  const params = {
-    id: state.id,
-  };
   /** get data from api */
   useEffect(() => {
+    /** params */
+    const params = {
+      id: state.id,
+    };
     const fetchData = async () => {
       const response = await dispatch(fetchDetail(params));
-      console.log("##response", response);
       if (response.status === 200) {
-        setData(response.data);
+        setItem(response.data);
       }
     };
     fetchData();
@@ -35,7 +37,7 @@ const Detail = () => {
   return (
     <div className={styles.mainBox}>
       <CategoryBar category={["Product Listing"]} />
-      {data && <DetailContent data={data} />}
+      {item && <DetailContent item={item} />}
     </div>
   );
 };

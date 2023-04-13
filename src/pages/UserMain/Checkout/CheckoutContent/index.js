@@ -2,8 +2,8 @@
 import styles from "./index.module.scss";
 // navigate
 import { useNavigate } from "react-router-dom";
-
-const CheckoutContent = ({ data }) => {
+/** checkout content */
+const CheckoutContent = ({ item }) => {
   /** data */
   const navigate = useNavigate();
 
@@ -11,21 +11,20 @@ const CheckoutContent = ({ data }) => {
     <div className={styles.checkoutContentBox}>
       <span className={styles.checkoutContentTitle}>Confirm</span>
       <div className={styles.checkoutContent}>
-        <img className={styles.image} src={data.images[0]} alt="img" />
+        <img className={styles.image} src={item.images[0]} alt="img" />
         <div className={styles.content}>
-          <span className={styles.title}>{data.productName}</span>
-          <div className={styles.price}>{`$${data.price}`}</div>
+          <span className={styles.title}>{item.productName}</span>
+          <div className={styles.price}>{`$${item.price}`}</div>
         </div>
       </div>
       <div className={styles.priceBox}>
         <span className={styles.total}>Total</span>
-        <div className={styles.price}>{`$${data.price}`}</div>
+        <div className={styles.price}>{`$${item.price}`}</div>
       </div>
       <div className={styles.buttonBox}>
         <a
-          // href={`tel:${data.sellerInfo.contact}`}
           onClick={() => {
-            navigate(`/pickup/${data.id}`, { state: { data } });
+            navigate(`/pickup/${item.id}`, { state: { item } });
           }}
           className={styles.button}
           type="btton"

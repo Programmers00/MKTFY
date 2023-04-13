@@ -18,7 +18,7 @@ import {
   DownIcon,
 } from "../../../../assets/svgIcons";
 
-const DetailContent = ({ data }) => {
+const DetailContent = ({ item }) => {
   /** initialize */
   // navigate
   const navigate = useNavigate();
@@ -31,21 +31,21 @@ const DetailContent = ({ data }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   // selected image
   const [selectedImage, setSelectedImage] = useState(
-    data.images[selectedIndex]
+    item.images[selectedIndex]
   );
   // scope 0 < selectedOrder < 2
   const [selectedOrder, setSelectedOrder] = useState(0);
 
   // detect selected image
   useEffect(() => {
-    setSelectedImage(data.images[selectedIndex]);
+    setSelectedImage(item.images[selectedIndex]);
   }, [selectedIndex]);
 
   /** move button ("up" or "down") */
   const onMove = (direction) => {
     // scope for selectedIndex (0 < selectedIndex < data.images.length -1)
     const MIN_INDEX = 0;
-    const MAX_INDEX = data.images.length - 1;
+    const MAX_INDEX = item.images.length - 1;
     // scope for selectedOrder (0 < selectedOrder < 2)
     const MAX_ORDER = 2;
     // click up button and slected index is bigger than min index
@@ -81,16 +81,15 @@ const DetailContent = ({ data }) => {
 
   /** params */
   const params = {
-    id: data.id,
+    id: item.id,
   };
   /** functions */
   const onSubmit = async () => {
     /** api */
     const response = await dispacth(updateCheckout(params));
-    console.log("##response", response);
     // if success, go to checkout
     if (response.status === 200) {
-      navigate(`/checkout/${data.id}`, { state: { data } });
+      navigate(`/checkout/${item.id}`, { state: { item } });
     }
   };
 
@@ -102,7 +101,7 @@ const DetailContent = ({ data }) => {
             <UpIcon />
           </button>
           <div className={styles.images}>
-            {data.images.map((image, index) => {
+            {item.images.map((image, index) => {
               return (
                 <img
                   ref={(image) => (imageRef.current[index] = image)}
@@ -135,11 +134,11 @@ const DetailContent = ({ data }) => {
         )}
       </div>
       <div className={styles.contentBox}>
-        <span className={styles.itemTitle}>{data.title}</span>
+        <span className={styles.itemTitle}>{item.title}</span>
         <div className={styles.itemPriceBox}>
-          <span className={styles.price}>{`$${data.price}`}</span>
+          <span className={styles.price}>{`$${item.price}`}</span>
           <div className={styles.itemStatus}>
-            {data.status === "new" ? <NewIcon /> : <UsedIcon />}
+            {item.status === "new" ? <NewIcon /> : <UsedIcon />}
           </div>
         </div>
         <div className={styles.buttonBox}>
@@ -148,20 +147,20 @@ const DetailContent = ({ data }) => {
           </button>
         </div>
         <span className={styles.details}>Details</span>
-        <div className={styles.description}>{data.description}</div>
+        <div className={styles.description}>{item.description}</div>
         <div className={styles.sellerInfoBox}>
           <div className={styles.circle}>
-            {data.sellerProfile?.lastName?.charAt(0)}
+            {item.sellerProfile?.lastName?.charAt(0)}
           </div>
           <div className={styles.sellerInfo}>
             <span className={styles.sellerName}>
-              {data.sellerInfo?.userName}
+              {item.sellerInfo?.userName}
             </span>
             <span className={styles.listingBox}>
               <LabelIcon />
               <span
                 className={styles.sellerListingCount}
-              >{`${data.sellerListingCount}`}</span>
+              >{`${item.sellerListingCount}`}</span>
               <span className={styles.listing}>listing</span>
             </span>
           </div>

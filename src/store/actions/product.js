@@ -1,25 +1,28 @@
 import {
-  // getProduct,
+  getProductById,
   putProduct,
   putProductComplete,
   putProductCancel,
 } from "../../api/userInfo/product";
 
-// /** get options */
-// const getOptions = {
-//   url: "/api/product",
-// };
+/** get options */
+const getOptions = {
+  url: "/api/Product",
+};
 
-// /** action : get product */
-// export const fetchProduct = (params) => {
-//   return async () => {
-//     try {
-//       return await getProduct({ ...getOptions, params });
-//     } catch (error) {
-//       console.log("Error");
-//     }
-//   };
-// };
+/** action : get product */
+export const fetchProductById = (data) => {
+  return async () => {
+    try {
+      return await getProductById({
+        ...getOptions,
+        url: `${getOptions.url}/${data.id}`,
+      });
+    } catch (error) {
+      console.error("#Fetch Product By Id Fail", error.response);
+    }
+  };
+};
 
 /** action : set product */
 export const setProduct = (params) => {
@@ -49,7 +52,7 @@ export const updateProduct = (data) => {
         data,
       });
     } catch (error) {
-      console.log("Error", error.response);
+      console.error("#Update Product Fail", error.response);
     }
   };
 };
@@ -68,7 +71,7 @@ export const updateProductComplete = (data) => {
         url: `${completeOptions.url}/${data.id}`,
       });
     } catch (error) {
-      console.log("Error", error.response);
+      console.error("#Update Product Complete Fail", error.response);
     }
   };
 };
@@ -87,7 +90,7 @@ export const updateProductCancel = (data) => {
         url: `${cancelOptions.url}/${data.id}`,
       });
     } catch (error) {
-      console.log("Error", error.response);
+      console.error("#Update Product Cancel Fail", error.response);
     }
   };
 };
@@ -106,7 +109,7 @@ export const updateProductCancelsale = (data) => {
         url: `${cancelsaleOptions.url}/${data.id}`,
       });
     } catch (error) {
-      console.log("Error", error.response);
+      console.error("#Update Product Cancel Sale Fail", error.response);
     }
   };
 };

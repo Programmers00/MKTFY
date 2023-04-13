@@ -1,29 +1,28 @@
 // scss
 import styles from "./index.module.scss";
 
-const PickupContent = ({ data }) => {
-  console.log("##data", data);
+const PickupContent = ({ item }) => {
   return (
     <div className={styles.pickupContentBox}>
       <span className={styles.pickupContentTitle}>Pick up</span>
       <div className={styles.userContent}>
         <div className={styles.infoBox}>
           <div className={styles.circle}>
-            {data.sellerProfile?.lastName?.charAt(0)}
+            {item.sellerProfile?.lastName?.charAt(0)}
           </div>
           <span className={styles.userName}>
-            {data.sellerProfile?.lastName + data.sellerProfile?.firstName}
+            {item.sellerProfile?.lastName + item.sellerProfile?.firstName}
           </span>
         </div>
         <span>
           {" "}
-          Please pick up your purchase at {data.sellerProfile?.address}
+          Please pick up your purchase at {item.sellerProfile?.address}
         </span>
       </div>
 
       <div className={styles.buttonBox}>
         <a
-          href={`tel:${data.sellerProfile.phone}`}
+          href={`tel:${item.sellerProfile?.phone}`}
           className={styles.button}
           type="btton"
         >

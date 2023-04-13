@@ -11,14 +11,15 @@ import PickupContent from "./PickupContent";
 const Pickup = () => {
   /** initialize */
   // parameter from router
-  const { state } = useLocation();
-
+  const {
+    state: { item },
+  } = useLocation();
   return (
     <div className={styles.mainBox}>
       <CategoryBar
         category={["Product Listing", "Checkout", "Pickup information"]}
       />
-      {state.data && <PickupContent data={state.data} />}
+      {item && <PickupContent item={item} />}
     </div>
   );
 };
