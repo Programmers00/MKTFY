@@ -9,7 +9,7 @@ const isOnlyMockup = envs.isOnlyMockup;
 
 /** get my listings count data: call api or mockup */
 export const getMyListingsCount = async (options) => {
-  let isTest = true; // local variable Test => true
+  let isTest = false; // local variable Test => true
   return isOnlyMockup || isTest
     ? await getMyListingsCountMockup(options)
     : await request(options);

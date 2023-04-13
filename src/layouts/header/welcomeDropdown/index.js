@@ -41,15 +41,13 @@ const WelcomeDropdown = ({ userName }) => {
     { title: "Contact us", url: "/contactUs" },
   ];
 
-  /** options */
-  const params = {};
   /** get data */
   useEffect(() => {
     const getData = async () => {
       /** api: get my listing count */
-      const response = await dispatch(fetchMyListingsCount(params));
-      if (response.data.code === "SUCCESS") {
-        setMyListingsCount(response.data.myListingsCount);
+      const response = await dispatch(fetchMyListingsCount());
+      if (response.status === 200) {
+        setMyListingsCount(response.data.pendingListings);
       }
     };
     getData();

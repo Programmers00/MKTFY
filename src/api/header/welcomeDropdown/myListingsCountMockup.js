@@ -4,24 +4,19 @@ export const getMyListingsCountMockup = (options) => {
   if (options)
     // success
     return {
-      loading: false,
+      status: 200,
+      statusText: "OK",
       data: {
-        code: "SUCCESS",
-        status: 200,
-        message: "Get My Listings Count Success",
-        myListingsCount: 4,
+        pendingListings: 2,
+        unreadNotifications: 0,
       },
-      error: null,
     };
   // fail
   return {
-    loading: false,
-    data: null,
-    error: {
-      code: "ERR_NETWORK",
-      message: "Network Error",
-      name: "AxiosError",
-      status: 404,
+    status: 400,
+    statusText: "Bad Request",
+    data: {
+      // message: "This porduct does not hava a buyer",
     },
   };
 };

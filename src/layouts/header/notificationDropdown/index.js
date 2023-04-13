@@ -23,75 +23,98 @@ const WelcomeDropdown = () => {
   // trigger to close dropdown
   const [closeTrigger, setCloseTrigger] = useState(0);
   // check notification active
-  const [isNotification, setIsNotification] = useState(false);
-  // notifications
-  const [notifications, setNotifications] = useState([]);
+  // const [isNotification, setIsNotification] = useState(false);
+  // new notifications
+  const [newNotifications, setNewNotifications] = useState([]);
+  // seen notifications
+  const [seenNotifications, setSeenNotifications] = useState([]);
   // notification id
-  const [clickedNotificationId, setClickedNotificationId] = useState("");
+  // const [clickedNotificationId, setClickedNotificationId] = useState("");
 
   /** params */
-  const getParams = {}; // params for get notification
-  const putParams = { id: clickedNotificationId }; // params for put notification
+  // const putParams = { id: clickedNotificationId }; // params for put notification
 
   /** get data: when mounting, closing dropdown => works(call api)*/
   useEffect(() => {
     const getData = async () => {
       /** api: get notification */
-      const response = await dispatch(fetchNotifications(getParams));
+      const response = await dispatch(fetchNotifications());
       /** if success, set data */
-      if (response.data.code === "SUCCESS") {
-        setNotifications(response.data.notifications);
+      if (response.status === 200) {
+        setNewNotifications(response.data.new);
+        setSeenNotifications(response.data.seen);
       }
     };
     getData();
     // when clicked notification, close and requset notifications!
   }, [closeTrigger]);
 
-  // notifications check
-  useEffect(() => {
-    setIsNotification(
-      notifications.find((element) => element.isRead === true) !== undefined
-    );
-  }, [notifications]);
-
   /** functions */
   /** click notification, triger for close dropdown */
-  const onReadNotification = async (notificationId) => {
-    // set clicked notification id for putParams
-    setClickedNotificationId(notificationId);
+  // const onReadNotification = async (notificationId) => {
+  // console.log("#no function yet");
+  // // set clicked notification id for putParams
+  // setClickedNotificationId(notificationId);
 
-    /** api: put notificaion, when read */
-    const response = await dispatch(updateNotification(putParams));
-    if (response.data.code === "SUCCESS") {
-      console.log("#Success update notification");
-    }
-    // always make new value => trigger ==> request notifications trigger
-    setCloseTrigger(new Date());
+  // /** api: put notificaion, when read */
+  // const response = await dispatch(updateNotification(putParams));
+  // if (response.data.code === "SUCCESS") {
+  //   console.log("#Success update notification");
+  // }
+
+  // always make new value => trigger ==> request notifications trigger
+  //   setCloseTrigger(new Date());
+  // };
+
+  /** function */
+  /** date converter */
+  const dateConverter = (date) => {
+    const convertedDate = new Date(date);
+    const month = convertedDate.toLocaleString("default", { month: "long" }); //month short to long
+    const day = date.slice(8, 10);
+    const year = date.slice(0, 4);
+    return month + " " + day + " " + year;
   };
 
   return (
     <Dropdown isRightTail closeTrigger={closeTrigger}>
       {/* button */}
       <div className={styles.icon}>
-        {isNotification ? <NotificationActiveIcon /> : <NotificationIcon />}
+        {newNotifications.length > 0 ? (
+          <NotificationActiveIcon />
+        ) : (
+          <NotificationIcon />
+        )}
       </div>
       {/* content */}
       <div className={styles.notificationContentBox}>
         {/* new for you */}
-        {isNotification && <span className={styles.title}>New for you</span>}
+        {newNotifications.length > 0 && (
+          <span className={styles.title}>New for you</span>
+        )}
         {/* new items */}
-        {notifications.map((element) => {
+        {newNotifications.map((newNotification) => {
           return (
-            element.isRead && (
+            newNotification && (
               <span
-                key={element.id}
+                key={newNotification.id}
                 className={styles.content}
-                onClick={() => onReadNotification(element.id)}
+                // onClick={() => onReadNotification(newNotification.id)}
+                // no function now, just close
+                onClick={() => setCloseTrigger(new Date())}
               >
-                <div className={styles.circle}>{element.notifier}</div>
+                <div className={styles.circle}>
+                  {newNotification.notifier
+                    ? newNotification.notifier
+                    : "MKTFY"}
+                </div>
                 <div className={styles.summaryBox}>
-                  <span className={styles.summary}>{element.summary}</span>
-                  <span className={styles.date}>{element.date}</span>
+                  <span className={styles.summary}>
+                    {newNotification.message}
+                  </span>
+                  <span className={styles.date}>
+                    {dateConverter(newNotification.created)}
+                  </span>
                 </div>
               </span>
             )
@@ -102,19 +125,27 @@ const WelcomeDropdown = () => {
           Previously seen
         </span>
         {/* prev items */}
-        {notifications.map((element) => {
+        {seenNotifications.map((seenNotification) => {
           return (
-            !element.isRead && (
+            seenNotification && (
               <span
-                key={element.id}
+                key={seenNotification.id}
                 className={styles.content}
                 // no function now, just close
                 onClick={() => setCloseTrigger(new Date())}
               >
-                <div className={styles.circle}>{element.notifier}</div>
+                <div className={styles.circle}>
+                  {seenNotification.notifier
+                    ? seenNotification.notifier
+                    : "MKTFY"}
+                </div>
                 <div className={styles.summaryBox}>
-                  <span className={styles.summary}>{element.summary}</span>
-                  <span className={styles.date}>{element.date}</span>
+                  <span className={styles.summary}>
+                    {seenNotification.message}
+                  </span>
+                  <span className={styles.date}>
+                    {dateConverter(seenNotification.created)}
+                  </span>
                 </div>
               </span>
             )

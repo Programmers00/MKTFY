@@ -3,15 +3,14 @@ import { getMyListingsCount } from "../../api/header/welcomeDropdown";
 /** action : get my listings count */
 // options
 const options = {
-  url: "/api/user/myListingsCount",
-  params: {},
+  url: "/api/User/notifications/count",
 };
-export const fetchMyListingsCount = (params) => {
+export const fetchMyListingsCount = () => {
   return async () => {
     try {
-      return await getMyListingsCount({ ...options, params });
+      return await getMyListingsCount({ ...options });
     } catch (error) {
-      console.log("#Error getMyListingsCount:", error);
+      console.error("#Fetch Notification Count Fail", error.response);
     }
   };
 };

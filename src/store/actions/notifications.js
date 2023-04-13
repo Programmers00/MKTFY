@@ -1,17 +1,17 @@
 import {
   getNotifications,
-  putNotification,
+  // putNotification,
 } from "../../api/header/notificationDropdown";
 
 /** action : get notifications */
 // options
 const getOptions = {
-  url: "/api/user/notifications",
+  url: "/api/User/notifications",
 };
-export const fetchNotifications = (params) => {
+export const fetchNotifications = () => {
   return async () => {
     try {
-      return await getNotifications({ ...getOptions, params });
+      return await getNotifications({ ...getOptions });
     } catch (error) {
       console.log("#Error getNotifications:", error);
     }
@@ -19,16 +19,16 @@ export const fetchNotifications = (params) => {
 };
 
 /** action : put notification */
-const putOptions = {
-  url: "/api/user/notifications",
-  method: "put",
-};
-export const updateNotification = (params) => {
-  return async () => {
-    try {
-      return await putNotification({ ...putOptions, params });
-    } catch (error) {
-      console.log("#Error putNotification", error);
-    }
-  };
-};
+// const putOptions = {
+//   url: "/api/user/notifications",
+//   method: "put",
+// };
+// export const updateNotification = (params) => {
+//   return async () => {
+//     try {
+//       return await putNotification({ ...putOptions, params });
+//     } catch (error) {
+//       console.log("#Error putNotification", error);
+//     }
+//   };
+// };
