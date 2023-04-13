@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // router dom
 import { Outlet } from "react-router-dom";
@@ -24,15 +24,17 @@ import {
 /** userMain layout with private router */
 const UserMain = () => {
   /** initialize */
+  // access token for checking login
+  const accessToken = sessionStorage.getItem("accessToken");
   // navigate
   const navigate = useNavigate();
   // dispatch for
   const dispatch = useDispatch();
-  const accessToken = sessionStorage.getItem("accessToken");
-
   const signupFormFromSessionStorage = JSON.parse(
     sessionStorage.getItem("signupForm")
   );
+  /** data state */
+  const [id, setId] = useState("");
 
   /** function: signup api */
   const singup = async (userId) => {
@@ -79,6 +81,7 @@ const UserMain = () => {
           sessionStorage.setItem("accessToken", res.accessToken);
 
           const userId = res.idTokenPayload.sub; // user id -> ex) auth0|123a456e789bfd01a234efba
+          setId(userId);
 
           // if auto login(signup), there is signupForm => flag(signup or not)
           // after login, call create account information api
@@ -86,17 +89,16 @@ const UserMain = () => {
             signupFormFromSessionStorage &&
             typeof signupFormFromSessionStorage === "object";
           // auto login after register
-          if (isAutoLogin) {
-            singup(userId);
-          }
-          // just login
-          else {
-            dispatch(fetchAccountInformation(userId));
-          }
+          isAutoLogin && singup(userId);
         }
       }
     });
   }, []);
+
+  /** when logining, fetch account information */
+  useEffect(() => {
+    accessToken && dispatch(fetchAccountInformation(id));
+  }, [accessToken]);
 
   return (
     <div className={styles.userMainBox}>

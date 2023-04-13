@@ -12,11 +12,13 @@ import {
 import { useDispatch } from "react-redux";
 import {
   fetchNotifications,
-  updateNotification,
+  // updateNotification,
 } from "../../../store/actions/notifications";
 
 const WelcomeDropdown = () => {
   /** initialize */
+  // access token for checking login
+  const accessToken = sessionStorage.getItem("accessToken");
   // dispatch
   const dispatch = useDispatch();
   /** data */
@@ -45,9 +47,9 @@ const WelcomeDropdown = () => {
         setSeenNotifications(response.data.seen);
       }
     };
-    getData();
+    accessToken && getData();
     // when clicked notification, close and requset notifications!
-  }, [closeTrigger]);
+  }, [closeTrigger, accessToken]);
 
   /** functions */
   /** click notification, triger for close dropdown */

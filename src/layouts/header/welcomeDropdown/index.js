@@ -17,6 +17,8 @@ import envs from "../../../envs";
 
 const WelcomeDropdown = ({ userName }) => {
   /** initialize */
+  // access token for checking login
+  const accessToken = sessionStorage.getItem("accessToken");
   // dispatch
   const dispatch = useDispatch();
   /** data */
@@ -50,8 +52,8 @@ const WelcomeDropdown = ({ userName }) => {
         setMyListingsCount(response.data.pendingListings);
       }
     };
-    getData();
-  }, []);
+    accessToken && getData();
+  }, [accessToken]);
 
   /** sign out: signout and close trigger */
   const onSignOut = () => {
