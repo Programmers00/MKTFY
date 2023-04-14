@@ -40,8 +40,8 @@ const CreateOfferContent = () => {
       );
       if (
         // when request upload images success,
-        response.status === 200 &&
-        response.data.length > 0
+        response.status === 200
+        // &&response.data.length > 0
       ) {
         // new params (copy from redux current params)
         const newParams = JSON.parse(JSON.stringify(currentParams));
