@@ -34,15 +34,10 @@ const ChangePasswordContent = () => {
   // confirm password
   const [confirmPassword, setConfirmPassword] = useState("");
   // eye icon for password visibility
-  // const [currentPasswordInputType, setCurrentPasswordInputType] =
-  //   useState("password");
-  // eye icon for password visibility
   const [newPasswordInputType, setPasswordInputType] = useState("password");
   // eye icon for password confirm visibility
   const [confirmPasswordInputType, setConfirmPasswordInputType] =
     useState("password");
-  // check password = password confirm
-  // const [confirmPassword, setConfirmPassword] = useState("");
 
   const params = {
     // currentPassword,
@@ -60,58 +55,33 @@ const ChangePasswordContent = () => {
       dispatch(setLoadingTrue("Change Password"));
       navigate("/");
     } else {
-      // console.log("##show Modal");
       setIsShowModal(true);
     }
   };
 
   /** password toggle: change input type and icon */
   const onToggle = (type) => {
-    // if (type === "current") {
-    // change input type
-    // setCurrentPasswordInputType((prevPasswordInputType) =>
-    //   prevPasswordInputType === "password" ? "text" : "password"
-    // );
-    // return;
-    // } else if (type === "confirm") {
-    // change input type
-    setConfirmPasswordInputType((prevPasswordInputType) =>
-      prevPasswordInputType === "password" ? "text" : "password"
-    );
-    // return;
-    // }
-    // change input type
-    setPasswordInputType((prevPasswordInputType) =>
-      prevPasswordInputType === "password" ? "text" : "password"
-    );
+    // new password
+    if (type === "new") {
+      // change input type
+      setPasswordInputType((prevPasswordInputType) =>
+        prevPasswordInputType === "password" ? "text" : "password"
+      );
+      return;
+    }
+    // confirm password
+    else if (type === "confirm") {
+      // change input type
+      setConfirmPasswordInputType((prevPasswordInputType) =>
+        prevPasswordInputType === "password" ? "text" : "password"
+      );
+    }
   };
 
   return (
     <div className={styles.changePasswordBox}>
       <span className={styles.title}>Change Password</span>
       <form className={styles.changePasswordForm} onSubmit={onClickSubmit}>
-        {/* <label className={styles.passwordLabel}>
-          <span>Current Password </span>
-          <div className={styles.passwordInputBox}>
-            <input
-              className={styles.passwordInput}
-              type={currentPasswordInputType}
-              value={currentPassword}
-              onChange={(event) => setCurrentPassword(event.target.value)}
-              placeholder="Insert your current password"
-              autoComplete="password"
-            />
-            <img
-              alt="eye"
-              className={styles.eyeIcon}
-              src={require(`../../../../assets/icons/${
-                currentPasswordInputType === "password" ? "eyeSlash" : "eye"
-              }.png`)}
-              onClick={() => onToggle("current")}
-            />
-          </div>
-        </label> */}
-
         <span className={styles.subTitle}>
           The password must have at least 6 characters and must contain 1
           uppercase and 1 number.
@@ -174,7 +144,7 @@ const ChangePasswordContent = () => {
                   ? "eyeSlash"
                   : "eye"
               }.png`)}
-              onClick={() => onToggle()}
+              onClick={() => onToggle("new")}
             />
           </div>
         </label>
