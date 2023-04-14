@@ -10,7 +10,7 @@ export const fetchMyListings = () => {
     try {
       return await getMyListings({ ...options });
     } catch (error) {
-      console.log("#Error getMyListings:", error);
+      console.error("#Error getMyListings:", error);
     }
   };
 };

@@ -28,7 +28,7 @@ const Deals = () => {
     const response = await dispatch(fetchDeals({ city: userCity }));
     // success
     if (response.status === 200) {
-      console.log("#Fetch Deals Success", response);
+      // console.log("#Fetch Deals Success", response);
       // set data
       setDeals(response.data);
     }
@@ -38,7 +38,7 @@ const Deals = () => {
         fetchCategory({ category, city: userCity })
       );
       if (response.status === 200) {
-        console.log("#Fetch Category Success", response);
+        // console.log("#Fetch Category Success", response);
         switch (category) {
           case "VEHICLES":
             setVehicles(response.data);

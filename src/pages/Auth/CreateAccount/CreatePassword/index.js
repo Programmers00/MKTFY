@@ -67,7 +67,7 @@ const CreatePassword = () => {
       }
       // signup success
       else if (res) {
-        console.log("##response signup success", res);
+        // console.log("##response signup success", res);
         // dispatch: remove signup form data in redux
         dispatch(resetSignup());
         // set loading page for 2seconds

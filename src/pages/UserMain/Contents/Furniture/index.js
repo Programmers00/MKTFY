@@ -26,7 +26,7 @@ const Furniture = () => {
     const response = await dispatch(fetchCategory(params));
     // success
     if (response.status === 200) {
-      console.log("#Fetch Furniture Success", response);
+      // console.log("#Fetch Furniture Success", response);
       // set data
       setFurniture(response.data);
     }

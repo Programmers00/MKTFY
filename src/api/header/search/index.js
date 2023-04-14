@@ -9,7 +9,6 @@ const isOnlyMockup = envs.isOnlyMockup;
 
 /** post search data: call api or mockup */
 export const getSearch = async (options) => {
-  console.log("#options", options);
   let isTest = false; // local variable Test => true
   return isOnlyMockup || isTest
     ? await postSearchMockup(options)

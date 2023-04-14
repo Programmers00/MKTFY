@@ -26,7 +26,7 @@ const RealEstate = () => {
     const response = await dispatch(fetchCategory(params));
     // success
     if (response.status === 200) {
-      console.log("#Fetch RealEstate Success", response);
+      // console.log("#Fetch RealEstate Success", response);
       // set data
       setRealEstate(response.data);
     }

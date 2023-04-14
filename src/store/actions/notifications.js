@@ -13,7 +13,7 @@ export const fetchNotifications = () => {
     try {
       return await getNotifications({ ...getOptions });
     } catch (error) {
-      console.log("#Error getNotifications:", error);
+      console.error("#Error getNotifications:", error);
     }
   };
 };

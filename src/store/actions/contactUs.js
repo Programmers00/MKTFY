@@ -10,7 +10,7 @@ export const createContactUs = (params) => {
     try {
       return await postContactUs({ ...options, params });
     } catch (error) {
-      console.log("#Error postContactUs:", error);
+      console.error("#Error postContactUs:", error);
     }
   };
 };

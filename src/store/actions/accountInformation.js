@@ -38,7 +38,7 @@ export const fetchAccountInformation = (data) => {
         url: `${getOptions.url}/${data}`,
       });
       if (response.status === 200) {
-        console.log("#Fetch Account Information Success", response);
+        // console.log("#Fetch Account Information Success", response);
         dispatch({
           type: "SET_ACCOUNT_INFORMATION",
           payload: response.data,
@@ -62,7 +62,7 @@ export const updateAccountInformation = (data) => {
     try {
       const response = await putAccountInformation({ ...updateOptions, data });
       if (response.status === 200) {
-        console.log("#Update Account Information Success", response);
+        // console.log("#Update Account Information Success", response);
         dispatch(fetchAccountInformation(response.data.id));
       }
       return response;

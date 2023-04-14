@@ -26,6 +26,8 @@ const UserMain = () => {
   /** initialize */
   // access token for checking login
   const accessToken = sessionStorage.getItem("accessToken");
+  // userId for checking login
+  const userId = sessionStorage.getItem("userId");
   // navigate
   const navigate = useNavigate();
   // dispatch for
@@ -33,8 +35,6 @@ const UserMain = () => {
   const signupFormFromSessionStorage = JSON.parse(
     sessionStorage.getItem("signupForm")
   );
-  /** data state */
-  const [id, setId] = useState("");
 
   /** function: signup api */
   const singup = async (userId) => {
@@ -52,7 +52,7 @@ const UserMain = () => {
     const response = dispatch(createAccountInformation(signupForm));
     // success
     if (response.status === 200) {
-      console.log("#Create Account Information Success", response);
+      // console.log("#Create Account Information Success", response);
       sessionStorage.removeItem("signupForm");
       // fetch account Information and set account information in redux
       dispatch(fetchAccountInformation(userId));
@@ -77,11 +77,12 @@ const UserMain = () => {
         if (res !== null) {
           // set token in redux
           dispatch(setToken(res.accessToken));
-          // set token in sesstion storage
+          // set token in session storage
           sessionStorage.setItem("accessToken", res.accessToken);
 
-          const userId = res.idTokenPayload.sub; // user id -> ex) auth0|123a456e789bfd01a234efba
-          setId(userId);
+          // const userId = res.idTokenPayload.sub; // user id -> ex) auth0|123a456e789bfd01a234efba
+          // set userId in session storage
+          sessionStorage.setItem("userId", res.idTokenPayload.sub); // user id -> ex) auth0|123a456e789bfd01a234efba
 
           // if auto login(signup), there is signupForm => flag(signup or not)
           // after login, call create account information api
@@ -89,7 +90,7 @@ const UserMain = () => {
             signupFormFromSessionStorage &&
             typeof signupFormFromSessionStorage === "object";
           // auto login after register
-          isAutoLogin && singup(userId);
+          isAutoLogin && singup(res.idTokenPayload.sub);
         }
       }
     });
@@ -97,7 +98,7 @@ const UserMain = () => {
 
   /** when logining, fetch account information */
   useEffect(() => {
-    accessToken && dispatch(fetchAccountInformation(id));
+    accessToken && userId && dispatch(fetchAccountInformation(userId));
   }, [accessToken]);
 
   return (

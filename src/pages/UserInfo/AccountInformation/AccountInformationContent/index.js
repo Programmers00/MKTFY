@@ -206,7 +206,6 @@ const AccountInformation = () => {
   /** functions */
   /** click submit button => save sinup form in redux and go userMain page*/
   const onClickSubmit = async (event) => {
-    console.log("updateParams.address", updateParams.address);
     event.preventDefault();
     /** api: update account information */
     const response = await dispatch(updateAccountInformation(updateParams));

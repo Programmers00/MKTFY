@@ -51,7 +51,7 @@ const ForgotPassword = () => {
     // seding email by auth0-js
     webAuth.changePassword(changePasswordForm, (error, response) => {
       if (response) {
-        console.log("#Success:", response);
+        // console.log("#Success:", response);
         navigate("/auth/resetPassword");
       } else {
         console.log("#Fail:", error);

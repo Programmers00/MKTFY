@@ -26,7 +26,7 @@ const Electroinics = () => {
     const response = await dispatch(fetchCategory(params));
     // success
     if (response.status === 200) {
-      console.log("#Fetch Electronics Success", response);
+      // console.log("#Fetch Electronics Success", response);
       // set data
       setElectronics(response.data);
     }

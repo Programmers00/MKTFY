@@ -26,7 +26,7 @@ const CarsVehicles = () => {
     const response = await dispatch(fetchCategory(params));
     // success
     if (response.status === 200) {
-      console.log("#Fetch Vehicles Success", response);
+      // console.log("#Fetch Vehicles Success", response);
       // set data
       setVehicles(response.data);
     }

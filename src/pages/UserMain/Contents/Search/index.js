@@ -25,7 +25,7 @@ const Search = () => {
     const response = await dispatch(fetchSearch(params));
     // success
     if (response.status === 200) {
-      console.log("#Fetch Search Success", response);
+      // console.log("#Fetch Search Success", response);
       // set data
       setSearchItems(response.data);
     }

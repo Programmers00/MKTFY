@@ -13,7 +13,7 @@ export const fetchDetail = (data) => {
         url: `${detailOptions.url}/${data.id}`,
       });
     } catch (error) {
-      console.log("#Error fetchDetail:", error);
+      console.error("#Error fetchDetail:", error);
     }
   };
 };

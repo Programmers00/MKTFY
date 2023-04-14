@@ -60,7 +60,7 @@ const ChangePasswordContent = () => {
       dispatch(setLoadingTrue("Change Password"));
       navigate("/");
     } else {
-      console.log("##show Modal");
+      // console.log("##show Modal");
       setIsShowModal(true);
     }
   };
