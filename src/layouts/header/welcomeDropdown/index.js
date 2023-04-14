@@ -45,14 +45,14 @@ const WelcomeDropdown = ({ userName }) => {
 
   /** get data */
   useEffect(() => {
-    const getData = async () => {
-      /** api: get my listing count */
-      const response = await dispatch(fetchMyListingsCount());
-      if (response.status === 200) {
-        setMyListingsCount(response.data.pendingListings);
-      }
-    };
-    accessToken && getData();
+    // const getData = async () => {
+    //   /** api: get my listing count */
+    //   const response = await dispatch(fetchMyListingsCount());
+    //   if (response.status === 200) {
+    //     setMyListingsCount(response.data.pendingListings);
+    //   }
+    // };
+    accessToken && fetchNotification();
   }, [accessToken]);
 
   /** sign out: signout and close trigger */
@@ -75,10 +75,19 @@ const WelcomeDropdown = ({ userName }) => {
     setCloseTrigger(new Date());
   };
 
+  /** fetch notification my listing count */
+  const fetchNotification = async () => {
+    /** api: get my listing count */
+    const response = await dispatch(fetchMyListingsCount());
+    if (response.status === 200) {
+      setMyListingsCount(response.data.pendingListings);
+    }
+  };
+
   return (
     <Dropdown isLeftTail closeTrigger={closeTrigger}>
       {/* button */}
-      <div className={styles.userTitle}>
+      <div className={styles.userTitle} onClick={fetchNotification}>
         <span className={styles.welcome}>Welcome back</span>
         <span className={styles.userName}>{userName}</span>
       </div>
