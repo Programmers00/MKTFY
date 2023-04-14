@@ -46,7 +46,7 @@ const ContentCard = ({
           className={styles.navigationButton}
           onClick={() => {
             // navigate to content.title
-            navigate(`./${title.toLowerCase()}`);
+            navigate(`./${title.replace("&", "").toLowerCase()}`);
           }}
         >
           Explore now
