@@ -9,7 +9,7 @@ const isOnlyMockup = envs.isOnlyMockup;
 
 /** get faq: call api or mockup */
 export const getFaq = async (options) => {
-  let isTest = true; // local variable Test => true
+  let isTest = false; // local variable Test => true
   return isOnlyMockup || isTest
     ? await getFaqMockup(options)
     : await request(options);

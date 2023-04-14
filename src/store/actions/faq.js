@@ -3,14 +3,14 @@ import { getFaq } from "../../api/help/faq";
 /** actions : get faq data */
 // options
 const options = {
-  url: "/api/user/faq",
+  url: "/api/FAQ",
 };
 export const fetchFaq = () => {
   return async () => {
     try {
       return await getFaq({ ...options });
     } catch (error) {
-      console.log("#Error getFaq:", error);
+      console.error("#Fetch FAQ Fail", error.response);
     }
   };
 };

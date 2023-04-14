@@ -56,7 +56,7 @@ const AppMain = () => {
 
   return (
     <>
-      {isLoading && <Loading />}(
+      {isLoading && <Loading />}
       <Router>
         {/* auth */}
         <Routes>
@@ -102,7 +102,6 @@ const AppMain = () => {
           </Route>
         </Routes>
       </Router>
-      )
     </>
   );
 };
