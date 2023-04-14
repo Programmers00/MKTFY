@@ -32,9 +32,13 @@ const ContentCard = ({
         // is extendable
         style={isExtendable && { flexWrap: "wrap" }}
       >
-        {items.map((item) => {
-          return ItemCard({ item, navigate });
-        })}
+        {items.length > 0 ? (
+          items.map((item) => {
+            return ItemCard({ item, navigate });
+          })
+        ) : (
+          <div className={styles.noItem}>There are no products for sale</div>
+        )}
       </div>
       {/* is navigate */}
       {isNavigate ? (
