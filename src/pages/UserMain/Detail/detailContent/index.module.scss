@@ -37,13 +37,13 @@
         display: flex;
         flex-direction: column;
         height: 100%;
-        overflow-y: auto;
-        gap: 20px;
+        overflow-y: hidden;
+        gap: 15px;
 
         .image {
           border-radius: 10px;
           width: 118px;
-          height: 123px;
+          min-height: 123px;
           border: transparent solid 1px;
           transition: all 0.3s;
           // transform: translateY(-140px);

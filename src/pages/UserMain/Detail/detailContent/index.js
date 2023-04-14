@@ -57,6 +57,7 @@ const DetailContent = ({ item }) => {
       // change order index -1
       setSelectedOrder((prev) => prev - 1);
       // css function
+      console.log("##", imageRef.current, selectedIndex);
       imageRef.current.forEach(
         selectedIndex === 2
           ? (image) => (image.style.transform = `translateY(${-140}px)`)
@@ -107,7 +108,7 @@ const DetailContent = ({ item }) => {
                   ref={(image) => (imageRef.current[index] = image)}
                   key={index}
                   onClick={() => {
-                    // setSelectedIndex(index);
+                    setSelectedIndex(index);
                   }}
                   className={styles.image}
                   alt="img"
