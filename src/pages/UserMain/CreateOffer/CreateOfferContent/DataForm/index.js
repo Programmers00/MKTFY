@@ -29,7 +29,7 @@ const DataForm = () => {
   const categories = [
     { key: "Cars & Vehicles", value: "VEHICLES" },
     { key: "Furniture", value: "FURNITURE" },
-    { key: "Electoronics", value: "ELECTORNICS" },
+    { key: "Electronics", value: "ELECTRONICS" },
     { key: "Real estate", value: "REAL_ESTATE" },
   ];
   // key for ui, value for param
@@ -111,7 +111,7 @@ const DataForm = () => {
           className={styles.input}
           placeholder="Choose the category"
           value={category.value}
-          onChange={(e) => e.target.value}
+          onChange={(e) => setCategory(e.target.value)}
         >
           {categories.map((category) => {
             return (
