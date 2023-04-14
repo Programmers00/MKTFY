@@ -12,11 +12,25 @@ const HorizontalItemCard = ({
   },
 }) => {
   /** initialize */
+  /** date converter */
+  const dateConverter = (date) => {
+    const convertedDate = new Date(date);
+    const month = convertedDate.toLocaleString("default", { month: "long" }); //month short to long
+    const day = date.slice(8, 10);
+    const year = date.slice(0, 4);
+    return month + " " + day + " " + year;
+  };
   return (
     <div key={item.id} className={styles.itemBox} onClick={onClick}>
-      <img src={item.images[0]} alt="img" />
+      {item.images[0] ? (
+        <img src={item.images[0]} alt="img" />
+      ) : (
+        <div className={styles.noImage}>No Image</div>
+      )}
       <div className={styles.contentBox}>
-        {item.date && <div className={styles.date}>{item.date}</div>}
+        {item.created && (
+          <div className={styles.date}>{dateConverter(item.created)}</div>
+        )}
         <div className={styles.itemTitle}>
           {item.productName.length < 50
             ? item.productName

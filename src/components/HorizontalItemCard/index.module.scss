@@ -15,6 +15,18 @@
     cursor: pointer;
     background-color: $verySubtleGray;
   }
+  .noImage {
+    width: 391px;
+    height: 200px;
+    border-radius: 10px 0px 0px 10px;
+    display: flex;
+    background-color: $verySubtleGray;
+    border: 1px solid $grayButtonGray;
+    align-items: center;
+    justify-content: center;
+    color: $grayButtonGray;
+    font-size: 35px;
+  }
   img {
     width: 391px;
     height: 200px;
