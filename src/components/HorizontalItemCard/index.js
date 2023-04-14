@@ -5,6 +5,7 @@ import styles from "./index.module.scss";
  * item : {id, productName, img, price, date, active}
  */
 const HorizontalItemCard = ({
+  isPurchase,
   item,
   onClick = () => {
     console.log("#No function");
@@ -24,7 +25,9 @@ const HorizontalItemCard = ({
         <div className={styles.itemPrice}>{`$${item.price}`}</div>
         {item.status === "COMPLETE" && (
           <div className={styles.tagBox}>
-            <div className={styles.tag}>SALE CONFIRMED</div>
+            <div className={styles.tag}>
+              {isPurchase ? "PURCHASED" : "SALE CONFIRMED"}
+            </div>
           </div>
         )}
       </div>

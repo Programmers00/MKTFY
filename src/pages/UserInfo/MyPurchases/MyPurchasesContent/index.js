@@ -34,7 +34,8 @@ const MyPurchasesContent = () => {
   }, []);
   /** function */
   const onClick = (item) => {
-    navigate(`/checkout/${item.id}`, { state: { item } });
+    item.status !== "COMPLETE" &&
+      navigate(`/checkout/${item.id}`, { state: { item } });
   };
 
   return (
@@ -45,6 +46,7 @@ const MyPurchasesContent = () => {
         {items.map((item, index) => {
           return (
             <HorizontalItemCard
+              isPurchase
               item={item}
               key={index}
               onClick={() => onClick(item)}

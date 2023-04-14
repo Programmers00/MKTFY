@@ -131,7 +131,7 @@ const MyListingsContent = () => {
               <HorizontalItemCard
                 item={item}
                 key={index}
-                onClick={() => onClickItem(item)}
+                // onClick={() => onClickItem(item)}
               />
             );
           })
