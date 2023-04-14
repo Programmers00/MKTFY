@@ -21,6 +21,18 @@
     height: 244px;
     object-fit: cover;
   }
+  .noImage {
+    width: 232px;
+    height: 244px;
+    border-radius: 10px 10px 0px 0px;
+    display: flex;
+    background-color: $verySubtleGray;
+    border: 1px solid $grayButtonGray;
+    align-items: center;
+    justify-content: center;
+    color: $grayButtonGray;
+    font-size: 35px;
+  }
   .contentBox {
     display: flex;
     flex-direction: column;

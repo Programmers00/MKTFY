@@ -14,7 +14,11 @@ const ItemCard = ({ item, navigate }) => {
       }}
     >
       {/* <img src={require(`../../assets/images/${item.image}.png`)} alt="img" /> */}
-      <img src={item?.images[0]} alt="img" />
+      {item.images[0] ? (
+        <img src={item.images[0]} alt="img" />
+      ) : (
+        <div className={styles.noImage}>No Image</div>
+      )}
       <div className={styles.contentBox}>
         <div className={styles.itemTitle}>
           {item.productName.length < 50
