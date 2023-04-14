@@ -4,6 +4,7 @@
 @import "../../styles/variabled";
 
 .userMainBox {
-  min-height: 100vh;
-  backdrop-filter: brightness(0.2) invert(1) grayscale(90%);
+  .background {
+    @include backgroundGey;
+  }
 }

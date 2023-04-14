@@ -24,9 +24,17 @@
 }
 
 @mixin background {
-  background-color: $occasionalPurple;
+  background-color: $lightPurple;
   font-family: "Open Sans", sans-serif;
   background-image: url("../assets/images/clouds.png");
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+@mixin backgroundGey {
+  background-color: $backgroundGray;
+  font-family: "Open Sans", sans-serif;
+  background-image: url("../assets/images/cloudsGrey.png");
+  background-repeat: repeat-x;
+  background-size: contain;
 }

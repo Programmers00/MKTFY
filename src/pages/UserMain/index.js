@@ -105,7 +105,9 @@ const UserMain = () => {
     <div className={styles.userMainBox}>
       {/* layout header, content(outlet)  */}
       <Header />
-      <Outlet />
+      <div className={styles.background}>
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );
